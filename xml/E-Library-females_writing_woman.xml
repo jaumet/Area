@@ -1,0 +1,16 @@
+<opt name="females writing woman" author="j" datasrc="E-Library" description="Who uses more the word &quot;woman&quot; in articles?
+(hint: filter by &quot;woman&quot;)" pk_field="id_autore" quantum="quantum" table="autori">
+  <blocks field="id_autor_gender">
+    <list label="female" numnodes="93" value="1" />
+    <list label="male" numnodes="229" value="4" />
+    <list label="x Others x" numnodes="1" value="8" />
+    <list label="mixed" numnodes="127" value="9" />
+    <list label="non applicable" numnodes="8" value="10" />
+  </blocks>
+  <colors field="id_tip_autore">
+    <list color="#ae3a51" color_dark="#3a131b" label="Individual" value="1" />
+    <list color="#cfce43" color_dark="#454416" label="Varios authors" value="2" />
+    <list color="#bb619e" color_dark="#3e2034" label="Collective" value="3" />
+  </colors>
+  <size x="800" y="600" />
+</opt>

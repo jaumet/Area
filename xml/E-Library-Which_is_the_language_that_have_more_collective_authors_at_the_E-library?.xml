@@ -1,0 +1,18 @@
+<opt name="Which is the language that have more collective authors at the E-library?" author="E-library" datasrc="E-Library" description="At the e-library there are texts signed by individual author or several authors, and there are texts signed by collectives (not individual authors but groups). This visualization presents which is the language in which is more easy to find collective authors. At the 26 of March it looks like the Catalan language is the one that facilitate more the collective writing. Is it also true today?  " pk_field="id_autore" quantum="non-quantum" table="autori">
+  <blocks field="id_language">
+    <list label="ca-Catalan" numnodes="32" value="19" />
+    <list label="de-German" numnodes="14" value="24" />
+    <list label="el-Greek" numnodes="1" value="27" />
+    <list label="en-English" numnodes="272" value="28" />
+    <list label="es-Spanish" numnodes="147" value="30" />
+    <list label="fr-French" numnodes="71" value="37" />
+    <list label="it-Italian" numnodes="22" value="57" />
+    <list label="pt-Portuguese" numnodes="65" value="99" />
+  </blocks>
+  <colors field="id_tip_autore">
+    <list color="#df3b7c" color_dark="#4a1329" label="Individual" value="1" />
+    <list color="#80a6e7" color_dark="#2a374d" label="Varios authors" value="2" />
+    <list color="#6a7f7b" color_dark="#232a29" label="Collective" value="3" />
+  </colors>
+  <size x="800" y="600" />
+</opt>

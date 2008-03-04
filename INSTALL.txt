@@ -1,0 +1,40 @@
+README (last edition: january 2007)
+
+AREA 1.0v is Copyright by Jaume Nualart under the terms 
+of GNU/GPL (http://gnu.org). See gpl.txt
+
+- About the use of AREA and documentation: check http://nualart.com/area
+
+#######################################################
+INSTALL
+
+AREA is a cgi perl script. It has been used under Linux, Apache with perl.
+
+0) Get the code using SUBVERSION: svn checkout svn://r23.cc/area
+   (about SUBVERSION: http://svn-book.red-bean.com/)
+
+1) Set permissions to execute .cgi and .pl files for the directory where Casual is placed in your Apache configuration,
+   and restart Apache.
+
+2) You require some CPAN perl modules (http://search.cpan.org)
+
+   [name_of_Modules]:
+
+	CGI::FormBuilder
+	CGI::Session
+	DBI;
+	Data::Dumper
+	POSIX
+	HTML::Entities
+	XML::Simple
+
+   - You can install it with: 
+   
+   		perl -MCPAN -e 'install [Name_of_Module]'
+
+
+----------
+
+Feedback is welcome to jaume AT nualart DOT com
+
+be happy!

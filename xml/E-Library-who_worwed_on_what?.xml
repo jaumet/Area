@@ -1,0 +1,23 @@
+<opt name="who worwed on what?" author="j" datasrc="E-Library" description="languajes versus reported by" pk_field="id_autore" quantum="non-quantum" table="autori">
+  <blocks field="id_language">
+    <list label="ca-Catalan" numnodes="32" value="19" />
+    <list label="de-German" numnodes="14" value="24" />
+    <list label="el-Greek" numnodes="1" value="27" />
+    <list label="en-English" numnodes="272" value="28" />
+    <list label="es-Spanish" numnodes="147" value="30" />
+    <list label="fr-French" numnodes="71" value="37" />
+    <list label="it-Italian" numnodes="22" value="57" />
+    <list label="pt-Portuguese" numnodes="65" value="99" />
+  </blocks>
+  <colors field="EmpoloyeeID">
+    <list color="#84f4c0" color_dark="#2c5140" label="Mayo" value="34" />
+    <list color="#7cb494" color_dark="#293c31" label="victorg" value="35" />
+    <list color="#9867e0" color_dark="#32224a" label="nico" value="38" />
+    <list color="#f43cfc" color_dark="#511454" label="salva" value="44" />
+    <list color="#c45a54" color_dark="#411e1c" label="martin" value="45" />
+    <list color="#e8a0a4" color_dark="#4d3536" label="morgane" value="49" />
+    <list color="#b48eb0" color_dark="#3c2f3a" label="Marco" value="52" />
+    <list color="#8aca96" color_dark="#2e4332" label="DASonnenfeld" value="85" />
+  </colors>
+  <size x="800" y="600" />
+</opt>

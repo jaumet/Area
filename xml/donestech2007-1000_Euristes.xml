@@ -1,0 +1,20 @@
+<opt name="1000 (E)uristes" author="jaume nualart" datasrc="donestech2007" description="La majoria de les entrevistades viuen a Europa i, naturalment son 1000 euristes. Aixo no pot ser casualitat, no?" pk_field="numero" quantum="quantum" table="donestech2007">
+  <blocks field="NIVELL_INGRESSOS_MENSUALS">
+    <list label="0-499 EUROS" numnodes="27" value="0-499 EUROS" />
+    <list label="1000-1399 EUROS" numnodes="77" value="1000-1399 EUROS" />
+    <list label="1400-1999 EUROS" numnodes="50" value="1400-1999 EUROS" />
+    <list label="2000-3000 EUROS" numnodes="33" value="2000-3000 EUROS" />
+    <list label="500-749 EUROS" numnodes="21" value="500-749 EUROS" />
+    <list label="750-999 EUROS" numnodes="34" value="750-999 EUROS" />
+    <list label="M�S DE 3000 EUROS" numnodes="20" value="M�S DE 3000 EUROS" />
+    <list label="NC" numnodes="40" value="NC" />
+  </blocks>
+  <colors field="CONTINENT_RESIDENCIA">
+    <list color="#603862" color_dark="#201220" label="AM�RICA DEL NORD" value="AM�RICA DEL NORD" />
+    <list color="#dbbe91" color_dark="#493f30" label="AM�RICA LLATINA" value="AM�RICA LLATINA" />
+    <list color="#f3504f" color_dark="#511a1a" label="EUROPA" value="EUROPA" />
+    <list color="#8b896f" color_dark="#2e2d25" label="NC" value="NC" />
+    <list color="#c06054" color_dark="#40201c" label="OCEANIA" value="OCEANIA" />
+  </colors>
+  <size x="800" y="600" />
+</opt>

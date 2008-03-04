@@ -1,0 +1,16 @@
+<opt name="Are the women author more used to licensing their writing in Copyleft than the men authors? " author="Fuster Morell" datasrc="E-Library" description="At 24 of March 2007 the copyright is more used by men authors than by women authors. Dos the e-library also confirme this preference of the women for copyleft licensing today?" pk_field="id_autore" quantum="non-quantum" table="autori">
+  <blocks field="id_license">
+    <list label="CC-Attribution Non-commercial No Derivatives" numnodes="11" value="1" />
+    <list label="CC-Attribution Non-commercial Share Alike" numnodes="55" value="2" />
+    <list label="CC-Attribution Non-commercial" numnodes="1" value="3" />
+    <list label="CC-Attribution No Derivatives" numnodes="19" value="4" />
+    <list label="CC-Attribution Share Alike" numnodes="1" value="11" />
+    <list label="CC-Attribution" numnodes="2" value="14" />
+    <list label="Copyright" numnodes="36" value="18" />
+  </blocks>
+  <colors field="id_autor_gender">
+    <list color="#55ce61" color_dark="#1c4420" label="female" value="1" />
+    <list color="#78696b" color_dark="#282323" label="male" value="4" />
+  </colors>
+  <size x="800" y="600" />
+</opt>

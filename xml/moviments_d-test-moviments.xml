@@ -1,0 +1,27 @@
+<opt name="test-moviments" author="j" datasrc="moviments_d" description="Aixo es un test per a representar la guia util de moviments socials" pk_field="nid" quantum="non-quantum" table="content_type_collectiu">
+  <blocks field="field provincia value">
+    <list label="Andorra" numnodes="1" value="Andorra" />
+    <list label="Barcelona" numnodes="1762" value="Barcelona" />
+    <list label="Barcelon�s" numnodes="25" value="Barcelon�s" />
+    <list label="Catalunya" numnodes="15" value="Catalunya" />
+    <list label="Ciberespai" numnodes="19" value="Ciberespai" />
+    <list label="Girona" numnodes="150" value="Girona" />
+    <list label="Lleida" numnodes="89" value="Lleida" />
+    <list label="No" numnodes="69" value="No" />
+    <list label="Paisos Catalans" numnodes="48" value="Pa�sos Catalans" />
+    <list label="Tarragona" numnodes="120" value="Tarragona" />
+  </blocks>
+  <colors field="field provincia value">
+    <list color="#ad7755" color_dark="#39271c" label="Andorra" value="Andorra" />
+    <list color="#508fea" color_dark="#1a2f4e" label="Barcelona" value="Barcelona" />
+    <list color="#9446e9" color_dark="#31174d" label="Barcelon�s" value="Barcelon�s" />
+    <list color="#c1f18c" color_dark="#40502e" label="Catalunya" value="Catalunya" />
+    <list color="#6f9aa4" color_dark="#253336" label="Ciberespai" value="Ciberespai" />
+    <list color="#b25af7" color_dark="#3b1e52" label="Girona" value="Girona" />
+    <list color="#e48360" color_dark="#4c2b20" label="Lleida" value="Lleida" />
+    <list color="#8aad66" color_dark="#2e3922" label="No" value="No" />
+    <list color="#6cdbc8" color_dark="#244942" label="Paisos Catalans" value="Paisos Catalans" />
+    <list color="#aae573" color_dark="#384c26" label="Tarragona" value="Tarragona" />
+  </colors>
+  <size x="800" y="600" />
+</opt>

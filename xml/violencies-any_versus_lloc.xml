@@ -1,0 +1,36 @@
+<opt name="any versus lloc" author="j" datasrc="violencies" description="Es important l'any respecte l'apario de les noticies a la premsa?" pk_field="id" quantum="quantum" table="violencies">
+  <blocks field="any">
+    <list label="2000" numnodes="65" value="2000" />
+    <list label="2001" numnodes="73" value="2001" />
+    <list label="2002" numnodes="77" value="2002" />
+    <list label="2003" numnodes="97" value="2003" />
+    <list label="2004" numnodes="97" value="2004" />
+    <list label="2005" numnodes="74" value="2005" />
+    <list label="2006" numnodes="73" value="2006" />
+  </blocks>
+  <colors field="comunitat_autonoma">
+    <list color="#4c6a53" color_dark="#19231b" label="ANDALUC�A" value="ANDALUC�A" />
+    <list color="#e7db86" color_dark="#4d492c" label="ARAGON" value="ARAGON" />
+    <list color="#415c71" color_dark="#151e25" label="ASTURIAS" value="ASTURIAS" />
+    <list color="#f46c64" color_dark="#512421" label="BALEARS" value="BALEARS" />
+    <list color="#874282" color_dark="#2d162b" label="CANARIAS" value="CANARIAS" />
+    <list color="#9ea6a9" color_dark="#343738" label="CANTABRIA" value="CANTABRIA" />
+    <list color="#ed8e55" color_dark="#4f2f1c" label="CASTILLALAMANCHA" value="CASTILLALAMANCHA" />
+    <list color="#ebc8d7" color_dark="#4e4247" label="CASTILLALEON" value="CASTILLALEON" />
+    <list color="#c5f392" color_dark="#415130" label="CATALUNYA" value="CATALUNYA" />
+    <list color="#843dc3" color_dark="#2c1441" label="CEUTA" value="CEUTA" />
+    <list color="#49719b" color_dark="#182533" label="EUSKADI" value="EUSKADI" />
+    <list color="#529954" color_dark="#1b331c" label="EXTREMADURA" value="EXTREMADURA" />
+    <list color="#73e6c5" color_dark="#264c41" label="GALICIA" value="GALICIA" />
+    <list color="#f9fd3e" color_dark="#535414" label="INTERNACIONAL" value="INTERNACIONAL" />
+    <list color="#af97d9" color_dark="#3a3248" label="JAEN" value="JAEN" />
+    <list color="#90ee62" color_dark="#304f20" label="MADRID" value="MADRID" />
+    <list color="#9f8a74" color_dark="#352e26" label="MELILLA" value="MELILLA" />
+    <list color="#b0c87d" color_dark="#3a4229" label="MURCIA" value="MURCIA" />
+    <list color="#bd47e9" color_dark="#3f174d" label="NAVARRA" value="NAVARRA" />
+    <list color="#cdc3d7" color_dark="#444147" label="Ns/c" value="Ns/c" />
+    <list color="#c44bcf" color_dark="#411945" label="RIOJA" value="RIOJA" />
+    <list color="#c2f892" color_dark="#405230" label="VALENCIA" value="VALENCIA" />
+  </colors>
+  <size x="800" y="600" />
+</opt>
