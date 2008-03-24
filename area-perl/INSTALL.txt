@@ -8,7 +8,7 @@ of GNU/GPL (http://gnu.org). See gpl.txt
 #######################################################
 INSTALL
 
-AREA is a cgi perl script. It has been used under Linux, Apache with perl.
+AREA-perl is a cgi perl script. It has been used under Linux, Apache with perl.
 
 0) Get the code using SUBVERSION: svn checkout  http://svn2.assembla.com/svn/area
    (about SUBVERSION: http://svn-book.red-bean.com/)
@@ -42,6 +42,11 @@ Then you need to edit the configuration file Area/Datasources.pm. The one that c
 
 ----------
 
-Feedback is welcome to jaume AT nualart DOT com
+Feedback is very welcome to jaume AT nualart DOT com
 
 be happy!
+
+jaume nualart
+
+
+
