@@ -21,4 +21,14 @@ function myescape($escaped) {
 	return $escaped;
 }
 
+function get_distinct_values($param, $table) {
+	$distinct = array();
+	$query = "select distinct ".myescape($param)." from ".myescape($table)." where ".$param." != '' order by ".myescape($param).";";
+	$result = mysql_query($query) or die('Query failed: ' . mysql_error());
+	while ($line = mysql_fetch_assoc($result)) {
+		array_push($distinct, htmlentities($line[$param]));
+	}
+	return $distinct;
+}
+
 ?>

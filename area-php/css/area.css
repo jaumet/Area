@@ -351,7 +351,7 @@ a:hover, a:active {
 }
 
 
-#debug {
+.debug {
 	background-color: #ffffff;
 	opacity: 50%;
 	color: black;
@@ -403,3 +403,8 @@ span.legend {
 }
 
 #formdiv p { display: none; }
+
+.emphat {
+	color: #ffa904;
+	color: black;
+}
