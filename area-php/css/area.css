@@ -353,12 +353,13 @@ a:hover, a:active {
 
 .debug {
 	background-color: #ffffff;
+	color: #000000;
 	opacity: 50%;
 	color: black;
 	position: absolute;
 	top: 20%;
 	bottom: 20%;
-	left: 700px;
+	left: 1000px;
 	#right: 20%;
 	overflow: auto;
 	z-index: 1000;
@@ -371,8 +372,8 @@ a:hover, a:active {
  	position: absolute;
  	top: 180px;
  	background-color: black;
- 	border: 1px solid grey;
- 	border-width: 1px 0 0 1px;
+ 	border: 2px solid red;
+ 	border-width: 1px;
 }
 
 

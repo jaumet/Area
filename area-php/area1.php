@@ -18,6 +18,7 @@ include('./lib/DataConfig.php');
 
 #GET DATASOURCES
 $dataname = $_REQUEST['dataname'];
+if (!$dataname) {echo "<h2>No dataname selected!!!!</h2>"; }
 $d = $datas[$dataname];
 #echo $dataname."<br />";
 # CONNECT
