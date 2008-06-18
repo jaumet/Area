@@ -401,9 +401,10 @@ input:checked,input:checked+label {
 span.legend {
  white-space: nowrap; 
  line-height: 2em; 
- color: black; 
+ color: white; 
  padding: 2px;
  border: none;
+ font-weight : bold;
 }
 
 #formdiv p { display: none; }

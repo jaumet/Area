@@ -59,7 +59,7 @@ echo "Nodex matrix max: ".$matrix_nodes = (round(sqrt($nodes_per_block_max[0]), 
 echo "<hr />COLORS<br />";
 $num_colors = sizeof($_REQUEST['color_selected']);
 echo "Num of colors seleccionats: ".$num_colors."<br />";
-echo "Num of colors seleccionats: ".sizeof($_REQUEST['color_values'])."<br />";
+echo "Num of colors total: ".sizeof($_REQUEST['color_values'])."<br />";
 echo "<pre>";print_r($_REQUEST);echo "</pre>";
 echo "</div>";
 
@@ -71,12 +71,22 @@ echo "</div>";
 
 ## formdiv
 echo '<div id="formdiv">'."\n";
-echo "hola hola hola";
+echo 'XXXXXXXXX';
 echo "</div>";
 
 ## Legend
+# FIXME ????
+$p1 = $datas['subvideo']['fields'][$param1]['label'];
+
 echo '<div id="legend">'."\n";
-echo "hola hola hola";
+echo 'LEGEND: '.$param1.' <-> '.$param2.': ';
+
+####### list of selected values / colors
+	## make colors:
+	$colors = get_random_colors($num_colors, "clear");
+print_r($colors);
+	//echo '<span class="legend" style="background-color: rgb(142, 222, 78);">2000</span>';
+
 echo "</div>";
 
 ## panel
