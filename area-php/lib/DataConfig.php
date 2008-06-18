@@ -1,29 +1,31 @@
 <?
 
 ##  Data donestech2007
-$datas['donestech'] = array
+$datas['subvideo'] = array
 (
-	        'name' => 'dones i tecnologies 2007',
-		'label' => 'Feminicis a l\'Estat Espanyol des de l\'any 2000. 556 entrades',
+	        'name' => 'subvideo',
+		'label' => 'translate online videos',
 		'db'=> array(
-			'name'=>'donestech2007',
-			'user'=>'area',
-			'passw'=>'lala',
+			'name'=>'subvideo',
+			'user'=>'root',
+			'passw'=>'gotic',
 			'host'=>'localhost'
 		),
 	
-	'table'=> 'donestech2007',
-	'pkey'=>'numero',
+	'table'=> 'subvideos',
+	'pkey'=>'id',
 	'fields' => array(
-		'CONTINENT_ORIGEN' => array(
-			'label'=>'Continent d\'origen',
+		'subvideo_name' => array(
+			'label'=>'Name',
+			'filter'=>'0'
+		),
+		'kind' => array(
+			'label'=>'Kind',
 			'filter'=>'1'
 		),
-		'EDAT' => array(
-			'label'=>'Edat'
-		),
-		'ESTUDIS_TECNICS' => array(
-			'label'=>'Estucis tecnics'
+		'subvideo_lang' => array(
+			'label'=>'Language',
+			'filter'=>'1'
 		)
 		
 	)

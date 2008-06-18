@@ -5,8 +5,8 @@ $area_url = "http://localhost/area/area-php";
 
 ## Database
 $DBserver = "localhost";
-$DBname = "donestech2007";
+$DBname = "subvideo";
 $DBuser = "root";
-$DBpassw = "";
+$DBpassw = "gotic";
 
 ?>

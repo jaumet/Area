@@ -190,6 +190,7 @@ border: 1px solid #ffffff;
 	visibility: visible;
 	display:block;
 	width: 97%;
+	height: 63px;
 	padding-left: 17px;
 	padding-right: 17px;
 	padding-bottom: 4px;
@@ -359,10 +360,12 @@ a:hover, a:active {
 	position: absolute;
 	top: 20%;
 	bottom: 20%;
-	left: 1000px;
+	left: 900px;
 	#right: 20%;
 	overflow: auto;
 	z-index: 1000;
+	padding:15px;
+	width:400px;
 }
 
 .panel {
