@@ -3,6 +3,9 @@ include('./lib/functions.php');
 
 include('./lib/DataConfig.php');
 
+## Handling session:
+$session = $_SESSION;
+
 #check if there is data in the session or redirect to the first step
 #if(!$session->param('param1')) {
 #	echo "Location: areac1.cgi\n\n";
@@ -83,6 +86,7 @@ echo " AREA, visualization tool<br>\n";
 echo "</div>\n";
 
 echo "<div id=\"formdiv\">\n";
+print_r($session);
 echo "<h2>Step 2: define & refine both parameters <span class =\"emphat\">".$d['fields'][$param1]['label']."</span> and <span class =\"emphat\">".$d['fields'][$param2]['label']."</span></h2>\n";
 
 
