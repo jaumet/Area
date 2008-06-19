@@ -12,6 +12,7 @@ echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://
 	<link rel=\"SHORTCUT ICON\" href=\"imgs/logoareapetit.png\" />\n
 	<link href=\"./css/area.css\" rel=\"stylesheet\" type=\"text/css\" />\n
 	<script language=\"javascript\" src=\"./js/area.js\"></script>
+	<script language=\"javascript\" src=\"./js/prototype.js\"></script>
 </head>\n
 <body>\n";
 $quantum = $_REQUEST['quantum'];
@@ -76,16 +77,26 @@ echo "</div>";
 
 ## Legend
 # FIXME ????
-$p1 = $datas['subvideo']['fields'][$param1]['label'];
+$pa1 = $d['fields'][$param1]['label'];
+$pa2 = $d['fields'][$param2]['label'];
 
 echo '<div id="legend">'."\n";
-echo 'LEGEND: '.$param1.' <-> '.$param2.': ';
+echo 'LEGEND: '.$pa1.' <-> '.$pa2.": ";
 
 ####### list of selected values / colors
 	## make colors:
 	$colors = get_random_colors($num_colors, "clear");
-print_r($colors);
-	//echo '<span class="legend" style="background-color: rgb(142, 222, 78);">2000</span>';
+	$n = 0;
+	$p = $_REQUEST['color_selected'];
+	$p2 = array();
+	foreach ($colors as $col) {
+		echo '<span class="legend" style="background-color: '.$col.';">'.$p[$n].'</span>'."\n";
+		## 1: building array param2 <-> colors
+		array_push($p2, $p[$n]);
+		$n++;
+}
+## and 2: building array param2 <-> colors
+$colors_array = array_combine($p2 , $colors);
 
 echo "</div>";
 
@@ -110,26 +121,46 @@ foreach ($block_array as $bl) {
 		}
 
 		## Param2 and colors
-		$query = "SELECT ".myescape($param2)." FROM ".myescape($d['table'])." WHERE ".myescape($param1)."='".myescape($bl)."';";
+		$query = "SELECT ".myescape($param2).", ".myescape($d['pkey'])." 
+		FROM ".myescape($d['table'])." 
+		WHERE ".myescape($param1)."='".myescape($bl)."'
+		ORDER BY ".myescape($param2).";";
+
 		//echo "<br />query: ".$query."<br />";
 		$result = mysql_query($query) or die('Query failed: ' . mysql_error());
-		$cl = array();
+		$cl = array(); $id_array = array();
 		while ($line = mysql_fetch_array($result)) {
 			array_push($cl, $line[0]);
+			array_push($id_array, $line[1]);
 		}
-
+		
 		for ($i=0;$i<($block1_array[$bl]);$i++) {
-			echo '<div class="node" id="a" style="background-color:yellow;'.$nodestyle.';" title="title" onclick="javascript:area_info()"></div>';
+			$rgb = $colors_array[$cl[$i]];
+			$id  = $id_array[$i];
+			echo '<div class="node" id="'.$id.'" name="'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$cl[$i].'" onclick="javascript:showdiv(\'node_info\');area_info(11);"></div>';
 		}
 	}
 	echo "</div>"."\n";
 }
-echo "<p>";
-print_r($cl);
-echo "</p>";
+echo "</div>"."\n";
 
-//echo '<hr /><pre>';
-//print_r($_REQUEST);
-//echo '</pre>';
+echo '
+<div id="preview" style="height: 600px; left: 840px;"><h3>Search here:</h3>
+<form action="area3.php" id="filter" method="post" name="filter">
+<div>
+<input id="_submitted_filter" name="_submitted_filter" value="1" type="hidden">
+<input id="filter" name="filter" value="1" type="hidden">
+Tag
+<input class="fb_input" id="tag" name="tag" value="" type="text">
+<input class="fb_button" id="filter_submit" name="_submit" value="filter" type="submit">
+</div>
+</form>
+<h2>About <b>this</b> AREA:</h2><h2>Violencies(*)</h2><p><b>Feminicis a l\'Estat Espanyol des de l\'any 2000. 556 entrades</b></p><hr><p>* Possible representations: <b>13.852.879.303.186 ~= 1.3 * E13</b></p>';
+
+echo "<p>TAG:  ".$_REQUEST['submitted_filter']."</p></div>";
+
+echo '<div id="node_info" style="visibility: hidden;">
+</div>';
+
 echo "</body></html>";
 ?>

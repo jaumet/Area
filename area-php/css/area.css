@@ -190,7 +190,7 @@ border: 1px solid #ffffff;
 	visibility: visible;
 	display:block;
 	width: 97%;
-	height: 63px;
+	/*height: 63px;*/
 	padding-left: 17px;
 	padding-right: 17px;
 	padding-bottom: 4px;
@@ -353,6 +353,7 @@ a:hover, a:active {
 
 
 .debug {
+display: none;
 	background-color: #ffffff;
 	color: #000000;
 	opacity: 50%;
@@ -401,7 +402,7 @@ input:checked,input:checked+label {
 span.legend {
  white-space: nowrap; 
  line-height: 2em; 
- color: white; 
+ color: black;
  padding: 2px;
  border: none;
  font-weight : bold;

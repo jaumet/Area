@@ -142,3 +142,33 @@ function validate_construct2 (form) {
     return true;  // all checked ok
 }
 
+function area_info(id) {
+	new Ajax.Updater('node_info', 'lib/node_info.php?id=' + id, { method: 'get' });
+}
+
+function hidediv(divid) {
+	if (divid==null) { divid='hideShow'; } 
+
+	if (document.getElementById) { // DOM3 = IE5, NS6
+		document.getElementById(divid).style.visibility = 'hidden';
+	} else {
+		if (document.layers) { // Netscape 4
+			document.hideShow.visibility = 'hidden';
+		} else { // IE 4
+		document.all.hideShow.style.visibility = 'hidden';
+		}
+	}
+}
+
+function showdiv(divid) {
+	if (document.getElementById) { // DOM3 = IE5, NS6
+		document.getElementById(divid).style.visibility = 'visible';
+	} else {
+		if (document.layers) { // Netscape 4
+			document.hideShow.visibility = 'visible';
+		} else { // IE 4
+			document.all.hideShow.style.visibility = 'visible';
+		}
+	}
+}
+

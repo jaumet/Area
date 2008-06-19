@@ -19,6 +19,12 @@ $datas['subvideo'] = array
 			'label'=>'Name',
 			'filter'=>'0'
 		),
+
+		'created_by' => array(
+			'label'=>'Created by',
+			'filter'=>'1'
+		),
+
 		'kind' => array(
 			'label'=>'Kind',
 			'filter'=>'1'
