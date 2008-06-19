@@ -2,7 +2,11 @@
 ## AREA functions
 
 function connect($dataname) {
-        include ('./lib/DataConfig.php');
+	if (file_exists('./lib/DataConfig.php')) {
+	        include ('./lib/DataConfig.php');
+	} else {
+	       include ('./DataConfig.php');
+	}
 	$DBserver = $datas[$dataname]['db']['server'];
 	$DBname = $datas[$dataname]['db']['name'];
 	$DBuser = $datas[$dataname]['db']['user'];

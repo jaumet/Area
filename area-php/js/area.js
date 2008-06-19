@@ -142,8 +142,8 @@ function validate_construct2 (form) {
     return true;  // all checked ok
 }
 
-function area_info(id) {
-	new Ajax.Updater('node_info', 'lib/node_info.php?id=' + id, { method: 'get' });
+function area_info(id, data) {
+	new Ajax.Updater('node_info', 'lib/node_info.php?id=' + id + '&data=' + data, { method: 'get' });
 }
 
 function hidediv(divid) {

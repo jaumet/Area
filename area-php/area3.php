@@ -137,7 +137,7 @@ foreach ($block_array as $bl) {
 		for ($i=0;$i<($block1_array[$bl]);$i++) {
 			$rgb = $colors_array[$cl[$i]];
 			$id  = $id_array[$i];
-			echo '<div class="node" id="'.$id.'" name="'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$cl[$i].'" onclick="javascript:showdiv(\'node_info\');area_info(11);"></div>';
+			echo '<div class="node" id="'.$id.'" name="'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$cl[$i].'" onclick="javascript:showdiv(\'node_info\');area_info('.$id.', \''.$dataname.'\');"></div>';
 		}
 	}
 	echo "</div>"."\n";
