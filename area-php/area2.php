@@ -4,7 +4,7 @@ include('./lib/functions.php');
 include('./lib/DataConfig.php');
 
 ## Handling session:
-$session = $_SESSION;
+session_start();
 
 #check if there is data in the session or redirect to the first step
 #if(!$session->param('param1')) {
@@ -21,6 +21,12 @@ $param1 = $_REQUEST['param1'];
 $param2 = $_REQUEST['param2'];
 $dataname = $_REQUEST['dataname'];
 $d = $datas[$dataname];
+
+## Adding variables to the phpsession
+$_SESSION['dataname'] = $dataname;
+$_SESSION['param1'] = $param1;
+$_SESSION['param2'] = $param2;
+
 
 #connexio a la bd mysql
 #my ($dbh,$datasrc)=Area::Datasources::connect($datasrcname);
@@ -47,7 +53,7 @@ connect($dataname);
 #echo Dumper($blkvals);
 #echo Dumper($colkeys);
 #echo Dumper($colvals);
-
+echo '<div class="debug">';
 $table = $d['table'];
 echo $query;
 echo "<pre>";
@@ -55,8 +61,12 @@ $param1_list = get_distinct_values($param1, $table);
 print_r($param1_list);
 echo "<hr />";
 $param2_list = get_distinct_values($param2, $table);
+
 print_r($param2_list);
+echo "<hr>SESSION<br />";
+print_r($_SESSION);
 echo "</pre>";
+echo "</div>";
 
 #my $rndcolor;
 #if(!$colors){$colors = ""};
@@ -86,7 +96,7 @@ echo " AREA, visualization tool<br>\n";
 echo "</div>\n";
 
 echo "<div id=\"formdiv\">\n";
-print_r($session);
+print_r($_SESSION);
 echo "<h2>Step 2: define & refine both parameters <span class =\"emphat\">".$d['fields'][$param1]['label']."</span> and <span class =\"emphat\">".$d['fields'][$param2]['label']."</span></h2>\n";
 
 

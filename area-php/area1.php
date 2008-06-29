@@ -137,8 +137,9 @@ echo "<div id=\"formdiv\">";
 echo "STEP 1: choose 2 main parameters visualization<br>";
 #echo $form->render();
 
+$sesion_id = session_id();
 ### FORM
-echo '<form action="area2.php?'.htmlspecialchars(SID).'" id="construct1" method="post" name="construct1" onsubmit="return validate_construct1(this);">
+echo '<form action="area2.php?' . $sesion_id . '" id="construct1" method="post" name="construct1" onsubmit="return validate_construct1(this);">
 <input id="_submitted_construct1" name="_submitted_construct1" type="hidden" value="1" />
 <input class="fb_hidden" id="dataname" name="dataname" type="hidden" value="'.$dataname.'" />
 <span class="fb_required">Param1</span>

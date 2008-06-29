@@ -1,6 +1,9 @@
 <?
 include('./lib/functions.php');
 include('./lib/DataConfig.php');
+## Handling session:
+session_start();
+
 echo <<<DOC
 <?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
 DOC;
@@ -16,15 +19,31 @@ echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://
 </head>\n
 <body>\n";
 $quantum = $_REQUEST['quantum'];
+
 echo "<div class='debug'>";
-echo "quantum? ".$quantum."<br />";
+echo "SESSION<br /><pre>";
+print_r($_SESSION);
+echo "</pre><hr />quantum?".$quantum."<br />";
 echo "<hr />BLOCKS<br />";
-echo "Num of blocks seleccionats: ".sizeof($_REQUEST['block_selected'])."<br />";
+if (isset($_REQUEST['block_selected_'])) {
+	$blocks_selected = $_REQUEST['block_selected_'];
+} else {
+	$blocks_selected = $_SESSION['param1_selected'];
+}
+
+echo "Num of blocks seleccionats: ".sizeof($blocks_selected)."<br />";
 echo "Num of blocks possibles: ".sizeof($_REQUEST['block_values'])."<br />";
-$blocks = sizeof($_REQUEST['block_selected']);
+$blocks = sizeof($blocks_selected);
 $matrix = round(sqrt($blocks), 0);
 while ($matrix*$matrix < $blocks) { $matrix++;}
 echo "Blocks matrix size:".$matrix." x ".$matrix."<br />";
+if (isset($_REQUEST['panelx'])) {
+	$x = $_REQUEST['panelx'];
+	$_SESSION['panelx'] = $_REQUEST['panelx'];
+} else {
+	
+}
+
 $x = $_REQUEST['panelx'];
 $y = $_REQUEST['panely'];
 $block_x = round($x/$matrix);
@@ -33,10 +52,10 @@ echo "Desired size ( ".$x.", ".$y." )<br />";
 echo "Size of each block: ".$block_x." px / ".$block_y." px<br />";
 
 //Getting max num the nodes in a block
-$block_array = $_REQUEST['block_selected'];
-$dataname = $_REQUEST['datasrcname'];
-$param1 = $_REQUEST['param1'];
-$param2 = $_REQUEST['param2'];
+$block_array = $blocks_selected;
+$dataname = $_SESSION['dataname'];
+$param1 = $_SESSION['param1'];
+$param2 = $_SESSION['param2'];
 $d = $datas[$dataname];
 connect($dataname);
 $nodes_per_block_max[0] = 0;
@@ -64,6 +83,16 @@ echo "Num of colors total: ".sizeof($_REQUEST['color_values'])."<br />";
 echo "<pre>";print_r($_REQUEST);echo "</pre>";
 echo "</div>";
 
+## Adding variables to the phpsession
+$_SESSION['quantum'] = $quantum;
+$_SESSION['param1_selected'] = $block_array;
+if(isset($_REQUEST['color_selected'])) {
+	$color_selected = $_REQUEST['color_selected'];
+	$_SESSION['param2_selected'] = $_REQUEST['color_selected'];
+} else {
+	$color_selected = $_SESSION['param2_selected'];
+}
+
 ## header
 echo '<div id="headerdiv">'."\n";
 echo "<h2><a href=\"/area\"><img src=\"./images/area.png\" width=\"33px\" align=\"left\" vspace=\"0\" hspace=\"0\" border=\"0\" alt=\"go to AREA\" style=\"margin-right:3px;margin-left:2px;\" /></a>\n";
@@ -87,7 +116,7 @@ echo 'LEGEND: '.$pa1.' <-> '.$pa2.": ";
 	## make colors:
 	$colors = get_random_colors($num_colors, "clear");
 	$n = 0;
-	$p = $_REQUEST['color_selected'];
+	$p = $color_selected;
 	$p2 = array();
 	foreach ($colors as $col) {
 		echo '<span class="legend" style="background-color: '.$col.';">'.$p[$n].'</span>'."\n";
@@ -96,7 +125,11 @@ echo 'LEGEND: '.$pa1.' <-> '.$pa2.": ";
 		$n++;
 }
 ## and 2: building array param2 <-> colors
-$colors_array = array_combine($p2 , $colors);
+//if(isset($_REQUEST['submitted_filter'])) {
+//	$colors_array = $_SESSION['param2_colors'];
+//} else {
+	$colors_array = array_combine($p2 , $colors);
+//}
 
 echo "</div>";
 
@@ -121,6 +154,9 @@ foreach ($block_array as $bl) {
 		}
 
 		## Param2 and colors
+		if(isset($_REQUEST['submitted_filter'])) {
+			$filter = " AND IS LIKE %%".$_REQUEST."['submitted_filter']%% ";
+		}
 		$query = "SELECT ".myescape($param2).", ".myescape($d['pkey'])." 
 		FROM ".myescape($d['table'])." 
 		WHERE ".myescape($param1)."='".myescape($bl)."'
@@ -143,10 +179,10 @@ foreach ($block_array as $bl) {
 	echo "</div>"."\n";
 }
 echo "</div>"."\n";
-
+$sesion_id = session_id();
 echo '
 <div id="preview" style="height: 600px; left: 840px;"><h3>Search here:</h3>
-<form action="area3.php" id="filter" method="post" name="filter">
+<form action="area3.php?"'.$sesion_id.' id="filter" method="post" name="filter">
 <div>
 <input id="_submitted_filter" name="_submitted_filter" value="1" type="hidden">
 <input id="filter" name="filter" value="1" type="hidden">
@@ -158,6 +194,7 @@ Tag
 <h2>About <b>this</b> AREA:</h2><h2>Violencies(*)</h2><p><b>Feminicis a l\'Estat Espanyol des de l\'any 2000. 556 entrades</b></p><hr><p>* Possible representations: <b>13.852.879.303.186 ~= 1.3 * E13</b></p>';
 
 echo "<p>TAG:  ".$_REQUEST['submitted_filter']."</p></div>";
+
 
 echo '<div id="node_info" style="visibility: hidden;">
 </div>';
