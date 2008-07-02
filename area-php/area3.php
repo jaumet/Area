@@ -18,34 +18,42 @@ echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://
 	<script language=\"javascript\" src=\"./js/prototype.js\"></script>
 </head>\n
 <body>\n";
-$quantum = $_REQUEST['quantum'];
+if (isset($_REQUEST['quantum'])) {
+	$quantum = $_REQUEST['quantum'];
+	$_SESSION['quantum'] = $_REQUEST['quantum'];
+} else {
+	$quantum = $_SESSION['quantum'];
+}
 
 echo "<div class='debug'>";
-echo "SESSION<br /><pre>";
-print_r($_SESSION);
+echo "REQUEST<br /><pre>";
+print_r($_REQUEST);
 echo "</pre><hr />quantum?".$quantum."<br />";
 echo "<hr />BLOCKS<br />";
-if (isset($_REQUEST['block_selected_'])) {
-	$blocks_selected = $_REQUEST['block_selected_'];
+if (isset($_REQUEST['block_selected'])) {
+	$blocks_selected = $_REQUEST['block_selected'];
+	$blocks_values = $_REQUEST['block_values'];
 } else {
 	$blocks_selected = $_SESSION['param1_selected'];
+	$blocks_values = $_REQUEST['block_values'];
 }
 
 echo "Num of blocks seleccionats: ".sizeof($blocks_selected)."<br />";
-echo "Num of blocks possibles: ".sizeof($_REQUEST['block_values'])."<br />";
+echo "Num of blocks possibles: ".sizeof($blocks_values)."<br />";
 $blocks = sizeof($blocks_selected);
 $matrix = round(sqrt($blocks), 0);
 while ($matrix*$matrix < $blocks) { $matrix++;}
 echo "Blocks matrix size:".$matrix." x ".$matrix."<br />";
-if (isset($_REQUEST['panelx'])) {
+if ($_REQUEST['panelx'] and $_REQUEST['panely']) {
 	$x = $_REQUEST['panelx'];
 	$_SESSION['panelx'] = $_REQUEST['panelx'];
+	$y = $_REQUEST['panely'];
+	$_SESSION['panely'] = $_REQUEST['panely'];
 } else {
-	
+	$x = $_SESSION['panelx'];
+	$y = $_SESSION['panely'];
 }
 
-$x = $_REQUEST['panelx'];
-$y = $_REQUEST['panely'];
 $block_x = round($x/$matrix);
 $block_y = round($y/$matrix);
 echo "Desired size ( ".$x.", ".$y." )<br />";
@@ -80,7 +88,7 @@ echo "<hr />COLORS<br />";
 $num_colors = sizeof($_REQUEST['color_selected']);
 echo "Num of colors seleccionats: ".$num_colors."<br />";
 echo "Num of colors total: ".sizeof($_REQUEST['color_values'])."<br />";
-echo "<pre>";print_r($_REQUEST);echo "</pre>";
+echo "<pre>";print_r($_SESSION);echo "</pre>";
 echo "</div>";
 
 ## Adding variables to the phpsession
@@ -113,24 +121,37 @@ echo '<div id="legend">'."\n";
 echo 'LEGEND: '.$pa1.' <-> '.$pa2.": ";
 
 ####### list of selected values / colors
-	## make colors:
-	$colors = get_random_colors($num_colors, "clear");
-	$n = 0;
-	$p = $color_selected;
-	$p2 = array();
-	foreach ($colors as $col) {
-		echo '<span class="legend" style="background-color: '.$col.';">'.$p[$n].'</span>'."\n";
-		## 1: building array param2 <-> colors
-		array_push($p2, $p[$n]);
-		$n++;
+## make colors:
+$colors = get_random_colors($num_colors, "clear");
+$n = 0;
+$p = $color_selected;
+$p2 = array();
+foreach ($colors as $col) {
+	echo '<span class="legend" style="background-color: '.$col.';">'.$p[$n].'</span>'."\n";
+	## 1: building array param2 <-> colors
+	array_push($p2, $p[$n]);
+	$n++;
 }
-## and 2: building array param2 <-> colors
-//if(isset($_REQUEST['submitted_filter'])) {
-//	$colors_array = $_SESSION['param2_colors'];
-//} else {
-	$colors_array = array_combine($p2 , $colors);
-//}
 
+if ($p2) { 
+	$_SESSION['p2'] = $p2; 
+}
+
+if ($colors) { 
+	$_SESSION['colors'] = $colors; 
+//} else {
+//	$colors = $_SESSION['colors'];
+}
+
+## and 2: building array param2 <-> colors
+
+if ($colors) { $_SESSION['colors'] = $colors; }
+if ($colors_array) { 
+	$_SESSION['colors_array'] = $colors_array; 
+} else {
+	$colors_array = array_combine($_SESSION['p2'] , $_SESSION['colors']);
+	//$colors_array = $_SESSION['colors_array'];
+}
 echo "</div>";
 
 ## panel
@@ -184,7 +205,7 @@ echo '
 <div id="preview" style="height: 600px; left: 840px;"><h3>Search here:</h3>
 <form action="area3.php?"'.$sesion_id.' id="filter" method="post" name="filter">
 <div>
-<input id="_submitted_filter" name="_submitted_filter" value="1" type="hidden">
+<input id="submitted_filter" name="submitted_filter" value="1" type="hidden">
 <input id="filter" name="filter" value="1" type="hidden">
 Tag
 <input class="fb_input" id="tag" name="tag" value="" type="text">
@@ -193,7 +214,9 @@ Tag
 </form>
 <h2>About <b>this</b> AREA:</h2><h2>Violencies(*)</h2><p><b>Feminicis a l\'Estat Espanyol des de l\'any 2000. 556 entrades</b></p><hr><p>* Possible representations: <b>13.852.879.303.186 ~= 1.3 * E13</b></p>';
 
-echo "<p>TAG:  ".$_REQUEST['submitted_filter']."</p></div>";
+echo "<p>TAG:  ".$_REQUEST['submitted_filter']."</p>";
+print_r($p);
+echo "</div>";
 
 
 echo '<div id="node_info" style="visibility: hidden;">

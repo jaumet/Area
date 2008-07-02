@@ -25,7 +25,21 @@ function myescape($escaped) {
 	return $escaped;
 }
 
-function get_distinct_values($param, $table) {
+function get_distinct_values($param, $table, $dataname) {
+
+	## Is there any join in the config?
+	if (file_exists('./lib/DataConfig.php')) {
+	        include ('./lib/DataConfig.php');
+	} else {
+	       include ('./DataConfig.php');
+	}
+	if ($datas[$dataname]['fields'][$param]['join']) {
+		$join_table = $datas[$dataname]['fields'][$param]['join']['table'];
+		$join_key = $datas[$dataname]['fields'][$param]['join']['key'];
+		$join_val = $datas[$dataname]['fields'][$param]['join']['val'];
+	}
+################## JAUME FIXME 
+
 	$distinct = array();
 	$query = "select distinct ".myescape($param)." from ".myescape($table)." where ".$param." != '' order by ".myescape($param).";";
 	$result = mysql_query($query) or die('Query failed: ' . mysql_error());

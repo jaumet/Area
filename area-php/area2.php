@@ -57,10 +57,10 @@ echo '<div class="debug">';
 $table = $d['table'];
 echo $query;
 echo "<pre>";
-$param1_list = get_distinct_values($param1, $table);
+$param1_list = get_distinct_values($param1, $table, $dataname);
 print_r($param1_list);
 echo "<hr />";
-$param2_list = get_distinct_values($param2, $table);
+$param2_list = get_distinct_values($param2, $table, $dataname);
 
 print_r($param2_list);
 echo "<hr>SESSION<br />";
@@ -126,20 +126,20 @@ echo '<span class="fb_required">Panelx</span>
 <span class="fb_required">Node size</span>
 <input checked="checked" class="fb_radio" id="quantum_quantum" name="quantum" type="radio" value="quantum" /> <label class="fb_option" for="quantum_quantum">quantum</label>
 <input class="fb_radio" id="quantum_non_quantum" name="quantum" type="radio" value="non-quantum" /> 
-<label class="fb_option" for="quantum_non_quantum">non-quantum</label>
+<label class="fb_option">non-quantum</label>
 
 <br />
 <span class="fb_required">Blocks: '.$d['fields'][$param1]['label'].' ( <a href="#" onClick="checkAll(document.construct2.block_selected,this)">Uncheck</a> | <a href="#" onClick="uncheckAll(document.construct2.block_selected,this)">Check</a> )</span><br />'."\n";
 
 foreach ($param1_list as $p) {
-	echo '<input checked="checked" class="fb_checkbox" id="block_selected_'.$p.'" name="block_selected[]" size="8" type="checkbox" value="'.$p.'" /> <label class="fb_option" for="block_selected_'.$p.'">'.$p.'</label><br />'."\n";
+	echo '<input checked="checked" class="fb_checkbox" id="block_selected'.$p.'" name="block_selected[]" size="8" type="checkbox" value="'.$p.'" /> <label class="fb_option" for="block_selected'.$p.'">'.$p.'</label><br />'."\n";
 }
 
 echo '<br />
 <span class="fb_required">Colors: '.$d['fields'][$param2]['label'].' ( <a href="#" onClick="checkAll(document.construct2.color_selected,this)">Uncheck</a> | <a href="#" onClick="uncheckAll(document.construct2.color_selected,this)">Check</a> )<br></span>'."\n";
 
 foreach ($param2_list as $p) {
-	echo '<input checked="checked" class="fb_checkbox" id="color_selected_'.$p.'" name="color_selected[]" type="checkbox" value="'.$p.'" /> <label class="fb_option" for="color_selected_'.$p.'">'.$p.'</label><br />'."\n";
+	echo '<input checked="checked" class="fb_checkbox" id="color_selected'.$p.'" name="color_selected[]" type="checkbox" value="'.$p.'" /> <label class="fb_option" for="color_selected'.$p.'">'.$p.'</label><br />'."\n";
 }
 
 echo '<br />

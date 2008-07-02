@@ -3,14 +3,14 @@
 ##  Data donestech2007
 $datas['subvideo'] = array
 (
-	        'name' => 'subvideo',
-		'label' => 'translate online videos',
-		'db'=> array(
-			'name'=>'subvideo',
-			'user'=>'root',
-			'passw'=>'gotic',
-			'host'=>'localhost'
-		),
+	'name' => 'subvideo',
+	'label' => 'translate online videos',
+	'db'=> array(
+		'name'=>'subvideo',
+		'user'=>'root',
+		'passw'=>'gotic',
+		'host'=>'localhost'
+	),
 	
 	'table'=> 'subvideos',
 	'pkey'=>'id',
@@ -27,7 +27,12 @@ $datas['subvideo'] = array
 
 		'kind' => array(
 			'label'=>'Kind',
-			'filter'=>'1'
+			'filter'=>'1',
+			'join' => array(
+				'table'=>'subvideo_kind',
+				'key' => 'id',
+				'val' => 'kind' 
+			),
 		),
 		'subvideo_lang' => array(
 			'label'=>'Language',
