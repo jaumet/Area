@@ -24,7 +24,6 @@ $datas['subvideo'] = array
 			'label'=>'Created by',
 			'filter'=>'1'
 		),
-
 		'kind' => array(
 			'label'=>'Kind',
 			'filter'=>'1',
@@ -37,8 +36,16 @@ $datas['subvideo'] = array
 		'subvideo_lang' => array(
 			'label'=>'Language',
 			'filter'=>'1'
-		)
-		
+		),
+		'protected' => array(
+			'label'=>'Protection',
+			'filter'=>'1',
+			'join' => array(
+				'table'=>'subvideo_protected',
+				'key' => 'id',
+				'val' => 'protected' 
+			),
+		),
 	)
 );
 

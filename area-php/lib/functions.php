@@ -37,16 +37,43 @@ function get_distinct_values($param, $table, $dataname) {
 		$join_table = $datas[$dataname]['fields'][$param]['join']['table'];
 		$join_key = $datas[$dataname]['fields'][$param]['join']['key'];
 		$join_val = $datas[$dataname]['fields'][$param]['join']['val'];
+		$query = "SELECT DISTINCT 
+		".myescape($table).".".myescape($param).", ".$join_table.".".myescape($join_val)." 
+		FROM ".myescape($table).", ".$join_table." 
+		WHERE ".myescape($table).".".$param." != '' 
+		AND ".myescape($table).".".myescape($param)." = ".$join_table.".".myescape($join_key)."
+		ORDER BY ".myescape($table).".".myescape($param).";";
+		$combine = "yes";
+//		echo "<hr />".$query."<hr />";
+	} else {
+		$query = "SELECT DISTINCT ".myescape($param)." 
+			FROM ".myescape($table)." 
+			WHERE ".$param." != '' 
+			ORDER BY ".myescape($param).";";
 	}
-################## JAUME FIXME 
-
-	$distinct = array();
-	$query = "select distinct ".myescape($param)." from ".myescape($table)." where ".$param." != '' order by ".myescape($param).";";
+	$distinct = array(); $distinct_key = array(); $distinct_val = array();
 	$result = mysql_query($query) or die('Query failed: ' . mysql_error());
-	while ($line = mysql_fetch_assoc($result)) {
-		array_push($distinct, htmlentities($line[$param]));
+	while ($line = mysql_fetch_array($result)) {
+		array_push($distinct_key, htmlentities($line[0]));
+		array_push($distinct_val, htmlentities($line[1]));
 	}
+	if ($combine == "yes") { 
+		$distinct = array_combine($distinct_key, $distinct_val);
+		array_push($distinct, "__join_needed__");
+	} else { 
+		$distinct = $distinct_key; 
+	}
+
+//echo "<hr />distinct_key";
+//print_r($distinct_key);
+//echo "<hr />distinct_val";
+//print_r($distinct_val);
+//echo "<hr />distinct";
+//print_r($distinct);
+//exit;
+
 	return $distinct;
+
 }
 
 function get_random_colors($num_colors, $factor)  {

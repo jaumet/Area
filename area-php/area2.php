@@ -56,14 +56,25 @@ connect($dataname);
 echo '<div class="debug">';
 $table = $d['table'];
 echo $query;
-echo "<pre>";
+echo "<pre>param1_list:<br />Abans";
 $param1_list = get_distinct_values($param1, $table, $dataname);
 print_r($param1_list);
 echo "<hr />";
+if (array_pop($param1_list) == "__join_needed__") { // NOTE: here the "if" does array_pop if is treu
+	$param1_list_val = array_values($param1_list);
+	$param1_list = array_keys($param1_list);
+} else {
+	$param1_list_val = $param1_list;
+}
+print_r($param1_list);
+echo "<hr />";
+print_r($param1_list_val);
+echo "<hr />";
+
 $param2_list = get_distinct_values($param2, $table, $dataname);
 
 print_r($param2_list);
-echo "<hr>SESSION<br />";
+echo "<hr />SESSION<br />";
 print_r($_SESSION);
 echo "</pre>";
 echo "</div>";
@@ -108,7 +119,9 @@ echo '<form action="area3.php" id="construct2" method="post" name="construct2" o
 
 <input class="fb_hidden" id="param1" name="param1" type="hidden" value="'.$param1.'" />
 <input class="fb_hidden" id="param2" name="param2" type="hidden" value="'.$param2.'" />'."\n";
-
+foreach ($param1_list_val as $v) {
+	echo '<input class="fb_hidden" id="block_values_h" name="block_values_h[]" type="hidden" value="'.$v.'" />'."\n";
+}
 foreach ($param1_list as $p) {
 	echo '<input class="fb_hidden" id="block_values" name="block_values[]" type="hidden" value="'.$p.'" />'."\n";
 }
@@ -130,9 +143,10 @@ echo '<span class="fb_required">Panelx</span>
 
 <br />
 <span class="fb_required">Blocks: '.$d['fields'][$param1]['label'].' ( <a href="#" onClick="checkAll(document.construct2.block_selected,this)">Uncheck</a> | <a href="#" onClick="uncheckAll(document.construct2.block_selected,this)">Check</a> )</span><br />'."\n";
-
+$f = 0;
 foreach ($param1_list as $p) {
-	echo '<input checked="checked" class="fb_checkbox" id="block_selected'.$p.'" name="block_selected[]" size="8" type="checkbox" value="'.$p.'" /> <label class="fb_option" for="block_selected'.$p.'">'.$p.'</label><br />'."\n";
+	echo '<input checked="checked" class="fb_checkbox" id="block_selected'.$p.'" name="block_selected[]" size="8" type="checkbox" value="'.$p.'" /> <label class="fb_option" for="block_selected'.$p.'">'.$param1_list_val[$f].'</label><br />'."\n";
+$f++;
 }
 
 echo '<br />
