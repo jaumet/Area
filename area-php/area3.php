@@ -155,7 +155,7 @@ echo 'LEGEND: '.$pa1.' <-> '.$pa2.": ";
 
 ####### list of selected values / join values / colors
 ## make colors if is needed:
-if ($randomcolor == "yes") { 
+if ($randomcolor == "yes" or !$_SESSION['colors']) { 
 	$colors = get_random_colors($num_colors, "clear"); 
 } else {
 	$colors = $_SESSION['colors'];
