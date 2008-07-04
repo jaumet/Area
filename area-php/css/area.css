@@ -155,10 +155,11 @@ fb_error        span around field error message
 
 .block {
 	float: left;
-	border-width: 0 1px 1px 0;
+	border-width: 1px 1px 1px 1px;
 	border-style: solid;
 	border-color: grey;
 	z-index:5;
+	padding-left:9px;
 }
 
 table {
@@ -239,14 +240,17 @@ border: 1px solid #ffffff;
 	z-index: 1;
 }
 #preview {
-	position:absolute; 
+	position:relative; 
 	background-color: #3d3d3d;
-	top: 182px; 
+	top: 155px;
 	visibility: visible;
 	display:block;
 	width: 180px;
 	padding: 15px;
 	z-index: 100;
+	border-width: 2px 1px 1px 1px;
+	border-style: solid;
+	border-color: grey;
 }
 
 #node_info, #savethis {
@@ -338,7 +342,7 @@ h3 {
 	font-size : 9px;
 	font-style : normal;
 	font-weight : bold;
-	width: 99%;
+	width: 90%;
 	padding: 2px;
 	padding-left: 3px;
 	line-height: 15px;
@@ -384,12 +388,13 @@ a:hover, a:active {
 
 .panel {
  	margin: 2px;
- 	width: 800px;
- 	height: 600px;
+ 	/*width: 800px;
+ 	height: 600px;*/
  	position: absolute;
  	top: 180px;
+	left:15px;
  	background-color: black;
- 	border-top: 1px solid white;
+ 	/*border-top: 1px solid white;*/
 }
 
 

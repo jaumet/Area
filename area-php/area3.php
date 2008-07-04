@@ -17,8 +17,13 @@ $blocks_values_h = $_SESSION['block_values_h'];
 $color_selected = $_SESSION['color_selected'];
 $color_values = $_SESSION['color_values'];
 $color_values_h = $_SESSION['color_values_h'];
-$x = $_SESSION['panelx'];
-$y = $_SESSION['panely'];
+if ($_REQUEST['panelx'] and $_REQUEST['panely']) {
+	$x = $_REQUEST['panelx'];
+	$y = $_REQUEST['panely'];
+} else {
+	$x = $_SESSION['panelx'];
+	$y = $_SESSION['panely'];
+}
 
 if (isset($_REQUEST['quantum'])) {
 	$_SESSION['quantum'] = $_REQUEST['quantum'];
@@ -91,7 +96,7 @@ foreach ($block_array as $bl) {
 }
 echo "Nodes per block max: ".$nodes_per_block_max[0]." -> ".$nodes_per_block_max[1]."<br />";
 while ($matrix_nodes*$matrix_nodes < ($nodes_per_block_max[0])) { $matrix_nodes++;}
-echo "Nodes matrix max: ".$matrix_nodes = (round(sqrt($nodes_per_block_max[0]), 0) + 0.8)."<br />";
+//echo "Nodes matrix max: ".$matrix_nodes = (round(sqrt($nodes_per_block_max[0]), 0) + 0.8)."<br />";
 echo "<hr />COLORS<br />";
 
 $color_joins = array_combine($color_selected, $color_values_h);
@@ -124,6 +129,10 @@ if ($quantum == "quantum") {
 } else {
 	$checkednq = ' checked="checked" '; $checkedq = ''; 
 }
+if ($x<=50 or $y<=50) { 
+	$x = 800; $y=600;
+}
+
 echo '<div id="formdiv">'."\n";
 echo '<form action="area3.php" id="update" method="post" name="update">
 <div>
@@ -141,9 +150,9 @@ Type of visualization
 <label class="fb_option" for="quantum_non_quantum">non-quantum</label>
 
 Size
-<input class="fb_input" id="panelx" maxlength="4" name="panelx" size="2" type="text" value="800" />
+<input class="fb_input" id="panelx" maxlength="4" name="panelx" size="2" type="text" value="'.$x.'" />
 <b>x</b>
-<input class="fb_input" id="panely" maxlength="4" name="panely" size="2" type="text" value="600" />
+<input class="fb_input" id="panely" maxlength="4" name="panely" size="2" type="text" value="'.$y.'" />
 
 <input class="fb_button" id="_submit" name="_submit" onclick="this.form._submit.value = this.value;" value="update" type="submit">
 <input class="fb_button" id="_savethis" name="_savethis" onclick="javascript:showdiv(\'savethis\');" value="save this">
@@ -192,11 +201,11 @@ if ($colors_array) {
 	$_SESSION['colors_array'] = $colors_array; 
 } else {
 
-	echo "<pre>p2:";
-	print_r($_SESSION['p2']);
-	echo "<hr />colors";
-	print_r($colors);
-	echo "</pre>";
+	//echo "<pre>p2:";
+	//print_r($_SESSION['p2']);
+	//echo "<hr />colors";
+	//print_r($colors);
+	//echo "</pre>";
 	$colors_array = array_combine($_SESSION['p2'] , $colors);
 	//$colors_array = $_SESSION['colors_array'];
 }
@@ -204,10 +213,9 @@ if ($colors_array) {
 echo "</div>";
 
 ## panel
-echo '<div class="panel" style="width:'.$x.'px;heigth:'.$y.'px;">'."\n";
+echo '<div class="panel" style="width:'.($x + 50).'px;heigth:'.($y + 10).'px;">'."\n";
 
 ########### Building blocks and nodes
-
 $blockstyle = "width: ".($block_x-2)."px; height:".($block_y-2)."px;";
 ## for non quantum:
 $nodestyle = "width: ".($block_x-15)/$matrix_nodes."px; height:".($block_y-38)/$matrix_nodes."px;";
@@ -268,7 +276,7 @@ foreach ($block_array as $bl) {
 echo "</div>"."\n";
 $sesion_id = session_id();
 echo '
-<div id="preview" style="height: 600px; left: 840px;"><h3>Search here:</h3>
+<div id="preview" style="height: 600px; left: '.($x + 40).'px;"><h3>Search here:</h3>
 <form action="area3.php" id="filter" method="post" name="filter">
 
 <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">
