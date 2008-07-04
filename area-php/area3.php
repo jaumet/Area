@@ -4,6 +4,33 @@ include('./lib/DataConfig.php');
 ## Handling session:
 session_start();
 
+############## $_REQUEST -> $_SESSION
+if (isset($_REQUEST['block_selected'])) {
+	$_SESSION = $_REQUEST;
+}
+$dataname = $_SESSION['datasrcname'];
+$param1 = $_SESSION['param1'];
+$param2 = $_SESSION['param2'];
+$blocks_selected = $_SESSION['block_selected'];
+$blocks_values = $_SESSION['block_values'];
+$blocks_values_h = $_SESSION['block_values_h'];
+$color_selected = $_SESSION['color_selected'];
+$color_values = $_SESSION['color_values'];
+$color_values_h = $_SESSION['color_values_h'];
+$x = $_SESSION['panelx'];
+$y = $_SESSION['panely'];
+
+if (isset($_REQUEST['quantum'])) {
+	$_SESSION['quantum'] = $_REQUEST['quantum'];
+}
+$quantum = $_SESSION['quantum'];
+
+if (isset($_REQUEST['randomcolor'])) {
+	$_SESSION['randomcolor'] = $_REQUEST['randomcolor'];
+}
+$randomcolor = $_SESSION['randomcolor'];
+
+########################  html start
 echo <<<DOC
 <?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
 DOC;
@@ -18,41 +45,19 @@ echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://
 	<script language=\"javascript\" src=\"./js/prototype.js\"></script>
 </head>\n
 <body>\n";
-if (isset($_REQUEST['quantum'])) {
-	$quantum = $_REQUEST['quantum'];
-	$_SESSION['quantum'] = $_REQUEST['quantum'];
-} else {
-	$quantum = $_SESSION['quantum'];
-}
+
 
 echo "<div class='debug'>";
 echo "REQUEST<br /><pre>";
 print_r($_REQUEST);
 echo "</pre><hr />quantum?".$quantum."<br />";
 echo "<hr />BLOCKS<br />";
-if (isset($_REQUEST['block_selected'])) {
-	$blocks_selected = $_REQUEST['block_selected'];
-	$blocks_values = $_REQUEST['block_values'];
-} else {
-	$blocks_selected = $_SESSION['param1_selected'];
-	$blocks_values = $_REQUEST['block_values'];
-}
-
 echo "Num of blocks seleccionats: ".sizeof($blocks_selected)."<br />";
 echo "Num of blocks possibles: ".sizeof($blocks_values)."<br />";
 $blocks = sizeof($blocks_selected);
 $matrix = round(sqrt($blocks), 0);
 while ($matrix*$matrix < $blocks) { $matrix++;}
 echo "Blocks matrix size:".$matrix." x ".$matrix."<br />";
-if ($_REQUEST['panelx'] and $_REQUEST['panely']) {
-	$x = $_REQUEST['panelx'];
-	$_SESSION['panelx'] = $_REQUEST['panelx'];
-	$y = $_REQUEST['panely'];
-	$_SESSION['panely'] = $_REQUEST['panely'];
-} else {
-	$x = $_SESSION['panelx'];
-	$y = $_SESSION['panely'];
-}
 
 $block_x = round($x/$matrix);
 $block_y = round($y/$matrix);
@@ -61,45 +66,40 @@ echo "Size of each block: ".$block_x." px / ".$block_y." px<br />";
 
 //Getting max num the nodes in a block
 $block_array = $blocks_selected;
-$dataname = $_SESSION['dataname'];
-$param1 = $_SESSION['param1'];
-$param2 = $_SESSION['param2'];
+$block_array_h = $blocks_values_h;
+
 $d = $datas[$dataname];
 connect($dataname);
 $nodes_per_block_max[0] = 0;
+
 foreach ($block_array as $bl) {
 	$query = "SELECT COUNT(*) FROM ".myescape($d['table'])." WHERE ".myescape($param1)."='".myescape($bl)."';";
-	//echo "<br />query: ".$query."<br />";
 	$result = mysql_query($query) or die('Query failed: ' . mysql_error());
 	$nodes_per_block = mysql_fetch_array($result);
-	//echo "-------- ".$bl." -> ".$nodes_per_block[0]."<br />";
 	## add nodes per block to the array as a value
 	$block1_array[$bl] = $nodes_per_block[0];
-	//print_r($block1_array);
-	//echo "<br />size: ".sizeof($block_array)."<br />";
 	if ($nodes_per_block[0] > $nodes_per_block_max[0]) { 
 		$nodes_per_block_max[0] = $nodes_per_block[0];
-		$nodes_per_block_max[1] = $bl;}
+		$nodes_per_block_max[1] = $bl;
+	}
 }
 echo "Nodes per block max: ".$nodes_per_block_max[0]." -> ".$nodes_per_block_max[1]."<br />";
 while ($matrix_nodes*$matrix_nodes < ($nodes_per_block_max[0])) { $matrix_nodes++;}
-echo "Nodex matrix max: ".$matrix_nodes = (round(sqrt($nodes_per_block_max[0]), 0) + 0.8)."<br />";
+echo "Nodes matrix max: ".$matrix_nodes = (round(sqrt($nodes_per_block_max[0]), 0) + 0.8)."<br />";
 echo "<hr />COLORS<br />";
-$num_colors = sizeof($_REQUEST['color_selected']);
+
+$color_joins = array_combine($color_selected, $color_values_h);
+$num_colors = sizeof($color_selected);
+
+
 echo "Num of colors seleccionats: ".$num_colors."<br />";
-echo "Num of colors total: ".sizeof($_REQUEST['color_values'])."<br />";
+echo "Num of colors total: ".sizeof($color_values)."<br />";
 echo "<pre>";print_r($_SESSION);echo "</pre>";
 echo "</div>";
 
 ## Adding variables to the phpsession
-$_SESSION['quantum'] = $quantum;
-$_SESSION['param1_selected'] = $block_array;
-if(isset($_REQUEST['color_selected'])) {
-	$color_selected = $_REQUEST['color_selected'];
-	$_SESSION['param2_selected'] = $_REQUEST['color_selected'];
-} else {
-	$color_selected = $_SESSION['param2_selected'];
-}
+//$_SESSION['quantum'] = $quantum;
+//$_SESSION['param1_selected'] = $block_array;
 
 ## header
 echo '<div id="headerdiv">'."\n";
@@ -108,8 +108,41 @@ echo " AREA, visualization tool<br>\n";
 echo "</div>";
 
 ## formdiv
+if ($randomcolor == "yes") { 
+	$checkedr = ' checked="checked" '; $checkednr = ''; 
+} else {
+	$checkednr = ' checked="checked" '; $checkedr = ''; 
+}
+if ($quantum == "quantum") { 
+	$checkedq = ' checked="checked" '; $checkednq = ''; 
+} else {
+	$checkednq = ' checked="checked" '; $checkedq = ''; 
+}
 echo '<div id="formdiv">'."\n";
-echo 'XXXXXXXXX';
+echo '<form action="area3.php" id="update" method="post" name="update">
+<div>
+Randomize colors
+<input '.$checkedr.' class="fb_radio" id="randomcolor_yes" name="randomcolor" value="yes" type="radio"> 
+<label class="fb_option" for="randomcolor_yes">yes</label>
+
+<input '.$checkednr.' class="fb_radio" id="randomcolor_no" name="randomcolor" value="no" type="radio"> <label class="fb_option" for="randomcolor_no">no</label>
+
+Type of visualization
+<input '.$checkedq.' class="fb_radio" id="quantum_quantum" name="quantum" value="quantum" type="radio"> 
+<label class="fb_option" for="quantum_quantum">quantum</label>
+
+<input '.$checkednq.' class="fb_radio" id="quantum_non_quantum" name="quantum" value="non-quantum" type="radio"> 
+<label class="fb_option" for="quantum_non_quantum">non-quantum</label>
+
+Size
+<input class="fb_input" id="panelx" maxlength="4" name="panelx" size="2" type="text" value="800" />
+<b>x</b>
+<input class="fb_input" id="panely" maxlength="4" name="panely" size="2" type="text" value="600" />
+
+<input class="fb_button" id="_submit" name="_submit" onclick="this.form._submit.value = this.value;" value="update" type="submit">
+<input class="fb_button" id="_savethis" name="_savethis" onclick="javascript:showdiv(\'savethis\');" value="save this">
+</div>
+</form>';
 echo "</div>";
 
 ## Legend
@@ -120,14 +153,20 @@ $pa2 = $d['fields'][$param2]['label'];
 echo '<div id="legend">'."\n";
 echo 'LEGEND: '.$pa1.' <-> '.$pa2.": ";
 
-####### list of selected values / colors
-## make colors:
-$colors = get_random_colors($num_colors, "clear");
+####### list of selected values / join values / colors
+## make colors if is needed:
+if ($randomcolor == "yes") { 
+	$colors = get_random_colors($num_colors, "clear"); 
+} else {
+	$colors = $_SESSION['colors'];
+}
+
 $n = 0;
 $p = $color_selected;
+$p_v = $color_values_h;
 $p2 = array();
 foreach ($colors as $col) {
-	echo '<span class="legend" style="background-color: '.$col.';">'.$p[$n].'</span>'."\n";
+	echo '<span class="legend" style="background-color: '.$col.';">'.$p_v[$n].'</span>'."\n";
 	## 1: building array param2 <-> colors
 	array_push($p2, $p[$n]);
 	$n++;
@@ -163,10 +202,11 @@ $blockstyle = "width: ".($block_x-2)."px; height:".($block_y-2)."px;";
 ## for non quantum:
 $nodestyle = "width: ".($block_x-15)/$matrix_nodes."px; height:".($block_y-38)/$matrix_nodes."px;";
 
-
+$s = 0;
 foreach ($block_array as $bl) {
 	echo '<div class="block" style="'.$blockstyle.'">'."\n";
-	echo '<div class="blockname">'.$bl.'( '.$block1_array[$bl].')</div>';
+	echo '<div class="blockname">'.$block_array_h[$s].'( '.$block1_array[$bl].')</div>';
+	$s++;
 	if ($block1_array[$bl])  {
 		if ($quantum != "quantum") { 
 			$matrix_nodes = round(sqrt($block1_array[$bl]), 0);
@@ -190,11 +230,10 @@ foreach ($block_array as $bl) {
 			array_push($cl, $line[0]);
 			array_push($id_array, $line[1]);
 		}
-		
 		for ($i=0;$i<($block1_array[$bl]);$i++) {
 			$rgb = $colors_array[$cl[$i]];
 			$id  = $id_array[$i];
-			echo '<div class="node" id="'.$id.'" name="'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$cl[$i].'" onclick="javascript:showdiv(\'node_info\');area_info('.$id.', \''.$dataname.'\');"></div>';
+			echo '<div class="node" id="'.$id.'" name="'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'" onclick="javascript:showdiv(\'node_info\');area_info('.$id.', \''.$dataname.'\');"></div>';
 		}
 	}
 	echo "</div>"."\n";
@@ -212,7 +251,8 @@ Tag
 <input class="fb_button" id="filter_submit" name="_submit" value="filter" type="submit">
 </div>
 </form>
-<h2>About <b>this</b> AREA:</h2><h2>Violencies(*)</h2><p><b>Feminicis a l\'Estat Espanyol des de l\'any 2000. 556 entrades</b></p><hr><p>* Possible representations: <b>13.852.879.303.186 ~= 1.3 * E13</b></p>';
+<h2>About <b>this</b> AREA: </h2><h2>'.$d['description'].'</h2>
+<p>* Possible representations: <b>13.852.879.303.186 ~= 1.3 * E13</b></p>';
 
 echo "<p>TAG:  ".$_REQUEST['submitted_filter']."</p>";
 print_r($p);
@@ -221,6 +261,7 @@ echo "</div>";
 
 echo '<div id="node_info" style="visibility: hidden;">
 </div>';
-
+echo '<div id="savethis" style="visibility: hidden;">
+</div>';
 echo "</body></html>";
 ?>

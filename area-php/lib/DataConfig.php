@@ -5,6 +5,7 @@ $datas['subvideo'] = array
 (
 	'name' => 'subvideo',
 	'label' => 'translate online videos',
+	'description' => 'With subvideo you can add subtitles to one video (subtitles, transcriptions, translations, comments, deficitions,...). You can add timed images next to the video screen. You can search a query in subvideo database and find in which videos and at which second appears your query. Then you can see the moments in a playlist. Visit <a href="http://subvideo.tv" target="_subvideo">subvideo.tv</a>',
 	'db'=> array(
 		'name'=>'subvideo',
 		'user'=>'root',

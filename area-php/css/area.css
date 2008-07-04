@@ -20,6 +20,7 @@ fb_invalid      span around labels for invalid fields
 fb_comment      span around field comment
 fb_error        span around field error message
 */
+
 .fb {
 	color : #ffa20f;
 	background: #999999;
@@ -109,6 +110,18 @@ fb_error        span around field error message
 	font-style : normal;
 	margin-right:2em;
 }
+
+#_savethis {
+	position:relative;
+	padding-top:9px;
+	padding-left:3px;
+	padding-right:3px;
+	width:42px;
+	height:19px;
+	top:-1px;
+	left:-10px;
+}
+
 /* main ones */
 .node {
 	border: 1px solid black;
@@ -136,7 +149,7 @@ fb_error        span around field error message
 	color : #ffffff;
 	font-family : Verdana, Sans;
 	font-size : 8px;
-	font-style : normal;
+	font-weight : bold;
 	background-color: #000000;
 }
 
@@ -236,7 +249,7 @@ border: 1px solid #ffffff;
 	z-index: 100;
 }
 
-#node_info {
+#node_info, #savethis {
 	position:absolute; 
         top: 185px;
         left: 30px;
@@ -353,7 +366,7 @@ a:hover, a:active {
 
 
 .debug {
-/*display: none;*/
+display: none;
 	background-color: #ffffff;
 	color: #000000;
 	opacity: 50%;
@@ -413,3 +426,4 @@ span.legend {
 	color: #ffa904;
 	color: black;
 }
+

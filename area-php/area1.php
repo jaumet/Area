@@ -90,7 +90,7 @@ foreach ($fields as $n) {
 	$numnull = $numnull[0];
 
 	#$count++;
-	$percdistinct = number_format(($numdistinct*100)/($numrows - $numnull), 2);
+	$percdistinct = number_format(($numdistinct*100)/($numrows - $numnull +1), 2);
 	$percnotnull  = number_format((($numrows - $numnull)*100)/$numrows, 2);
 
 $humann = $n;

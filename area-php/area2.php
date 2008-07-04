@@ -29,30 +29,8 @@ $_SESSION['param2'] = $param2;
 
 
 #connexio a la bd mysql
-#my ($dbh,$datasrc)=Area::Datasources::connect($datasrcname);
-#my %datasrc = %{$datasrc};
 connect($dataname);
 
-#echo "<div class='debug'>";
-#print_r();
-#echo "</div>";
-
-
-#sub to escape mysql special chars
-#sub myescape {
-#	my $escaped = $_[0];
-#	$escaped =~ s/\\/\\\\/g;
-#	$escaped =~ s/'/\\'/g;
-#	return $escaped;
-#}
-
-#my ($blkkeys,$blkvals) = getdistinctvals($datasrc,$param1);
-#my ($colkeys,$colvals) = getdistinctvals($datasrc,$param2);
-
-#echo Dumper($blkkeys);
-#echo Dumper($blkvals);
-#echo Dumper($colkeys);
-#echo Dumper($colvals);
 echo '<div class="debug">';
 $table = $d['table'];
 echo $query;
@@ -60,7 +38,7 @@ echo "<pre>param1_list:<br />Abans";
 $param1_list = get_distinct_values($param1, $table, $dataname);
 print_r($param1_list);
 echo "<hr />";
-if (array_pop($param1_list) == "__join_needed__") { // NOTE: here the "if" does array_pop if is treu
+if (array_pop($param1_list) == "__join_needed__") { // NOTE: here the "if" does array_pop if is true
 	$param1_list_val = array_values($param1_list);
 	$param1_list = array_keys($param1_list);
 } else {
@@ -72,6 +50,12 @@ print_r($param1_list_val);
 echo "<hr />";
 
 $param2_list = get_distinct_values($param2, $table, $dataname);
+if (array_pop($param2_list) == "__join_needed__") { // NOTE: here the "if" does array_pop if is true
+	$param2_list_val = array_values($param2_list);
+	$param2_list = array_keys($param2_list);
+} else {
+	$param2_list_val = $param2_list;
+}
 
 print_r($param2_list);
 echo "<hr />SESSION<br />";
@@ -119,11 +103,14 @@ echo '<form action="area3.php" id="construct2" method="post" name="construct2" o
 
 <input class="fb_hidden" id="param1" name="param1" type="hidden" value="'.$param1.'" />
 <input class="fb_hidden" id="param2" name="param2" type="hidden" value="'.$param2.'" />'."\n";
-foreach ($param1_list_val as $v) {
-	echo '<input class="fb_hidden" id="block_values_h" name="block_values_h[]" type="hidden" value="'.$v.'" />'."\n";
+foreach ($param1_list_val as $v1) {
+	echo '<input class="fb_hidden" id="block_values_h" name="block_values_h[]" type="hidden" value="'.$v1.'" />'."\n";
 }
 foreach ($param1_list as $p) {
 	echo '<input class="fb_hidden" id="block_values" name="block_values[]" type="hidden" value="'.$p.'" />'."\n";
+}
+foreach ($param2_list_val as $v2) {
+	echo '<input class="fb_hidden" id="color_values_h" name="color_values_h[]" type="hidden" value="'.$v2.'" />'."\n";
 }
 foreach ($param2_list as $p) {
 	echo '<input class="fb_hidden" id="color_values" name="color_values[]" type="hidden" value="'.$p.'" />'."\n";
@@ -143,17 +130,18 @@ echo '<span class="fb_required">Panelx</span>
 
 <br />
 <span class="fb_required">Blocks: '.$d['fields'][$param1]['label'].' ( <a href="#" onClick="checkAll(document.construct2.block_selected,this)">Uncheck</a> | <a href="#" onClick="uncheckAll(document.construct2.block_selected,this)">Check</a> )</span><br />'."\n";
-$f = 0;
+$f1 = 0;
 foreach ($param1_list as $p) {
-	echo '<input checked="checked" class="fb_checkbox" id="block_selected'.$p.'" name="block_selected[]" size="8" type="checkbox" value="'.$p.'" /> <label class="fb_option" for="block_selected'.$p.'">'.$param1_list_val[$f].'</label><br />'."\n";
-$f++;
+	echo '<input checked="checked" class="fb_checkbox" id="block_selected'.$p.'" name="block_selected[]" size="8" type="checkbox" value="'.$p.'" /> <label class="fb_option" for="block_selected'.$p.'">'.$param1_list_val[$f1].'</label><br />'."\n";
+$f1++;
 }
 
 echo '<br />
 <span class="fb_required">Colors: '.$d['fields'][$param2]['label'].' ( <a href="#" onClick="checkAll(document.construct2.color_selected,this)">Uncheck</a> | <a href="#" onClick="uncheckAll(document.construct2.color_selected,this)">Check</a> )<br></span>'."\n";
-
+$f2 = 0;
 foreach ($param2_list as $p) {
-	echo '<input checked="checked" class="fb_checkbox" id="color_selected'.$p.'" name="color_selected[]" type="checkbox" value="'.$p.'" /> <label class="fb_option" for="color_selected'.$p.'">'.$p.'</label><br />'."\n";
+	echo '<input checked="checked" class="fb_checkbox" id="color_selected'.$p.'" name="color_selected[]" type="checkbox" value="'.$p.'" /> <label class="fb_option" for="color_selected'.$p.'">'.$param2_list_val[$f2].'</label><br />'."\n";
+$f2++;
 }
 
 echo '<br />
