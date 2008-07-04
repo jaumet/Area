@@ -155,7 +155,7 @@ echo 'LEGEND: '.$pa1.' <-> '.$pa2.": ";
 
 ####### list of selected values / join values / colors
 ## make colors if is needed:
-if ($randomcolor == "yes" or !$_SESSION['colors']) { 
+if (!$_SESSION['colors'] or $randomcolor == "yes") { 
 	$colors = get_random_colors($num_colors, "clear"); 
 } else {
 	$colors = $_SESSION['colors'];
@@ -178,19 +178,18 @@ if ($p2) {
 
 if ($colors) { 
 	$_SESSION['colors'] = $colors; 
-//} else {
-//	$colors = $_SESSION['colors'];
 }
 
 ## and 2: building array param2 <-> colors
-
 if ($colors) { $_SESSION['colors'] = $colors; }
+
 if ($colors_array) { 
 	$_SESSION['colors_array'] = $colors_array; 
 } else {
 	$colors_array = array_combine($_SESSION['p2'] , $_SESSION['colors']);
 	//$colors_array = $_SESSION['colors_array'];
 }
+
 echo "</div>";
 
 ## panel
@@ -215,16 +214,28 @@ foreach ($block_array as $bl) {
 		}
 
 		## Param2 and colors
-		if(isset($_REQUEST['submitted_filter'])) {
-			$filter = " AND IS LIKE %%".$_REQUEST."['submitted_filter']%% ";
+		if ($_REQUEST['submitted_filter'] == 1) {
+			$query = "SELECT ".myescape($d['pkey'])." 
+			FROM ".myescape($d['table'])." 
+			WHERE ".myescape($param1)."='".myescape($bl)."' 
+			AND ".myescape($d['table']).".subvideo_name LIKE '%".$_REQUEST['tag']."%' 
+			ORDER BY ".myescape($param2).";";
+			//echo "<br />query: ".$query."<br />";
+			$result = mysql_query($query) or die('Query filter param2: ' . mysql_error());
+			$filter_array = array();
+			while ($line = mysql_fetch_array($result)) {
+				array_push($filter_array, $line[0]);
+			}			
+		} else {
+			$filter_array = array();
 		}
+
 		$query = "SELECT ".myescape($param2).", ".myescape($d['pkey'])." 
 		FROM ".myescape($d['table'])." 
-		WHERE ".myescape($param1)."='".myescape($bl)."'
+		WHERE ".myescape($param1)."='".myescape($bl)."'  
 		ORDER BY ".myescape($param2).";";
-
 		//echo "<br />query: ".$query."<br />";
-		$result = mysql_query($query) or die('Query failed: ' . mysql_error());
+		$result = mysql_query($query) or die('Query select param2: ' . mysql_error());
 		$cl = array(); $id_array = array();
 		while ($line = mysql_fetch_array($result)) {
 			array_push($cl, $line[0]);
@@ -233,29 +244,30 @@ foreach ($block_array as $bl) {
 		for ($i=0;$i<($block1_array[$bl]);$i++) {
 			$rgb = $colors_array[$cl[$i]];
 			$id  = $id_array[$i];
+			if (!in_array($id, $filter_array)) { $rgb = get_dark_color($rgb);}
 			echo '<div class="node" id="'.$id.'" name="'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'" onclick="javascript:showdiv(\'node_info\');area_info('.$id.', \''.$dataname.'\');"></div>';
 		}
 	}
 	echo "</div>"."\n";
 }
+
 echo "</div>"."\n";
 $sesion_id = session_id();
 echo '
 <div id="preview" style="height: 600px; left: 840px;"><h3>Search here:</h3>
-<form action="area3.php?"'.$sesion_id.' id="filter" method="post" name="filter">
+<form action="area3.php" id="filter" method="post" name="filter">
 <div>
 <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">
-<input id="filter" name="filter" value="1" type="hidden">
 Tag
 <input class="fb_input" id="tag" name="tag" value="" type="text">
 <input class="fb_button" id="filter_submit" name="_submit" value="filter" type="submit">
 </div>
 </form>
-<h2>About <b>this</b> AREA: </h2><h2>'.$d['description'].'</h2>
+<h2>About <b>this</b> AREA: <br />Name: '.$d['name'].'<br />Bescription: '.$d['description'].'</h2>
 <p>* Possible representations: <b>13.852.879.303.186 ~= 1.3 * E13</b></p>';
 
-echo "<p>TAG:  ".$_REQUEST['submitted_filter']."</p>";
-print_r($p);
+echo "<p>TAG:  ".$_REQUEST['tag']."</p>";
+print_r($filter_array);
 echo "</div>";
 
 

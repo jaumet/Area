@@ -80,21 +80,19 @@ function get_random_colors($num_colors, $factor)  {
 	$colors = array();
 	for ($i=0;$i<$num_colors;$i++) {
 		$r = intval( 100+rand(0, 155));
-		$rd = intval($r/1.5);
 		$g = intval( 100+rand(0, 155));
-		$gd = intval($g/1.5);
 		$b = intval( 50+rand(0, 205));
-		$bd = intval($b/1.5);
 		$bgcolorc = "rgb(".$r.",".$g.",".$b.")";
-		$bgcolord = "rgb(".$rd.",".$gd.",".$bd.")";  
-		//$clear .= '<div style="float:left;width:30px;height:30px;padding:3px;background-color:'.$bgcolorc.';">'.$b.'</div>';
-		//$dark .= '<div style="float:left;width:30px;height:30px;padding:3px;background-color:'.$bgcolord.';">'.$bd.'</div>';
-		if ($factor == "dark")  {
-			array_push($colors, $bgcolord);
-		} else {
-			array_push($colors, $bgcolorc);
-		}
 	}
 	return $colors;
+}
+function get_dark_color($rgb)  {
+	$rgb1 = substr($rgb, 4, -1);
+	$rgb2 = split(",", $rgb1);
+	$rd = intval($rgb2[0]/2.5);
+	$gd = intval($rgb2[1]/2.5);
+	$bd = intval($rgb2[2]/2.5);
+	$dark = "rgb(".$rd.",".$gd.",".$bd.")"; 
+	return $dark;
 }
 ?>
