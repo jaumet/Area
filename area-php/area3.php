@@ -214,11 +214,12 @@ foreach ($block_array as $bl) {
 		}
 
 		## Param2 and colors
+		#### AND ".myescape($d['table']).".subvideo_name REGEXP '".myescape($_REQUEST['tag'])."'
 		if ($_REQUEST['submitted_filter'] == 1) {
 			$query = "SELECT ".myescape($d['pkey'])." 
 			FROM ".myescape($d['table'])." 
 			WHERE ".myescape($param1)."='".myescape($bl)."' 
-			AND ".myescape($d['table']).".subvideo_name LIKE '%".$_REQUEST['tag']."%' 
+			AND LOWER(".myescape($d['table']).".subvideo_name) LIKE LOWER('%%".$_REQUEST['tag']."%%') 
 			ORDER BY ".myescape($param2).";";
 			//echo "<br />query: ".$query."<br />";
 			$result = mysql_query($query) or die('Query filter param2: ' . mysql_error());
