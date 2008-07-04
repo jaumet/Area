@@ -76,14 +76,16 @@ function get_distinct_values($param, $table, $dataname) {
 
 }
 
-function get_random_colors($num_colors, $factor)  {
+function get_random_colors($num_colors)  {
 	$colors = array();
 	for ($i=0;$i<$num_colors;$i++) {
 		$r = intval( 100+rand(0, 155));
 		$g = intval( 100+rand(0, 155));
 		$b = intval( 50+rand(0, 205));
 		$bgcolorc = "rgb(".$r.",".$g.",".$b.")";
+		array_push($colors, $bgcolorc);
 	}
+	
 	return $colors;
 }
 function get_dark_color($rgb)  {

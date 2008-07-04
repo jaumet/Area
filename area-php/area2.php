@@ -34,10 +34,11 @@ connect($dataname);
 echo '<div class="debug">';
 $table = $d['table'];
 echo $query;
-echo "<pre>param1_list:<br />Abans";
+echo "<pre>SESSION:";
+print_r($_SESSION);
+echo "</pre>";
 $param1_list = get_distinct_values($param1, $table, $dataname);
-print_r($param1_list);
-echo "<hr />";
+echo "<hr />param1_list";
 if (array_pop($param1_list) == "__join_needed__") { // NOTE: here the "if" does array_pop if is true
 	$param1_list_val = array_values($param1_list);
 	$param1_list = array_keys($param1_list);
@@ -45,7 +46,7 @@ if (array_pop($param1_list) == "__join_needed__") { // NOTE: here the "if" does 
 	$param1_list_val = $param1_list;
 }
 print_r($param1_list);
-echo "<hr />";
+echo "<hr />param1_list_val";
 print_r($param1_list_val);
 echo "<hr />";
 
@@ -56,11 +57,6 @@ if (array_pop($param2_list) == "__join_needed__") { // NOTE: here the "if" does 
 } else {
 	$param2_list_val = $param2_list;
 }
-
-print_r($param2_list);
-echo "<hr />SESSION<br />";
-print_r($_SESSION);
-echo "</pre>";
 echo "</div>";
 
 #my $rndcolor;

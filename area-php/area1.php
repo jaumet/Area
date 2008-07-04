@@ -68,6 +68,9 @@ $good = array();
 
 #foreach my $n (@fieldnames) {
 echo "<div class='debug'><hr />";
+echo "<pre>SESSION:";
+print_r($SESSION);
+echo "</pre>";
 foreach ($fields as $n) {
 	// get config for this field
 	$f=$d['fields'][$n];
