@@ -9,7 +9,7 @@ include($area_path.'lib/DataConfig.php');
 $dataname = $_REQUEST['dataname'];
 if (!$dataname) {echo "<h2>No dataname selected!!!!</h2>"; }
 $d = $datas[$dataname];
-#echo $dataname."<br />";
+
 ## CONNECT to database
 connect($dataname);
 
@@ -34,7 +34,6 @@ $result = mysql_query($query) or die('Query failed: ' . mysql_error());
 
 $numfields = mysql_num_fields($result);
 $numrows = mysql_num_rows($result); 
-
 $r = mysql_query("show columns from ".$d['table']);
 if (mysql_num_rows($r) > 0) {
    while ($row = mysql_fetch_assoc($r)) {
@@ -42,18 +41,14 @@ if (mysql_num_rows($r) > 0) {
    }
 }
 
-####### Sobre la taula:
-# Nom de la taula
 echo "<div id=\"headerdiv\">";
 echo "<h2><a href=\"".$area_url."\" alt=\"Area visualization tool home page\"><img src=\"area.png\" width=\"33px\" align=\"left\" vspace=\"0\" hspace=\"0\" border=\"0\" alt=\"go to AREA\" style=\"margin-right:3px;margin-left:2px;\" /></a>";
 echo " AREA, a database to treemap visualization tool<br>";
 echo "</div>";
 
-#$count = 0;
 $bad = array();
 $good = array();
 
-#foreach my $n (@fieldnames) {
 echo "<div class='debug'><hr />";
 echo "<pre>SESSION:";
 print_r($SESSION);
@@ -63,11 +58,12 @@ foreach ($fields as $n) {
 	$f=$d['fields'][$n];
 
 	if (!$f) {
-		$alert = '<div id="alert><p>".$f." ->note: field named $n is not defined in the config!</p></div>';
+		$alert = '<div id="alert><p>".$f." ->note: field named $n is not';
+		$alert .= ' defined in the config!</p></div>'."\n";
 	}
 
 	# Count distinct values per field
-	# this is array: field -> distinct_number
+	# array: field -> distinct_number
 	$query = "select count(distinct $n) FROM ".myescape($d['table']).";";
 	$result = mysql_query($query) or die('Query failed: ' . mysql_error());
 	$numdistinct = mysql_fetch_array($result);
@@ -83,31 +79,27 @@ foreach ($fields as $n) {
 	$percdistinct = number_format(($numdistinct*100)/($numrows - $numnull +1), 2);
 	$percnotnull  = number_format((($numrows - $numnull)*100)/$numrows, 2);
 
-$humann = $n;
-if ($f['label']) {
-	$humann = $f['label'];
-} else {
-	$humann = str_replace("_"," ", $humann);
-}
+	$humann = $n;
+	if ($f['label']) {
+		$humann = $f['label'];
+	} else {
+		$humann = str_replace("_"," ", $humann);
+	}
 
-if (($percnotnull < $area_percnotnull ) or ($numdistinct > $area_numdistinct_max ) or ($numdistinct < $area_numdistinct_min)) {
-#		$bin=\@bad; 
+	if (($percnotnull < $area_percnotnull ) 
+	  or ($numdistinct > $area_numdistinct_max ) 
+	  or ($numdistinct < $area_numdistinct_min)) {
 		$class='bad';
 		array_push($bad, $n);
 		$htmlbad .= '<tr class="'.$class.'"><td>'.$humann.'</td><td> no null: '.($numrows - $numnull).' ('.$percnotnull.' %) </td><td> distinct values: '.$numdistinct.' ('.$percdistinct.' %)</td></tr>'."\n\n";
 
 	} else {
-#		$bin=\@good; 
 		$class='good';
-#		push(@params, $n);
-#		$params{$n}=$datasrc->{fields}{$n}{label};
-		//$params[$n]=$data[$dataname][fields][$n][label];
 		array_push($good, $n);
 		$htmlgood .= '<tr class="'.$class.'"><td>'.$humann.'</td><td> no null: '.($numrows - $numnull).' ('.$percnotnull.' %) </td><td> distinct values: '.$numdistinct.' ('.$percdistinct.' %)</td></tr>'."\n\n";
 		$options .= '<option value="'.$n.'">'.$humann.'</option>\n';
 	}
 
-#	push @{$bin}, $html;
 }
 
 echo "<hr />BAD: ";
@@ -119,43 +111,33 @@ echo "<hr />html: ".$html;
 echo '</div>';
 
 #Add fields with sql results to the form and echo the form
-#@params = sort(@params);
-echo "<div id=\"formdiv\">";
-#$form->field(name => 'datasrcname', type=> 'hidden', value=>$datasrcname, required => 1);
-#$form->field(name => 'param1', type=> 'select', options=>\%params, required => 1);
-#$form->field(name => 'param2', type=> 'select', options=>\%params, required => 1);
+echo "<div id=\"formdiv\">"."\n";
 echo "STEP 1: choose 2 main parameters visualization<br>";
-#echo $form->render();
 
-$sesion_id = session_id();
 ### FORM
-echo '<form action="area2.php?' . $sesion_id . '" id="construct1" method="post" name="construct1" onsubmit="return validate_construct1(this);">
-<input id="_submitted_construct1" name="_submitted_construct1" type="hidden" value="1" />
-<input class="fb_hidden" id="dataname" name="dataname" type="hidden" value="'.$dataname.'" />
-<span class="fb_required">Param1</span>
-<select class="fb_select" id="param1" name="param1">
-  <option value="">-select-</option>
+echo '<form action="area2.php" id="construct1" method="post" name="construct1" onsubmit="return validate_construct1(this);">'."\n".'
+<input id="_submitted_construct1" name="_submitted_construct1" type="hidden" value="1" />'."\n".'
+<input class="fb_hidden" id="dataname" name="dataname" type="hidden" value="'.$dataname.'" />'."\n".'
+<span class="fb_required">Param1</span>'."\n".'
+<select class="fb_select" id="param1" name="param1">'."\n".'
+  <option value="">-select-</option>'."\n".'
   '.$options.'
-</select>
-
-<span class="fb_required">Param2</span>
-<select class="fb_select" id="param2" name="param2">
-  <option value="">-select-</option>
+</select>'."\n".'
+<span class="fb_required">Param2</span>'."\n".'
+<select class="fb_select" id="param2" name="param2">'."\n".'
+  <option value="">-select-</option>'."\n".'
   '.$options.'
-</select>
-<input class="fb_button" id="construct1_submit" name="_submit" type="submit" value="Next" />
-</div>
-</form>';
-
-
+</select>'."\n".'
+<input class="fb_button" id="construct1_submit" name="_submit" type="submit" value="Next" />'."\n".'
+</div>'."\n".'
+</form>'."\n";
 
 ### END FORM
-
-echo "</div>";
+echo "</div>"."\n";
 echo "<br /><br /><br />";
-echo "<div id=\"analisisdiv\">";
+echo "<div id=\"analisisdiv\">"."\n";
 
-echo "<h2>About the data: ".$d['name']." </h2>";
+echo "<h2>About the data: ".$d['name']." </h2>"."\n";
 echo "<p><ul><li>Database Name: ".$d['db']['name']."</li>\n";
 echo "<p><ul><li>Database Label: ".$d['label']."</li>\n";
 echo "<li>Table Name: <b>".$d['table']."</b></li>\n\n";
@@ -169,15 +151,10 @@ echo "<li>Number of records: ".$numrows."</li></ul></p>";
 echo "<p>You can choose 2 of these parameters:</p>";
 echo "<table>".$htmlgood."</table>";
 
-echo "<p>List of the rest of fields:</p>";
-echo "<table>".$htmlbad."</table>";
-echo "</div>";
+echo "<p>List of the rest of fields:</p>"."\n";
+echo "<table>".$htmlbad."</table>"."\n";
+echo "</div>"."\n";
 
-#es tanca la conexió
-#$sth->finish();
-#$dbh->disconnect();
-
-echo "\n</body></html>";
-
+echo "</body></html>";
 ?>
 
