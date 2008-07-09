@@ -2,28 +2,15 @@
 session_start();
 
 include('./lib/functions.php');
+include('./lib/AreaConfig.php');
+include($area_path.'lib/DataConfig.php');
 
-include('./lib/DataConfig.php');
-
-
-#create the form object
-#my $form = CGI::FormBuilder->new(
-#				name => 'construct1',
-#				method => 'post',
-#				submit => 'Next',
-#				stylesheet => 1,
-#				#table      => {width => 1400},
-#				table      => 0,
-#				fields => [qw(datasrcname param1 param2)],
-#				);
-
-
-#GET DATASOURCES
+## GET DATASOURCES
 $dataname = $_REQUEST['dataname'];
 if (!$dataname) {echo "<h2>No dataname selected!!!!</h2>"; }
 $d = $datas[$dataname];
 #echo $dataname."<br />";
-# CONNECT
+## CONNECT to database
 connect($dataname);
 
 # Starting html
@@ -58,7 +45,7 @@ if (mysql_num_rows($r) > 0) {
 ####### Sobre la taula:
 # Nom de la taula
 echo "<div id=\"headerdiv\">";
-echo "<h2><a href=\"/area\"><img src=\"area.png\" width=\"33px\" align=\"left\" vspace=\"0\" hspace=\"0\" border=\"0\" alt=\"go to AREA\" style=\"margin-right:3px;margin-left:2px;\" /></a>";
+echo "<h2><a href=\"".$area_url."\" alt=\"Area visualization tool home page\"><img src=\"area.png\" width=\"33px\" align=\"left\" vspace=\"0\" hspace=\"0\" border=\"0\" alt=\"go to AREA\" style=\"margin-right:3px;margin-left:2px;\" /></a>";
 echo " AREA, a database to treemap visualization tool<br>";
 echo "</div>";
 
@@ -103,7 +90,7 @@ if ($f['label']) {
 	$humann = str_replace("_"," ", $humann);
 }
 
-if (($percnotnull < "80") or ($numdistinct > "50") or ($numdistinct < "2")) {
+if (($percnotnull < $area_percnotnull ) or ($numdistinct > $area_numdistinct_max ) or ($numdistinct < $area_numdistinct_min)) {
 #		$bin=\@bad; 
 		$class='bad';
 		array_push($bad, $n);

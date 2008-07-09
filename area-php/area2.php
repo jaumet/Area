@@ -1,7 +1,7 @@
 <?
 include('./lib/functions.php');
-
-include('./lib/DataConfig.php');
+include('./lib/AreaConfig.php');
+include($area_path.'lib/DataConfig.php');
 
 ## Handling session:
 session_start();
