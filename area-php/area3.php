@@ -99,6 +99,7 @@ foreach ($block_array as $bl) {
 echo "Nodes per block max: ".$nodes_per_block_max[0]." -> ".$nodes_per_block_max[1]."<br />";
 //while ($matrix_nodes*$matrix_nodes < ($nodes_per_block_max[0])) { $matrix_nodes++;}
 $matrix_nodes = round(sqrt($nodes_per_block_max[0]), 0);
+if ($matrix_nodes*$matrix_nodes < $nodes_per_block_max[0]) { $matrix_nodes++;}
 echo "<br />matrix nodes: ".$matrix_nodes;
 echo "<br />node x :".$block_x/$matrix_nodes." | node y : ".$block_y/$matrix_nodes;
 //echo "Nodes matrix max: ".$matrix_nodes = (round(sqrt($nodes_per_block_max[0]), 0) + 0.8)."<br />";
@@ -221,10 +222,10 @@ echo "</div>";
 echo '<div class="panel" style="width:'.($x + 30).'px;heigth:'.($y + 10).'px;">'."\n";
 
 ########### Building blocks and nodes
-$blockstyle = "width: ".($block_x)."px; height:".($block_y + $matrix_nodes + 30)."px;";
+$blockstyle = "width: ".($block_x)."px; height:".($block_y + 40)."px;";
 
 ## for quantum:
-$nodestyle = "width: ".(($block_x)/($matrix_nodes) - 2)."px; height:".intval(($block_y/$matrix_nodes)*0.9)."px;";
+$nodestyle = "width: ".(($block_x)/($matrix_nodes) - 2)."px; height:".intval(($block_y/$matrix_nodes))."px;";
 
 $qqq = "";
 if ($submitted_filter == 1) {
@@ -300,26 +301,22 @@ echo "</div>"."\n";
 $sesion_id = session_id();
 echo '
 <div id="preview" style="height: 600px; left: '.($x + intval($x/20)).'px;"><h3>Search here:</h3>
-<form action="area3.php" id="filter" method="post" name="filter">
-
-<input id="submitted_filter" name="submitted_filter" value="1" type="hidden">
-<h3>Filter by tag:</h3>
+<form action="area3.php" id="filter" method="post" name="filter">'."\n".'
+<input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
+<h3>Filter by tag:</h3>'."\n".'
 <input class="fb_input" id="tag" name="tag" value="" type="text">
 <input class="fb_button" id="filter_submit" name="_submit" value="filter" type="submit">
-</form>';
+</form>'."\n";
 if ($tag) { echo "<p>TAG:  ".$tag."</p>"; }
 echo '<h2>About <b>this</b> AREA: <br />Name: '.$d['name'].'<br />Description: '.$d['description'].'</h2>
-<p>* Possible representations: <b>'.$d['max_representations'].'</b></p>';
+<p>* Possible representations: <b>'.$d['max_representations'].'</b></p>'."\n";
 
-echo "<p>TAG:  ".$tag."</p>";
-//print_r($filter_array);
-echo " submitted: ".$submitted_filter;
-echo "</div>";
-
+echo "<p>TAG:  ".$tag."</p>"."\n";
+echo "</div>"."\n";
 
 echo '<div id="node_info" style="visibility: hidden;">
-</div>';
+</div>'."\n";
 echo '<div id="savethis" style="visibility: hidden;">
-</div>';
+</div>'."\n";
 echo "</body></html>";
 ?>

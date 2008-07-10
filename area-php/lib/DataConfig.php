@@ -18,11 +18,13 @@ $datas['directori'] = array
 	'fields' => array(
 		's_contactname' => array(
 			'label'=>'Nom',
-			'filter'=>'1'
+			'filter'=>'1',
+			'show'=>'1'
 		),
 		's_type' => array(
 			'label'=>'Tipus',
-			'filter'=>'1'
+			'filter'=>'1',
+			'show'=>'1'
 		)
 	)
 );
@@ -46,7 +48,8 @@ $datas['directori1'] = array
 	'fields' => array(
 		's_name' => array(
 			'label'=>'Name',
-			'filter'=>'1'
+			'filter'=>'1',
+			'show'=>'1'
 		),
 		'XXX' => array(
 			'label'=>'XXXXX',
@@ -74,15 +77,18 @@ $datas['subvideo'] = array
 	'fields' => array(
 		'subvideo_name' => array(
 			'label'=>'Name',
-			'filter'=>'1'
+			'filter'=>'1',
+			'show'=>'1'
 		),
 		'subvideo_description' => array(
 			'label'=>'Description',
-			'filter'=>'1'
+			'filter'=>'1',
+			'show'=>'1'
 		),
 		'created_by' => array(
 			'label'=>'Created by',
-			'filter'=>'1'
+			'filter'=>'1',
+			'show'=>'1'
 		),
 		'views' => array(
 			'label'=>'Views',
