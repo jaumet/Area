@@ -111,7 +111,7 @@ $num_colors = sizeof($color_selected);
 
 echo "Num of colors seleccionats: ".$num_colors."<br />";
 echo "Num of colors total: ".sizeof($color_values)."<br />";
-echo "<pre>";print_r($_SESSION);echo "</pre>";
+echo "<pre>";print_r($_SESSION);print_r($color_joins);echo "</pre>";
 echo "</div>";
 
 ## Adding variables to the phpsession
@@ -206,14 +206,7 @@ if ($colors) {
 if ($colors_array) { 
 	$_SESSION['colors_array'] = $colors_array; 
 } else {
-
-	//echo "<pre>p2:";
-	//print_r($_SESSION['p2']);
-	//echo "<hr />colors";
-	//print_r($colors);
-	//echo "</pre>";
 	$colors_array = array_combine($_SESSION['p2'] , $colors);
-	//$colors_array = $_SESSION['colors_array'];
 }
 
 echo "</div>";
@@ -222,7 +215,7 @@ echo "</div>";
 echo '<div class="panel" style="width:'.($x + 30).'px;heigth:'.($y + 10).'px;">'."\n";
 
 ########### Building blocks and nodes
-$blockstyle = "width: ".($block_x)."px; height:".($block_y + 40)."px;";
+$blockstyle = "width: ".($block_x)."px; height:".($block_y + 50)."px;";
 
 ## for quantum:
 $nodestyle = "width: ".(($block_x)/($matrix_nodes) - 2)."px; height:".intval(($block_y/$matrix_nodes))."px;";
