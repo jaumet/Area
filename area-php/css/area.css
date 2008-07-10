@@ -124,12 +124,12 @@ fb_error        span around field error message
 
 /* main ones */
 .node {
-	border: 1px solid black;
+	border: 0px solid black;
 	border-width: 0px 1px 1px 0px;
 	visibility: visible;
 	display: block;
-	height: 6px;
-	width: 6px;
+	/*height: 6px;
+	width: 6px;*/
 	cursor : help;
 	z-index: 10;
 	float: left;
@@ -378,7 +378,7 @@ a:hover, a:active {
 	position: absolute;
 	top: 20%;
 	bottom: 20%;
-	left: 900px;
+	left: 1100px;
 	#right: 20%;
 	overflow: auto;
 	z-index: 1000;
@@ -395,6 +395,7 @@ a:hover, a:active {
 	left:15px;
  	background-color: black;
  	/*border-top: 1px solid white;*/
+ 	margin-bottom: 500px;
 }
 
 

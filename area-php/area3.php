@@ -72,8 +72,8 @@ $matrix = round(sqrt($blocks), 0);
 while ($matrix*$matrix < $blocks) { $matrix++;}
 echo "Blocks matrix size:".$matrix." x ".$matrix."<br />";
 
-$block_x = round($x/$matrix);
-$block_y = round($y/$matrix);
+$block_x = round($x/$matrix, 0);
+$block_y = round($y/$matrix, 0);
 echo "Desired size ( ".$x.", ".$y." )<br />";
 echo "Size of each block: ".$block_x." px / ".$block_y." px<br />";
 
@@ -97,7 +97,10 @@ foreach ($block_array as $bl) {
 	}
 }
 echo "Nodes per block max: ".$nodes_per_block_max[0]." -> ".$nodes_per_block_max[1]."<br />";
-while ($matrix_nodes*$matrix_nodes < ($nodes_per_block_max[0])) { $matrix_nodes++;}
+//while ($matrix_nodes*$matrix_nodes < ($nodes_per_block_max[0])) { $matrix_nodes++;}
+$matrix_nodes = round(sqrt($nodes_per_block_max[0]), 0);
+echo "<br />matrix nodes: ".$matrix_nodes;
+echo "<br />node x :".$block_x/$matrix_nodes." | node y : ".$block_y/$matrix_nodes;
 //echo "Nodes matrix max: ".$matrix_nodes = (round(sqrt($nodes_per_block_max[0]), 0) + 0.8)."<br />";
 echo "<hr />COLORS<br />";
 
@@ -218,9 +221,10 @@ echo "</div>";
 echo '<div class="panel" style="width:'.($x + 30).'px;heigth:'.($y + 10).'px;">'."\n";
 
 ########### Building blocks and nodes
-$blockstyle = "width: ".($block_x-2)."px; height:".($block_y-2 + intval($y/25))."px;";
-## for non quantum:
-$nodestyle = "width: ".($block_x-15)/$matrix_nodes."px; height:".($block_y-38)/($matrix_nodes)."px;";
+$blockstyle = "width: ".($block_x)."px; height:".($block_y + $matrix_nodes + 30)."px;";
+
+## for quantum:
+$nodestyle = "width: ".(($block_x)/($matrix_nodes) - 2)."px; height:".intval(($block_y/$matrix_nodes)*0.9)."px;";
 
 $qqq = "";
 if ($submitted_filter == 1) {
@@ -250,7 +254,7 @@ foreach ($block_array as $bl) {
 		if ($quantum != "quantum") { 
 			$matrix_nodes = round(sqrt($block1_array[$bl]), 0);
 			while ($matrix_nodes*$matrix_nodes < $block1_array[$bl]) { $matrix_nodes++;}
-			$nodestyle = "width: ".($block_x-15)/$matrix_nodes."px; height:".($block_y-38)/$matrix_nodes."px;";
+			$nodestyle = "width: ".(($block_x/$matrix_nodes) - 2)."px; height:".($block_y)/$matrix_nodes."px;";
 		}
 
 		## Param2 and colors

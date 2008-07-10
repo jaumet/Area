@@ -47,6 +47,10 @@ $datas['directori1'] = array
 		's_name' => array(
 			'label'=>'Name',
 			'filter'=>'1'
+		),
+		'XXX' => array(
+			'label'=>'XXXXX',
+			'filter'=>'1'
 		)
 	)
 );
