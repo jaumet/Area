@@ -27,6 +27,6 @@ $area_numdistinct_max = 50;
 
 ## $numdistinct_min       : minimum number of distinct values (different values) 
 ## 			of any field of the selected database (default/recommended: 2)
-$area_numdistinct_min      = 1;
+$area_numdistinct_min      = 2;
 
 ?>

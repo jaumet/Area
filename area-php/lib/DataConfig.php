@@ -1,4 +1,55 @@
 <?
+## DIrectori moviments.net
+$datas['directori'] = array
+(
+	'name' => 'Directori',
+	'label' => 'Guia util moviments',
+	'max_representations' => '6.103.527.116.845.563.008 ~ 6 E18',
+	'description' => 'Descriptio Descriptio Descriptio Descriptio Descriptio Descriptio Descriptio Descriptio <a href="http://moviments.net" target="_moviments">moviments.net</a>',
+	'db'=> array(
+		'name'=>'directori',
+		'user'=>'root',
+		'passw'=>'gotic',
+		'host'=>'localhost'
+	),
+	
+	'table'=> 'Anydata_ItemContacts',
+	'pkey'=>'id_Items',
+	'fields' => array(
+		's_contactname' => array(
+			'label'=>'Nom',
+			'filter'=>'1'
+		),
+		's_type' => array(
+			'label'=>'Tipus',
+			'filter'=>'1'
+		)
+	)
+);
+
+## DIrectori moviments.net
+$datas['directori1'] = array
+(
+	'name' => 'Directori1',
+	'label' => 'Guia util moviments',
+	'max_representations' => '6.103.527.116.845.563.008 ~ 6 E18',
+	'description' => 'Descriptio Descriptio Descriptio Descriptio Descriptio Descriptio Descriptio Descriptio <a href="http://moviments.net" target="_moviments">moviments.net</a>',
+	'db'=> array(
+		'name'=>'directori',
+		'user'=>'root',
+		'passw'=>'gotic',
+		'host'=>'localhost'
+	),
+	
+	'table'=> 'Anydata_Items',
+	'pkey'=>'id_Items',
+	'fields' => array(
+		's_name' => array(
+			'label'=>'Name',
+			'filter'=>'1'
+		)
+	)
+);
 
 ##  Data donestech2007
 $datas['subvideo'] = array

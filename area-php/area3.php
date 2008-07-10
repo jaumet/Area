@@ -215,12 +215,12 @@ if ($colors_array) {
 echo "</div>";
 
 ## panel
-echo '<div class="panel" style="width:'.($x + 50).'px;heigth:'.($y + 10).'px;">'."\n";
+echo '<div class="panel" style="width:'.($x + 30).'px;heigth:'.($y + 10).'px;">'."\n";
 
 ########### Building blocks and nodes
-$blockstyle = "width: ".($block_x-2)."px; height:".($block_y-2)."px;";
+$blockstyle = "width: ".($block_x-2)."px; height:".($block_y-2 + intval($y/25))."px;";
 ## for non quantum:
-$nodestyle = "width: ".($block_x-15)/$matrix_nodes."px; height:".($block_y-38)/$matrix_nodes."px;";
+$nodestyle = "width: ".($block_x-15)/$matrix_nodes."px; height:".($block_y-38)/($matrix_nodes)."px;";
 
 $qqq = "";
 if ($submitted_filter == 1) {
@@ -295,7 +295,7 @@ foreach ($block_array as $bl) {
 echo "</div>"."\n";
 $sesion_id = session_id();
 echo '
-<div id="preview" style="height: 600px; left: '.($x + 40).'px;"><h3>Search here:</h3>
+<div id="preview" style="height: 600px; left: '.($x + intval($x/20)).'px;"><h3>Search here:</h3>
 <form action="area3.php" id="filter" method="post" name="filter">
 
 <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">
