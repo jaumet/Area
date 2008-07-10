@@ -291,7 +291,7 @@ foreach ($block_array as $bl) {
 			if (!in_array($id, $filter_array) and $submitted_filter == 1) { 
 				$rgb = get_dark_color($rgb);
 			}
-			echo '<div class="node" id="'.$id.'" name="'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'" onclick="javascript:showdiv(\'node_info\');area_info('.$id.', \''.$dataname.'\');"></div>';
+			echo '<div class="node" id="'.$id.'" name="'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  onclick="javascript:showdiv(\'node_info\');area_info('.$id.', \''.$dataname.'\');"></div>';
 		}
 	}
 	echo "</div>"."\n";

@@ -16,6 +16,7 @@ function connect($dataname) {
         $link = mysql_connect($DBserver, $DBuser, $DBpassw)
             or die('Could not connect: ' . mysql_error());
         mysql_select_db($DBname) or die('Could not select database');
+	mysql_query("SET NAMES 'utf8'");
 }
 
 #sub to escape mysql special chars
