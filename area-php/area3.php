@@ -227,7 +227,11 @@ if ($submitted_filter == 1) {
 	$qqq = "(";
 	foreach ($d['fields'] as $key => $value) {
 		if ($d['fields'][$key]['filter'] == 1)  {
+		  if ($d['fields'][$key]['join'])  {
 		    $qqq .= " LOWER(".myescape($d['table']).".".$key.") LIKE LOWER('%%".$tag."%%') OR ";
+		  } else {
+		    $qqq .= " LOWER(".myescape($d['table']).".".$key.") LIKE LOWER('%%".$tag."%%') OR ";
+		  }
 		}
 	}
 	if (substr($qqq, -3) == "OR ") {
@@ -250,25 +254,21 @@ foreach ($block_array as $bl) {
 		}
 
 		## Param2 and colors
-		#### AND ".myescape($d['table']).".subvideo_name REGEXP '".myescape($_REQUEST['tag'])."'
-
+		$filter_array = array();
 		if ($submitted_filter == 1) {
-		$query = "SELECT ".myescape($d['pkey'])." 
-			FROM ".myescape($d['table'])." 
-			WHERE ".myescape($param1)."='".myescape($bl)."' AND ";
-			
+			$query = "SELECT ".myescape($d['pkey'])." 
+				FROM ".myescape($d['table'])." 
+				WHERE ".myescape($param1)."='".myescape($bl)."' AND ";
+
 			if ($qqq) { $query .= $qqq; }
+	
 			$query .= " ORDER BY ".myescape($param2).";";
 			//echo "<br />query: ".$query."<br />";
 			$result = mysql_query($query) or die('Query filter param2: ' . mysql_error());
-			$filter_array = array();
 			while ($line = mysql_fetch_array($result)) {
 				array_push($filter_array, $line[0]);
-			}			
-		} else {
-			$filter_array = array();
-		}
-
+			}
+		}			
 		$query = "SELECT ".myescape($param2).", ".myescape($d['pkey'])." 
 		FROM ".myescape($d['table'])." 
 		WHERE ".myescape($param1)."='".myescape($bl)."'  
@@ -304,8 +304,8 @@ echo '
 <input class="fb_button" id="filter_submit" name="_submit" value="filter" type="submit">
 </form>';
 if ($tag) { echo "<p>TAG:  ".$tag."</p>"; }
-echo '<h2>About <b>this</b> AREA: <br />Name: '.$d['name'].'<br />Bescription: '.$d['description'].'</h2>
-<p>* Possible representations: <b>13.852.879.303.186 ~= 1.3 * E13</b></p>';
+echo '<h2>About <b>this</b> AREA: <br />Name: '.$d['name'].'<br />Description: '.$d['description'].'</h2>
+<p>* Possible representations: <b>'.$d['max_representations'].'</b></p>';
 
 echo "<p>TAG:  ".$tag."</p>";
 //print_r($filter_array);

@@ -19,7 +19,7 @@ $area_data_config_path = "/var/www/area/area-php/lib/AreaConfig.php";
 
 ## $area_percnotnull : minimum of percentage of non null values of any field 
 ## 			the selected database (default/recommended: 80)
-$area_percnotnull = 80;
+$area_percnotnull = 90;
 
 ## $numdistinct_max      : maximum number of distinct values (different values) 
 ## 			of any field of the selected database (default/recommended: 50)
@@ -27,6 +27,6 @@ $area_numdistinct_max = 50;
 
 ## $numdistinct_min       : minimum number of distinct values (different values) 
 ## 			of any field of the selected database (default/recommended: 2)
-$area_numdistinct_min      = 2;
+$area_numdistinct_min      = 1;
 
 ?>

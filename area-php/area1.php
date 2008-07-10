@@ -146,7 +146,9 @@ echo "<li>Table Name: <b>".$d['table']."</b></li>\n\n";
 echo "<li>Number of fields: ".$numfields."</li>\n\n";
 
 # Numero d'entrades
-echo "<li>Number of records: ".$numrows."</li></ul></p>";
+echo "<li>Number of records: ".$numrows."</li>";
+
+echo "<li>Possible representations: <b>".$d['max_representations']."</b></li></ul></p>";
 
 echo "<p>You can choose 2 of these parameters:</p>";
 echo "<table>".$htmlgood."</table>";
