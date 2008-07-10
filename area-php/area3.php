@@ -250,6 +250,8 @@ $qqq = substr($qqq, 0, -3);
 
 
 $s = 0;
+$total_nodes = 0;
+$dark_nodes = 0;
 foreach ($block_array as $bl) {
 	echo '<div class="block" style="'.$blockstyle.'">'."\n";
 	echo '<div class="blockname">'.$block_array_h[$s].'( '.$block1_array[$bl].')</div>';
@@ -293,7 +295,9 @@ foreach ($block_array as $bl) {
 			$id  = $id_array[$i];
 			if (!in_array($id, $filter_array) and $submitted_filter == 1) { 
 				$rgb = get_dark_color($rgb);
+				$dark_nodes++;
 			}
+			$total_nodes++;
 			echo '<div class="node" id="'.$id.'" name="'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  onclick="javascript:showdiv(\'node_info\');area_info(\''.htmlentities($id).'\', \''.$dataname.'\');"></div>';
 		}
 	}
@@ -310,11 +314,14 @@ echo '
 <input class="fb_input" id="tag" name="tag" value="" type="text">
 <input class="fb_button" id="filter_submit" name="_submit" value="filter" type="submit">
 </form>'."\n";
-if ($tag) { echo "<p>TAG:  ".$tag."</p>"; }
-echo '<h2>About <b>this</b> AREA: <br />Name: '.$d['name'].'<br />Description: '.$d['description'].'</h2>
-<p>* Possible representations: <b>'.$d['max_representations'].'</b></p>'."\n";
 
-echo "<p>TAG:  ".$tag."</p>"."\n";
+echo '<h2>About <b>this</b> AREA: <br />Name: '.$d['name'].'<br />Description: '.$d['description'].'</h2>';
+echo '<p> Total nodes: '.$total_nodes.'</p>';
+
+if ($tag != "") { echo '<p>Filter:<span class="tag">'.$tag.'</span><br /> Found: <span class="tag">'.($total_nodes - $dark_nodes).' ('.round(((1 - ($dark_nodes/$total_nodes))*100), 2).'%)</span></p>'; }
+
+echo "<hr />";
+echo '<p>* Possible representations: <b>'.$d['max_representations'].'</b></p>'."\n";
 echo "</div>"."\n";
 
 echo '<div id="node_info" style="visibility: hidden;">

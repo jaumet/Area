@@ -432,4 +432,9 @@ span.legend {
 	color: #ffa904;
 	color: black;
 }
+.tag {
+	color:red;
+	font-weight : bold;
+	font-size:1.2em;
+}
 
