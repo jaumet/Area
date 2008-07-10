@@ -39,7 +39,8 @@ print_r($_SESSION);
 echo "</pre>";
 $param1_list = get_distinct_values($param1, $table, $dataname);
 echo "<hr />param1_list";
-if (array_pop($param1_list) == "__join_needed__") { // NOTE: here the "if" does array_pop if is true
+$param1_list_copy = $param1_list;
+if (array_pop($param1_list_copy) == "__join_needed__") { 
 	$param1_list_val = array_values($param1_list);
 	$param1_list = array_keys($param1_list);
 } else {
@@ -51,7 +52,8 @@ print_r($param1_list_val);
 echo "<hr />";
 
 $param2_list = get_distinct_values($param2, $table, $dataname);
-if (array_pop($param2_list) == "__join_needed__") { // NOTE: here the "if" does array_pop if is true
+$param1_list_copy = $param1_list;
+if (array_pop($param1_list_copy) == "__join_needed__") {
 	$param2_list_val = array_values($param2_list);
 	$param2_list = array_keys($param2_list);
 } else {
@@ -87,7 +89,6 @@ echo " AREA, visualization tool<br>\n";
 echo "</div>\n";
 
 echo "<div id=\"formdiv\">\n";
-print_r($_SESSION);
 echo "<h2>Step 2: define & refine both parameters <span class =\"emphat\">".$d['fields'][$param1]['label']."</span> and <span class =\"emphat\">".$d['fields'][$param2]['label']."</span></h2>\n";
 
 
@@ -122,21 +123,21 @@ echo '<span class="fb_required">Panelx</span>
 <span class="fb_required">Node size</span>
 <input checked="checked" class="fb_radio" id="quantum_quantum" name="quantum" type="radio" value="quantum" /> <label class="fb_option" for="quantum_quantum">quantum</label>
 <input class="fb_radio" id="quantum_non_quantum" name="quantum" type="radio" value="non-quantum" /> 
-<label class="fb_option">non-quantum</label>
+<label class="fb_option" for="quantum_non_quantum">non-quantum</label>
 
 <br />
-<span class="fb_required">Blocks: '.$d['fields'][$param1]['label'].' ( <a href="#" onClick="checkAll(document.construct2.block_selected,this)">Uncheck</a> | <a href="#" onClick="uncheckAll(document.construct2.block_selected,this)">Check</a> )</span><br />'."\n";
+<span class="fb_required">Blocks: '.$d['fields'][$param1]['label'].' ( <a href="#" onClick="checkAll(document.construct2.block_selected,this);return false;">Uncheck</a> | <a href="#" onClick="uncheckAll(document.construct2.block_selected,this);return false;">Check</a> all )</span><br />'."\n";
 $f1 = 0;
 foreach ($param1_list as $p) {
-	echo '<input checked="checked" class="fb_checkbox" id="block_selected'.$p.'" name="block_selected[]" size="8" type="checkbox" value="'.$p.'" /> <label class="fb_option" for="block_selected'.$p.'">'.$param1_list_val[$f1].'</label><br />'."\n";
+	echo '<input checked="checked" class="fb_checkbox" id="block_selected" name="block_selected[]" size="8" type="checkbox" value="'.$p.'" /> <label class="fb_option" for="block_selected'.$p.'">'.$param1_list_val[$f1].'</label><br />'."\n";
 $f1++;
 }
 
 echo '<br />
-<span class="fb_required">Colors: '.$d['fields'][$param2]['label'].' ( <a href="#" onClick="checkAll(document.construct2.color_selected,this)">Uncheck</a> | <a href="#" onClick="uncheckAll(document.construct2.color_selected,this)">Check</a> )<br></span>'."\n";
+<span class="fb_required">Colors: '.$d['fields'][$param2]['label'].' ( <a href="#" onClick="checkAll(document.construct2.color_selected,this);return false;">Uncheck</a> | <a href="#" onClick="uncheckAll(document.construct2.color_selected,this);return false;">Check</a> all )<br></span>'."\n";
 $f2 = 0;
 foreach ($param2_list as $p) {
-	echo '<input checked="checked" class="fb_checkbox" id="color_selected'.$p.'" name="color_selected[]" type="checkbox" value="'.$p.'" /> <label class="fb_option" for="color_selected'.$p.'">'.$param2_list_val[$f2].'</label><br />'."\n";
+	echo '<input checked="checked" class="fb_checkbox" id="color_selected" name="color_selected[]" type="checkbox" value="'.$p.'" /> <label class="fb_option" for="color_selected'.$p.'">'.$param2_list_val[$f2].'</label><br />'."\n";
 $f2++;
 }
 

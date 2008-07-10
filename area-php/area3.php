@@ -222,6 +222,21 @@ $blockstyle = "width: ".($block_x-2)."px; height:".($block_y-2)."px;";
 ## for non quantum:
 $nodestyle = "width: ".($block_x-15)/$matrix_nodes."px; height:".($block_y-38)/$matrix_nodes."px;";
 
+$qqq = "";
+if ($submitted_filter == 1) {
+	$qqq = "(";
+	foreach ($d['fields'] as $key => $value) {
+		if ($d['fields'][$key]['filter'] == 1)  {
+		    $qqq .= " LOWER(".myescape($d['table']).".".$key.") LIKE LOWER('%%".$tag."%%') OR ";
+		}
+	}
+	if (substr($qqq, -3) == "OR ") {
+$qqq = substr($qqq, 0, -3);
+}
+	$qqq .= ")";
+}
+
+
 $s = 0;
 foreach ($block_array as $bl) {
 	echo '<div class="block" style="'.$blockstyle.'">'."\n";
@@ -236,12 +251,14 @@ foreach ($block_array as $bl) {
 
 		## Param2 and colors
 		#### AND ".myescape($d['table']).".subvideo_name REGEXP '".myescape($_REQUEST['tag'])."'
+
 		if ($submitted_filter == 1) {
-			$query = "SELECT ".myescape($d['pkey'])." 
+		$query = "SELECT ".myescape($d['pkey'])." 
 			FROM ".myescape($d['table'])." 
-			WHERE ".myescape($param1)."='".myescape($bl)."' 
-			AND LOWER(".myescape($d['table']).".subvideo_name) LIKE LOWER('%%".$tag."%%') 
-			ORDER BY ".myescape($param2).";";
+			WHERE ".myescape($param1)."='".myescape($bl)."' AND ";
+			
+			if ($qqq) { $query .= $qqq; }
+			$query .= " ORDER BY ".myescape($param2).";";
 			//echo "<br />query: ".$query."<br />";
 			$result = mysql_query($query) or die('Query filter param2: ' . mysql_error());
 			$filter_array = array();

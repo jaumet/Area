@@ -18,16 +18,23 @@ $datas['subvideo'] = array
 	'fields' => array(
 		'subvideo_name' => array(
 			'label'=>'Name',
-			'filter'=>'0'
+			'filter'=>'1'
 		),
-
+		'subvideo_description' => array(
+			'label'=>'Description',
+			'filter'=>'1'
+		),
 		'created_by' => array(
 			'label'=>'Created by',
 			'filter'=>'1'
 		),
+		'views' => array(
+			'label'=>'Views',
+			'filter'=>'1'
+		),
 		'kind' => array(
 			'label'=>'Kind',
-			'filter'=>'1',
+			'filter'=>'0',
 			'join' => array(
 				'table'=>'subvideo_kind',
 				'key' => 'id',
@@ -40,13 +47,13 @@ $datas['subvideo'] = array
 		),
 		'protected' => array(
 			'label'=>'Protection',
-			'filter'=>'1',
+			'filter'=>'0',
 			'join' => array(
 				'table'=>'subvideo_protected',
 				'key' => 'id',
 				'val' => 'protected' 
-			),
-		),
+			)
+		)
 	)
 );
 
