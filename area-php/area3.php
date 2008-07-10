@@ -161,15 +161,25 @@ Size
 <input class="fb_input" id="panely" maxlength="4" name="panely" size="2" type="text" value="'.$y.'" />
 
 <input class="fb_button" id="_submit" name="_submit" onclick="this.form._submit.value = this.value;" value="update" type="submit">
-<input class="fb_button" id="_savethis" name="_savethis" onclick="javascript:showdiv(\'savethis\');" value="save this">
+<!--<input class="fb_button" id="_savethis" name="_savethis" onclick="javascript:showdiv(\'savethis\');" value="save this">-->
 </div>
 </form>';
 echo "</div>";
 
 ## Legend
 # FIXME ????
-$pa1 = $d['fields'][$param1]['label'];
-$pa2 = $d['fields'][$param2]['label'];
+if ($d['fields'][$param1]['label']) { 
+	$pa1 = $d['fields'][$param1]['label'];
+} else {
+	$pa1 = $param1;
+}
+if ($d['fields'][$param2]['label']) { 
+	$pa2 = $d['fields'][$param2]['label'];
+} else {
+	$pa2 = $param2;
+}
+
+
 
 echo '<div id="legend">'."\n";
 echo 'LEGEND: '.$pa1.' <-> '.$pa2.": ";
@@ -284,7 +294,7 @@ foreach ($block_array as $bl) {
 			if (!in_array($id, $filter_array) and $submitted_filter == 1) { 
 				$rgb = get_dark_color($rgb);
 			}
-			echo '<div class="node" id="'.$id.'" name="'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  onclick="javascript:showdiv(\'node_info\');area_info('.$id.', \''.$dataname.'\');"></div>';
+			echo '<div class="node" id="'.$id.'" name="'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  onclick="javascript:showdiv(\'node_info\');area_info(\''.htmlentities($id).'\', \''.$dataname.'\');"></div>';
 		}
 	}
 	echo "</div>"."\n";

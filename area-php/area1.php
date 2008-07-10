@@ -7,8 +7,18 @@ include($area_path.'lib/DataConfig.php');
 
 ## GET DATASOURCES
 $dataname = $_REQUEST['dataname'];
-if (!$dataname) {echo "<h2>No dataname selected!!!!</h2>"; }
 $d = $datas[$dataname];
+
+if (!$dataname) {
+	echo "<h2>No dataname selected!!!!<br /> Choose one of the list:</h2>";
+	echo "<ul>"; 
+	foreach ($datas as $k => $v) {
+		echo "<li><a href=\"".$area_url."?dataname=".$k."\">$k</a></li>";
+	}
+	echo "</ul>";
+	exit;
+}
+
 
 ## CONNECT to database
 connect($dataname);
