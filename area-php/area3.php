@@ -315,10 +315,10 @@ echo '
 <input class="fb_button" id="filter_submit" name="_submit" value="filter" type="submit">
 </form>'."\n";
 
+if ($tag != "") { echo '<p>Filter:<span class="tag">'.$tag.'</span><br /> Found: <span class="tag">'.($total_nodes - $dark_nodes).' ('.round(((1 - ($dark_nodes/$total_nodes))*100), 2).'%)</span></p>'; }
+
 echo '<h2>About <b>this</b> AREA: <br />Name: '.$d['name'].'<br />Description: '.$d['description'].'</h2>';
 echo '<p> Total nodes: '.$total_nodes.'</p>';
-
-if ($tag != "") { echo '<p>Filter:<span class="tag">'.$tag.'</span><br /> Found: <span class="tag">'.($total_nodes - $dark_nodes).' ('.round(((1 - ($dark_nodes/$total_nodes))*100), 2).'%)</span></p>'; }
 
 echo "<hr />";
 echo '<p>* Possible representations: <b>'.$d['max_representations'].'</b></p>'."\n";
