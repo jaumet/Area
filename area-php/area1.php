@@ -13,7 +13,7 @@ if (!$dataname) {
 	echo "<h2>No dataname selected!!!!<br /> Choose one of the list:</h2>";
 	echo "<ul>"; 
 	foreach ($datas as $k => $v) {
-		echo "<li><a href=\"".$area_url."?dataname=".$k."\">$k</a></li>";
+		echo "<li><a href=\"".$area_url."area1.php?dataname=".$k."\">$k</a></li>";
 	}
 	echo "</ul>";
 	exit;
