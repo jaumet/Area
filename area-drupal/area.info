@@ -1,0 +1,4 @@
+; $Id$
+name = Area
+description = Represent a drupal site as a treemap.
+core = 6.x

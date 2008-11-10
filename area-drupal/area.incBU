@@ -1,0 +1,4 @@
+<?
+    $page_content .= '<br /><h1>Here the include with the Area code</h1>';
+
+?>

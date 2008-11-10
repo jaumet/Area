@@ -78,7 +78,7 @@ fb_error        span around field error message
 	padding: 3px;
 }
 .fb_button {
-	height: 30px;
+	height: 20px;
 	color : #ffa20f;
 	background: #000000;
 	outline: none;
@@ -92,8 +92,9 @@ fb_error        span around field error message
 	color : #000000;
 	background: #ffa20f;
 	font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
-	font-size: 10px;
+	font-size: 8px;
 	font-weight : bold;
+	margin-left:10px;
 }
 .fb_required {
         font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
@@ -123,7 +124,7 @@ fb_error        span around field error message
 }
 
 /* main ones */
-.node {
+.areanode {
 	border: 0px solid black;
 	border-width: 0px 1px 1px 0px;
 	visibility: visible;
@@ -131,7 +132,7 @@ fb_error        span around field error message
 	/*height: 6px;
 	width: 6px;*/
 	cursor : help;
-	z-index: 10;
+	z-index: 0;
 	float: left;
 }
 
@@ -141,11 +142,11 @@ fb_error        span around field error message
 	margin: 0px;
 	height: 24px;
 	line-height: 9px; 
-	padding-top:0px;
-	padding: 3px 3px 0px 3px;
-	border-style: none;
-	border-color: #3d3d3d;
-	z-index:10;
+	#padding-top:0px;
+	padding: 3px 0px 0px 3px;
+	#border-style: none;
+	#border-color: #3d3d3d;
+	#z-index:0;
 	color : #ffffff;
 	font-family : Verdana, Sans;
 	font-size : 8px;
@@ -153,13 +154,13 @@ fb_error        span around field error message
 	background-color: #000000;
 }
 
-.block {
+.areablock {
 	float: left;
 	border-width: 1px 1px 1px 1px;
 	border-style: solid;
 	border-color: grey;
-	z-index:5;
-	padding-left:9px;
+	z-index:0;
+	padding-left:2	px;
 }
 
 table {
@@ -247,7 +248,7 @@ border: 1px solid #ffffff;
 	display:block;
 	width: 180px;
 	padding: 15px;
-	z-index: 100;
+	z-index: 0;
 	border-width: 2px 1px 1px 1px;
 	border-style: solid;
 	border-color: grey;
@@ -300,34 +301,6 @@ body {
 	background-color:#000000; 
 }
 
-p, li, td {
-	color : #ffffff;
-	font-family : Verdana, Sans;
-	font-size : 10px;
-	font-style : normal;
-}
-	
-h2 {
-	color : #ffffff;
-	font-family : Verdana, Sans;
-	font-size : 10px;
-	font-style : normal;
-}
-
-h1 {
-	color : #ffffff;
-	font-family : Verdana, Sans;
-	font-size : 12px;
-	font-style : normal;
-}
-
-h3 {
-	color : #ffffff;
-	font-family : Verdana, Sans;
-	font-size : 14px;
-	font-style : normal;
-}
-
 
 #legend {
 	position:absolute;
@@ -346,31 +319,12 @@ h3 {
 	padding: 2px;
 	padding-left: 3px;
 	line-height: 15px;
-	z-index:25;
-}
-a {
-	color : orange;
-	font-family : Verdana, Sans;
-	font-size : 10px;
-	font-style : normal;
-	font-weight : bold;
-	text-decoration:none;
-}
-	
-a:hover, a:active {
-	background-color : white;
-	width:50px;
-	height:50px;
-	font-family : Verdana, Sans;
-	font-size : 10px;
-	font-style : normal;
-	font-weight : bold;
-	text-decoration:none;
+	z-index:0a;
 }
 
 
 .debug {
-/*display: none;*/
+display: none;
 	background-color: #ffffff;
 	color: #000000;
 	opacity: 50%;
@@ -390,12 +344,11 @@ a:hover, a:active {
  	margin: 2px;
  	/*width: 800px;
  	height: 600px;*/
- 	position: absolute;
- 	top: 180px;
-	left:15px;
+ 	/*top: 18px;
+	left:15px;*/
  	background-color: black;
  	/*border-top: 1px solid white;*/
- 	margin-bottom: 500px;
+ 	margin-bottom: 0px;
 }
 
 
@@ -404,18 +357,6 @@ a:hover, a:active {
 }
 
 
-input[type=checkbox]+label {
-	padding: 3px;
-}
-
-input[type=checkbox]+label+br {
-
-}
-
-input:checked,input:checked+label {
-	color: black;
-	background: white;
-}
 
 span.legend {
  white-space: nowrap; 
@@ -425,8 +366,6 @@ span.legend {
  border: none;
  font-weight : bold;
 }
-
-#formdiv p { display: none; }
 
 .emphat {
 	color: #ffa904;

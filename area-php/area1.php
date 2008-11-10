@@ -69,7 +69,7 @@ foreach ($fields as $n) {
 
 	if (!$f) {
 		$alert = '<div id="alert><p>".$f." ->note: field named $n is not';
-		$alert .= ' defined in the config!</p></div>'."\n";
+		$alert .= ' defined in the DataConfig file!</p></div>'."\n";
 	}
 
 	# Count distinct values per field
