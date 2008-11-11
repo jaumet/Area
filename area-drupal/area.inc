@@ -103,7 +103,6 @@ $colors = get_random_colors($num_colors);
 
 // Is this only one block or the whole area?
 if ($area_block == 1) { 
-//	$block_array = array(0 => "page");
 	$block_array = array(0 => variable_get('area_block_type', "page"));
 	$block_array_h= array(0 => variable_get('area_block_type', "page"));
 }
@@ -217,4 +216,5 @@ foreach ($block_array as $bl) {
 
 $page_content .= "</div>"."\n";
 $page_content .= "<div class='clear'></div>"."\n";
+
 ?>

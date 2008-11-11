@@ -25,6 +25,9 @@ function area_init() {
 
 function area_block($op = 'list', $delta = 0) {
 
+//uncomment to reset values:
+//variable_set('area_param1', "type");
+//variable_set('area_param2', "type");
 	//include('area_block.inc'); 
 
 	$form_var = variable_get('area_param1', "type");
