@@ -8,7 +8,7 @@ Download Area: svn co http://svn2.assembla.com/svn/area
 
 INSTALL
 
-* 3 Area versions:
+* 2 Area versions:
 
 1- Area-drupal: this is a module for Drupal CMS, tested in 6.x versions
 	- cp -R area-drupal/* /your_drupal_path/modules/area
@@ -18,14 +18,6 @@ INSTALL
 	- Setup Area block
 
 2- Area-php: php version of Area. It works separate to any application.
-	- cp lib/AreaConfig-sample.php lib/AreaConfig.php
-	- Edit lib/AreaConfig.php
-	- cp lib/DataConfig-sample.php lib/DataConfig.php
-	- Edit lib/DataConfig.php
-	- Go to http://path_to_area/area/area-php/
-
-3 area-perl: old Area version in perl.
-	- Setup apache permissions for cgi execution in the directory area-perl/
 	- cp lib/AreaConfig-sample.php lib/AreaConfig.php
 	- Edit lib/AreaConfig.php
 	- cp lib/DataConfig-sample.php lib/DataConfig.php

@@ -3,14 +3,14 @@
 
 ## AREA Vars paths
 ## NOTE: use slash (/) at the end
-$area_path = "/var/www/area/area-php/";
-$area_url = "http://localhost/area/area-php/";
+$area_path = "/var/www/area/";
+$area_url = "http://localhost/area/";
 
 ##################################################
 ## Put this file in a non-webserver public space, 
 ## otherwise, the access to the databases will be 
 ## accessible publicly in internet !!
-$area_data_config_path = "/var/www/area/area-php/lib/AreaConfig.php"; 
+$area_data_config_path = "/var/www/area/lib/AreaConfig.php"; 
 
 
 ## AREA general parameters: 
