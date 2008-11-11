@@ -217,6 +217,4 @@ foreach ($block_array as $bl) {
 
 $page_content .= "</div>"."\n";
 $page_content .= "<div class='clear'></div>"."\n";
-print "XXXXXXX";
-print_r($area_block_type);
 ?>
