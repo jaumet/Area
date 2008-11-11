@@ -49,6 +49,7 @@ function area_block($op = 'list', $delta = 0) {
 	if ($n == 0) {
 		// Getting the area admin variables
 		$dataname = "area_type"; //default value "area_type"
+		$area_block_type = variable_get('area_block_type', "page");
 		$param1 = variable_get('area_param1', "type");
 		$param2 = variable_get('area_param2', "type");
 		$panelx = variable_get('area_panelx_block', "310"); //310;
@@ -69,6 +70,24 @@ function area_block($op = 'list', $delta = 0) {
 }
 
 function area_admin() {
+
+// FIXME function getting the possible parameters in an array (see area1.php)
+include_once('/var/www/vis/modules/area/lib/functions.php');
+//$params = get_possible_params("node", "area_type");
+
+$options = get_distinct_values("type", "node", "area_type");
+$options = array_combine($options, $options);
+//$options = array("type" => "type");
+//print_r($options);
+
+  $form['area_block_type'] = array(
+    '#type' => 'select',
+    '#title' => t('Area block type'),
+    '#default_value' => variable_get('area_block_type', "page"),
+    '#options' => $options,
+    '#description' => t("Wich content-type you want in the Area blocks:"),
+    '#required' => TRUE,
+  );
   $form['area_panelx'] = array(
     '#type' => 'textfield',
     '#title' => t('Area width'),
@@ -107,11 +126,6 @@ function area_admin() {
     '#required' => TRUE,
   );
 
-// FIXME function getting the possible parameters in an array (see area1.php)
-//include_once('/var/www/vis/modules/area/lib/functions.php');
-//$options = get_possible_params("node", "area_type");
-$options = array("type" => "type");
-//print_r($options);
 /*
    $form['area_param1'] = array(
         '#type' => 'select',

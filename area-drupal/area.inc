@@ -103,7 +103,9 @@ $colors = get_random_colors($num_colors);
 
 // Is this only one block or the whole area?
 if ($area_block == 1) { 
-	$block_array = array(0 => "page");
+//	$block_array = array(0 => "page");
+	$block_array = array(0 => variable_get('area_block_type', "page"));
+	$block_array_h= array(0 => variable_get('area_block_type', "page"));
 }
 
 $n = 0;
@@ -129,7 +131,8 @@ $page_content .= '<form action="#" id="filter" method="post" name="filter">'."\n
 <input class="fb_button" id="filter_submit" name="_submit" value="filter" type="submit">
 <input type="checkbox" name="filter_sticky" value="1" '.$checked.' > 
 </form>'."\n";
-$page_content .= 'Filter_sticky: '.$filter_sticky;
+$page_content .= 'Filter_sticky: '.$filter_sticky.'<br />';
+//$page_content .= print_r($area_block_type);
 ## panel
 $page_content .= '<div class="panel" style="width: '.(intval(($block_x*1.05)*$matrix)).'px">'."\n";
 
@@ -214,4 +217,6 @@ foreach ($block_array as $bl) {
 
 $page_content .= "</div>"."\n";
 $page_content .= "<div class='clear'></div>"."\n";
+print "XXXXXXX";
+print_r($area_block_type);
 ?>

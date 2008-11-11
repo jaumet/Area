@@ -94,8 +94,10 @@ function get_distinct_values($param, $table, $dataname) { /// used in area2.php
 	## Is there any join in the config?
 	if (file_exists('./lib/DataConfig.php')) {
 	        include ('./lib/DataConfig.php');
-	} else {
+	} elseif (file_exists('./DataConfig.php')) {
 	       include ('./DataConfig.php');
+	} else {
+	       include ('/var/www/vis/modules/area/lib/DataConfig.php');
 	}
 	if ($datas[$dataname]['fields'][$param]['join']) {
 		$join_table = $datas[$dataname]['fields'][$param]['join']['table'];
