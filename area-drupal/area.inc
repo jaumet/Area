@@ -1,8 +1,9 @@
 <?
 global $base_path;
+global $base_url;
 
 include_once('./modules/area/lib/functions.php');
-include('./modules/area/lib/AreaConfig.php');
+//include('./modules/area/lib/AreaConfig.php');
 include('./modules/area/lib/DataConfig.php');
 
 // Get the node-types list:
@@ -208,7 +209,7 @@ foreach ($block_array as $bl) {
 				$dark_nodes++;
 			}
 			$total_nodes++;
-			$page_content .= '<div class="areanode" id="block-'.$id.'" name="block-'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  onclick="javascript:location.href=\''.$area_url.'node/'.htmlentities($id).'\';"></div>'."\n";
+			$page_content .= '<div class="areanode" id="block-'.$id.'" name="block-'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  onclick="javascript:location.href=\''.$base_url.'/node/'.htmlentities($id).'\';"></div>'."\n";
 		}
 	}
 	$page_content .= "</div>"."\n";
