@@ -1,5 +1,5 @@
 <?
-global $base_url;
+global $base_path;
 
 include_once('./modules/area/lib/functions.php');
 include('./modules/area/lib/AreaConfig.php');
@@ -122,15 +122,15 @@ foreach ($colors as $col) {
 ## and 2: building array param2 <-> colors
 $colors_array = array_combine($p2 , $colors);
 
-if ($filter_sticky == 1) { $checked = "checked=\"checked\""; }
+//if ($filter_sticky == 1) { $checked = "checked=\"checked\""; }
 
 $page_content .= '<form action="#" id="filter" method="post" name="filter">'."\n".'
 <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
 <input class="fb_input" id="tag" name="tag" value="'.$tag.'" type="text" size="10">
 <input class="fb_button" id="filter_submit" name="_submit" value="filter" type="submit">
-<input type="checkbox" name="filter_sticky" value="1" '.$checked.' > 
+<!--<input type="checkbox" name="filter_sticky" value="1" '.$checked.' > -->
 </form>'."\n";
-$page_content .= 'Filter_sticky: '.$filter_sticky.'<br />';
+//$page_content .= 'Filter_sticky: '.$filter_sticky.'<br />';
 //$page_content .= print_r($area_block_type);
 ## panel
 $page_content .= '<div class="panel" style="width: '.(intval(($block_x*1.05)*$matrix)).'px">'."\n";
@@ -208,7 +208,7 @@ foreach ($block_array as $bl) {
 				$dark_nodes++;
 			}
 			$total_nodes++;
-			$page_content .= '<div class="areanode" id="block-'.$id.'" name="block-'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  onclick="javascript:location.href=\''.$base_url.'/node/'.htmlentities($id).'\';"></div>'."\n";
+			$page_content .= '<div class="areanode" id="block-'.$id.'" name="block-'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  onclick="javascript:location.href=\''.$area_url.'node/'.htmlentities($id).'\';"></div>'."\n";
 		}
 	}
 	$page_content .= "</div>"."\n";

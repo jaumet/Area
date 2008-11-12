@@ -1,17 +1,10 @@
 <?php
 // $Id$
-	
-// preset variables.
-//$param1 = "type";
-//$param2 = "type";
 
 /**
 * Valid permissions for this module
 * @return array An array of valid permissions for the onthisdate module
 */
-//global $filter_sticky;
-
-
 function area_perm() {
   return array('access area content');
 } // function area_perm()
@@ -23,16 +16,12 @@ function area_init() {
   drupal_add_css(drupal_get_path('module', 'area') .'/css/area.css');
 }
 
+
 function area_block($op = 'list', $delta = 0) {
-
-//uncomment to reset values:
-//variable_set('area_param1', "type");
-//variable_set('area_param2', "type");
-	//include('area_block.inc'); 
-
+	//uncomment to reset values:
+	//variable_set('area_param1', "type");
+	//variable_set('area_param2', "type");
 	$form_var = variable_get('area_param1', "type");
-	//$form_var = $form_state['values']['area_param1'];
-	//$page_content .= "aqui block: ".$form_var;
 
 	// Check if we are showing area in the page:
 	function _curPageURL() {
@@ -48,7 +37,9 @@ function area_block($op = 'list', $delta = 0) {
 	}
 	$current_url = _curPageURL();	
 	$n = preg_match('/vis\/area/', $current_url); 
-// $n preg_match() returns the number of times pattern  matches. That will be either 0 times (no match) or 1 time because preg_match() will stop searching after the first match.//
+	// $n preg_match() returns the number of times pattern  matches. That will 
+	//be either 0 times (no match) or 1 time because preg_match() will stop 
+	//searching after the first match.//
 	if ($n == 0) {
 		// Getting the area admin variables
 		$dataname = "area_type"; //default value "area_type"
@@ -61,7 +52,6 @@ function area_block($op = 'list', $delta = 0) {
 		// Show only one block
 		$area_block = 1;
 		// building area
-		//$page_content .= "param1: ".$param1." | param2: ".$param2." | quantum: ".$quantum."<br/>";
 		include('area.inc');
 	} else {
 		$page_content .= "This is Area page";
@@ -74,140 +64,115 @@ function area_block($op = 'list', $delta = 0) {
 
 function area_admin() {
 
-// FIXME function getting the possible parameters in an array (see area1.php)
-include_once('/var/www/vis/modules/area/lib/functions.php');
-//$params = get_possible_params("node", "area_type");
+	// FIXME function getting the possible parameters in an array 
+	include_once($base_path.'lib/functions.php');
 
-$options = get_distinct_values("type", "node", "area_type");
-$options = array_combine($options, $options);
-//$options = array("type" => "type");
-//print_r($options);
+	$options = get_distinct_values("type", "node", "area_type");
+	$options = array_combine($options, $options);
 
-  $form['area_block_type'] = array(
-    '#type' => 'select',
-    '#title' => t('Area block type'),
-    '#default_value' => variable_get('area_block_type', "page"),
-    '#options' => $options,
-    '#description' => t("Wich content-type you want in the Area blocks:"),
-    '#required' => TRUE,
-  );
-  $form['area_panelx'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Area width'),
-    '#default_value' => variable_get('area_panelx', 500),
-    '#size' => 4,
-    '#maxlength' => 4,
-    '#description' => t("Horizontal size (in pixels)"),
-    '#required' => TRUE,
-  );
-  $form['area_panely'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Area heigth'),
-    '#default_value' => variable_get('area_panely', 400),
-    '#size' => 4,
-    '#maxlength' => 4,
-    '#description' => t("Vertical size (in pixels)"),
-    '#required' => TRUE,
-  );
+	$form['area_block_type'] = array(
+		'#type' => 'select',
+		'#title' => t('Area block type'),
+		'#default_value' => variable_get('area_block_type', "page"),
+		'#options' => $options,
+		'#description' => t("Wich content-type you want in the Area blocks:"),
+		'#required' => TRUE,
+	);
+	$form['area_panelx'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Area width'),
+		'#default_value' => variable_get('area_panelx', 500),
+		'#size' => 4,
+		'#maxlength' => 4,
+		'#description' => t("Horizontal size (in pixels)"),
+		'#required' => TRUE,
+	);
+	$form['area_panely'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Area heigth'),
+		'#default_value' => variable_get('area_panely', 400),
+		'#size' => 4,
+		'#maxlength' => 4,
+		'#description' => t("Vertical size (in pixels)"),
+		'#required' => TRUE,
+	);
 
-  $form['area_panelx_block'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Block Area width'),
-    '#default_value' => variable_get('area_panelx_block', 310),
-    '#size' => 4,
-    '#maxlength' => 4,
-    '#description' => t("Horizontal size (in pixels)"),
-    '#required' => TRUE,
-  );
-  $form['area_panely_block'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Block Area heigth'),
-    '#default_value' => variable_get('area_panely_block', 200),
-    '#size' => 4,
-    '#maxlength' => 4,
-    '#description' => t("Vertical size (in pixels)"),
-    '#required' => TRUE,
-  );
+	$form['area_panelx_block'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Block Area width'),
+		'#default_value' => variable_get('area_panelx_block', 310),
+		'#size' => 4,
+		'#maxlength' => 4,
+		'#description' => t("Horizontal size (in pixels)"),
+		'#required' => TRUE,
+	);
+	$form['area_panely_block'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Block Area heigth'),
+		'#default_value' => variable_get('area_panely_block', 200),
+		'#size' => 4,
+		'#maxlength' => 4,
+		'#description' => t("Vertical size (in pixels)"),
+		'#required' => TRUE,
+	);
 
-/*
-   $form['area_param1'] = array(
-        '#type' => 'select',
-        '#title' => t('1st parameter'),
-        '#options' => $options,
-        '#default_value' => variable_get('area_param1', 'type'),
-        '#description' => t("This is the 1rst parameter to represent with Area"),
-        );
-   $form['area_param2'] = array(
-        '#type' => 'select',
-        '#title' => t('2nd parameter'),
-        '#options' => $options,
-        '#default_value' => variable_get('area_param2', 'type'),
-        '#description' => t("This is the 2nd parameter to represent with Area"),
-        );
-*/
-   $opcions_quantum = array("quantum" => "quantum", "non quantum" => "non quantum");
-   $form['area_quantum'] = array(
-        '#type' => 'select',
-        '#title' => t('quantum?'),
-        '#options' => $opcions_quantum,
-        '#default_value' => variable_get('area_quantum', 'quantum'),
-        '#description' => t("A quantum representation, show all the nodes the same size. A non-quantum one makes size of nodes related to the number of them"),
-        );
+	$opcions_quantum = array("quantum" => "quantum", "non quantum" => "non quantum");
+	$form['area_quantum'] = array(
+		'#type' => 'select',
+		'#title' => t('quantum?'),
+		'#options' => $opcions_quantum,
+		'#default_value' => variable_get('area_quantum', 'quantum'),
+		'#description' => t("A quantum representation, show all the nodes the same size. A non-quantum one makes size of nodes related to the number of them"),
+	);
 
-  return system_settings_form($form);
+	return system_settings_form($form);
 }
 
 function area_admin_validate($form, &$form_state) {
-  $maxdisp = $form_state['values']['area_panelx_block'];
-  if (!is_numeric($maxdisp)) {
-    form_set_error('area_panelx_block', t('You must select a number between 50 and 5000.'));
-  }
-  else if ($maxdisp <= 49 or $maxdisp > 5000) {
-    form_set_error('area_panelx_block', t('You must select a number between 50 and 5000.'));
-  }
+	$maxdisp = $form_state['values']['area_panelx_block'];
+	if (!is_numeric($maxdisp)) {
+		form_set_error('area_panelx_block', t('You must select a number between 50 and 5000.'));
+	} else if ($maxdisp <= 49 or $maxdisp > 5000) {
+		form_set_error('area_panelx_block', t('You must select a number between 50 and 5000.'));
+	}
 
-$maxdisp = $form_state['values']['area_panely_block'];
-  if (!is_numeric($maxdisp)) {
-    form_set_error('area_panely_block', t('You must select a number.'));
-  }
-  else if ($maxdisp <= 49 or $maxdisp > 500) {
-    form_set_error('area_panely_block', t('You must select a number between 50 and 5000.'));
-  }
-$maxdisp = $form_state['values']['area_panely'];
-  if (!is_numeric($maxdisp)) {
-    form_set_error('area_panely', t('You must select a number.'));
-  }
-  else if ($maxdisp <= 49 or $maxdisp > 5000) {
-    form_set_error('area_panely', t('You must select a number between 50 and 5000.'));
-  }
+	$maxdisp = $form_state['values']['area_panely_block'];
+	if (!is_numeric($maxdisp)) {
+		form_set_error('area_panely_block', t('You must select a number.'));
+	} else if ($maxdisp <= 49 or $maxdisp > 500) {
+		form_set_error('area_panely_block', t('You must select a number between 50 and 5000.'));
+	}
+	$maxdisp = $form_state['values']['area_panely'];
+	if (!is_numeric($maxdisp)) {
+		form_set_error('area_panely', t('You must select a number.'));
+	} else if ($maxdisp <= 49 or $maxdisp > 5000) {
+		form_set_error('area_panely', t('You must select a number between 50 and 5000.'));
+	}
 }
 
 function area_menu() {	
 
-  $items = array();
+	$items = array();
+	$items['admin/settings/area'] = array(
+		'title' => 'Area settings',
+		'description' => 'Set the Area behevior.',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('area_admin'),
+		'access arguments' => array('access administration pages'),
+		'type' => MENU_NORMAL_ITEM,
+	);
 
-  $items['admin/settings/area'] = array(
-    'title' => 'Area settings',
-    'description' => 'Set the Area behevior.',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('area_admin'),
-    'access arguments' => array('access administration pages'),
-    'type' => MENU_NORMAL_ITEM,
-   );
-
-  $items['area'] = array(
-    'title' => 'Area representation',
-    'page callback' => 'area_all',
-    'access arguments' => array('access area content'),
-    //'type' => MENU_CALLBACK
-    'type' => MENU_NORMAL_ITEM,
-  );
-  return $items;
+	$items['area'] = array(
+		'title' => 'Area representation',
+		'page callback' => 'area_all',
+		'access arguments' => array('access area content'),
+		//'type' => MENU_CALLBACK
+		'type' => MENU_NORMAL_ITEM,
+	);
+	return $items;
 }
 
 function area_all() {
-	//$page_content = "This is be the AREA representation for this drupal site.";
-
 	// Getting the area admin variables
 	$dataname = "area_type"; //default value "area_type"
 	$param1 = variable_get('area_param1', "type");
@@ -215,12 +180,8 @@ function area_all() {
 	$panelx = variable_get('area_panelx', 500);
 	$panely = variable_get('area_panelx', 400);
 	$quantum = variable_get('area_quantum', "quantum");
-
-//	$filter_sticky = variable_get('filter_sticky', 0);
 	// building area
 	include('area.inc');
-
 	return $page_content;
 }
-
 
