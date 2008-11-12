@@ -1,21 +1,22 @@
 <?php
 // $Id$
+global $base_path;
+global $base_url;
 
 /**
 * Valid permissions for this module
 * @return array An array of valid permissions for the onthisdate module
 */
 function area_perm() {
-  return array('access area content');
-} // function area_perm()
+	return array('access area content');
+} 
 
 /**
  * Implementation of hook_init(). Add's the book module's CSS.
  */
 function area_init() {
-  drupal_add_css(drupal_get_path('module', 'area') .'/css/area.css');
+	drupal_add_css(drupal_get_path('module', 'area') .'/css/area.css');
 }
-
 
 function area_block($op = 'list', $delta = 0) {
 	//uncomment to reset values:
@@ -37,9 +38,6 @@ function area_block($op = 'list', $delta = 0) {
 	}
 	$current_url = _curPageURL();	
 	$n = preg_match('/vis\/area/', $current_url); 
-	// $n preg_match() returns the number of times pattern  matches. That will 
-	//be either 0 times (no match) or 1 time because preg_match() will stop 
-	//searching after the first match.//
 	if ($n == 0) {
 		// Getting the area admin variables
 		$dataname = "area_type"; //default value "area_type"
@@ -56,20 +54,15 @@ function area_block($op = 'list', $delta = 0) {
 	} else {
 		$page_content .= "This is Area page";
 	}
-
 	$block['subject'] = 'Area';
 	$block['content'] = $page_content;
 	return $block;
 }
 
 function area_admin() {
-
-	// FIXME function getting the possible parameters in an array 
 	include_once($base_path.'lib/functions.php');
-
 	$options = get_distinct_values("type", "node", "area_type");
 	$options = array_combine($options, $options);
-
 	$form['area_block_type'] = array(
 		'#type' => 'select',
 		'#title' => t('Area block type'),
@@ -78,35 +71,6 @@ function area_admin() {
 		'#description' => t("Wich content-type you want in the Area blocks:"),
 		'#required' => TRUE,
 	);
-/*
-	$form['area_percnotnull'] = array(
-		'#type' => 'textfield',
-		'#title' => t('Minimum not null values'),
-		'#default_value' => variable_get('area_percnotnull', 90),
-		'#size' => 4,
-		'#maxlength' => 4,
-		'#description' => t("Minimum percentage of non null values of any field the selected database (default/recommended: 90)"),
-		'#required' => TRUE,
-	);
-	$form['area_numdistinct_max'] = array(
-		'#type' => 'textfield',
-		'#title' => t('Maximim disctinc number per field'),
-		'#default_value' => variable_get('area_numdistinct_max', 50),
-		'#size' => 4,
-		'#maxlength' => 4,
-		'#description' => t("Maximum number of distinct values (different values) of any field of the selected database (default/recommended: 50)"),
-		'#required' => TRUE,
-	);
-	$form['area_numdistinct_min'] = array(
-		'#type' => 'textfield',
-		'#title' => t('Minimum disctinc number per field'),
-		'#default_value' => variable_get('area_numdistinct_min', 2),
-		'#size' => 4,
-		'#maxlength' => 4,
-		'#description' => t("Minimum number of distinct values (different values) of any field of the selected database (default/recommended: 2)"),
-		'#required' => TRUE,
-	);
-*/
 	$form['area_panelx'] = array(
 		'#type' => 'textfield',
 		'#title' => t('Area width'),
@@ -125,7 +89,6 @@ function area_admin() {
 		'#description' => t("Vertical size (in pixels)"),
 		'#required' => TRUE,
 	);
-
 	$form['area_panelx_block'] = array(
 		'#type' => 'textfield',
 		'#title' => t('Block Area width'),
@@ -144,7 +107,6 @@ function area_admin() {
 		'#description' => t("Vertical size (in pixels)"),
 		'#required' => TRUE,
 	);
-
 	$opcions_quantum = array("quantum" => "quantum", "non quantum" => "non quantum");
 	$form['area_quantum'] = array(
 		'#type' => 'select',
@@ -153,7 +115,6 @@ function area_admin() {
 		'#default_value' => variable_get('area_quantum', 'quantum'),
 		'#description' => t("A quantum representation, show all the nodes the same size. A non-quantum one makes size of nodes related to the number of them"),
 	);
-
 	return system_settings_form($form);
 }
 
@@ -164,7 +125,6 @@ function area_admin_validate($form, &$form_state) {
 	} else if ($maxdisp <= 49 or $maxdisp > 5000) {
 		form_set_error('area_panelx_block', t('You must select a number between 50 and 5000.'));
 	}
-
 	$maxdisp = $form_state['values']['area_panely_block'];
 	if (!is_numeric($maxdisp)) {
 		form_set_error('area_panely_block', t('You must select a number.'));
@@ -179,8 +139,7 @@ function area_admin_validate($form, &$form_state) {
 	}
 }
 
-function area_menu() {	
-
+function area_menu() {
 	$items = array();
 	$items['admin/settings/area'] = array(
 		'title' => 'Area settings',
@@ -190,7 +149,6 @@ function area_menu() {
 		'access arguments' => array('access administration pages'),
 		'type' => MENU_NORMAL_ITEM,
 	);
-
 	$items['area'] = array(
 		'title' => 'Area representation',
 		'page callback' => 'area_all',
