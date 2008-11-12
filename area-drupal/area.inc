@@ -126,8 +126,8 @@ $colors_array = array_combine($p2 , $colors);
 
 $page_content .= '<form action="#" id="filter" method="post" name="filter">'."\n".'
 <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
-<input class="fb_input" id="tag" name="tag" value="'.$tag.'" type="text" size="10">
-<input class="fb_button" id="filter_submit" name="_submit" value="filter" type="submit">
+<input id="tag" name="tag" value="'.$tag.'" type="text" size="10">
+<input id="filter_submit" name="_submit" value="filter" type="submit">
 <!--<input type="checkbox" name="filter_sticky" value="1" '.$checked.' > -->
 </form>'."\n";
 //$page_content .= 'Filter_sticky: '.$filter_sticky.'<br />';
@@ -166,7 +166,7 @@ $total_nodes = 0;
 $dark_nodes = 0;
 foreach ($block_array as $bl) {
 	$page_content .= '<div class="areablock" style="'.$blockstyle.'">'."\n";
-	$page_content .= '<div class="blockname">'.$block_array_h[$s].'( '.$block1_array[$bl].')</div>';
+	$page_content .= '<div class="blockname">'.$block_array_h[$s].' ('.$block1_array[$bl].')</div>';
 	$s++;
 	if ($block1_array[$bl])  {
 		if ($quantum != "quantum") { 
