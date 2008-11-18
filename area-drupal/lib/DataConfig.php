@@ -42,6 +42,36 @@ $datas['area_type'] = array // Name for the data (only letters and/or numbers
 			'label'=>'Comments', 
 			'filter'=>'1', 
 			'show'=>'1' 
+		),
+		'promote' => array( 
+			'label'=>'Promoted', 
+			'filter'=>'1', 
+			'show'=>'1' 
+		),
+		'moderate' => array( 
+			'label'=>'Moderated', 
+			'filter'=>'1', 
+			'show'=>'1' 
+		),
+		'sticky' => array( 
+			'label'=>'Sticked', 
+			'filter'=>'1', 
+			'show'=>'1' 
+		),
+		'translate' => array( 
+			'label'=>'Translated', 
+			'filter'=>'1', 
+			'show'=>'1' 
+		),
+		'language' => array( 
+			'label'=>'Language', 
+			'filter'=>'1', 
+			'show'=>'1',
+			'join' => array(
+                                'table'=>'languages', // Table to join
+                                'key' => 'language', // Key to join
+                                'val' => 'name'  // value to get
+                        )
 		)
 	)
 );
