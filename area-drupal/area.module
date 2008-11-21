@@ -18,11 +18,14 @@ function area_init() {
 	drupal_add_css(drupal_get_path('module', 'area') .'/css/area.css');
 }
 
+//function area_block($op = 'list', $delta = 0) {
+//}
+
 function area_block($op = 'list', $delta = 0) {
 	//uncomment to reset values:
 	//variable_set('area_param1', "type");
 	//variable_set('area_param2', "type");
-	$form_var = variable_get('area_param1', "type");
+	///////$form_var = variable_get('area_param1', "type");
 
 	// Check if we are showing area in the page:
 	function _curPageURL() {
@@ -37,20 +40,20 @@ function area_block($op = 'list', $delta = 0) {
 		return $pageURL;
 	}
 	$current_url = _curPageURL();	
-	$n = preg_match('/vis\/area/', $current_url); 
+	$n = preg_match('/area/', $current_url); 
 	if ($n == 0) {
 		// Getting the area admin variables
-		$dataname = "area_type"; //default value "area_type"
-		$area_block_type = variable_get('area_block_type', "page");
-		$param1 = variable_get('area_param1', "type");
-		$param2 = variable_get('area_param2', "type");
-		$panelx = variable_get('area_panelx_block', "310"); //310;
-		$panely = variable_get('area_panely_block', "200"); //200;
-		$quantum = variable_get('area_quantum', "quantum");
+	///////	$dataname = "area_type"; //default value "area_type"
+	///////	$area_block_type = variable_get('area_block_type', "page");
+	///////	$param1 = variable_get('area_param1', "type");
+	///////	$param2 = variable_get('area_param2', "type");
+	///////	$panelx = variable_get('area_panelx_block', "310"); //310;
+	///////	$panely = variable_get('area_panely_block', "200"); //200;
+	///////	$quantum = variable_get('area_quantum', "quantum");
 		// Show only one block
-		$area_block = 1;
+		//$area_block = 1;
 		// building area
-		include('area.inc');
+		/////include('area.inc');
 	} else {
 		$page_content .= "This is Area page";
 	}
@@ -61,7 +64,7 @@ function area_block($op = 'list', $delta = 0) {
 
 function area_admin() {
 	include_once($base_path.'lib/functions.php');
-	$options = get_distinct_values("type", "node", "area_type");
+	$options = area_get_distinct_values("type", "node", "area_type");
 	$options = array_combine($options, $options);
 	$form['area_block_type'] = array(
 		'#type' => 'select',

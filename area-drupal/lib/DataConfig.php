@@ -1,5 +1,5 @@
 <?
-## This is the AreaConfig-sample file: 
+## This is the DataConfig-sample file: 
 ## copy this file:
 ## $: cd /path/to/area/diretory
 ## $: cd lib/
@@ -29,9 +29,9 @@ $datas['area_type'] = array // Name for the data (only letters and/or numbers
 			'show'=>'1' 
 		),
 		'uid' => array( 
-			'label'=>'Status', 
+			'label'=>'Users', 
 			'filter'=>'1', 
-			'show'=>'0', 
+			'show'=>'1', 
 			'join' => array(
                                 'table'=>'users', // Table to join
                                 'key' => 'uid', // Key to join

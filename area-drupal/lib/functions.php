@@ -8,7 +8,7 @@ function myescape($escaped) {
 	return $escaped;
 }
 
-function get_distinct_values($param, $table, $dataname) { /// used in area2.php
+function area_get_distinct_values($param, $table, $dataname) { /// used in area2.php
 	## Is there any join in the config?
 	if ($datas[$dataname]['fields'][$param]['join']) {
 		$join_table = $datas[$dataname]['fields'][$param]['join']['table'];
@@ -29,21 +29,22 @@ function get_distinct_values($param, $table, $dataname) { /// used in area2.php
 			ORDER BY ".myescape($param).";";
 	}
 	$distinct = array(); $distinct_key = array(); $distinct_val = array();
-	$result = mysql_query($query) or die('Query failed: ' . mysql_error());
-	while ($line = mysql_fetch_array($result)) {
-		array_push($distinct_key, htmlentities($line[0]));
-		array_push($distinct_val, htmlentities($line[1]));
+	$result = db_query($query) or die('Query failed: ' . mysql_error());
+	while ($line = db_fetch_object($result)) {
+
+		array_push($distinct, $line->$param);
 	}
-	if ($combine == "yes") { 
-		$distinct = array_combine($distinct_key, $distinct_val);
-		array_push($distinct, "__join_needed__");
-	} else { 
-		$distinct = $distinct_key; 
-	}
+//	if ($combine == "yes") { 
+//		$distinct = array_combine($distinct_key, $distinct_val);
+//		array_push($distinct, "__join_needed__");
+//	} else { 
+//		$distinct = $distinct_key; 
+//	}
+//print_r($distinct);exit;
 	return $distinct;
 }
 
-function get_random_colors($num_colors)  {
+function area_get_random_colors($num_colors)  {
 	$colors = array();
 	for ($i=0;$i<$num_colors;$i++) {
 		$r = intval( 100+rand(0, 155));
@@ -55,7 +56,7 @@ function get_random_colors($num_colors)  {
 	
 	return $colors;
 }
-function get_dark_color($rgb)  {
+function area_get_dark_color($rgb)  {
 	$rgb1 = substr($rgb, 4, -1);
 	$rgb2 = split(",", $rgb1);
 	$rd = intval($rgb2[0]/2.5);

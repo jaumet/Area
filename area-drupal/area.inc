@@ -65,11 +65,12 @@ $nodes_per_block_max[0] = 0;
 foreach ($block_array as $bl) {
 	$query = "SELECT COUNT(*) FROM {".myescape($d['table'])."} WHERE ".myescape($param1)."='".myescape($bl)."';";
 	$result =  db_query($query);
-	$nodes_per_block = mysql_fetch_array($result);
+	$nodes_per_block = db_fetch_array($result);
+
 	## add nodes per block to the array as a value
-	$block1_array[$bl] = $nodes_per_block[0];
-	if ($nodes_per_block[0] > $nodes_per_block_max[0]) { 
-		$nodes_per_block_max[0] = $nodes_per_block[0];
+	$block1_array[$bl] = $nodes_per_block['COUNT(*)'];
+	if ($nodes_per_block['COUNT(*)'] > $nodes_per_block_max[0]) { 
+		$nodes_per_block_max[0] = $nodes_per_block['COUNT(*)'];
 		$nodes_per_block_max[1] = $bl;
 	}
 }
@@ -99,7 +100,7 @@ if ($d['fields'][$param2]['label']) {
 
 ####### list of selected values / join values / colors
 ## make colors if is needed:
-$colors = get_random_colors($num_colors); 
+$colors = area_get_random_colors($num_colors); 
 
 // Is this only one block or the whole area?
 if ($area_block == 1) { 
@@ -196,19 +197,19 @@ foreach ($block_array as $bl) {
 		ORDER BY '".$d['pkey']."', ".myescape($param2).";";
 		$result =  db_query($query);
 		$cl = array(); $id_array = array();
-		while ($line = mysql_fetch_array($result)) {
-			array_push($cl, $line[0]);
-			array_push($id_array, $line[1]);
+		while ($line = db_fetch_object($result)) {
+			array_push($cl, $line->$param2);
+			array_push($id_array, $line->$d['pkey']);
 		}
 		for ($i=0;$i<($block1_array[$bl]);$i++) {
 			$rgb = $colors_array[$cl[$i]];
 			$id  = $id_array[$i];
 			if (!in_array($id, $filter_array) and $submitted_filter == 1) { 
-				$rgb = get_dark_color($rgb);
+				$rgb = area_get_dark_color($rgb);
 				$dark_nodes++;
 			}
 			$total_nodes++;
-			$page_content .= '<div class="areanode" id="block-'.$id.'" name="block-'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  onclick="javascript:location.href=\''.$base_url.'/node/'.htmlentities($id).'\';"></div>'."\n";
+			$page_content .= '<div class="areanode" id="block-'.$id.'" name="block-'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  onclick="javascript:location.href=\''.url('node/'.htmlentities($id)).'\';"></div>'."\n";
 		}
 	}
 	$page_content .= "</div>"."\n";
