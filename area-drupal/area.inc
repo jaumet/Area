@@ -6,21 +6,21 @@ include_once('./modules/area/lib/functions.php');
 include('./modules/area/lib/DataConfig.php');
 
 // Get the node-types list:
-$content_types = array();
-$content_types_h = array();
+$blocks_selected = array();
+$blocks_values_h = array();
 $param1 = variable_get($area_param1, "type");
 $query = "SELECT ".$param1.", name FROM {node_type};";
 //////echo "query: ".$query;exit;
 $result =  db_query($query);
 while ($links = db_fetch_object($result)) {
-	array_push($content_types, $links->type);
-	array_push($content_types_h, $links->name);
+	array_push($blocks_selected, $links->type);
+	array_push($blocks_values_h, $links->name);
 }
 
-$blocks_selected = $content_types;
-$blocks_values_h = $content_types_h;
-$color_selected = $content_types;
-$color_values_h = $content_types_h;
+//$blocks_selected = $content_types;
+//$blocks_values_h = $content_types_h;
+$color_selected = $blocks_selected;
+$color_values_h = $blocks_values_h;
 
 $x = $panelx;
 $y = $panely;
@@ -131,6 +131,8 @@ $page_content .= '<form action="#" id="filter" method="post" name="filter">'."\n
 <input id="filter_submit" name="_submit" value="filter" type="submit">
 <!--<input type="checkbox" name="filter_sticky" value="1" '.$checked.' > -->
 </form>'."\n";
+
+
 //$page_content .= 'Filter_sticky: '.$filter_sticky.'<br />';
 //$page_content .= print_r($area_block_type);
 ## panel
@@ -187,9 +189,10 @@ foreach ($block_array as $bl) {
 	
 			$query .= " ORDER BY '".$d['pkey']."', ".myescape($param2).";";
 			$result =  db_query($query);
-			while ($line = mysql_fetch_array($result)) {
-				array_push($filter_array, $line[0]);
+			while ($line = db_fetch_object($result)) {
+				array_push($filter_array, $line->$d['pkey']);
 			}
+///print_r($query);exit;
 		}			
 		$query = "SELECT ".myescape($param2).", ".myescape($d['pkey'])." 
 		FROM ".myescape($d['table'])." 

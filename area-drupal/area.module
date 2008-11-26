@@ -18,48 +18,28 @@ function area_init() {
 	drupal_add_css(drupal_get_path('module', 'area') .'/css/area.css');
 }
 
-//function area_block($op = 'list', $delta = 0) {
-//}
-
 function area_block($op = 'list', $delta = 0) {
-	//uncomment to reset values:
-	//variable_set('area_param1', "type");
-	//variable_set('area_param2', "type");
-	///////$form_var = variable_get('area_param1', "type");
-
-	// Check if we are showing area in the page:
-	function _curPageURL() {
-		$pageURL = 'http';
-		if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
-			$pageURL .= "://";
-		if ($_SERVER["SERVER_PORT"] != "80") {
-			$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-		} else {
-			$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-		}
-		return $pageURL;
-	}
-	$current_url = _curPageURL();	
-	$n = preg_match('/area/', $current_url); 
-	if ($n == 0) {
-		// Getting the area admin variables
-	///////	$dataname = "area_type"; //default value "area_type"
-	///////	$area_block_type = variable_get('area_block_type', "page");
-	///////	$param1 = variable_get('area_param1', "type");
-	///////	$param2 = variable_get('area_param2', "type");
-	///////	$panelx = variable_get('area_panelx_block', "310"); //310;
-	///////	$panely = variable_get('area_panely_block', "200"); //200;
-	///////	$quantum = variable_get('area_quantum', "quantum");
-		// Show only one block
-		//$area_block = 1;
-		// building area
-		/////include('area.inc');
-	} else {
-		$page_content .= "This is Area page";
-	}
-	$block['subject'] = 'Area';
-	$block['content'] = $page_content;
+  if ($op == "list") {
+    $block[0]["info"] = t("Area");
+    return $block;
+  } else if ($op == 'view') {
+	// Getting the area admin variables
+	$dataname = "area_type"; //default value "area_type"
+	$area_block_type = variable_get('area_block_type', "page");
+	$param1 = variable_get('area_param1', "type");
+	$param2 = variable_get('area_param2', "type");
+	$panelx = variable_get('area_panelx_block', "310"); //310;
+	$panely = variable_get('area_panely_block', "200"); //200;
+	$quantum = variable_get('area_quantum', "quantum");
+	//$form_var = variable_get('area_param1', "type");
+	// building area
+	include('area.inc');
+	// setting area block
+	$block["info"]       = "Area block";
+	$block["subject"]	= "Area";
+	$block["content"]	= $page_content;
 	return $block;
+   }
 }
 
 function area_admin() {
