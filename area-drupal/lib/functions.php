@@ -34,13 +34,7 @@ function area_get_distinct_values($param, $table, $dataname) { /// used in area2
 
 		array_push($distinct, $line->$param);
 	}
-//	if ($combine == "yes") { 
-//		$distinct = array_combine($distinct_key, $distinct_val);
-//		array_push($distinct, "__join_needed__");
-//	} else { 
-//		$distinct = $distinct_key; 
-//	}
-//print_r($distinct);exit;
+	array_unshift($distinct, 'All nodes');
 	return $distinct;
 }
 

@@ -99,7 +99,7 @@ if ($d['fields'][$param2]['label']) {
 $colors = area_get_random_colors($num_colors); 
 
 // Is this only one block or the whole area?
-if (variable_get('area_block_type', "page") != "All types") { 
+if (variable_get('area_block_type', "page") != "All nodes") { 
 	$block_array = array(0 => variable_get('area_block_type', "page"));
 	$block_array_h= array(0 => variable_get('area_block_type', "page"));
 }
