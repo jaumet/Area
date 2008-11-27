@@ -39,7 +39,6 @@ if (!$filter_sticky) {
 	$filter_sticky = 1;
 	variable_set('filter_sticky' ,1);
 }
-//$filter_sticky = variable_get('filter_sticky' ,0);
 
 if ($_REQUEST['tag']) {
 	$tag = $_REQUEST['tag'];
@@ -59,11 +58,9 @@ $block_array = $blocks_selected;
 $block_array_h = $blocks_values_h;
 
 $d = $datas[$dataname];
-//connect($dataname);
 $nodes_per_block_max[0] = 0;
-//echo "ZXXXX:".$dataname."  | ffff: ";print_r($d);echo "lll";exit;
 foreach ($block_array as $bl) {
-	$query = "SELECT COUNT(*) FROM {".myescape($d['table'])."} WHERE ".myescape($param1)."='".myescape($bl)."';";
+	$query = "SELECT COUNT(*) FROM {".area_myescape($d['table'])."} WHERE ".area_myescape($param1)."='".area_myescape($bl)."';";
 	$result =  db_query($query);
 	$nodes_per_block = db_fetch_array($result);
 
@@ -86,7 +83,6 @@ if ($x<=50 or $y<=50) {
 }
 
 ## Legend
-# FIXME ????
 if ($d['fields'][$param1]['label']) { 
 	$pa1 = $d['fields'][$param1]['label'];
 } else {
@@ -103,7 +99,7 @@ if ($d['fields'][$param2]['label']) {
 $colors = area_get_random_colors($num_colors); 
 
 // Is this only one block or the whole area?
-if ($area_block == 1) { 
+if (variable_get('area_block_type', "page") != "All types") { 
 	$block_array = array(0 => variable_get('area_block_type', "page"));
 	$block_array_h= array(0 => variable_get('area_block_type', "page"));
 }
@@ -132,9 +128,6 @@ $page_content .= '<form action="#" id="filter" method="post" name="filter">'."\n
 <!--<input type="checkbox" name="filter_sticky" value="1" '.$checked.' > -->
 </form>'."\n";
 
-
-//$page_content .= 'Filter_sticky: '.$filter_sticky.'<br />';
-//$page_content .= print_r($area_block_type);
 ## panel
 $page_content .= '<div class="panel" style="width: '.(intval(($block_x*1.05)*$matrix)).'px">'."\n";
 
@@ -152,9 +145,9 @@ if ($submitted_filter == 1) {
 	foreach ($d['fields'] as $key => $value) {
 		if ($d['fields'][$key]['filter'] == 1)  {
 		  if ($d['fields'][$key]['join'])  {
-		    $qqq .= " LOWER(".myescape($d['table']).".".$key.") LIKE LOWER('%%".$tag."%%') OR ";
+		    $qqq .= " LOWER(".area_myescape($d['table']).".".$key.") LIKE LOWER('%%".$tag."%%') OR ";
 		  } else {
-		    $qqq .= " LOWER(".myescape($d['table']).".".$key.") LIKE LOWER('%%".$tag."%%') OR ";
+		    $qqq .= " LOWER(".area_myescape($d['table']).".".$key.") LIKE LOWER('%%".$tag."%%') OR ";
 		  }
 		}
 	}
@@ -181,23 +174,22 @@ foreach ($block_array as $bl) {
 		## Param2 and colors
 		$filter_array = array();
 		if ($submitted_filter == 1) {
-			$query = "SELECT ".myescape($d['pkey'])." 
-				FROM ".myescape($d['table'])." 
-				WHERE ".myescape($param1)."='".myescape($bl)."' AND ";
+			$query = "SELECT ".area_myescape($d['pkey'])." 
+				FROM ".area_myescape($d['table'])." 
+				WHERE ".area_myescape($param1)."='".area_myescape($bl)."' AND ";
 
 			if ($qqq) { $query .= $qqq; }
 	
-			$query .= " ORDER BY '".$d['pkey']."', ".myescape($param2).";";
+			$query .= " ORDER BY '".$d['pkey']."', ".area_myescape($param2).";";
 			$result =  db_query($query);
 			while ($line = db_fetch_object($result)) {
 				array_push($filter_array, $line->$d['pkey']);
 			}
-///print_r($query);exit;
 		}			
-		$query = "SELECT ".myescape($param2).", ".myescape($d['pkey'])." 
-		FROM ".myescape($d['table'])." 
-		WHERE ".myescape($param1)."='".myescape($bl)."'  
-		ORDER BY '".$d['pkey']."', ".myescape($param2).";";
+		$query = "SELECT ".area_myescape($param2).", ".area_myescape($d['pkey'])." 
+		FROM ".area_myescape($d['table'])." 
+		WHERE ".area_myescape($param1)."='".area_myescape($bl)."'  
+		ORDER BY '".$d['pkey']."', ".area_myescape($param2).";";
 		$result =  db_query($query);
 		$cl = array(); $id_array = array();
 		while ($line = db_fetch_object($result)) {

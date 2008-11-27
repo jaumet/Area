@@ -1,6 +1,6 @@
-Thhis is a non usable Area-drupal module for versions 6.x
-25 nov 2008
+Thhis is Area module for Drupal tested only in versions 6.6
+27 nov 2008
 
-in some weeks you will have the first version of the module
+Alpha version (!)
 
 comments: jaume AT riereta.net

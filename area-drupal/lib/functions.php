@@ -2,7 +2,7 @@
 ## AREA functions
 
 #sub to escape mysql special chars
-function myescape($escaped) {
+function area_myescape($escaped) {
 	$escaped = str_replace("\\","\\\\", $escaped);
 	$escaped = str_replace("'","\'", $escaped);
 	return $escaped;
