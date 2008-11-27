@@ -15,18 +15,18 @@ function area_get_distinct_values($param, $table, $dataname) { /// used in area2
 		$join_key = $datas[$dataname]['fields'][$param]['join']['key'];
 		$join_val = $datas[$dataname]['fields'][$param]['join']['val'];
 		$query = "SELECT DISTINCT 
-		".myescape($table).".".myescape($param).", ".$join_table.".".myescape($join_val)." 
-		FROM ".myescape($table).", ".$join_table." 
-		WHERE ".myescape($table).".".$param." != '' 
-		AND ".myescape($table).".".myescape($param)." = ".$join_table.".".myescape($join_key)."
-		ORDER BY ".myescape($table).".".myescape($param).";";
+		".area_myescape($table).".".area_myescape($param).", ".$join_table.".".area_myescape($join_val)." 
+		FROM ".area_myescape($table).", ".$join_table." 
+		WHERE ".area_myescape($table).".".$param." != '' 
+		AND ".area_myescape($table).".".area_myescape($param)." = ".$join_table.".".area_myescape($join_key)."
+		ORDER BY ".area_myescape($table).".".area_myescape($param).";";
 		$combine = "yes";
 //		echo "<hr />".$query."<hr />";
 	} else {
-		$query = "SELECT DISTINCT ".myescape($param)." 
-			FROM ".myescape($table)." 
+		$query = "SELECT DISTINCT ".area_myescape($param)." 
+			FROM ".area_myescape($table)." 
 			WHERE ".$param." != '' 
-			ORDER BY ".myescape($param).";";
+			ORDER BY ".area_myescape($param).";";
 	}
 	$distinct = array(); $distinct_key = array(); $distinct_val = array();
 	$result = db_query($query) or die('Query failed: ' . mysql_error());
