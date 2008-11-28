@@ -22,9 +22,14 @@ INSTALLATION:
 
 3. Enable the Area module by navigating to:
      administer > modules
-4. Configure teh Area module in 
+
+4. Set permissions for area use
+     administer > User management > Permissions
+
+5. Configure teh Area module in 
      administer > Site configuration > Area settings
-5. (optional) Acticate and configure the Area block in
+
+6. (optional) Acticate and configure the Area block in
      administer > Site building > Blocks
 
 
@@ -40,7 +45,7 @@ Future:
 Plans for the version 1.0:
 * Some languages versions.
 * Make it 6.x compatible, not only 6.6
-* Optimaze code
+* Clean code
 * Sticky Area filter in block
 * Group nodes depending on how big is the drupal
 
