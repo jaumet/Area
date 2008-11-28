@@ -129,11 +129,11 @@ $page_content .= '<form action="#" id="filter" method="post" name="filter">'."\n
 </form>'."\n";
 
 ## panel
-$page_content .= '<div class="panel" style="width: '.(intval(($block_x*1.05)*$matrix)).'px">'."\n";
+$page_content .= '<div class="panel" style="width: '.(intval(($block_x)*$matrix)+10).'px">'."\n";
 
 ########### Building blocks and nodes
-$correct = intval($matrix_nodes);
-$blockstyle = "width: ".($block_x)."px; height:".($block_y + 20)."px;";
+//$correct = intval($matrix_nodes);
+$blockstyle = "width: ".($block_x - 2)."px; height:".($block_y + 10)."px;";
 
 ## for quantum:
 $nodestyle = "width: ".intval(($block_x/$matrix_nodes))."px; height:".intval(($block_y/$matrix_nodes))."px;";
@@ -161,6 +161,7 @@ $s = 0;
 $total_nodes = 0;
 $dark_nodes = 0;
 foreach ($block_array as $bl) {
+  if ($block1_array[$bl] > 0) {
 	$page_content .= '<div class="areablock" style="'.$blockstyle.'">'."\n";
 	$page_content .= '<div class="blockname">'.$block_array_h[$s].' ('.$block1_array[$bl].')</div>';
 	$s++;
@@ -168,7 +169,7 @@ foreach ($block_array as $bl) {
 		if ($quantum != "quantum") { 
 			$matrix_nodes = round(sqrt($block1_array[$bl]), 0);
 			while ($matrix_nodes*$matrix_nodes < $block1_array[$bl]) { $matrix_nodes++;}
-			$nodestyle = "width: ".(($block_x/$matrix_nodes) - 2)."px; height:".($block_y)/$matrix_nodes."px;";
+			$nodestyle = "width: ".(($block_x/$matrix_nodes) - 3)."px; height:".(($block_y/$matrix_nodes) - 3)."px;";
 		}
 
 		## Param2 and colors
@@ -208,6 +209,7 @@ foreach ($block_array as $bl) {
 		}
 	}
 	$page_content .= "</div>"."\n";
+   }
 }
 
 $page_content .= "</div>"."\n";
