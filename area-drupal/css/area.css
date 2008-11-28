@@ -2,7 +2,7 @@
 /* main ones */
 .areanode {
 	border: 0px solid black;
-	border-width: 0px 1px 1px 0px;
+	border-width: 0px 1px 1px 1px;
 	visibility: visible;
 	display: block;
 	cursor : help;
@@ -12,7 +12,7 @@
 
 .areablock {
 	float: left;
-	border-width: 1px 1px 1px 1px;
+	border-width: 1px 0px 0px 0px;
 	border-style: solid;
 	border-color: grey;
 	z-index:0;
