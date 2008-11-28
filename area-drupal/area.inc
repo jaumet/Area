@@ -99,7 +99,7 @@ if ($d['fields'][$param2]['label']) {
 $colors = area_get_random_colors($num_colors); 
 
 // Is this only one block or the whole area?
-if (variable_get('area_block_type', "page") != "All nodes") { 
+if (variable_get('area_block_type', "page") != "All nodes" and $area_block == 1) { 
 	$block_array = array(0 => variable_get('area_block_type', "page"));
 	$block_array_h= array(0 => variable_get('area_block_type', "page"));
 }
@@ -132,8 +132,8 @@ $page_content .= '<form action="#" id="filter" method="post" name="filter">'."\n
 $page_content .= '<div class="panel" style="width: '.(intval(($block_x*1.05)*$matrix)).'px">'."\n";
 
 ########### Building blocks and nodes
-$correct = intval($matrix_nodes * 1.1);
-$blockstyle = "width: ".($block_x + $correct)."px; height:".($block_y + 30)."px;";
+$correct = intval($matrix_nodes);
+$blockstyle = "width: ".($block_x)."px; height:".($block_y + 20)."px;";
 
 ## for quantum:
 $nodestyle = "width: ".intval(($block_x/$matrix_nodes))."px; height:".intval(($block_y/$matrix_nodes))."px;";

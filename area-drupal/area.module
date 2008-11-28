@@ -143,6 +143,7 @@ function area_menu() {
 }
 
 function area_all() {
+	$area_block = 0;
 	// Getting the area admin variables
 	$dataname = "area_type"; //default value "area_type"
 	$param1 = variable_get('area_param1', "type");
