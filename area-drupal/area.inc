@@ -160,11 +160,12 @@ $qqq = substr($qqq, 0, -3);
 $s = 0;
 $total_nodes = 0;
 $dark_nodes = 0;
+$s = -1;
 foreach ($block_array as $bl) {
+  $s++;
   if ($block1_array[$bl] > 0) {
 	$page_content .= '<div class="areablock" style="'.$blockstyle.'">'."\n";
 	$page_content .= '<div class="blockname">'.$block_array_h[$s].' ('.$block1_array[$bl].')</div>';
-	$s++;
 	if ($block1_array[$bl])  {
 		if ($quantum != "quantum") { 
 			$matrix_nodes = round(sqrt($block1_array[$bl]), 0);
