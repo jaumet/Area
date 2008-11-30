@@ -1,5 +1,11 @@
 <?php
 // $Id$
+
+/**
+ * @file
+ * This is ths standar module file for Area module
+ */
+
 global $base_path;
 global $base_url;
 
@@ -8,14 +14,14 @@ global $base_url;
 * @return array An array of valid permissions for the onthisdate module
 */
 function area_perm() {
-	return array('access area content');
+  return array('access area content');
 } 
 
 /**
  * Implementation of hook_init(). Add's the book module's CSS.
  */
 function area_init() {
-	drupal_add_css(drupal_get_path('module', 'area') .'/css/area.css');
+  drupal_add_css(drupal_get_path('module', 'area') .'/css/area.css');
 }
 
 function area_block($op = 'list', $delta = 0) {
@@ -23,136 +29,136 @@ function area_block($op = 'list', $delta = 0) {
     $block[0]["info"] = t("Area");
     return $block;
   } else if ($op == 'view') {
-	// Getting the area admin variables
-	$area_block = 1;
-	$dataname = "area_type"; //default value "area_type"
-	$area_block_type = variable_get('area_block_type', "page");
-	$param1 = variable_get('area_param1', "type");
-	$param2 = variable_get('area_param2', "type");
-	$panelx = variable_get('area_panelx_block', "190"); //310;
-	$panely = variable_get('area_panely_block', "160"); //200;
-	$quantum = variable_get('area_quantum', "quantum");
-	// building area
-	include('area.inc');
-	// setting area block
-	$block["info"]       = 'Area block';
-	$block["subject"]	= "Area";
-	$block["content"]	= $page_content;
-	$block["pages"]	= "node/*";
-	return $block;
-   }
+    // Getting the area admin variables
+    $area_block = 1;
+    $dataname = "area_type"; //default value "area_type"
+    $area_block_type = variable_get('area_block_type', "page");
+    $param1 = variable_get('area_param1', "type");
+    $param2 = variable_get('area_param2', "type");
+    $panelx = variable_get('area_panelx_block', "190"); //310;
+    $panely = variable_get('area_panely_block', "160"); //200;
+    $quantum = variable_get('area_quantum', "quantum");
+    // building area
+    include_once('area.inc');
+    // setting area block
+    $block["info"]       = 'Area block';
+    $block["subject"]	= "Area";
+    $block["content"]	= $page_content;
+    $block["pages"]	= "node/*";
+    return $block;
+  }
 }
 
 function area_admin() {
-	include_once($base_path.'lib/functions.php');
-	$options = area_get_distinct_values("type", "node", "area_type");
-	$options = array_combine($options, $options);
-	$form['area_block_type'] = array(
-		'#type' => 'select',
-		'#title' => t('Area block type'),
-		'#default_value' => variable_get('area_block_type', "page"),
-		'#options' => $options,
-		'#description' => t("Wich content-type you want in the Area blocks:"),
-		'#required' => TRUE,
-	);
-	$form['area_panelx'] = array(
-		'#type' => 'textfield',
-		'#title' => t('Area width'),
-		'#default_value' => variable_get('area_panelx', 500),
-		'#size' => 4,
-		'#maxlength' => 4,
-		'#description' => t("Horizontal size (in pixels)"),
-		'#required' => TRUE,
-	);
-	$form['area_panely'] = array(
-		'#type' => 'textfield',
-		'#title' => t('Area heigth'),
-		'#default_value' => variable_get('area_panely', 400),
-		'#size' => 4,
-		'#maxlength' => 4,
-		'#description' => t("Vertical size (in pixels)"),
-		'#required' => TRUE,
-	);
-	$form['area_panelx_block'] = array(
-		'#type' => 'textfield',
-		'#title' => t('Block Area width'),
-		'#default_value' => variable_get('area_panelx_block', 190),
-		'#size' => 4,
-		'#maxlength' => 4,
-		'#description' => t("Horizontal size (in pixels)"),
-		'#required' => TRUE,
-	);
-	$form['area_panely_block'] = array(
-		'#type' => 'textfield',
-		'#title' => t('Block Area heigth'),
-		'#default_value' => variable_get('area_panely_block', 160),
-		'#size' => 4,
-		'#maxlength' => 4,
-		'#description' => t("Vertical size (in pixels)"),
-		'#required' => TRUE,
-	);
-	$opcions_quantum = array("quantum" => "quantum", "non quantum" => "non quantum");
-	$form['area_quantum'] = array(
-		'#type' => 'select',
-		'#title' => t('quantum?'),
-		'#options' => $opcions_quantum,
-		'#default_value' => variable_get('area_quantum', 'quantum'),
-		'#description' => t("A quantum representation, show all the nodes the same size. A non-quantum one makes size of nodes related to the number of them"),
-	);
-	return system_settings_form($form);
+  include_once($base_path.'lib/functions.php');
+  $options = area_get_distinct_values("type", "node", "area_type");
+  $options = array_combine($options, $options);
+  $form['area_block_type'] = array(
+    '#type' => 'select',
+    '#title' => t('Area block type'),
+    '#default_value' => variable_get('area_block_type', "page"),
+    '#options' => $options,
+    '#description' => t("Wich content-type you want in the Area blocks:"),
+    '#required' => TRUE,
+  );
+  $form['area_panelx'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Area width'),
+    '#default_value' => variable_get('area_panelx', 500),
+    '#size' => 4,
+    '#maxlength' => 4,
+    '#description' => t("Horizontal size (in pixels)"),
+    '#required' => TRUE,
+  );
+  $form['area_panely'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Area heigth'),
+    '#default_value' => variable_get('area_panely', 400),
+    '#size' => 4,
+    '#maxlength' => 4,
+    '#description' => t("Vertical size (in pixels)"),
+    '#required' => TRUE,
+  );
+  $form['area_panelx_block'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Block Area width'),
+    '#default_value' => variable_get('area_panelx_block', 190),
+    '#size' => 4,
+    '#maxlength' => 4,
+    '#description' => t("Horizontal size (in pixels)"),
+    '#required' => TRUE,
+  );
+  $form['area_panely_block'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Block Area heigth'),
+    '#default_value' => variable_get('area_panely_block', 160),
+    '#size' => 4,
+    '#maxlength' => 4,
+    '#description' => t("Vertical size (in pixels)"),
+    '#required' => TRUE,
+  );
+  $opcions_quantum = array("quantum" => "quantum", "non quantum" => "non quantum");
+  $form['area_quantum'] = array(
+    '#type' => 'select',
+    '#title' => t('quantum?'),
+    '#options' => $opcions_quantum,
+    '#default_value' => variable_get('area_quantum', 'quantum'),
+    '#description' => t("A quantum representation, show all the nodes the same size. A non-quantum one makes size of nodes related to the number of them"),
+  );
+  return system_settings_form($form);
 }
 
 function area_admin_validate($form, &$form_state) {
-	$maxdisp = $form_state['values']['area_panelx_block'];
-	if (!is_numeric($maxdisp)) {
-		form_set_error('area_panelx_block', t('You must select a number between 50 and 5000.'));
-	} else if ($maxdisp <= 49 or $maxdisp > 5000) {
-		form_set_error('area_panelx_block', t('You must select a number between 50 and 5000.'));
-	}
-	$maxdisp = $form_state['values']['area_panely_block'];
-	if (!is_numeric($maxdisp)) {
-		form_set_error('area_panely_block', t('You must select a number.'));
-	} else if ($maxdisp <= 49 or $maxdisp > 500) {
-		form_set_error('area_panely_block', t('You must select a number between 50 and 5000.'));
-	}
-	$maxdisp = $form_state['values']['area_panely'];
-	if (!is_numeric($maxdisp)) {
-		form_set_error('area_panely', t('You must select a number.'));
-	} else if ($maxdisp <= 49 or $maxdisp > 5000) {
-		form_set_error('area_panely', t('You must select a number between 50 and 5000.'));
-	}
+  $maxdisp = $form_state['values']['area_panelx_block'];
+  if (!is_numeric($maxdisp)) {
+    form_set_error('area_panelx_block', t('You must select a number between 50 and 5000.'));
+  } else if ($maxdisp <= 49 or $maxdisp > 5000) {
+    form_set_error('area_panelx_block', t('You must select a number between 50 and 5000.'));
+  }
+  $maxdisp = $form_state['values']['area_panely_block'];
+  if (!is_numeric($maxdisp)) {
+    form_set_error('area_panely_block', t('You must select a number.'));
+  } else if ($maxdisp <= 49 or $maxdisp > 500) {
+    form_set_error('area_panely_block', t('You must select a number between 50 and 5000.'));
+  }
+  $maxdisp = $form_state['values']['area_panely'];
+  if (!is_numeric($maxdisp)) {
+    form_set_error('area_panely', t('You must select a number.'));
+  } else if ($maxdisp <= 49 or $maxdisp > 5000) {
+    form_set_error('area_panely', t('You must select a number between 50 and 5000.'));
+  }
 }
 
 function area_menu() {
-	$items = array();
-	$items['admin/settings/area'] = array(
-		'title' => t('Area settings'),
-		'description' => t('Set the Area behevior.'),
-		'page callback' => 'drupal_get_form',
-		'page arguments' => array('area_admin'),
-		'access arguments' => array('access administration pages'),
-		'type' => MENU_NORMAL_ITEM,
-	);
-	$items['area'] = array(
-		'title' => t('Area representation'),
-		'page callback' => 'area_all',
-		'access arguments' => array('access area content'),
-		'type' => MENU_NORMAL_ITEM,
-	);
-	return $items;
+  $items = array();
+  $items['admin/settings/area'] = array(
+    'title' => t('Area settings'),
+    'description' => t('Set the Area behevior.'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('area_admin'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['area'] = array(
+    'title' => t('Area representation'),
+    'page callback' => 'area_all',
+    'access arguments' => array('access area content'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  return $items;
 }
 
 function area_all() {
-	$area_block = 0;
-	// Getting the area admin variables
-	$dataname = "area_type"; //default value "area_type"
-	$param1 = variable_get('area_param1', "type");
-	$param2 = variable_get('area_param1', "type");
-	$panelx = variable_get('area_panelx', 500);
-	$panely = variable_get('area_panelx', 400);
-	$quantum = variable_get('area_quantum', "quantum");
-	// building area
-	include('area.inc');
-	return $page_content;
+  $area_block = 0;
+  // Getting the area admin variables
+  $dataname = "area_type"; //default value "area_type"
+  $param1 = variable_get('area_param1', "type");
+  $param2 = variable_get('area_param1', "type");
+  $panelx = variable_get('area_panelx', 500);
+  $panely = variable_get('area_panelx', 400);
+  $quantum = variable_get('area_quantum', "quantum");
+  // building area
+  include_once('area.inc');
+  return $page_content;
 }
 
