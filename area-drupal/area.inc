@@ -133,7 +133,7 @@ $colors_array = array_combine($p2 , $colors);
 
 $page_content .= '<form action="#" id="filter" method="post" name="filter">'."\n".'
 <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
-<input id="tag" name="tag" value="'.$tag.'" type="text" size="10">
+<input id="tag" name="tag" value="'.$tag.'" type="text" size="8">
 <input id="filter_submit" name="_submit" value="filter" type="submit">
 <!--<input type="checkbox" name="filter_sticky" value="1" '.$checked.' > -->
 </form>'."\n";
