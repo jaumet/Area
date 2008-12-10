@@ -8,11 +8,10 @@
  * Here is going on the logic of the module
  */
 
-global $base_path;
-global $base_url;
+$module_path = drupal_get_path('module', 'area');
 
-require_once('./modules/area/lib/functions.php');
-require_once('./modules/area/lib/DataConfig.php');
+require_once($module_path.'/lib/functions.php');
+require_once($module_path.'/lib/DataConfig.php');
 
 // Get the node-types list:
 $blocks_selected = array();
@@ -155,9 +154,9 @@ if ($submitted_filter == 1) {
   foreach ($d['fields'] as $key => $value) {
     if ($d['fields'][$key]['filter'] == 1)  {
       if ($d['fields'][$key]['join'])  {
-        $qqq .= " LOWER(".area_myescape($d['table']).".".$key.") LIKE LOWER('%%".$tag."%%') OR ";
+        $qqq .= "node.nid = node_revisions.nid AND node_revisions.body LIKE LOWER('%%".$tag."%%') OR ";
       } else {
-        $qqq .= " LOWER(".area_myescape($d['table']).".".$key.") LIKE LOWER('%%".$tag."%%') OR ";
+        $qqq .= "node.".$key." LIKE LOWER('%%".$tag."%%') OR ";
       }
     }
   }
@@ -185,13 +184,14 @@ foreach ($block_array as $bl) {
         // Param2 and colors
         $filter_array = array();
         if ($submitted_filter == 1) {
-          $query = "SELECT ".area_myescape($d['pkey'])." 
-                    FROM ".area_myescape($d['table'])." 
-                    WHERE ".area_myescape($param1)."='".area_myescape($bl)."' AND ";
+          $query = "SELECT node.nid 
+                    FROM node, users, node_revisions, languages  
+                    WHERE node.type = '".area_myescape($bl)."' AND ";
+
           if ($qqq) { 
             $query .= $qqq; 
           }
-          $query .= " ORDER BY '".$d['pkey']."', ".area_myescape($param2).";";
+          $query .= " ORDER BY node.nid, node.type;";
           $result =  db_query($query);
           while ($line = db_fetch_object($result)) {
             array_push($filter_array, $line->$d['pkey']);

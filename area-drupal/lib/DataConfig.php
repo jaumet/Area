@@ -20,7 +20,7 @@ $datas['area_type'] = array // Name for the data (only letters and/or numbers
   'fields' => array( // list of fields in the database
     'type' => array( 
       'label'=>'Content type', 
-      'filter'=>'1', 
+      'filter'=>'0', 
       'show'=>'1' 
     ),
     'title' => array( 
@@ -36,6 +36,16 @@ $datas['area_type'] = array // Name for the data (only letters and/or numbers
         'table'=>'users', // Table to join
         'key' => 'uid', // Key to join
         'val' => 'name'  // value to get
+      )
+    ),
+      'nid' => array( 
+      'label'=>'Content', 
+      'filter'=>'1', 
+      'show'=>'1', 
+      'join' => array(
+        'table'=>'node_revisions', // Table to join
+        'key' => 'nid', // Key to join
+        'val' => 'body'  // value to get
       )
     ),
     'comment' => array( 

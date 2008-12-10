@@ -6,8 +6,6 @@
  * This is ths standar module file for Area module
  */
 
-global $base_path;
-global $base_url;
 
 /**
 * Valid permissions for this module
@@ -39,18 +37,20 @@ function area_block($op = 'list', $delta = 0) {
     $panely = variable_get('area_panely_block', "160"); //200;
     $quantum = variable_get('area_quantum', "quantum");
     // building area
-    include_once('area.inc');
+    $module_path = drupal_get_path('module', 'area');
+    include_once($module_path.'/area.inc');
     // setting area block
-    $block["info"]       = 'Area block';
+    $block["info"]    = 'Area block';
     $block["subject"]	= "Area";
     $block["content"]	= $page_content;
-    $block["pages"]	= "node/*";
+    $block["pages"]	  = "node/*";
     return $block;
   }
 }
 
 function area_admin() {
-  include_once($base_path.'lib/functions.php');
+  $module_path = drupal_get_path('module', 'area');
+  require_once($module_path.'/lib/functions.php');
   $options = area_get_distinct_values("type", "node", "area_type");
   $options = array_combine($options, $options);
   $form['area_block_type'] = array(
