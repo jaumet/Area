@@ -1,5 +1,5 @@
 <?php
-// $Id$
+// $Id: DataConfig.php,v 1.1.2.1 2009/02/24 16:47:32 jaume Exp $
 /**
  * @file
  * This is a configuration file for the Area module.

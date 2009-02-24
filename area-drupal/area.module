@@ -1,5 +1,5 @@
 <?php
-// $Id$
+// $Id: area.module,v 1.1.2.1 2009/02/24 16:47:32 jaume Exp $
 
 /**
  * @file
@@ -19,6 +19,7 @@ function area_perm() {
  * Implementation of hook_init(). Add's the book module's CSS.
  */
 function area_init() {
+	drupal_add_js(drupal_get_path('module', 'area') .'/js/area.js');
   drupal_add_css(drupal_get_path('module', 'area') .'/css/area.css');
 }
 

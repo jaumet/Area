@@ -1,5 +1,5 @@
 <?php
-// $Id$
+// $Id: area.inc,v 1.1.2.2 2009/02/24 16:47:32 jaume Exp $
 
 /**
  * @file
@@ -111,15 +111,14 @@ if (variable_get('area_block_type', "page") != "All nodes" and $area_block == 1)
   $block_array = array(0 => variable_get('area_block_type', "page"));
   $block_array_h= array(0 => variable_get('area_block_type', "page"));
 }
-
+if ($area_block != 1) { $page_content .= "<div style='float:left;'>"."\n";}
 $n = 0;
 $p = $color_selected;
 $p_h = $color_values_h;
 $p2 = array();
-foreach ($colors as $col) {
-  if ($area_block != 1) { 
+foreach ($colors as $col) { 
     $page_content .= '<span class="legend" style="background-color: '.$col.';">'.$p_h[$n].'</span>'."\n";
-  }
+
   //1: building array param2 <-> colors
   array_push($p2, $p[$n]);
   $n++;
@@ -129,13 +128,19 @@ foreach ($colors as $col) {
 $colors_array = array_combine($p2 , $colors);
 
 //if ($filter_sticky == 1) { $checked = "checked=\"checked\""; }
-
 $page_content .= '<form action="#" id="filter" method="post" name="filter">'."\n".'
 <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
 <input id="tag" name="tag" value="'.$tag.'" type="text" size="6">
 <input id="filter_submit" name="_submit" value="filter" type="submit">
 <!--<input type="checkbox" name="filter_sticky" value="1" '.$checked.' > -->
 </form>'."\n";
+$page_content .= "</div>"."\n";
+$page_content .= "<div style='float:left;height-max:100px;overflow:auto;'>"."\n";
+$page_content .= "<div id=\"area_preview_head\">Preview</div>"."\n";
+$page_content .= "<div id=\"area_preview\"></div>"."\n";
+$page_content .= "</div>"."\n";
+
+$page_content .= "<div class='clear'>"."\n";
 
 // panel
 $page_content .= '<div class="panel" style="width: '.(intval(($block_x)*$matrix)+10).'px">'."\n";
@@ -185,7 +190,7 @@ foreach ($block_array as $bl) {
         $filter_array = array();
         if ($submitted_filter == 1) {
           $query = "SELECT node.nid 
-                    FROM node, users, node_revisions, languages  
+                    FROM node, users, node_revisions  
                     WHERE node.type = '".area_myescape($bl)."' AND ";
 
           if ($qqq) { 
@@ -196,6 +201,8 @@ foreach ($block_array as $bl) {
           while ($line = db_fetch_object($result)) {
             array_push($filter_array, $line->$d['pkey']);
           }
+          ### NEW SEARCH
+          //$dosearch = node_search("search", "sss");
         }			
         $query = "SELECT ".area_myescape($param2).", ".area_myescape($d['pkey'])." 
                   FROM ".area_myescape($d['table'])." 
@@ -216,13 +223,15 @@ foreach ($block_array as $bl) {
             $dark_nodes++;
           }
           $total_nodes++;
-          $page_content .= '<div class="areanode" id="block-'.$id.'" name="block-'.$id.'" style="background-color:'.$rgb.';'.   $nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  onclick="javascript:location.href=\''.url('node/'.htmlentities($id)).'\';"></div>'."\n";
+          $page_content .= '<div class="areanode" id="block-'.$id.'" name="block-'.$id.'" style="background-color:'.$rgb.';'.   $nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  onclick="javascript:location.href=\''.url('node/'.htmlentities($id)).'\';"';
+	        $area_pre = node_load(htmlentities($id));
+	        $area_pre_content = "<h2>".$area_pre->title."</h2>";
+ 	        $area_pre_content .= "<p>".$area_pre->teaser."</p>";
+         	$page_content .= ' onmouseover="javascript:area_pre(\''.htmlentities($area_pre_content).'\');"></div>'."\n";
         }
     }
   $page_content .= "</div>"."\n";
   }
 }
 $page_content .= "</div>"."\n";
-$page_content .= "<div class='clear'></div>"."\n";
-
 ?>

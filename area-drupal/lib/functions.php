@@ -1,5 +1,5 @@
 <?php
-// $Id$
+// $Id: functions.php,v 1.1.2.1 2009/02/24 16:47:32 jaume Exp $
 
 /**
  * @file
