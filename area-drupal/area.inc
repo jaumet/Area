@@ -146,7 +146,7 @@ $page_content .= "<div class='clear'>"."\n";
 $page_content .= '<div class="panel" style="width: '.(intval(($block_x)*$matrix)+10).'px">'."\n";
 
 // Building blocks and nodes
-$correct = intval($matrix_nodes*2);
+$correct = intval($matrix_nodes*2-10);
 $blockstyle = "width: ".($block_x + $correct)."px; height:".($block_y + 25)."px;";
 
 // for quantum:
@@ -223,11 +223,13 @@ foreach ($block_array as $bl) {
             $dark_nodes++;
           }
           $total_nodes++;
-          $page_content .= '<div class="areanode" id="block-'.$id.'" name="block-'.$id.'" style="background-color:'.$rgb.';'.   $nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  onclick="javascript:location.href=\''.url('node/'.htmlentities($id)).'\';"';
-	        $area_pre = node_load(htmlentities($id));
-	        $area_pre_content = "<h2>".$area_pre->title."</h2>";
- 	        $area_pre_content .= "<p>".$area_pre->teaser."</p>";
-         	$page_content .= ' onmouseover="javascript:area_pre(\''.htmlentities($area_pre_content).'\');"></div>'."\n";
+          $page_content .= '<div class="areanode" id="block-'.$id.'" name="block-'.$id.'" style="background-color:'.$rgb.';'.   $nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  ';
+	  $area_pre = node_load($id);
+	  $area_pre_content = "<h2><a href=\"".url('node/'.htmlentities($id))."\">".$area_pre->title."</a></h2>";
+	  //$op=strpos($area_pre->teaser, "</p>");
+	  //$area_data=substr($area_pre->teaser, 0, $op+4);
+ 	  //$area_pre_content .= "<p>".htmlentities($area_data)."</p>";
+          $page_content .= ' onclick="javascript:area_pre(\''.htmlentities($area_pre_content).'\');"></div>'."\n";
         }
     }
   $page_content .= "</div>"."\n";
