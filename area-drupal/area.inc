@@ -143,11 +143,11 @@ $page_content .= "</div>"."\n";
 $page_content .= "<div class='clear'>"."\n";
 
 // panel
-$page_content .= '<div class="panel" style="width: '.(intval(($block_x)*$matrix)+10).'px">'."\n";
+$page_content .= '<div class="panel" style="width: '.(intval(($block_x)*$matrix)).'px">'."\n";
 
 // Building blocks and nodes
-$correct = intval($matrix_nodes*2-10);
-$blockstyle = "width: ".($block_x + $correct)."px; height:".($block_y + 25)."px;";
+##$correct = intval($matrix_nodes*2);
+$blockstyle = "width: ".($block_x)."px; height:".($block_y + 25)."px;";
 
 // for quantum:
 $nodestyle = "width: ".intval(($block_x/$matrix_nodes))."px; height:".intval(($block_y/$matrix_nodes))."px;";
