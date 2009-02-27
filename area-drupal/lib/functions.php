@@ -95,4 +95,22 @@ function area_get_dark_color($rgb)  {
   return $dark;
 }
 
+/**
+ * array_combine for PHP 4. Uncomment this function if you are using PHP4
+ *
+ * @array
+ *   string to scape
+ *
+ */
+/*
+function array_combine($arr1, $arr2) {
+	$out = array();
+        $arr1 = array_values($arr1);
+	$arr2 = array_values($arr2);
+	foreach($arr1 as $key1 => $value1) {
+		$out[(string)$value1] = $arr2[$key1];
+	}
+	return $out;
+}
+*/
 ?>
