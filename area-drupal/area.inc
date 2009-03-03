@@ -122,10 +122,10 @@ $p2 = array();
     array_push($p2, $p[$n]);
     $n++;
   }
-}
-
 // and 2: building array param2 <-> colors
 $colors_array = array_combine($p2 , $colors);
+}
+
 
 //if ($filter_sticky == 1) { $checked = "checked=\"checked\""; }
 $page_content .= '<form action="#" id="filter" method="post" name="filter">'."\n".'
@@ -135,9 +135,10 @@ $page_content .= '<form action="#" id="filter" method="post" name="filter">'."\n
 <!--<input type="checkbox" name="filter_sticky" value="1" '.$checked.' > -->
 </form>'."\n";
 $page_content .= "</div>"."\n";
-$page_content .= "<div style='float:left;height-max:100px;overflow:auto;'>"."\n";
-$page_content .= "<div id=\"area_preview\">Preview</div>"."\n";
-$page_content .= "</div>"."\n";
+//$page_content .= "<div style='float:left;height-max:100px;overflow:auto;'>"."\n";
+$page_content .= "<div style='clear:both;'></div>"."\n";
+$page_content .= "<div id=\"area_preview\" style='max-height:100px;overflow:auto;margin-bottom:10px;'><p><br /><b>Click nodes to preview</b></p></div>"."\n";
+//$page_content .= "</div>"."\n";
 
 $page_content .= "<div class='clear'>"."\n";
 
@@ -224,10 +225,11 @@ foreach ($block_array as $bl) {
           $total_nodes++;
           $page_content .= '<div class="areanode" id="block-'.$id.'" name="block-'.$id.'" style="background-color:'.$rgb.';'.   $nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  ';
 	  $area_pre = node_load($id);
-	  $area_pre_content = "<h2><a href=\"".url('node/'.htmlentities($id))."\">".$area_pre->title."</a></h2>";
+	  $area_pre_content = "<h3>title: <a href=\"".url('node/'.htmlentities($id))."\">".$area_pre->title."</a></h3>";
 	  //$op=strpos($area_pre->teaser, "</p>");
-	  //$area_data=substr($area_pre->teaser, 0, $op+4);
- 	  //$area_pre_content .= "<p>".htmlentities($area_data)."</p>";
+	  preg_match("/\<p\>(.*)\<\/p\>/", $area_pre->body, $area_data);
+	  //$area_data=substr($area_pre->teaser, 0, 100);
+ 	  $area_pre_content .= "<p>".$area_data[0]."</p>";
           $page_content .= ' onclick="javascript:area_pre(\''.htmlentities($area_pre_content).'\');"></div>'."\n";
         }
     }
