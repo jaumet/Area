@@ -1,5 +1,5 @@
 <?php
-// $Id: area.inc,v 1.1.2.2 2009/02/24 16:47:32 jaume Exp $
+// $Id: area.inc,v 1.1.2.3 2009/02/27 15:31:43 jaume Exp $
 
 /**
  * @file
@@ -111,17 +111,17 @@ if (variable_get('area_block_type', "page") != "All nodes" and $area_block == 1)
   $block_array = array(0 => variable_get('area_block_type', "page"));
   $block_array_h= array(0 => variable_get('area_block_type', "page"));
 }
-if ($area_block != 1) { $page_content .= "<div style='float:left;'>"."\n";}
+if ($area_block != 1) { $page_content .= "<div style='float:left;'>"."\n";
 $n = 0;
 $p = $color_selected;
 $p_h = $color_values_h;
 $p2 = array();
-foreach ($colors as $col) { 
+  foreach ($colors as $col) { 
     $page_content .= '<span class="legend" style="background-color: '.$col.';">'.$p_h[$n].'</span>'."\n";
-
-  //1: building array param2 <-> colors
-  array_push($p2, $p[$n]);
-  $n++;
+    //1: building array param2 <-> colors
+    array_push($p2, $p[$n]);
+    $n++;
+  }
 }
 
 // and 2: building array param2 <-> colors
@@ -136,8 +136,7 @@ $page_content .= '<form action="#" id="filter" method="post" name="filter">'."\n
 </form>'."\n";
 $page_content .= "</div>"."\n";
 $page_content .= "<div style='float:left;height-max:100px;overflow:auto;'>"."\n";
-$page_content .= "<div id=\"area_preview_head\">Preview</div>"."\n";
-$page_content .= "<div id=\"area_preview\"></div>"."\n";
+$page_content .= "<div id=\"area_preview\">Preview</div>"."\n";
 $page_content .= "</div>"."\n";
 
 $page_content .= "<div class='clear'>"."\n";

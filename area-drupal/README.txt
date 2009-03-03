@@ -20,6 +20,8 @@ INSTALLATION:
 2. Place the entire area into your Drupal modules/
    directory.
 
+3. (ONLY if you use PHP4: edit hte file area/lib/functions.php and uncoment the last function array_combine)
+
 3. Enable the Area module by navigating to:
      administer > modules
 
@@ -36,7 +38,7 @@ INSTALLATION:
 Features:
 ---------
 * Represents the content types published in the drupal as a treemap
-* Show a block for one or more content types
+* Show a block for one or all content types
 * Filter the representation using tags. And see the weight of your search in the whole site content
 
 
@@ -44,10 +46,9 @@ Future:
 -------
 Plans for the version 1.0:
 * Some languages versions.
-* Make it 6.x compatible, not only 6.6
-* Clean code
 * Sticky Area filter in block
 * Group nodes depending on how big is the drupal
+* Options for parameters: content-types (now), user author, etc... 
 
 Author:
 -------
