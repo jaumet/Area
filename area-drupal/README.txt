@@ -4,8 +4,8 @@
 
 DESCRIPTION:
 ------------
-This is Area module for Drupal tested only in versions 6.6
-(27 nov 2008)
+This is Area module for Drupal tested in versions 6.6 to 6.9
+(3 mar 2009)
 
 
 REQUIREMENTS:
@@ -53,5 +53,5 @@ Plans for the version 1.0:
 Author:
 -------
 Jaume Nualart
-jaume AT riereta.net
+jaume AT nualart.cat
 
