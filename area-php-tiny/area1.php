@@ -1,9 +1,9 @@
 <?
 session_start();
 
-include('./lib/functions.php');
-include('./lib/AreaConfig.php');
-include($area_path.'lib/DataConfig.php');
+include_once('./lib/functions.php');
+include_once('./lib/AreaConfig.php');
+include_once($area_path.'lib/DataConfig.php');
 
 ## GET DATASOURCES
 $dataname = $_REQUEST['dataname'];
@@ -23,18 +23,7 @@ if (!$dataname) {
 ## CONNECT to database
 connect($dataname);
 
-# Starting html
-echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n
-<html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\">\n
-	<head>
-	<title>:: AREA :: treemaps visualization - Step 1</title>\n
-	<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n
-	<link rel=\"SHORTCUT ICON\" href=\"imgs/logoareapetit.png\" />\n
-	<link href=\"./css/area.css\" rel=\"stylesheet\" type=\"text/css\" />\n
-	<script language=\"javascript\" src=\"./js/area.js\"></script>
-</head>\n
-<body>\n";
+
 
 $fields = array();
 
