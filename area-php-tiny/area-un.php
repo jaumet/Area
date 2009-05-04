@@ -78,7 +78,7 @@ if ($param1 AND $param2) {
 	$blocks_selected = $param1_list;
 	$blocks_values_h = $param1_list_val;
 	$color_selected = $param2_list;
-	$color_values_h = $param1_list_val;
+	$color_values_h = $param2_list_val;
 }
 
 if ($_POST['panelx'] and $_POST['panely']) {
@@ -96,15 +96,19 @@ if (isset($_POST['quantum'])) {
 }
 
 if (isset($_POST['randomcolor'])) {
-	$vars['randomcolor'] = $_POST['randomcolor'];
+	$randomcolor = $_POST['randomcolor'];
+} else {
+	$randomcolor = "yes";
 }
-$randomcolor = $vars['randomcolor'];
 if ($_POST['submitted_filter'] == 1) {
 	$vars['submitted_filter'] = $_POST['submitted_filter'];
-	$vars['tag'] = $_POST['tag'];
+	if ($_POST['tag']) { 
+		$tag = $_POST['tag']; 
+	}
+} else {
+	$submitted_filter = 0;
 }
-$submitted_filter = $vars['submitted_filter'];
-if ($_POST['tag']) { $tag = $_POST['tag']; }
+
 
 ########################  html start
 head_html("Area 1 step");
@@ -137,7 +141,7 @@ if ($param1 AND $param2) {
 	$nodes_per_block_max[0] = 0;
 
 	foreach ($block_array as $bl) {
-	echo $query;
+	//echo $query;
 		$query = "SELECT COUNT(*) FROM ".myescape($d['table'])." WHERE ".myescape($param1)."='".myescape($bl)."';";
 		$result = mysql_query($query) or die('Query count L132: ' . mysql_error());
 		$nodes_per_block = mysql_fetch_array($result);
@@ -162,8 +166,11 @@ if ($param1 AND $param2) {
 
 
 	echo "Num of colors seleccionats: ".$num_colors."<br />";
-	echo "Num of colors total: ".sizeof($color_values)."<br />";
-	echo "<pre>";print_r($vars);print_r($color_joins);echo "</pre>";
+	echo "Num of colors total: ".sizeof($color_selected)."<br />";
+	echo "<pre>VARS:";
+	print_r($vars);
+	echo "<hr />color_joins:";
+	print_r($color_joins);echo "</pre>";
 
 }
 echo "</div>";
@@ -296,15 +303,13 @@ if ($p2) {
 	$vars['p2'] = $p2; 
 }
 
-if ($colors) { 
-	$vars['colors'] = $colors; 
-}
+//if ($colors) { 
+//	$vars['colors'] = $colors; 
+//}
 
 ## and 2: building array param2 <-> colors
 
-if ($colors_array) { 
-	$vars['colors_array'] = $colors_array; 
-} else {
+if (!$colors_array) { 
 	$colors_array = array_combine($vars['p2'] , $colors);
 }
 
@@ -314,7 +319,8 @@ echo "</div>";
 echo '<div class="panel" style="width:'.($x + 30).'px;heigth:'.($y + 10).'px;">'."\n";
 
 ########### Building blocks and nodes
-$blockstyle = "width: ".($block_x)."px; height:".($block_y + 50)."px;";
+$correction = 0;   /// FIXME 
+$blockstyle = "width: ".($block_x)."px; height:".($block_y + $correction)."px;";
 
 ## for quantum:
 $nodestyle = "width: ".(($block_x)/($matrix_nodes) - 2)."px; height:".intval(($block_y/$matrix_nodes))."px;";
@@ -396,7 +402,7 @@ foreach ($block_array as $bl) {
 echo "</div>"."\n";
 $sesion_id = session_id();
 echo '
-<div id="preview" style="height: 600px; left: '.($x + intval($x/20)).'px;"><h3>Search here:</h3>
+<div id="preview" style="height: 600px; left: '.($x + 50).'px;"><h3>Search here:</h3>
 <form action="area-un.php" id="filter" method="post" name="filter">'."\n".'
 <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
 <input id="param1" name="param1" value="'.$param1.'" type="hidden">

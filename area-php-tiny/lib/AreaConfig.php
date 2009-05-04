@@ -23,7 +23,7 @@ $area_percnotnull = 40;
 
 ## $numdistinct_max      : maximum number of distinct values (different values) 
 ## 			of any field of the selected database (default/recommended: 50)
-$area_numdistinct_max = 5;
+$area_numdistinct_max = 50;
 
 ## $numdistinct_min       : minimum number of distinct values (different values) 
 ## 			of any field of the selected database (default/recommended: 2)
