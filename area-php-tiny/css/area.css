@@ -207,7 +207,7 @@ border: 1px solid #ffffff;
 	/*height: 63px;*/
 	padding-left: 17px;
 	padding-right: 17px;
-	padding-bottom: 4px;
+	padding-bottom: 13px;
 	padding-top: 4px;
 	z-index: 1;
 }
@@ -331,7 +331,7 @@ h3 {
 
 #legend {
 	position:absolute;
-	top:130px;
+	top:140px;
 	height: 46px;
 	left:3px;
 	overflow: auto;
@@ -370,7 +370,7 @@ a:hover, a:active {
 
 
 .debug {
-	display: none;
+	display: block;
 	background-color: #ffffff;
 	color: #000000;
 	opacity: 50%;

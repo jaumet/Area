@@ -1,7 +1,7 @@
 <?
 include('./lib/functions.php');
 include('./lib/AreaConfig.php');
-include('./lib/preset.inc');
+//include('./lib/preset.inc');
 include($area_path.'lib/DataConfig.php');
 
 ## Handling session:
@@ -9,121 +9,207 @@ include($area_path.'lib/DataConfig.php');
 
 ############## $_REQUEST -> $vars
 //if (isset($_REQUEST['block_selected']) ) {
-	$_REQUEST = $vars;
+//	$_REQUEST = $vars;
 //}
-$dataname = $vars['datasrcname'];
-$param1 = $vars['param1'];
-$param2 = $vars['param2'];
-$blocks_selected = $vars['block_selected'];
-//$blocks_values = $vars['block_values'];
-$blocks_values_h = $vars['block_values_h'];
-$color_selected = $vars['color_selected'];
-//$color_values = $vars['color_values'];
-$color_values_h = $vars['color_values_h'];
-if ($_REQUEST['panelx'] and $_REQUEST['panely']) {
-	$x = $_REQUEST['panelx'];
-	$y = $_REQUEST['panely'];
+
+##  IS ANY DATABASE SELECTED?
+$dataname = $_GET['dataname'];
+if ($dataname == "") {
+$dataname = $_POST['dataname'];
+}
+$d = $datas[$dataname];
+
+
+if (!$dataname) {
+	echo "<h2>No dataname selected!!!!<br /> Choose one of the list:</h2>";
+	echo "<ul>"; 
+	foreach ($datas as $k => $v) {
+		echo "<li><a href=\"".$area_url."area-un.php?dataname=".$k."\">$k</a></li>";
+	}
+	echo "</ul>";
+	exit;
+	
 } else {
-	$x = $vars['panelx'];
-	$y = $vars['panely'];
+
+	## CONNECT to database
+	connect($dataname);
+
+	include ('lib/step1.inc');
+
+	//$dataname = $_POST['datasrcname']; //FIXME
+	$param1 = $_POST['param1'];
+	$param2 = $_POST['param2'];
+
+	######## ARE PARAMETERS DEFINED?
+	if (!$param1 OR !$param2) {
+//	echo "aquiiii";exit;
+		head_html("Area 1 step");
+		get_areadiv();
+		$noparameters_html = "<br /><br /><br /> 
+			<div id=\"analisisdiv\">
+			<h2>About the data: ".$d['name']." </h2>
+			<p><ul><li>Database Name: ".$d['db']['name']."</li>
+			<p><ul><li>Database Label: ".$d['label']."</li>
+			<li>Table Name: <b>".$d['table']."</b></li>\n\n";
+
+		# Numero de camps a la taula
+		$noparameters_html .= "<li>Number of fields: ".$numfields."</li>\n\n";
+
+		# Numero d'entrades
+		$noparameters_html .=  "<li>Number of records: ".$numrows."</li>";
+		$noparameters_html .=  "<li>Possible representations: <b>".$d['max_representations']."</b></li></ul></p>";
+		$noparameters_html .=  "<p>You can choose 2 of these parameters:</p>";
+		$noparameters_html .=  "<table>".$htmlgood."</table>";
+
+		$noparameters_html .=  "<p>List of the rest of fields:</p>"."\n";
+		$noparameters_html .=  "<table>".$htmlbad."</table>"."\n";
+		$noparameters_html .=  "</div>"."\n";
+		echo $noparameters_html;
+	}
+
+################### JAUME
+//print_r($param2_list);echo "<hr />";
+//print_r($good);echo "<hr />";
+//print_r($vars['block_selected']);exit;
+
+if ($param1 AND $param2) {
+	include ('lib/step2.inc');
+	$blocks_selected = $param1_list;
+	$blocks_values_h = $param1_list_val;
+	$color_selected = $param2_list;
+	$color_values_h = $param1_list_val;
 }
 
-if (isset($_REQUEST['quantum'])) {
-	$vars['quantum'] = $_REQUEST['quantum'];
+if ($_POST['panelx'] and $_POST['panely']) {
+	$x = $_POST['panelx'];
+	$y = $_POST['panely'];
+} else {
+	$x = $x_min;
+	$y = $y_min;
 }
-$quantum = $vars['quantum'];
 
-if (isset($_REQUEST['randomcolor'])) {
-	$vars['randomcolor'] = $_REQUEST['randomcolor'];
+if (isset($_POST['quantum'])) {
+	$quantum = $_POST['quantum'];
+} else {
+	$quantum = $quantum_default;
+}
+
+if (isset($_POST['randomcolor'])) {
+	$vars['randomcolor'] = $_POST['randomcolor'];
 }
 $randomcolor = $vars['randomcolor'];
-if ($_REQUEST['submitted_filter'] == 1) {
-	$vars['submitted_filter'] = $_REQUEST['submitted_filter'];
-	$vars['tag'] = $_REQUEST['tag'];
+if ($_POST['submitted_filter'] == 1) {
+	$vars['submitted_filter'] = $_POST['submitted_filter'];
+	$vars['tag'] = $_POST['tag'];
 }
 $submitted_filter = $vars['submitted_filter'];
-$tag = $vars['tag'];
+if ($_POST['tag']) { $tag = $_POST['tag']; }
 
 ########################  html start
-echo <<<DOC
-<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
-DOC;
-echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n
-<html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\">\n
-	<head>
-	<title>:: AREA :: when data talks - Step 3</title>\n
-	<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n
-	<link rel=\"SHORTCUT ICON\" href=\"imgs/logoareapetit.png\" />\n
-	<link href=\"./css/area.css\" rel=\"stylesheet\" type=\"text/css\" />\n
-	<script language=\"javascript\" src=\"./js/area.js\"></script>
-	<script language=\"javascript\" src=\"./js/prototype.js\"></script>
-</head>\n
-<body>\n";
-
+head_html("Area 1 step");
 
 echo "<div class='debug'>";
 echo "REQUEST<br /><pre>";
 print_r($_REQUEST);
-echo "</pre><hr />quantum?".$quantum."<br />";
-echo "<hr />BLOCKS<br />";
-echo "Num of blocks seleccionats: ".sizeof($blocks_selected)."<br />";
-echo "Num of blocks possibles: ".sizeof($blocks_values)."<br />";
-$blocks = sizeof($blocks_selected);
-$matrix = round(sqrt($blocks), 0);
-while ($matrix*$matrix < $blocks) { $matrix++;}
-echo "Blocks matrix size:".$matrix." x ".$matrix."<br />";
 
-$block_x = round($x/$matrix, 0);
-$block_y = round($y/$matrix, 0);
-echo "Desired size ( ".$x.", ".$y." )<br />";
-echo "Size of each block: ".$block_x." px / ".$block_y." px<br />";
+if ($param1 AND $param2) {
+	echo "</pre><hr />quantum?".$quantum."<br />";
+	echo "<hr />BLOCKS<br />";
+	echo "Num of blocks seleccionats: ".sizeof($blocks_selected)."<br />";
+	echo "Num of blocks possibles: ".sizeof($blocks_values)."<br />";
+	$blocks = sizeof($blocks_selected);
+	$matrix = round(sqrt($blocks), 0);
+	while ($matrix*$matrix < $blocks) { $matrix++;}
+	echo "Blocks matrix size:".$matrix." x ".$matrix."<br />";
+
+	$block_x = round($x/$matrix, 0);
+	$block_y = round($y/$matrix, 0);
+	echo "Desired size ( ".$x.", ".$y." )<br />";
+	echo "Size of each block: ".$block_x." px / ".$block_y." px<br />";
 
 //Getting max num the nodes in a block
-$block_array = $blocks_selected;
-$block_array_h = $blocks_values_h;
+	$block_array = $blocks_selected;
+	$block_array_h = $blocks_values_h;
 
-$d = $datas[$dataname];
-connect($dataname);
-$nodes_per_block_max[0] = 0;
+	$d = $datas[$dataname];
+	connect($dataname);
+	$nodes_per_block_max[0] = 0;
 
-foreach ($block_array as $bl) {
-	$query = "SELECT COUNT(*) FROM ".myescape($d['table'])." WHERE ".myescape($param1)."='".myescape($bl)."';";
-	$result = mysql_query($query) or die('Query failed: ' . mysql_error());
-	$nodes_per_block = mysql_fetch_array($result);
-	## add nodes per block to the array as a value
-	$block1_array[$bl] = $nodes_per_block[0];
-	if ($nodes_per_block[0] > $nodes_per_block_max[0]) { 
-		$nodes_per_block_max[0] = $nodes_per_block[0];
-		$nodes_per_block_max[1] = $bl;
+	foreach ($block_array as $bl) {
+	echo $query;
+		$query = "SELECT COUNT(*) FROM ".myescape($d['table'])." WHERE ".myescape($param1)."='".myescape($bl)."';";
+		$result = mysql_query($query) or die('Query count L132: ' . mysql_error());
+		$nodes_per_block = mysql_fetch_array($result);
+		## add nodes per block to the array as a value
+		$block1_array[$bl] = $nodes_per_block[0];
+		if ($nodes_per_block[0] > $nodes_per_block_max[0]) { 
+			$nodes_per_block_max[0] = $nodes_per_block[0];
+			$nodes_per_block_max[1] = $bl;
+		}
 	}
+	echo "Nodes per block max: ".$nodes_per_block_max[0]." -> ".$nodes_per_block_max[1]."<br />";
+	//while ($matrix_nodes*$matrix_nodes < ($nodes_per_block_max[0])) { $matrix_nodes++;}
+	$matrix_nodes = round(sqrt($nodes_per_block_max[0]), 0);
+	if ($matrix_nodes*$matrix_nodes < $nodes_per_block_max[0]) { $matrix_nodes++;}
+	echo "<br />matrix nodes: ".$matrix_nodes;
+	echo "<br />node x :".$block_x/$matrix_nodes." | node y : ".$block_y/$matrix_nodes;
+	//echo "Nodes matrix max: ".$matrix_nodes = (round(sqrt($nodes_per_block_max[0]), 0) + 0.8)."<br />";
+	echo "<hr />COLORS<br />";
+
+	$color_joins = array_combine($color_selected, $color_values_h);
+	$num_colors = sizeof($color_selected);
+
+
+	echo "Num of colors seleccionats: ".$num_colors."<br />";
+	echo "Num of colors total: ".sizeof($color_values)."<br />";
+	echo "<pre>";print_r($vars);print_r($color_joins);echo "</pre>";
+
 }
-echo "Nodes per block max: ".$nodes_per_block_max[0]." -> ".$nodes_per_block_max[1]."<br />";
-//while ($matrix_nodes*$matrix_nodes < ($nodes_per_block_max[0])) { $matrix_nodes++;}
-$matrix_nodes = round(sqrt($nodes_per_block_max[0]), 0);
-if ($matrix_nodes*$matrix_nodes < $nodes_per_block_max[0]) { $matrix_nodes++;}
-echo "<br />matrix nodes: ".$matrix_nodes;
-echo "<br />node x :".$block_x/$matrix_nodes." | node y : ".$block_y/$matrix_nodes;
-//echo "Nodes matrix max: ".$matrix_nodes = (round(sqrt($nodes_per_block_max[0]), 0) + 0.8)."<br />";
-echo "<hr />COLORS<br />";
-
-$color_joins = array_combine($color_selected, $color_values_h);
-$num_colors = sizeof($color_selected);
-
-
-echo "Num of colors seleccionats: ".$num_colors."<br />";
-echo "Num of colors total: ".sizeof($color_values)."<br />";
-echo "<pre>";print_r($vars);print_r($color_joins);echo "</pre>";
 echo "</div>";
-
 ## Adding variables to the phpsession
 //$vars['quantum'] = $quantum;
 //$vars['param1_selected'] = $block_array;
 
 ## header
-echo '<div id="headerdiv">'."\n";
-echo "<h2><a href=\"/area\"><img src=\"./images/area.png\" width=\"33px\" align=\"left\" vspace=\"0\" hspace=\"0\" border=\"0\" alt=\"go to AREA\" style=\"margin-right:3px;margin-left:2px;\" /></a>\n";
-echo " AREA, visualization tool<br>\n";
-echo "</div>";
+get_areadiv();
+
+#######################
+
+
+//echo "<hr />BAD: ";
+//print_r($bad);
+//echo "<hr />GOOD: ";
+//print_r($good);
+//echo "<hr />html: ".$html;
+#Add fields with sql results to the form and echo the form
+$form_html .= "<div id=\"formdiv\">"."\n";
+$form_html .= "Choose 2 parameters for the visualization<br>";
+
+### FORM
+$form_html .= '<form action="area-un.php" id="construct1" method="post" name="construct1" onsubmit="return validate_construct1(this);">'."\n";
+$form_html .= '<input id="_submitted_construct1" name="_submitted_construct1" type="hidden" value="1" />'."\n".'
+<input class="fb_hidden" id="dataname" name="dataname" type="hidden" value="'.$dataname.'" />'."\n".'
+<span class="fb_required">Param1</span>'."\n".'
+<select class="fb_select" id="param1" name="param1">'."\n".'
+  <option value="">-select-</option>'."\n".'
+  '.$options.'
+</select>'."\n".'
+<span class="fb_required">Param2</span>'."\n".'
+<select class="fb_select" id="param2" name="param2">'."\n".'
+  <option value="">-select-</option>'."\n".'
+  '.$options.'
+</select>'."\n".'
+<input class="fb_button" id="construct1_submit" name="_submit" type="submit" value="Area it" />'."\n";
+//</div>'."\n";
+$form_html .= '</form>'."\n";
+
+### END FORM
+//$form_html .= "</div>"."\n";
+//echo '</div>';
+
+
+
+###########################
 
 ## formdiv
 if ($randomcolor == "yes") { 
@@ -140,9 +226,14 @@ if ($x<=50 or $y<=50) {
 	$x = 800; $y=600;
 }
 
-echo '<div id="formdiv">'."\n";
-echo '<form action="area3.php" id="update" method="post" name="update">
+### JAUME
+//echo '<div id="formdiv">'."\n";
+echo $form_html;
+echo '<form action="area-un.php" id="update" method="post" name="update">
 <div>
+<input id="param1" name="param1" value="'.$param1.'" type="hidden">
+<input id="param2" name="param2" value="'.$param2.'" type="hidden">
+<input id="dataname" name="dataname" value="'.$dataname.'" type="hidden"> 
 Randomize colors
 <input '.$checkedr.' class="fb_radio" id="randomcolor_yes" name="randomcolor" value="yes" type="radio"> 
 <label class="fb_option" for="randomcolor_yes">yes</label>
@@ -180,7 +271,10 @@ if ($d['fields'][$param2]['label']) {
 	$pa2 = $param2;
 }
 
+################################### AQUI si no hi ha parametres JAUME
 
+
+if ($param1 AND $param2) {
 
 echo '<div id="legend">'."\n";
 echo 'LEGEND: '.$pa1.' <-> '.$pa2.": ";
@@ -309,8 +403,11 @@ echo "</div>"."\n";
 $sesion_id = session_id();
 echo '
 <div id="preview" style="height: 600px; left: '.($x + intval($x/20)).'px;"><h3>Search here:</h3>
-<form action="area3.php" id="filter" method="post" name="filter">'."\n".'
+<form action="area-un.php" id="filter" method="post" name="filter">'."\n".'
 <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
+<input id="param1" name="param1" value="'.$param1.'" type="hidden">
+<input id="param2" name="param2" value="'.$param2.'" type="hidden">
+<input id="dataname" name="dataname" value="'.$dataname.'" type="hidden"> 
 <h3>Filter by tag:</h3>'."\n".'
 <input class="fb_input" id="tag" name="tag" value="" type="text">
 <input class="fb_button" id="filter_submit" name="_submit" value="filter" type="submit">
@@ -329,5 +426,9 @@ echo '<div id="node_info" style="visibility: hidden;">
 </div>'."\n";
 echo '<div id="savethis" style="visibility: hidden;">
 </div>'."\n";
+
+
+	}
+}
 echo "</body></html>";
 ?>

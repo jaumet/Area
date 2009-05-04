@@ -48,10 +48,11 @@ echo "</div>";
 $bad = array();
 $good = array();
 
-echo "<div class='debug'><hr />";
-echo "<pre>SESSION:";
-print_r($SESSION);
-echo "</pre>";
+//echo "<div class='debug'><hr />";
+//echo "<pre>SESSION:";
+//print_r($SESSION);
+//echo "</pre>";
+
 foreach ($fields as $n) {
 	// get config for this field
 	$f=$d['fields'][$n];
@@ -101,13 +102,13 @@ foreach ($fields as $n) {
 
 }
 
-echo "<hr />BAD: ";
-print_r($bad);
-echo "<hr />GOOD: ";
-print_r($good);
-echo "<hr />html: ".$html;
+//echo "<hr />BAD: ";
+//print_r($bad);
+//echo "<hr />GOOD: ";
+//print_r($good);
+//echo "<hr />html: ".$html;
 
-echo '</div>';
+//echo '</div>';
 
 #Add fields with sql results to the form and echo the form
 echo "<div id=\"formdiv\">"."\n";
@@ -115,6 +116,7 @@ echo "STEP 1: choose 2 main parameters visualization<br>";
 
 ### FORM
 echo '<form action="area2.php" id="construct1" method="post" name="construct1" onsubmit="return validate_construct1(this);">'."\n".'
+<div>'."\n".'
 <input id="_submitted_construct1" name="_submitted_construct1" type="hidden" value="1" />'."\n".'
 <input class="fb_hidden" id="dataname" name="dataname" type="hidden" value="'.$dataname.'" />'."\n".'
 <span class="fb_required">Param1</span>'."\n".'
@@ -132,7 +134,10 @@ echo '<form action="area2.php" id="construct1" method="post" name="construct1" o
 </form>'."\n";
 
 ### END FORM
-echo "</div>"."\n";
+//echo "</div>"."\n";
+
+function metadata()  {
+
 echo "<br /><br /><br />";
 echo "<div id=\"analisisdiv\">"."\n";
 
@@ -155,6 +160,7 @@ echo "<table>".$htmlgood."</table>";
 echo "<p>List of the rest of fields:</p>"."\n";
 echo "<table>".$htmlbad."</table>"."\n";
 echo "</div>"."\n";
+}
 
 echo "</body></html>";
 ?>

@@ -2,6 +2,50 @@
 $vars = array
 (
     "_submitted_construct2" => 1,
+    "datasrcname" => "area_test",
+    "savethis" => "no",
+    "param1" => "parameter1",
+    "param2" => "parameter2",
+    "block_values_h" => array
+        (
+            "0" => "0",
+            "1" => "1",
+            "2" => "2",
+            "3" => "3",
+        ),
+
+    "color_values_h" => array
+        (
+            "0" => "Cero",
+            "1" => "Ú",
+        ),
+
+    "panelx" => 800,
+    "panely" => 600,
+    "quantum" => "quantum",
+    "block_selected" => array
+        (
+            "0" => "0",
+            "1" => "1",
+            "2" => "2",
+            "3" => "3",
+        ),
+
+    "color_selected" => array
+        (
+            "0" => "Cero",
+            "1" => "Ú",
+        ),
+
+    "_submit" => "Next",
+    "SESS786b295afd1587e408d51a661301accf" => "005cc0f84d7c10f988f51a689e91d936",
+    "PHPSESSID" => "21428b864c5f99638471bbf03ffb5078",
+    "has_js" => 1,
+);
+
+$varsNO = array
+(
+    "_submitted_construct2" => 1,
     "datasrcname" => "ae_submissions",
     "savethis" => "no",
     "param1" => "sYear",
