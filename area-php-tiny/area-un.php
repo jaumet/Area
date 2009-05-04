@@ -21,13 +21,17 @@ $d = $datas[$dataname];
 
 
 if (!$dataname) {
+	head_html("Area 0 step");
+	get_areadiv();
+	echo "<div id=\"analisisdiv\">";
 	echo "<h2>No dataname selected!!!!<br /> Choose one of the list:</h2>";
 	echo "<ul>"; 
 	foreach ($datas as $k => $v) {
 		echo "<li><a href=\"".$area_url."area-un.php?dataname=".$k."\">$k</a></li>";
 	}
 	echo "</ul>";
-	exit;
+	echo "</div>";
+	
 	
 } else {
 
@@ -68,9 +72,6 @@ if (!$dataname) {
 	}
 
 ################### JAUME
-//print_r($param2_list);echo "<hr />";
-//print_r($good);echo "<hr />";
-//print_r($vars['block_selected']);exit;
 
 if ($param1 AND $param2) {
 	include ('lib/step2.inc');
@@ -166,21 +167,12 @@ if ($param1 AND $param2) {
 
 }
 echo "</div>";
-## Adding variables to the phpsession
-//$vars['quantum'] = $quantum;
-//$vars['param1_selected'] = $block_array;
 
 ## header
 get_areadiv();
 
 #######################
 
-
-//echo "<hr />BAD: ";
-//print_r($bad);
-//echo "<hr />GOOD: ";
-//print_r($good);
-//echo "<hr />html: ".$html;
 #Add fields with sql results to the form and echo the form
 $form_html .= "<div id=\"formdiv\">"."\n";
 $form_html .= "Choose 2 parameters for the visualization<br>";
@@ -217,11 +209,13 @@ if ($randomcolor == "yes") {
 } else {
 	$checkednr = ' checked="checked" '; $checkedr = ''; 
 }
+
 if ($quantum == "quantum") { 
 	$checkedq = ' checked="checked" '; $checkednq = ''; 
 } else {
 	$checkednq = ' checked="checked" '; $checkedq = ''; 
 }
+
 if ($x<=50 or $y<=50) { 
 	$x = 800; $y=600;
 }
@@ -274,7 +268,7 @@ if ($d['fields'][$param2]['label']) {
 ################################### AQUI si no hi ha parametres JAUME
 
 
-if ($param1 AND $param2) {
+if ($param1 AND $param2) { // IF L71
 
 echo '<div id="legend">'."\n";
 echo 'LEGEND: '.$pa1.' <-> '.$pa2.": ";
@@ -338,8 +332,8 @@ if ($submitted_filter == 1) {
 		}
 	}
 	if (substr($qqq, -3) == "OR ") {
-$qqq = substr($qqq, 0, -3);
-}
+		$qqq = substr($qqq, 0, -3);
+	}
 	$qqq .= ")";
 }
 
@@ -428,7 +422,7 @@ echo '<div id="savethis" style="visibility: hidden;">
 </div>'."\n";
 
 
-	}
+	}  // END IF L71
 }
 echo "</body></html>";
 ?>
