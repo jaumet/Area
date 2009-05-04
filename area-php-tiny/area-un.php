@@ -19,6 +19,9 @@ $dataname = $_POST['dataname'];
 }
 $d = $datas[$dataname];
 
+############### SESSION
+session_start();
+
 
 if (!$dataname) {
 	head_html("Area 0 step");
@@ -235,6 +238,8 @@ echo '<form action="area-un.php" id="update" method="post" name="update">
 <input id="param1" name="param1" value="'.$param1.'" type="hidden">
 <input id="param2" name="param2" value="'.$param2.'" type="hidden">
 <input id="dataname" name="dataname" value="'.$dataname.'" type="hidden"> 
+<input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
+<input id="tag" name="tag" value="'.$tag.'" type="hidden">
 Randomize colors
 <input '.$checkedr.' class="fb_radio" id="randomcolor_yes" name="randomcolor" value="yes" type="radio"> 
 <label class="fb_option" for="randomcolor_yes">yes</label>
@@ -278,14 +283,15 @@ if ($d['fields'][$param2]['label']) {
 if ($param1 AND $param2) { // IF L71
 
 echo '<div id="legend">'."\n";
-echo 'LEGEND: '.$pa1.' <-> '.$pa2.": ";
+echo 'LEGEND: '.$pa1.' <-> '.$pa2.": ".$randomcolor."|";
 
 ####### list of selected values / join values / colors
 ## make colors if is needed:
-if (!$vars['colors'] or $randomcolor == "yes") { 
+if ($randomcolor == "yes") { 
 	$colors = get_random_colors($num_colors); 
+	$_SESSION['colors'] = $colors;
 } else {
-	$colors = $vars['colors'];
+	$colors = $_SESSION['colors'];
 }
 
 $n = 0;
@@ -303,9 +309,9 @@ if ($p2) {
 	$vars['p2'] = $p2; 
 }
 
-//if ($colors) { 
-//	$vars['colors'] = $colors; 
-//}
+if ($colors) { 
+	$vars['colors'] = $colors; 
+}
 
 ## and 2: building array param2 <-> colors
 
