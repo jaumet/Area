@@ -98,4 +98,20 @@ function get_dark_color($rgb)  {
 	$dark = "rgb(".$rd.",".$gd.",".$bd.")"; 
 	return $dark;
 }
+
+############### HTML INCLUDES
+function head($page_title) {
+    # Starting html
+    echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+    echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n
+    <html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\">\n
+        <head>
+        <title>:: AREA :: treemaps visualization - ".$page_title."</title>\n
+    	<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n
+    	<link rel=\"SHORTCUT ICON\" href=\"imgs/logoareapetit.png\" />\n
+    	<link href=\"./css/area.css\" rel=\"stylesheet\" type=\"text/css\" />\n
+    	<script language=\"javascript\" src=\"./js/area.js\"></script>
+    </head>\n
+    <body>\n";
+}
 ?>
