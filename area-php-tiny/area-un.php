@@ -101,7 +101,7 @@ if (isset($_POST['randomcolor'])) {
 	$randomcolor = "yes";
 }
 if ($_POST['submitted_filter'] == 1) {
-	$vars['submitted_filter'] = $_POST['submitted_filter'];
+	$submitted_filter = $_POST['submitted_filter'];
 	if ($_POST['tag']) { 
 		$tag = $_POST['tag']; 
 	}
