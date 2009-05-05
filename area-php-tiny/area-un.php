@@ -159,7 +159,7 @@ if ($param1 AND $param2) {
 	//while ($matrix_nodes*$matrix_nodes < ($nodes_per_block_max[0])) { $matrix_nodes++;}
 	$matrix_nodes = round(sqrt($nodes_per_block_max[0]), 0);
 	if ($matrix_nodes*$matrix_nodes < $nodes_per_block_max[0]) { $matrix_nodes++;}
-	echo "<br />matrix nodes: ".$matrix_nodes;
+	echo "<br />matrix nodes: ".$matrix_nodes." x ".$matrix_nodes;
 	echo "<br />node x :".$block_x/$matrix_nodes." | node y : ".$block_y/$matrix_nodes;
 	//echo "Nodes matrix max: ".$matrix_nodes = (round(sqrt($nodes_per_block_max[0]), 0) + 0.8)."<br />";
 	echo "<hr />COLORS<br />";
@@ -345,14 +345,25 @@ echo "</div>";
 if ($param1 AND $param2) { // IF L71
 
 ## panel
-echo '<div class="panel" style="width:'.($x + 30).'px;heigth:'.($y + 10).'px;">'."\n";
+$panel_w = $x + (15*$matrix);
+$panel_h = $y + (15*$matrix);
+echo '<div class="panel" style="width:'.$panel_w.'px;heigth:'.$panel_y.'px;">'."\n";
 
 ########### Building blocks and nodes
-$correction = 0;   /// FIXME 
+
+if ($total_nodes > 5000) { 
+	$block_y = $block_y - 27;
+	$correction = 15;
+} else {
+	$correction = 0;   /// FIXME 
+}
+
 $blockstyle = "width: ".($block_x)."px; height:".($block_y + $correction)."px;";
 
 ## for quantum:
-$nodestyle = "width: ".(($block_x)/($matrix_nodes) - 2)."px; height:".intval(($block_y/$matrix_nodes))."px;";
+
+$node_h = intval((($block_y)/$matrix_nodes) - (0.30*$matrix));
+$nodestyle = "width: ".(($block_x)/($matrix_nodes))."px; height:".$node_h."px;";
 
 $qqq = "";
 if ($submitted_filter == 1) {
@@ -431,7 +442,7 @@ foreach ($block_array as $bl) {
 echo "</div>"."\n";
 $sesion_id = session_id();
 echo '
-<div id="preview" style="height: 600px; left: '.($x + 50).'px;"><h3>Search here:</h3>
+<div id="preview" style="height: 600px; left: '.($x + 13*$matrix).'px;"><h3>Search here:</h3>
 <form action="area-un.php" id="filter" method="post" name="filter">'."\n".'
 <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
 <input id="param1" name="param1" value="'.$param1.'" type="hidden">
