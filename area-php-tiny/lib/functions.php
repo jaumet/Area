@@ -111,15 +111,32 @@ function head_html($page_title) {
     $html = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
     $html .= "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n
     <html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en\">\n
-        <head>
-        <title>:: AREA :: data visualization  - ".$page_title."</title>\n
+    <head>
+      <title>:: AREA :: data visualization  - ".$page_title."</title>\n
     	<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n
     	<link rel=\"SHORTCUT ICON\" href=\"imgs/logoareapetit.png\" />\n
     	<link href=\"./css/area.css\" rel=\"stylesheet\" type=\"text/css\" />\n
-    	<script language=\"javascript\" src=\"./js/prototype.js\"></script>
+    	<link href=\"./css/myTabz.css\" rel=\"stylesheet\" type=\"text/css\" />\n
     	<script language=\"javascript\" src=\"./js/area.js\"></script>
+    	<script language=\"javascript\" src=\"./js/prototype.js\"></script>
+    	<script language=\"javascript\" src=\"./js/myTabz.js\"></script>
+			<script type=\"text/javascript\">
+				var ActivateTabs=function(){
+					if(typeof(MT)=='undefined'){
+						var MyTabs= new mt('tabs','div.my_tab');
+					
+						MyTabs.removeTabTitles('h5.tab_title');
+						MyTabs.addTab('t1','Legend');
+						MyTabs.addTab('t2','Parameters');
+						MyTabs.addTab('t3','Config');
+						//MyTabs.addTab('t4','tab 4 - Long Title');
+						MyTabs.makeActive('t1');
+					}
+				}
+
+			</script>
     </head>\n
-    <body>\n";
+    <body onload=\"ActivateTabs('tabs');\">\n";
     echo $html;
 }
 

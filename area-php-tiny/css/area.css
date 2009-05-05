@@ -204,7 +204,7 @@ border: 1px solid #ffffff;
 	visibility: visible;
 	display:block;
 	width: 97%;
-	/*height: 63px;*/
+	height: 93px;
 	padding-left: 17px;
 	padding-right: 17px;
 	padding-bottom: 13px;
@@ -330,11 +330,11 @@ h3 {
 
 
 #legend {
-	position:absolute;
+	/*position:absolute;
 	top:140px;
 	height: 46px;
 	left:3px;
-	overflow: auto;
+	overflow: auto;*/
 	color: white;
 	background-color: transparent;
 	font-family : Verdana, Sans;
@@ -346,7 +346,7 @@ h3 {
 	padding: 2px;
 	padding-left: 3px;
 	line-height: 15px;
-	z-index:25;
+	/*z-index:25;*/
 }
 a {
 	color : orange;
@@ -370,7 +370,7 @@ a:hover, a:active {
 
 
 .debug {
-	display: block;
+	display: none;
 	background-color: #ffffff;
 	color: #000000;
 	opacity: 50%;
@@ -438,3 +438,35 @@ span.legend {
 	font-size:1.2em;
 }
 
+#area_tabs ul.subsection_tabs {
+	border-bottom:1px solid #CCCCCC;
+	clear:both;
+	height:20px;
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+	margin:0 0 5px;
+	padding:0;
+}
+#area_tabs ul.subsection_tabs li.tab {
+	float:left;
+	margin-right:7px;
+	text-align:center;
+}
+#area_tabs ul.subsection_tabs li.tab a {
+	background-color:#FFFFFF;
+	color:#666666;
+	display:block;
+	height:20px;
+	padding:0 6px;
+	width:80px;
+}
+#area_tabs ul.subsection_tabs li.tab a:hover {
+	color:#666666;
+}
+#main ul.subsection_tabs li.tab a.active {
+	background-color:#DDDDDD;
+}
+#area_tabs ul.subsection_tabs li.source_code {
+	float:right;
+}

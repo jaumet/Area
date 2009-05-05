@@ -182,32 +182,100 @@ echo "</div>";
 get_areadiv();
 
 #######################
+## Legend
+if ($param1 AND $param2) { //
+
+# FIXME ????
+if ($d['fields'][$param1]['label']) { 
+	$pa1 = $d['fields'][$param1]['label'];
+} else {
+	$pa1 = $param1;
+}
+if ($d['fields'][$param2]['label']) { 
+	$pa2 = $d['fields'][$param2]['label'];
+} else {
+	$pa2 = $param2;
+}
+
+
+
+$legend = '<div id="legend">'."\n";
+$legend .= 'Representing: '.$pa1.' <-> '.$pa2.'<br />'.$pa2.' -> ';
+
+####### list of selected values / join values / colors
+## make colors if is needed:
+if ($randomcolor == "yes") { 
+	$colors = get_random_colors($num_colors); 
+	$_SESSION['colors'] = $colors;
+} else {
+	$colors = $_SESSION['colors'];
+}
+
+$n = 0;
+$p = $color_selected;
+$p_v = $color_values_h;
+$p2 = array();
+foreach ($colors as $col) {
+	$legend .= '<span class="legend" style="background-color: '.$col.';">'.$p_v[$n].'</span>'."\n";
+	## 1: building array param2 <-> colors
+	array_push($p2, $p[$n]);
+	$n++;
+//	echo $legend."<br />";
+}
+//exit;
+if ($p2) { 
+	$vars['p2'] = $p2; 
+}
+
+if ($colors) { 
+	$vars['colors'] = $colors; 
+}
+
+## and 2: building array param2 <-> colors
+
+if (!$colors_array) { 
+	$colors_array = array_combine($vars['p2'] , $colors);
+}
+
+$legend .= "</div>";
+}
+
 
 #Add fields with sql results to the form and echo the form
 $form_html .= "<div id=\"formdiv\">"."\n";
-$form_html .= "Choose 2 parameters for the visualization<br>";
+$form_html .= '<div id="tabs">
+	<div id="t1" class="my_tab">
+	<h5 class="tab_title">Legend</h5>
+	<p>';
+$form_html .=  $legend;
+$form_html .= '</p></div>';
+
+$form_html .= '<div id="t2" class="my_tab">
+	<h5 class="tab_title">Parameters</h5>';
+	
+$form_html .= "<p>";
 
 ### FORM
 $form_html .= '<form action="area-un.php" id="construct1" method="post" name="construct1" onsubmit="return validate_construct1(this);">'."\n";
 $form_html .= '<input id="_submitted_construct1" name="_submitted_construct1" type="hidden" value="1" />'."\n".'
 <input class="fb_hidden" id="dataname" name="dataname" type="hidden" value="'.$dataname.'" />'."\n".'
-<span class="fb_required">Param1</span>'."\n".'
+<span class="fb_required">Parameter #1</span>'."\n".'
 <select class="fb_select" id="param1" name="param1">'."\n".'
   <option value="">-select-</option>'."\n".'
   '.$options.'
 </select>'."\n".'
-<span class="fb_required">Param2</span>'."\n".'
+<span class="fb_required">Parameter #2</span>'."\n".'
 <select class="fb_select" id="param2" name="param2">'."\n".'
   <option value="">-select-</option>'."\n".'
   '.$options.'
 </select>'."\n".'
-<input class="fb_button" id="construct1_submit" name="_submit" type="submit" value="Area it" />'."\n";
+<input class="fb_button" id="construct1_submit" name="_submit" type="submit" value="Area it" /><br /><span class="fb_required"><b>Choose 2 parameters for the visualization</b></span>'."\n";
 //</div>'."\n";
 $form_html .= '</form>'."\n";
 
 ### END FORM
-//$form_html .= "</div>"."\n";
-//echo '</div>';
+$form_html .= "</p></div>"."\n";
+//echo '</p></div>';
 
 
 
@@ -233,6 +301,9 @@ if ($x<=50 or $y<=50) {
 ### JAUME
 //echo '<div id="formdiv">'."\n";
 echo $form_html;
+echo '<div id="t3" class="my_tab">
+	<h5 class="tab_title">Config</h5>
+	<p>';
 echo '<form action="area-un.php" id="update" method="post" name="update">
 <div>
 <input id="param1" name="param1" value="'.$param1.'" type="hidden">
@@ -263,63 +334,15 @@ Size
 </div>
 </form>';
 echo "</div>";
+echo "</div>";
+echo "</div>";
 
-## Legend
-# FIXME ????
-if ($d['fields'][$param1]['label']) { 
-	$pa1 = $d['fields'][$param1]['label'];
-} else {
-	$pa1 = $param1;
-}
-if ($d['fields'][$param2]['label']) { 
-	$pa2 = $d['fields'][$param2]['label'];
-} else {
-	$pa2 = $param2;
-}
+
 
 ################################### AQUI si no hi ha parametres JAUME
 
 
 if ($param1 AND $param2) { // IF L71
-
-echo '<div id="legend">'."\n";
-echo 'LEGEND: '.$pa1.' <-> '.$pa2.": ".$randomcolor."|";
-
-####### list of selected values / join values / colors
-## make colors if is needed:
-if ($randomcolor == "yes") { 
-	$colors = get_random_colors($num_colors); 
-	$_SESSION['colors'] = $colors;
-} else {
-	$colors = $_SESSION['colors'];
-}
-
-$n = 0;
-$p = $color_selected;
-$p_v = $color_values_h;
-$p2 = array();
-foreach ($colors as $col) {
-	echo '<span class="legend" style="background-color: '.$col.';">'.$p_v[$n].'</span>'."\n";
-	## 1: building array param2 <-> colors
-	array_push($p2, $p[$n]);
-	$n++;
-}
-
-if ($p2) { 
-	$vars['p2'] = $p2; 
-}
-
-if ($colors) { 
-	$vars['colors'] = $colors; 
-}
-
-## and 2: building array param2 <-> colors
-
-if (!$colors_array) { 
-	$colors_array = array_combine($vars['p2'] , $colors);
-}
-
-echo "</div>";
 
 ## panel
 echo '<div class="panel" style="width:'.($x + 30).'px;heigth:'.($y + 10).'px;">'."\n";
