@@ -391,7 +391,7 @@ a:hover, a:active {
  	position: absolute;
  	top: 180px;
  	background-color: black;
- 	margin-bottom: 500px;
+ 	padding-bottom: 30px;
 }
 
 
