@@ -341,7 +341,6 @@ h3 {
 	width: 90%;
 	padding: 2px;
 	padding-left: 3px;
-	line-height: 15px;
     font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
     font-size: 15px;
     font-weight : bold;
@@ -415,7 +414,6 @@ input:checked,input:checked+label {
 
 span.legend {
  white-space: nowrap; 
- line-height: 2em; 
  color: black;
  padding: 2px;
  border: none;
