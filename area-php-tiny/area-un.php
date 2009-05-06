@@ -259,6 +259,7 @@ if (!$dataname) {
     <input class="fb_button" id="construct1_submit" name="_submit" type="submit" value="Area it" /><br /><span class="fb_required"><b>Choose 2 parameters for the visualization</b></span>'."\n";
     $form_html .= '</form>'."\n";
 
+
     ### END FORM
     $form_html .= "</p></div>"."\n";
     //echo '</p></div>';
