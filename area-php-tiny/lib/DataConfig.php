@@ -19,7 +19,7 @@ $datas['area_test'] = array // Name for the data (only letters and/or numbers
 	'db'=> array(
 		'name'=>'area_test_minim', // database name
 		'user'=>'root', // database user
-		'passw'=>'gotic', // database password
+		'passw'=>'qwerasdf', // database password
 		'host'=>'localhost' // Host. Ussually is 'localhost'
 	),
 	
@@ -49,336 +49,6 @@ $datas['area_test'] = array // Name for the data (only letters and/or numbers
 	)
 );
 
-$datas['prixars'] = array // Name for the data (only letters and/or numbers
-(
-	'name' => 'Prix Ars', // Human title for the data
-	'label' => 'test data', // Human subtitle for the data
-	'max_representations' => 'XXXX', // Use area_calc.rb to calculate how many 
-					 // representations you can do with your data using Area
-	'description' => 'XXXX', // Description of the Data (accepts HTML.
-	'db'=> array(
-		'name'=>'prixars', // database name
-		'user'=>'root', // database user
-		'passw'=>'gotic', // database password
-		'host'=>'localhost' // Host. Ussually is 'localhost'
-	),
-	
-	'table'=> 'prixdata', // Table to be represented.
-	'pkey'=>'id', // Unique value per entrye (use to be the 'id'
-	'fields' => array( // list of fields in the database
-		'gender' => array( // name of one of the fields
-			'label'=>'Gender', // Human name for the field
-			'filter'=>'1', // 0 or 1. By defaulf or if 'label' is not setted, its value is 0
-			'show'=>'1' // 0 or 1
-		),
-		'year' => array( // example of one field that joins another table
-			'label'=>'Year', // Human name for the field
-			'filter'=>'1'
-			//'join' => array(
-			//	'table'=>'XXXX', // Table to join
-			//	'key' => 'XXXX', // Key to join
-			//	'val' => 'XXXX'  // value to get
-			//),
-		),
-	)
-);
-$datas['prixars_ca'] = array // Name for the data (only letters and/or numbers
-(
-	'name' => 'Prix Ars', // Human title for the data
-	'label' => 'test data', // Human subtitle for the data
-	'max_representations' => 'XXXX', // Use area_calc.rb to calculate how many 
-					 // representations you can do with your data using Area
-	'description' => 'XXXX', // Description of the Data (accepts HTML.
-	'db'=> array(
-		'name'=>'prixars', // database name
-		'user'=>'root', // database user
-		'passw'=>'gotic', // database password
-		'host'=>'localhost' // Host. Ussually is 'localhost'
-	),
-	
-	'table'=> 'ca', // Table to be represented.
-	'pkey'=>'id', // Unique value per entrye (use to be the 'id'
-	'fields' => array( // list of fields in the database
-		'gender' => array( // name of one of the fields
-			'label'=>'Gender', // Human name for the field
-			'filter'=>'1', // 0 or 1. By defaulf or if 'label' is not setted, its value is 0
-			'show'=>'1' // 0 or 1
-		),
-		'year' => array( // example of one field that joins another table
-			'label'=>'Year', // Human name for the field
-			'filter'=>'1'
-			//'join' => array(
-			//	'table'=>'XXXX', // Table to join
-			//	'key' => 'XXXX', // Key to join
-			//	'val' => 'XXXX'  // value to get
-			//),
-		),
-	)
-);
-$datas['prixars_jp'] = array // Name for the data (only letters and/or numbers
-(
-	'name' => 'Prix Ars', // Human title for the data
-	'label' => 'test data', // Human subtitle for the data
-	'max_representations' => 'XXXX', // Use area_calc.rb to calculate how many 
-					 // representations you can do with your data using Area
-	'description' => 'XXXX', // Description of the Data (accepts HTML.
-	'db'=> array(
-		'name'=>'prixars', // database name
-		'user'=>'root', // database user
-		'passw'=>'gotic', // database password
-		'host'=>'localhost' // Host. Ussually is 'localhost'
-	),
-	
-	'table'=> 'jp', // Table to be represented.
-	'pkey'=>'id', // Unique value per entrye (use to be the 'id'
-	'fields' => array( // list of fields in the database
-		'gender' => array( // name of one of the fields
-			'label'=>'Gender', // Human name for the field
-			'filter'=>'1', // 0 or 1. By defaulf or if 'label' is not setted, its value is 0
-			'show'=>'1' // 0 or 1
-		),
-		'year' => array( // example of one field that joins another table
-			'label'=>'Year', // Human name for the field
-			'filter'=>'1'
-			//'join' => array(
-			//	'table'=>'XXXX', // Table to join
-			//	'key' => 'XXXX', // Key to join
-			//	'val' => 'XXXX'  // value to get
-			//),
-		),
-	)
-);
-$datas['prixars_ju'] = array // Name for the data (only letters and/or numbers
-(
-	'name' => 'Prix Ars', // Human title for the data
-	'label' => 'test data', // Human subtitle for the data
-	'max_representations' => 'XXXX', // Use area_calc.rb to calculate how many 
-					 // representations you can do with your data using Area
-	'description' => 'XXXX', // Description of the Data (accepts HTML.
-	'db'=> array(
-		'name'=>'prixars', // database name
-		'user'=>'root', // database user
-		'passw'=>'gotic', // database password
-		'host'=>'localhost' // Host. Ussually is 'localhost'
-	),
-	
-	'table'=> 'ju', // Table to be represented.
-	'pkey'=>'id', // Unique value per entrye (use to be the 'id'
-	'fields' => array( // list of fields in the database
-		'gender' => array( // name of one of the fields
-			'label'=>'Gender', // Human name for the field
-			'filter'=>'1', // 0 or 1. By defaulf or if 'label' is not setted, its value is 0
-			'show'=>'1' // 0 or 1
-		),
-		'year' => array( // example of one field that joins another table
-			'label'=>'Year', // Human name for the field
-			'filter'=>'1'
-			//'join' => array(
-			//	'table'=>'XXXX', // Table to join
-			//	'key' => 'XXXX', // Key to join
-			//	'val' => 'XXXX'  // value to get
-			//),
-		),
-	)
-);
-$datas['prixars_pe'] = array // Name for the data (only letters and/or numbers
-(
-	'name' => 'Prix Ars', // Human title for the data
-	'label' => 'test data', // Human subtitle for the data
-	'max_representations' => 'XXXX', // Use area_calc.rb to calculate how many 
-					 // representations you can do with your data using Area
-	'description' => 'XXXX', // Description of the Data (accepts HTML.
-	'db'=> array(
-		'name'=>'prixars', // database name
-		'user'=>'root', // database user
-		'passw'=>'gotic', // database password
-		'host'=>'localhost' // Host. Ussually is 'localhost'
-	),
-	
-	'table'=> 'pe', // Table to be represented.
-	'pkey'=>'id', // Unique value per entrye (use to be the 'id'
-	'fields' => array( // list of fields in the database
-		'gender' => array( // name of one of the fields
-			'label'=>'Gender', // Human name for the field
-			'filter'=>'1', // 0 or 1. By defaulf or if 'label' is not setted, its value is 0
-			'show'=>'1' // 0 or 1
-		),
-		'year' => array( // example of one field that joins another table
-			'label'=>'Year', // Human name for the field
-			'filter'=>'1'
-			//'join' => array(
-			//	'table'=>'XXXX', // Table to join
-			//	'key' => 'XXXX', // Key to join
-			//	'val' => 'XXXX'  // value to get
-			//),
-		),
-	)
-);
-$datas['prixars_wo'] = array // Name for the data (only letters and/or numbers
-(
-	'name' => 'Prix Ars', // Human title for the data
-	'label' => 'test data', // Human subtitle for the data
-	'max_representations' => 'XXXX', // Use area_calc.rb to calculate how many 
-					 // representations you can do with your data using Area
-	'description' => 'XXXX', // Description of the Data (accepts HTML.
-	'db'=> array(
-		'name'=>'prixars', // database name
-		'user'=>'root', // database user
-		'passw'=>'gotic', // database password
-		'host'=>'localhost' // Host. Ussually is 'localhost'
-	),
-	
-	'table'=> 'wo', // Table to be represented.
-	'pkey'=>'id', // Unique value per entrye (use to be the 'id'
-	'fields' => array( // list of fields in the database
-		'gender' => array( // name of one of the fields
-			'label'=>'Gender', // Human name for the field
-			'filter'=>'1', // 0 or 1. By defaulf or if 'label' is not setted, its value is 0
-			'show'=>'1' // 0 or 1
-		),
-		'year' => array( // example of one field that joins another table
-			'label'=>'Year', // Human name for the field
-			'filter'=>'1'
-			//'join' => array(
-			//	'table'=>'XXXX', // Table to join
-			//	'key' => 'XXXX', // Key to join
-			//	'val' => 'XXXX'  // value to get
-			//),
-		),
-	)
-);
-$datas['prixars_ca'] = array // Name for the data (only letters and/or numbers
-(
-	'name' => 'Prix Ars', // Human title for the data
-	'label' => 'test data', // Human subtitle for the data
-	'max_representations' => 'XXXX', // Use area_calc.rb to calculate how many 
-					 // representations you can do with your data using Area
-	'description' => 'XXXX', // Description of the Data (accepts HTML.
-	'db'=> array(
-		'name'=>'prixars', // database name
-		'user'=>'root', // database user
-		'passw'=>'gotic', // database password
-		'host'=>'localhost' // Host. Ussually is 'localhost'
-	),
-	
-	'table'=> 'ca', // Table to be represented.
-	'pkey'=>'id', // Unique value per entrye (use to be the 'id'
-	'fields' => array( // list of fields in the database
-		'gender' => array( // name of one of the fields
-			'label'=>'Gender', // Human name for the field
-			'filter'=>'1', // 0 or 1. By defaulf or if 'label' is not setted, its value is 0
-			'show'=>'1' // 0 or 1
-		),
-		'year' => array( // example of one field that joins another table
-			'label'=>'Year', // Human name for the field
-			'filter'=>'1'
-			//'join' => array(
-			//	'table'=>'XXXX', // Table to join
-			//	'key' => 'XXXX', // Key to join
-			//	'val' => 'XXXX'  // value to get
-			//),
-		),
-	)
-);
-$datas['prixars_jp'] = array // Name for the data (only letters and/or numbers
-(
-	'name' => 'Prix Ars', // Human title for the data
-	'label' => 'test data', // Human subtitle for the data
-	'max_representations' => 'XXXX', // Use area_calc.rb to calculate how many 
-					 // representations you can do with your data using Area
-	'description' => 'XXXX', // Description of the Data (accepts HTML.
-	'db'=> array(
-		'name'=>'prixars', // database name
-		'user'=>'root', // database user
-		'passw'=>'gotic', // database password
-		'host'=>'localhost' // Host. Ussually is 'localhost'
-	),
-	
-	'table'=> 'jp', // Table to be represented.
-	'pkey'=>'id', // Unique value per entrye (use to be the 'id'
-	'fields' => array( // list of fields in the database
-		'gender' => array( // name of one of the fields
-			'label'=>'Gender', // Human name for the field
-			'filter'=>'1', // 0 or 1. By defaulf or if 'label' is not setted, its value is 0
-			'show'=>'1' // 0 or 1
-		),
-		'year' => array( // example of one field that joins another table
-			'label'=>'Year', // Human name for the field
-			'filter'=>'1'
-			//'join' => array(
-			//	'table'=>'XXXX', // Table to join
-			//	'key' => 'XXXX', // Key to join
-			//	'val' => 'XXXX'  // value to get
-			//),
-		),
-	)
-);
-$datas['prixars_ju'] = array // Name for the data (only letters and/or numbers
-(
-	'name' => 'Prix Ars', // Human title for the data
-	'label' => 'test data', // Human subtitle for the data
-	'max_representations' => 'XXXX', // Use area_calc.rb to calculate how many 
-					 // representations you can do with your data using Area
-	'description' => 'XXXX', // Description of the Data (accepts HTML.
-	'db'=> array(
-		'name'=>'prixars', // database name
-		'user'=>'root', // database user
-		'passw'=>'gotic', // database password
-		'host'=>'localhost' // Host. Ussually is 'localhost'
-	),
-	
-	'table'=> 'ju', // Table to be represented.
-	'pkey'=>'id', // Unique value per entrye (use to be the 'id'
-	'fields' => array( // list of fields in the database
-		'gender' => array( // name of one of the fields
-			'label'=>'Gender', // Human name for the field
-			'filter'=>'1', // 0 or 1. By defaulf or if 'label' is not setted, its value is 0
-			'show'=>'1' // 0 or 1
-		),
-		'year' => array( // example of one field that joins another table
-			'label'=>'Year', // Human name for the field
-			'filter'=>'1'
-			//'join' => array(
-			//	'table'=>'XXXX', // Table to join
-			//	'key' => 'XXXX', // Key to join
-			//	'val' => 'XXXX'  // value to get
-			//),
-		),
-	)
-);
-$datas['prixars_pe'] = array // Name for the data (only letters and/or numbers
-(
-	'name' => 'Prix Ars', // Human title for the data
-	'label' => 'test data', // Human subtitle for the data
-	'max_representations' => 'XXXX', // Use area_calc.rb to calculate how many 
-					 // representations you can do with your data using Area
-	'description' => 'XXXX', // Description of the Data (accepts HTML.
-	'db'=> array(
-		'name'=>'prixars', // database name
-		'user'=>'root', // database user
-		'passw'=>'gotic', // database password
-		'host'=>'localhost' // Host. Ussually is 'localhost'
-	),
-	
-	'table'=> 'pe', // Table to be represented.
-	'pkey'=>'id', // Unique value per entrye (use to be the 'id'
-	'fields' => array( // list of fields in the database
-		'gender' => array( // name of one of the fields
-			'label'=>'Gender', // Human name for the field
-			'filter'=>'1', // 0 or 1. By defaulf or if 'label' is not setted, its value is 0
-			'show'=>'1' // 0 or 1
-		),
-		'year' => array( // example of one field that joins another table
-			'label'=>'Year', // Human name for the field
-			'filter'=>'1'
-			//'join' => array(
-			//	'table'=>'XXXX', // Table to join
-			//	'key' => 'XXXX', // Key to join
-			//	'val' => 'XXXX'  // value to get
-			//),
-		),
-	)
-);
 $datas['ae_submissions'] = array // Name for the data (only letters and/or numbers
 (
 	'name' => 'Prix Ars submissions', // Human title for the data
@@ -387,28 +57,64 @@ $datas['ae_submissions'] = array // Name for the data (only letters and/or numbe
 					 // representations you can do with your data using Area
 	'description' => 'XXXX', // Description of the Data (accepts HTML.
 	'db'=> array(
-		'name'=>'ae_submissions', // database name
+		'name'=>'ae', // database name
 		'user'=>'root', // database user
-		'passw'=>'gotic', // database password
+		'passw'=>'qwerasdf', // database password
 		'host'=>'localhost' // Host. Ussually is 'localhost'
 	),
 	
 	'table'=> 'submission', // Table to be represented.
 	'pkey'=>'iSubmissionID', // Unique value per entrye (use to be the 'id'
 	'fields' => array( // list of fields in the database
-		'gender' => array( // name of one of the fields
-			'label'=>'Gender', // Human name for the field
-			'filter'=>'1', // 0 or 1. By defaulf or if 'label' is not setted, its value is 0
-			'show'=>'1' // 0 or 1
-		),
-		'year' => array( // example of one field that joins another table
+		'sYear' => array( // example of one field that joins another table
 			'label'=>'Year', // Human name for the field
-			'filter'=>'1'
+			'filter'=>'1',
+			'show'=>'1' // 0 or 1
 			//'join' => array(
 			//	'table'=>'XXXX', // Table to join
 			//	'key' => 'XXXX', // Key to join
 			//	'val' => 'XXXX'  // value to get
 			//),
+		),
+		'sTitle' => array(
+			'label'=>'Title', // Human name for the field
+			'filter'=>'1',
+			'show'=>'1' // 0 or 1
+		),
+		'sFirstname' => array(
+			'label'=>'Firstname', // Human name for the field
+			'filter'=>'1',
+			'show'=>'1' // 0 or 1
+		),
+		'sSurname' => array(
+			'label'=>'Surname', // Human name for the field
+			'filter'=>'1',
+			'show'=>'1' // 0 or 1
+		),
+		'iCategoryID' => array(
+			'label'=>'Category', // Human name for the field
+			'filter'=>'1',
+			'show'=>'1', // 0 or 1
+			'join' => array(
+				'table'=>'prixcategory', // Table to join
+				'key' => 'iCategoryID', // Key to join
+				'val' => 'sCategorytitleE'  // value to get
+			)
+		),
+		'sFormat' => array(
+			'label'=>'Format', // Human name for the field
+			'filter'=>'1',
+			'show'=>'1' // 0 or 1
+		),
+		'xml' => array(
+			'label'=>'xml', // Human name for the field
+			'filter'=>'1',
+			'show'=>'1' // 0 or 1
+		),
+		'sCountry' => array(
+			'label'=>'Country', // Human name for the field
+			'filter'=>'1',
+			'show'=>'1' // 0 or 1
 		),
 	)
 )

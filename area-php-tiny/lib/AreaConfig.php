@@ -4,7 +4,7 @@
 ## AREA Vars paths
 ## NOTE: use slash (/) at the end
 $area_path = "/var/www/area/area-php-tiny/";
-$area_url = "http://localhost/area/area-php-tiny/";
+$area_url = "http://www.lbi.ufg.ac.at/area/area-php-tiny/";
 
 ##################################################
 ##    Security! You can protect this file or put it in a non-webserver public space
