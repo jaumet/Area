@@ -241,7 +241,7 @@ border: 1px solid #ffffff;
 #preview {
 	position:relative; 
 	background-color: #3d3d3d;
-	top: 175px;
+	top: 174px;
 	visibility: visible;
 	display:block;
 	width: 180px;
@@ -342,8 +342,8 @@ h3 {
 	padding: 2px;
 	padding-left: 3px;
     font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    font-weight : bold;
+    font-size: 12px;
+    font-weight : normal;
 	/*z-index:25;*/
 }
 a {
@@ -420,6 +420,7 @@ span.legend {
  padding-right: 3px;
  border: none;
  font-weight : bold;
+ border:1px solid black ;
 }
 
 #formdiv p { display: none; }
