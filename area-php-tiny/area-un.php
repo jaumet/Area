@@ -288,30 +288,33 @@ if (!$dataname) {
         <h5 class="tab_title">Config</h5>
         <p>';
     echo '<form action="area-un.php" id="update" method="post" name="update">
-    <div>
+    <div class="fb_required">
     <input id="param1" name="param1" value="'.$param1.'" type="hidden">
     <input id="param2" name="param2" value="'.$param2.'" type="hidden">
     <input id="dataname" name="dataname" value="'.$dataname.'" type="hidden">
     <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
-    <input id="tag" name="tag" value="'.$tag.'" type="hidden">
-    Randomize colors
+  
+    <input id="tag" name="tag" class="fb_required" value="'.$tag.'" type="hidden">
+    - Randomize colors
     <input '.$checkedr.' class="fb_radio" id="randomcolor_yes" name="randomcolor" value="yes" type="radio">
     <label class="fb_option" for="randomcolor_yes">yes</label>
-
-    <input '.$checkednr.' class="fb_radio" id="randomcolor_no" name="randomcolor" value="no" type="radio"> <label class="fb_option" for="randomcolor_no">no</label>
-
-    Type of visualization
+    <input '.$checkednr.' class="fb_required" id="randomcolor_no" name="randomcolor" value="no" type="radio"> <label class="fb_option" for="randomcolor_no">no</label>
+<br />
+    - Type of visualization
     <input '.$checkedq.' class="fb_radio" id="quantum_quantum" name="quantum" value="quantum" type="radio">
     <label class="fb_option" for="quantum_quantum">quantum</label>
 
     <input '.$checkednq.' class="fb_radio" id="quantum_non_quantum" name="quantum" value="non-quantum" type="radio">
-    <label class="fb_option" for="quantum_non_quantum">non-quantum</label>
-
-    Size
+    <label class="fb_required" for="quantum_non_quantum">non-quantum</label>
+<br />
+    - Size
     <input class="fb_input" id="panelx" maxlength="4" name="panelx" size="2" type="text" value="'.$x.'" />
     <b>x</b>
     <input class="fb_input" id="panely" maxlength="4" name="panely" size="2" type="text" value="'.$y.'" />
-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <input class="fb_button" id="_submit" name="_submit" onclick="this.form._submit.value = this.value;" value="update" type="submit">
     <!--<input class="fb_button" id="_savethis" name="_savethis" onclick="javascript:showdiv(\'savethis\');" value="save this">-->
     </div>
@@ -416,24 +419,24 @@ if (!$dataname) {
         echo "</div>"."\n";
         $sesion_id = session_id();
         echo '
-        <div id="preview" style="height: 600px; left: '.($x + 13*$matrix).'px;"><h3>Search here:</h3>
+        <div id="preview" style="height: 600px; left: '.($x + 13*$matrix).'px;">
         <form action="area-un.php" id="filter" method="post" name="filter">'."\n".'
         <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
         <input id="param1" name="param1" value="'.$param1.'" type="hidden">
         <input id="param2" name="param2" value="'.$param2.'" type="hidden">
         <input id="dataname" name="dataname" value="'.$dataname.'" type="hidden">
         <h3>Filter by tag:</h3>'."\n".'
-        <input class="fb_input" id="tag" name="tag" value="" type="text">
+        <input class="fb_input" id="tag" size="10" name="tag" value="" type="text">
         <input class="fb_button" id="filter_submit" name="_submit" value="filter" type="submit">
         </form>'."\n";
 
         if ($tag != "") { echo '<p>Filter:<span class="tag">'.$tag.'</span><br /> Found: <span class="tag">'.($total_nodes - $dark_nodes).' ('.round(((1 - ($dark_nodes/$total_nodes))*100), 2).'%)</span></p>'; }
 
-        echo '<h2>About <b>this</b> AREA: <br />Name: '.$d['name'].'<br />Description: '.$d['description'].'</h2>';
-        echo '<p> Total nodes: '.$total_nodes.'</p>';
-
-        echo "<hr />";
-        echo '<p>* Possible representations: <b>'.$d['max_representations'].'</b></p>'."\n";
+        echo '<h2>About <b>this</b> AREA</h2>';
+        echo '<p>- Name: <b>'.$d['name'].'</b></p><p>- Description: <b>'.$d['description'].'</b></p>';
+        echo '<p>- Total nodes: <b>'.$total_nodes.'</b></p>';
+        echo '<p>- Possible representations: <b>'.$d['max_representations'].'</b></p>'."\n";
+        echo "<br /><hr />";
         echo "</div>"."\n";
 
         echo '<div id="node_info" style="visibility: hidden;">

@@ -23,15 +23,15 @@ fb_error        span around field error message
 
 .fb {
 	color : #ffa20f;
-	background: #999999;
-	font-family : Verdana, Sans;
-	font-size : 8px;
-	font-style : normal;
-	font-weight : bold;
+	background: #ffffff;
+    font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight : bold;
+    color:white;
 }
 .fb_field {
 	font-family : Verdana, Sans;
-	font-size : 8px;
+	font-size : 12px;
 	font-style : normal;
 	font-weight : bold;
 	text-decoration:none;
@@ -40,10 +40,9 @@ fb_error        span around field error message
 .fb_radio, .fb_input {
 	color : #000000;
  	background: #fee3ad;
-	font-family : Verdana, Sans;
-	font-size : 8px;
-	font-style : normal;
-	font-weight : bold;
+    font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight : bold;
 	text-decoration:none;
 	margin-left:0px;
 	margin-right:0px;
@@ -53,7 +52,7 @@ fb_error        span around field error message
 	border: 1px solid #781351;
 	color : #000000;
 	font-family : Verdana, Sans;
-	font-size : 9px;
+	font-size : 12px;
 	font-style : normal;
 	font-weight : bold;
 	text-decoration:none;
@@ -64,9 +63,9 @@ fb_error        span around field error message
 	background: #fee3ad;
 	width: 250px;
 	height: 50px;
-	color : #000000;
+	color : #ffffff;
 	font-family : Verdana, Sans;
-	font-size : 8px;
+	font-size : 12px;
 	font-style : normal;
 	font-weight : bold;
 	text-decoration:none;
@@ -83,7 +82,7 @@ fb_error        span around field error message
 	background: #000000;
 	outline: none;
 	font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
-	font-size: 8px;
+	font-size: 12px;
 	border:0px;
 	font-weight : bold;
 	margin-left:10px;
@@ -92,15 +91,15 @@ fb_error        span around field error message
 	color : #000000;
 	background: #ffa20f;
 	font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
-	font-size: 10px;
+	font-size: 12px;
 	font-weight : bold;
 }
 .fb_required {
-        font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
-        font-size: 15px;
-        font-weight : bold;
-	color: #ffffff;
-        line-height: 2em;
+    font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight : bold;
+    color: #ffffff;
+    /*line-height: 2em;*/
 }
 			
 .fb_option {
@@ -204,7 +203,7 @@ border: 1px solid #ffffff;
 	visibility: visible;
 	display:block;
 	width: 97%;
-	height: 93px;
+	height: 97px;
 	padding-left: 17px;
 	padding-right: 17px;
 	padding-bottom: 13px;
@@ -310,15 +309,15 @@ p, li, td {
 h2 {
 	color : #ffffff;
 	font-family : Verdana, Sans;
-	font-size : 10px;
-	font-style : normal;
+	font-size : 16px;
+	font-style : bold;
 }
 
 h1 {
 	color : #ffffff;
 	font-family : Verdana, Sans;
-	font-size : 12px;
-	font-style : normal;
+	font-size : 20px;
+	font-style : bold;
 }
 
 h3 {
@@ -339,13 +338,13 @@ h3 {
 	background-color: transparent;
 	font-family : Verdana, Sans;
 	font-color: white;
-	font-size : 9px;
-	font-style : normal;
-	font-weight : bold;
 	width: 90%;
 	padding: 2px;
 	padding-left: 3px;
 	line-height: 15px;
+    font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight : bold;
 	/*z-index:25;*/
 }
 a {
@@ -370,7 +369,7 @@ a:hover, a:active {
 
 
 .debug {
-	display: block;
+	display: none;
 	background-color: #ffffff;
 	color: #000000;
 	opacity: 50%;
@@ -379,7 +378,6 @@ a:hover, a:active {
 	top: 20%;
 	bottom: 20%;
 	left: 1100px;
-	#right: 20%;
 	overflow: auto;
 	z-index: 1000;
 	padding:15px;

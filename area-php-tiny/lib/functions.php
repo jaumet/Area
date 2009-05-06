@@ -142,8 +142,8 @@ function head_html($page_title) {
 
 function get_areadiv()  {
 	$output = '<div id="headerdiv">'."\n";
-	$output .=  "<h2><a href=\"/area\"><img src=\"./images/area.png\" width=\"33px\" align=\"left\" vspace=\"0\" hspace=\"0\" border=\"0\" alt=\"go to AREA\" style=\"margin-right:3px;margin-left:2px;\" /></a>\n";
-	$output .=   " AREA, visualization tool<br>\n";
+	$output .=  "<h1><a href=\"/area\"><img src=\"./images/area.png\" width=\"33px\" align=\"left\" vspace=\"0\" hspace=\"0\" border=\"0\" alt=\"go to AREA\" style=\"margin-right:3px;margin-left:2px;\" /></a>\n";
+	$output .=   " AREA, visualization tool</h1>\n";
 	$output .=   "</div>";
 	echo $output;
 }
