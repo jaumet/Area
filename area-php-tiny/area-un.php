@@ -187,7 +187,7 @@ if (!$dataname) {
     }
 
     $legend = '<div id="legend">'."\n";
-    $legend .= 'Representing: '.$pa1.' <-> '.$pa2.'<br />'.$pa2.' -> ';
+    $legend .= 'Representing: <b>'.$pa1.'</b> (blocks) <-> <b>'.$pa2.'</b> (colors)<br />'.$pa2.' -> ';
 
     ####### list of selected values / join values / colors
     ## make colors if is needed:
