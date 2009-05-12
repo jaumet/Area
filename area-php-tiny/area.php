@@ -274,6 +274,8 @@ if (!$dataname) {
     <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
     <input class="fb_hidden" id="tag" name="tag" value="'.$tag.'" type="hidden">
     <input class="fb_hidden" id="randomcolor" name="randomcolor" value="yes" type="hidden">
+    <input class="fb_hidden" id="panelx" name="panelx" type="hidden" value="'.$x.'" />
+    <input class="fb_hidden" id="panely" name="panely" type="hidden" value="'.$y.'" />
     <input class="fb_hidden" id="status" name="status" type="hidden" value="parameters" />'."\n".'
     <span class="fb_required">Parameter #1</span>'."\n".'
     <select class="fb_select" id="param1" name="param1">'."\n".'
@@ -456,6 +458,8 @@ if (!$dataname) {
         <input id="param2" name="param2" value="'.$param2.'" type="hidden">
         <input id="dataname" name="dataname" value="'.$dataname.'" type="hidden">
         <input class="fb_hidden" id="randomcolor" name="randomcolor" value="no" type="hidden">
+        <input class="fb_hidden" id="panelx" name="panelx" type="hidden" value="'.$x.'" />
+        <input class="fb_hidden" id="panely" name="panely" type="hidden" value="'.$y.'" />
         <h3>Filter by tag:</h3>'."\n".'
         <input class="fb_input" id="tag" size="10" name="tag" value="" type="text">
         <input class="fb_button" id="filter_submit" name="_submit" value="filter" type="submit">
