@@ -71,6 +71,7 @@ if (!$dataname) {
         echo $noparameters_html;
 
 	} else {
+        head_html("Area 0 step", $status);
         $table = $d['table'];
         $blocks_selected = get_distinct_values($param1, $table, $dataname);
         $param1_list_copy = $blocks_selected;
@@ -90,10 +91,11 @@ if (!$dataname) {
             $color_selected = array_keys($color_selected);
         } else {
             $color_values_h = $color_selected;
-        }
-        $options1 = get_parameters_list($param1, $d['table'], $area_percnotnull, $area_numdistinct_max, $area_numdistinct_min);
-        $options2 = get_parameters_list($param2, $d['table'], $area_percnotnull, $area_numdistinct_max, $area_numdistinct_min);
+        }        
     }
+
+    $options1 = get_parameters_list($param1, $d['table'], $area_percnotnull, $area_numdistinct_max, $area_numdistinct_min);
+    $options2 = get_parameters_list($param2, $d['table'], $area_percnotnull, $area_numdistinct_max, $area_numdistinct_min);
 
     if ($_POST['panelx'] and $_POST['panely']) {
         $x = $_POST['panelx'];
@@ -112,7 +114,7 @@ if (!$dataname) {
     if (isset($_POST['randomcolor'])) {
         $randomcolor = $_POST['randomcolor'];
     } else {
-        $randomcolor = "yes";
+        $randomcolor = "";
     }
 
     if ($_POST['submitted_filter'] == 1) {
@@ -214,7 +216,7 @@ if (!$dataname) {
 
     ####### list of selected values / join values / colors
     ## make colors if is needed:
-    if ($randomcolor == "yes") {
+    if ($randomcolor == "yes" or $randomcolor == "") {
         $colors = get_random_colors($num_colors);
         $_SESSION['colors'] = $colors;
     } else {
@@ -269,6 +271,9 @@ if (!$dataname) {
     $form_html .= '<form action="area.php" id="construct1" method="post" name="construct1" onsubmit="return validate_construct1(this);">'."\n";
     $form_html .= '<input id="_submitted_construct1" name="_submitted_construct1" type="hidden" value="1" />'."\n".'
     <input class="fb_hidden" id="dataname" name="dataname" type="hidden" value="'.$dataname.'" />'."\n".'
+    <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
+    <input class="fb_hidden" id="tag" name="tag" value="'.$tag.'" type="hidden">
+    <input class="fb_hidden" id="randomcolor" name="randomcolor" value="yes" type="hidden">
     <input class="fb_hidden" id="status" name="status" type="hidden" value="parameters" />'."\n".'
     <span class="fb_required">Parameter #1</span>'."\n".'
     <select class="fb_select" id="param1" name="param1">'."\n".'
@@ -291,7 +296,7 @@ if (!$dataname) {
     ## formdiv
     if ($randomcolor == "yes") {
         $checkedr = ' checked="checked" '; $checkednr = '';
-    } else {
+    } elseif ($randomcolor == "no" or $randomcolor == "") {
         $checkednr = ' checked="checked" '; $checkedr = '';
     }
 
@@ -318,8 +323,7 @@ if (!$dataname) {
     <input class="fb_hidden" id="status" name="status" type="hidden" value="config" />'."\n".'
     <input id="dataname" name="dataname" value="'.$dataname.'" type="hidden">
     <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
-  
-    <input id="tag" name="tag" class="fb_required" value="'.$tag.'" type="hidden">
+    <input class="fb_hidden" id="tag" name="tag" value="'.$tag.'" type="hidden">
     - Randomize colors
     <input '.$checkedr.' class="fb_radio" id="randomcolor_yes" name="randomcolor" value="yes" type="radio">
     <label class="fb_option" for="randomcolor_yes">yes</label>
@@ -448,9 +452,10 @@ if (!$dataname) {
         <form action="area.php" id="filter" method="post" name="filter">'."\n".'
         <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
         <input id="param1" name="param1" value="'.$param1.'" type="hidden">
-        <input class="fb_hidden" id="status" name="status" type="hidden" value="legend" />'."\n".'
+        <input class="fb_hidden" id="status" name="status" type="hidden" value="'.$status.'" />'."\n".'
         <input id="param2" name="param2" value="'.$param2.'" type="hidden">
         <input id="dataname" name="dataname" value="'.$dataname.'" type="hidden">
+        <input class="fb_hidden" id="randomcolor" name="randomcolor" value="no" type="hidden">
         <h3>Filter by tag:</h3>'."\n".'
         <input class="fb_input" id="tag" size="10" name="tag" value="" type="text">
         <input class="fb_button" id="filter_submit" name="_submit" value="filter" type="submit">
