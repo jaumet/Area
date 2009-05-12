@@ -46,7 +46,7 @@ if (!$dataname) {
 
 	######## ARE PARAMETERS DEFINED?
 	if (!$param1 OR !$param2) {
-		head_html("Area 1 step", $status);
+		head_html("Area 0 step", $status);
 		get_areadiv($area_url);
 		$noparameters_html = "<br /><br /><br /> 
 			<div id=\"analisisdiv\">
@@ -71,11 +71,28 @@ if (!$dataname) {
         echo $noparameters_html;
 
 	} else {
-        include ('lib/step2.inc');
-        //include ('lib/step1.inc');
+        $table = $d['table'];
+        $blocks_selected = get_distinct_values($param1, $table, $dataname);
+        $param1_list_copy = $blocks_selected;
+        if (array_pop($param1_list_copy) == "__join_needed__") {
+            array_pop($blocks_selected);
+            $blocks_values_h = array_values($blocks_selected);
+            $param1_list = array_keys($blocks_selected);
+        } else {
+            $blocks_values_h = $blocks_selected;
+        }
+
+        $color_selected = get_distinct_values($param2, $table, $dataname);
+        $param2_list_copy = $color_selected;
+        if (array_pop($param2_list_copy) == "__join_needed__") {
+            array_pop($color_selected);
+            $color_values_h = array_values($color_selected);
+            $color_selected = array_keys($color_selected);
+        } else {
+            $color_values_h = $color_selected;
+        }
         $options1 = get_parameters_list($param1, $d['table'], $area_percnotnull, $area_numdistinct_max, $area_numdistinct_min);
         $options2 = get_parameters_list($param2, $d['table'], $area_percnotnull, $area_numdistinct_max, $area_numdistinct_min);
-        // print_r($options);exit;
     }
 
     if ($_POST['panelx'] and $_POST['panely']) {
@@ -107,7 +124,7 @@ if (!$dataname) {
 
     ########################  html start
     
-    head_html("Area 1 step", $status);
+    //head_html("Area 1 step", $status);
 
     ##### DEBUG  DIV
     echo "<div class='debug'>";

@@ -174,6 +174,8 @@ function head_html($page_title, $status) {
         case "config":
              $tab_active = "t3";
              break;
+         default:
+             $tab_active = "t2";
     }
 
     # Starting html
