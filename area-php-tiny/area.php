@@ -3,6 +3,9 @@ include('./lib/functions.php');
 include('./lib/AreaConfig.php');
 include($area_path.'lib/DataConfig.php');
 
+## Getting the right tab activated
+$status = $_POST['status'];
+
 ## Handling session:
 session_start();
 
@@ -20,13 +23,13 @@ $d = $datas[$dataname];
 
 
 if (!$dataname) {
-	head_html("Area 0 step");
-	get_areadiv();
+	head_html("Area 0 step", $status);
+	get_areadiv($area_url);
 	echo "<div id=\"analisisdiv\">";
-	echo "<h2>No dataname selected!!!!<br /> Choose one of the list:</h2>";
+	echo "<h2>No dataname selected!!<br /> Choose one of the list:</h2>";
 	echo "<ul>"; 
 	foreach ($datas as $k => $v) {
-		echo "<li><a href=\"".$area_url."area-un.php?dataname=".$k."\">$k</a></li>";
+		echo "<li><a href=\"".$area_url."area.php?dataname=".$k."\">$k</a></li>";
 	}
 	echo "</ul>";
 	echo "</div>";
@@ -37,16 +40,14 @@ if (!$dataname) {
 	## CONNECT to database
 	connect($dataname);
 
-	include ('lib/step1.inc');
-
 	//$dataname = $_POST['datasrcname']; //FIXME
 	$param1 = $_POST['param1'];
 	$param2 = $_POST['param2'];
 
 	######## ARE PARAMETERS DEFINED?
 	if (!$param1 OR !$param2) {
-		head_html("Area 1 step");
-		get_areadiv();
+		head_html("Area 1 step", $status);
+		get_areadiv($area_url);
 		$noparameters_html = "<br /><br /><br /> 
 			<div id=\"analisisdiv\">
 			<h2>About the data: ".$d['name']." </h2>
@@ -66,13 +67,15 @@ if (!$dataname) {
 		$noparameters_html .=  "<p>List of the rest of fields:</p>"."\n";
 		$noparameters_html .=  "<table>".$htmlbad."</table>"."\n";
 		$noparameters_html .=  "</div>"."\n";
-		echo $noparameters_html;
-	} else { //if ($param1 AND $param2) {
+		
+        echo $noparameters_html;
+
+	} else {
         include ('lib/step2.inc');
-        $blocks_selected = $param1_list;
-        $blocks_values_h = $param1_list_val;
-        $color_selected = $param2_list;
-        $color_values_h = $param2_list_val;
+        //include ('lib/step1.inc');
+        $options1 = get_parameters_list($param1, $d['table'], $area_percnotnull, $area_numdistinct_max, $area_numdistinct_min);
+        $options2 = get_parameters_list($param2, $d['table'], $area_percnotnull, $area_numdistinct_max, $area_numdistinct_min);
+        // print_r($options);exit;
     }
 
     if ($_POST['panelx'] and $_POST['panely']) {
@@ -94,18 +97,19 @@ if (!$dataname) {
     } else {
         $randomcolor = "yes";
     }
+
     if ($_POST['submitted_filter'] == 1) {
         $submitted_filter = $_POST['submitted_filter'];
-        if ($_POST['tag']) {
-            $tag = $_POST['tag'];
-        }
+        if ($_POST['tag']) {  $tag = $_POST['tag'];  }
     } else {
         $submitted_filter = 0;
     }
 
     ########################  html start
-    head_html("Area 1 step");
+    
+    head_html("Area 1 step", $status);
 
+    ##### DEBUG  DIV
     echo "<div class='debug'>";
     echo "REQUEST<br /><pre>";
     print_r($_REQUEST);
@@ -166,20 +170,22 @@ if (!$dataname) {
         print_r($color_joins);echo "</pre>";
     }
     echo "</div>";
+    ##### END DEBUG  DIV
 
     ## header
-    get_areadiv();
+    get_areadiv($area_url);
 
     #######################
     ## Legend
-    if ($param1 AND $param2) { //
+    if ($param1 AND $param2) { 
 
-    # FIXME ????
+    ## Getting names of the parameters
     if ($d['fields'][$param1]['label']) {
         $pa1 = $d['fields'][$param1]['label'];
     } else {
         $pa1 = $param1;
     }
+
     if ($d['fields'][$param2]['label']) {
         $pa2 = $d['fields'][$param2]['label'];
     } else {
@@ -243,18 +249,19 @@ if (!$dataname) {
     $form_html .= "<p>";
 
     ### FORM
-    $form_html .= '<form action="area-un.php" id="construct1" method="post" name="construct1" onsubmit="return validate_construct1(this);">'."\n";
+    $form_html .= '<form action="area.php" id="construct1" method="post" name="construct1" onsubmit="return validate_construct1(this);">'."\n";
     $form_html .= '<input id="_submitted_construct1" name="_submitted_construct1" type="hidden" value="1" />'."\n".'
     <input class="fb_hidden" id="dataname" name="dataname" type="hidden" value="'.$dataname.'" />'."\n".'
+    <input class="fb_hidden" id="status" name="status" type="hidden" value="parameters" />'."\n".'
     <span class="fb_required">Parameter #1</span>'."\n".'
     <select class="fb_select" id="param1" name="param1">'."\n".'
       <option value="">-select-</option>'."\n".'
-      '.$options.'
+      '.$options1.'
     </select>'."\n".'
     <span class="fb_required">Parameter #2</span>'."\n".'
     <select class="fb_select" id="param2" name="param2">'."\n".'
       <option value="">-select-</option>'."\n".'
-      '.$options.'
+      '.$options2.'
     </select>'."\n".'
     <input class="fb_button" id="construct1_submit" name="_submit" type="submit" value="Area it" /><br /><span class="fb_required"><b>Choose 2 parameters for the visualization</b></span>'."\n";
     $form_html .= '</form>'."\n";
@@ -287,10 +294,11 @@ if (!$dataname) {
     echo '<div id="t3" class="my_tab">
         <h5 class="tab_title">Config</h5>
         <p>';
-    echo '<form action="area-un.php" id="update" method="post" name="update">
+    echo '<form action="area.php" id="update" method="post" name="update">
     <div class="fb_required">
     <input id="param1" name="param1" value="'.$param1.'" type="hidden">
     <input id="param2" name="param2" value="'.$param2.'" type="hidden">
+    <input class="fb_hidden" id="status" name="status" type="hidden" value="config" />'."\n".'
     <input id="dataname" name="dataname" value="'.$dataname.'" type="hidden">
     <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
   
@@ -420,9 +428,10 @@ if (!$dataname) {
         $sesion_id = session_id();
         echo '
         <div id="preview" style="height: '.$panel_h.'px; left: '.($x + 13*$matrix).'px;">
-        <form action="area-un.php" id="filter" method="post" name="filter">'."\n".'
+        <form action="area.php" id="filter" method="post" name="filter">'."\n".'
         <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
         <input id="param1" name="param1" value="'.$param1.'" type="hidden">
+        <input class="fb_hidden" id="status" name="status" type="hidden" value="legend" />'."\n".'
         <input id="param2" name="param2" value="'.$param2.'" type="hidden">
         <input id="dataname" name="dataname" value="'.$dataname.'" type="hidden">
         <h3>Filter by tag:</h3>'."\n".'

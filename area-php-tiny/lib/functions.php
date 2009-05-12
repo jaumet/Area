@@ -65,20 +65,10 @@ function get_distinct_values($param, $table, $dataname) {
 		} else { 
 			$distinct = $distinct_key; 
 		}
-	
-//echo "<hr />distinct_key";
-//print_r($distinct_key);
-//echo "<hr />distinct_val";
-//print_r($distinct_val);
-//echo "<hr />distinct";
-//print_r($distinct);
-//exit;
-
-	return $distinct;
+        return $distinct;
 	} else {
 		return;
-		}
-
+	}
 }
 
 
@@ -105,8 +95,87 @@ function get_dark_color($rgb)  {
 	return $dark;
 }
 
+function get_parameters_list($param, $table, $area_percnotnull, $area_numdistinct_max, $area_numdistinct_min) {
+    $fields = array();
+
+    #preparacio de la taula en questio
+    $query = "SELECT * FROM ".myescape($table).";";
+    $result = mysql_query($query) or die('Query select table: ' . mysql_error());
+
+    $numfields = mysql_num_fields($result);
+    $numrows = mysql_num_rows($result);
+    $r = mysql_query("show columns from ".$table);
+    if (mysql_num_rows($r) > 0) {
+        while ($row = mysql_fetch_assoc($r)) {
+            array_push($fields, $row['Field']);
+        }
+    }
+
+    $bad = array();
+    $good = array();
+
+    foreach ($fields as $n) {
+        // get config for this field
+        $f=$f[$n];
+
+        if (!$f) {
+            $alert = '<div id="alert><p>".$f." ->note: field named $n is not';
+            $alert .= ' defined in the DataConfig file!</p></div>'."\n";
+        }
+
+        # Count distinct values per field
+        # array: field -> distinct_number
+        $query = "select count(distinct $n) FROM ".myescape($table).";";
+        $result = mysql_query($query) or die('Query count distinc L11: ' . mysql_error());
+        $numdistinct = mysql_fetch_array($result);
+        $numdistinct = $numdistinct[0];
+        //echo $query;print_r($numdistinct);echo "<hr />";
+        # null values per field
+        $query = "select count(*) from ".myescape($table)." where ".myescape($n)."='' or ".myescape($n)." is null;";
+        $result = mysql_query($query) or die('Query count step1 L39: ' . mysql_error());
+        $numnull = mysql_fetch_array($result);
+        $numnull = $numnull[0];
+
+        $percdistinct = number_format(($numdistinct*100)/($numrows - $numnull +1), 2);
+        $percnotnull  = number_format((($numrows - $numnull)*100)/$numrows, 2);
+
+
+        if ($f[$n]['label']) {
+            $humann = $f[$n]['label'];
+        } else {
+            $humann = str_replace("_"," ", $n);
+        }
+        if (($percnotnull < $area_percnotnull )
+            or ($numdistinct > $area_numdistinct_max )
+            or ($numdistinct < $area_numdistinct_min)) {
+                $class='bad';
+                array_push($bad, $n);
+                $htmlbad .= '<tr class="'.$class.'"><td>'.$humann.'</td><td> no null: '.($numrows - $numnull).' ('.$percnotnull.' %) </td><td> distinct values: '.$numdistinct.' ('.$percdistinct.' %)</td></tr>'."\n\n";
+        } else {
+            if ($param == $n) {$checked = ' selected="selected" ';} else { $checked = ""; }
+                $class='good';
+                array_push($good, $n);
+                $htmlgood .= '<tr class="'.$class.'"><td>'.$humann.'</td><td> no null: '.($numrows - $numnull).' ('.$percnotnull.' %) </td><td> distinct values: '.$numdistinct.' ('.$percdistinct.' %)</td></tr>'."\n\n";
+                $options .= '<option value="'.$n.'" '.$checked.'>'.$humann.'</option>'."\n";
+        }
+    }
+    return $options;
+}
+
 ############### HTML INCLUDES
-function head_html($page_title) {
+function head_html($page_title, $status) {
+    switch ($status) {
+        case "legend":
+             $tab_active = "t1";
+             break;
+        case "parameters":
+             $tab_active = "t2";
+             break;
+        case "config":
+             $tab_active = "t3";
+             break;
+    }
+
     # Starting html
     $html = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
     $html .= "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n
@@ -123,14 +192,13 @@ function head_html($page_title) {
 			<script type=\"text/javascript\">
 				var ActivateTabs=function(){
 					if(typeof(MT)=='undefined'){
-						var MyTabs= new mt('tabs','div.my_tab');
-					
+						var MyTabs= new mt('tabs','div.my_tab');				
 						MyTabs.removeTabTitles('h5.tab_title');
 						MyTabs.addTab('t1','Legend');
 						MyTabs.addTab('t2','Parameters');
 						MyTabs.addTab('t3','Config');
 						//MyTabs.addTab('t4','tab 4 - Long Title');
-						MyTabs.makeActive('t1');
+						MyTabs.makeActive('".$tab_active."');
 					}
 				}
 
@@ -140,9 +208,9 @@ function head_html($page_title) {
     echo $html;
 }
 
-function get_areadiv()  {
+function get_areadiv($area_url)  {
 	$output = '<div id="headerdiv">'."\n";
-	$output .=  "<h1><a href=\"/area\"><img src=\"./images/area.png\" width=\"33px\" align=\"left\" vspace=\"0\" hspace=\"0\" border=\"0\" alt=\"go to AREA\" style=\"margin-right:3px;margin-left:2px;\" /></a>\n";
+	$output .=  "<h1><a href=\"".$area_url."\"><img src=\"./images/area.png\" width=\"33px\" align=\"left\" vspace=\"0\" hspace=\"0\" border=\"0\" alt=\"go to AREA\" style=\"margin-right:3px;margin-left:2px;\" /></a>\n";
 	$output .=   " AREA, visualization tool</h1>\n";
 	$output .=   "</div>";
 	echo $output;

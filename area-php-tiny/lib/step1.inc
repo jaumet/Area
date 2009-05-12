@@ -65,7 +65,4 @@ foreach ($fields as $n) {
 
 }
 
-	//print_r($options);exit;
-
-
 ?>
