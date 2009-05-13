@@ -54,7 +54,7 @@ function get_distinct_values($param, $table, $dataname) {
 		}
 		$distinct = array(); $distinct_key = array(); $distinct_val = array();
 		//echo $query;
-		$result = mysql_query($query) or die('Query main distinct functions.php L57: ' . mysql_error());
+		$result = mysql_query($query) or die('Query main distinct functions.php L57: '.$query.' | '.$table.' | ' . mysql_error());
 		while ($line = mysql_fetch_array($result)) {
 			array_push($distinct_key, htmlentities($line[0]));
 			array_push($distinct_val, htmlentities($line[1]));
