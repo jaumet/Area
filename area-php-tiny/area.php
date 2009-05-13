@@ -44,9 +44,6 @@ if (!$dataname) {
 	$param1 = $_POST['param1'];
 	$param2 = $_POST['param2'];
 
-	######## ARE PARAMETERS DEFINED?
-	if (!$param1 OR !$param2) {
-
         $fields = array();
 
         #preparacio de la taula en questio
@@ -61,6 +58,8 @@ if (!$dataname) {
                 array_push($fields, $row['Field']);
             }
         }
+	######## ARE PARAMETERS DEFINED?
+	if (!$param1 OR !$param2) {
 
         $bad = array();
         $good = array();
@@ -465,8 +464,9 @@ if (!$dataname) {
         $total_nodes = 0;
         $dark_nodes = 0;
         foreach ($block_array as $bl) {
+            $percertage = round(((100*$block1_array[$bl])/$numrows), 1);
             echo '<div class="block" style="'.$blockstyle.'">'."\n";
-            echo '<div class="blockname">'.$block_array_h[$s].'( '.$block1_array[$bl].')</div>';
+            echo '<div class="blockname">'.$block_array_h[$s].' <i>['.$percertage.'%] '.$block1_array[$bl].'</i></div>';
             $s++;
             if ($block1_array[$bl])  {
                 if ($quantum != "quantum") {
@@ -509,7 +509,9 @@ if (!$dataname) {
                         $dark_nodes++;
                     }
                     $total_nodes++;
-                    echo '<div class="node" id="'.$id.'" name="'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  onclick="javascript:showdiv(\'node_info\');area_info(\''.htmlentities($id).'\', \''.$dataname.'\');"></div>';
+                    ////echo '<div class="node" id="'.$id.'" name="'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$color_joins[$cl[$i]]."-".$cl[$i].'"  onclick="javascript:showdiv(\'node_info\');area_info(\''.htmlentities($id).'\', \''.$dataname.'\');"></div>';
+                    echo '<div class="node" id="'.$id.'" name="'.$id.'" style="background-color:'.$rgb.';'.$nodestyle.';" title="'.$color_joins[$cl[$i]].'"  onclick="javascript:showdiv(\'node_info\');area_info(\''.htmlentities($id).'\', \''.$dataname.'\');"></div>';
+
                 }
             }
             echo "</div>"."\n";
