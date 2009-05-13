@@ -271,7 +271,7 @@ if (!$dataname) {
     $form_html .= '<form action="area.php" id="construct1" method="post" name="construct1" onsubmit="return validate_construct1(this);">'."\n";
     $form_html .= '<input id="_submitted_construct1" name="_submitted_construct1" type="hidden" value="1" />'."\n".'
     <input class="fb_hidden" id="dataname" name="dataname" type="hidden" value="'.$dataname.'" />'."\n".'
-    <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
+    <input id="submitted_filter" name="submitted_filter" value="'.$submitted_filter.'" type="hidden">'."\n".'
     <input class="fb_hidden" id="tag" name="tag" value="'.$tag.'" type="hidden">
     <input class="fb_hidden" id="randomcolor" name="randomcolor" value="yes" type="hidden">
     <input class="fb_hidden" id="panelx" name="panelx" type="hidden" value="'.$x.'" />
@@ -325,7 +325,7 @@ if (!$dataname) {
     <input id="param2" name="param2" value="'.$param2.'" type="hidden">
     <input class="fb_hidden" id="status" name="status" type="hidden" value="config" />'."\n".'
     <input id="dataname" name="dataname" value="'.$dataname.'" type="hidden">
-    <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
+    <input id="submitted_filter" name="submitted_filter" value="'.$submitted_filter.'" type="hidden">'."\n".'
     <input class="fb_hidden" id="tag" name="tag" value="'.$tag.'" type="hidden">
     - Randomize colors
     <input '.$checkedr.' class="fb_radio" id="randomcolor_yes" name="randomcolor" value="yes" type="radio">
@@ -379,6 +379,7 @@ if (!$dataname) {
         $qqq = "";
         if ($submitted_filter == 1) {
             $qqq = "(";
+            //echo "XXXX: ";print_r($d['fields']);
             foreach ($d['fields'] as $key => $value) {
                 if ($d['fields'][$key]['filter'] == 1)  {
                   if ($d['fields'][$key]['join'])  {
@@ -418,7 +419,7 @@ if (!$dataname) {
                     if ($qqq) { $query .= $qqq; }
 
                     $query .= " ORDER BY ".myescape($param2).";";
-                    $result = mysql_query($query) or die('Query filter param2: ' . mysql_error());
+                    $result = mysql_query($query) or die('Query filter param2:'.$query.'| ' . mysql_error());
                     while ($line = mysql_fetch_array($result)) {
                         array_push($filter_array, $line[0]);
                     }
