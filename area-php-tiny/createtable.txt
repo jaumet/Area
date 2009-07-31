@@ -1,6 +1,0 @@
- `prixars`.`prixdata` (`id`, `node`, `category`, `gender`, `juryperson`, `jurystatement`, `period`, `person`, `persontype`, `prix`, `win` , `work` , `year`
-
-CREATE TABLE pe (`id` INT, `node` VARCHAR(255), `category` VARCHAR(255), `gender` VARCHAR(3), `juryperson` VARCHAR(255), `jurystatement` VARCHAR(255), `period` VARCHAR(255), `person` VARCHAR(255), `persontype` VARCHAR(255), `prix` VARCHAR(255), `win` VARCHAR(255), `work` VARCHAR(255), `year` VARCHAR(255));
-
-nombre VARCHAR(40), fecha DATE);
-

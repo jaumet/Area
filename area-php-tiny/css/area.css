@@ -368,7 +368,7 @@ a:hover, a:active {
 
 
 .debug {
-	display: none;
+	/*display: none;*/
 	background-color: #ffffff;
 	color: #000000;
 	opacity: 50%;
