@@ -17,8 +17,8 @@ $datas['AEsubmissions'] = array // Name for the data (only letters and/or number
 	'description' => 'XXXX', // Description of the Data (accepts HTML.
 	'db'=> array(
 		'name'=>'AEsubmissions', // database name
-		'user'=>'root', // database user
-		'passw'=>'gotic', // database password
+		'user'=>'admin', // database user
+		'passw'=>'$%lbi09$%', // database password
 		'host'=>'localhost' // Host. Ussually is 'localhost'
 	),
 	

@@ -515,8 +515,8 @@ if (!$dataname) {
         echo "</div>"."\n";
         $sesion_id = session_id();
         echo '
-        <div id="preview" style="height: '.$panel_h.'px; left: '.($x + 13*$matrix).'px;">
-        <form action="area.php" id="filter" method="post" name="filter">'."\n".'
+        <div id="preview" style="height: '.$panel_h.'px; left: '.($x + 13*$matrix+15).'px;">
+        <form action="index.php" id="filter" method="post" name="filter">'."\n".'
         <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
         <input id="param1" name="param1" value="'.$param1.'" type="hidden">
         <input class="fb_hidden" id="status" name="status" type="hidden" value="'.$status.'" />'."\n".'

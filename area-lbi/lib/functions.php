@@ -206,14 +206,16 @@ function head_html($page_title, $status) {
 
 			</script>
     </head>\n
-    <body onload=\"ActivateTabs('tabs');\">\n";
+    <body onload=\"ActivateTabs('tabs');\">";
     echo $html;
 }
 
 function get_areadiv($area_url)  {
 	$output = '<div id="headerdiv">'."\n";
-	$output .=  "<h1><a href=\"".$area_url."\"><img src=\"./images/area.png\" width=\"33px\" align=\"left\" vspace=\"0\" hspace=\"0\" border=\"0\" alt=\"go to AREA\" style=\"margin-right:3px;margin-left:2px;\" /></a>\n";
-	$output .=   " AREA, visualization tool</h1>\n";
+	$output .= "<a href=\"/webarchive\"><img src=\"./images/wa_logo.png\" style=\"border-width:0px;\" /></a><br/>";
+	$output .= "<span style=\"padding-left:25px;\"><a href=\"/webarchive/public/view/mid:5\" style=\"color:#2abbf1;\">back</a></span>";
+	//$output .=  "<h1><a href=\"".$area_url."\"><img src=\"./images/	area.png\" width=\"33px\" align=\"left\" vspace=\"0\" hspace=\"0\" border=\"0\" alt=\"go to AREA\" style=\"margin-right:3px;margin-left:2px;\" /></a>\n";
+	//$output .=   " AREA, visualization tool</h1>\n";
 	$output .=   "</div>";
 	echo $output;
 }
