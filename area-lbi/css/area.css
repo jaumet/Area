@@ -173,13 +173,13 @@ fb_error        span around field error message
 	position:absolute; 
 	background-color: #ffffff;
 	overflow:auto; 
-	top: 0px; 
+	top: 20px; 
 	left: 3px;
 	visibility: visible;
 	display:block;
 	width: 100%;
 	padding: 20px;
-	padding-top: 5px;
+	padding-top: 0px;
 	z-index: 1;
 }
 #formdiv {
@@ -187,7 +187,7 @@ fb_error        span around field error message
 	/*background-color: #999999;*/
 	background-color:#f5f5f5;
 	overflow:auto; 
-	top: 100px; 
+	top: 120px; 
 	left: 3px;
 	visibility: visible;
 	display:block;
@@ -229,7 +229,7 @@ fb_error        span around field error message
 	position:relative; 
 	/*background-color: #999999;*/
 	background-color:#f5f5f5;
-	top: 215px;
+	top: 235px;
 	visibility: visible;
 	display:block;
 	width: 180px;
@@ -286,6 +286,8 @@ fb_error        span around field error message
 body { 
 	/*background-color:#000000;*/
 	background-image: url(../images/bg_body.gif);
+	margin-top:0px;
+	padding-top:0px;
 }
 
 p, li, td {
@@ -374,7 +376,7 @@ a:hover, a:active {
 .panel {
  	margin: 2px;
  	position: absolute;
- 	top: 220px;
+ 	top: 240px;
  	background-color: black;
  	padding-bottom: 30px;
 }

@@ -206,7 +206,8 @@ function head_html($page_title, $status) {
 
 			</script>
     </head>\n
-    <body onload=\"ActivateTabs('tabs');\">";
+    <body onload=\"ActivateTabs('tabs');\">
+	 <div style=\"background-image:url('/area-lbi/images/bg_head.gif');width:100%;height:10px;padding:0px;margin:0px;\"></div>";
     echo $html;
 }
 
