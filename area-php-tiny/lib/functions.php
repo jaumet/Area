@@ -12,8 +12,9 @@ function connect($dataname) {
 	$DBuser = $datas[$dataname]['db']['user'];
 	$DBpassw = $datas[$dataname]['db']['passw'];
 
-	#echo "data: ".$DBserver." - ".$DBuser." - ".$DBpassw." - ".$DBname;
-        $link = mysql_connect($DBserver, $DBuser, $DBpassw)
+	//echo "data: ".$DBserver." - ".$DBuser." - ".$DBpassw." - ".$DBname;
+	
+	$link = mysql_connect($DBserver, $DBuser, $DBpassw)
             or die('Could not connect: ' . mysql_error());
         mysql_select_db($DBname) or die('Could not select database');
 	mysql_query("SET NAMES 'utf8'");
