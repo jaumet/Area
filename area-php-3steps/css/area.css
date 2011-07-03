@@ -23,15 +23,15 @@ fb_error        span around field error message
 
 .fb {
 	color : #ffa20f;
-	background: #ffffff;
-    font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    font-weight : bold;
-    color:white;
+	background: #999999;
+	font-family : Verdana, Sans;
+	font-size : 8px;
+	font-style : normal;
+	font-weight : bold;
 }
 .fb_field {
 	font-family : Verdana, Sans;
-	font-size : 12px;
+	font-size : 8px;
 	font-style : normal;
 	font-weight : bold;
 	text-decoration:none;
@@ -40,9 +40,10 @@ fb_error        span around field error message
 .fb_radio, .fb_input {
 	color : #000000;
  	background: #fee3ad;
-    font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    font-weight : bold;
+	font-family : Verdana, Sans;
+	font-size : 8px;
+	font-style : normal;
+	font-weight : bold;
 	text-decoration:none;
 	margin-left:0px;
 	margin-right:0px;
@@ -52,7 +53,7 @@ fb_error        span around field error message
 	border: 1px solid #781351;
 	color : #000000;
 	font-family : Verdana, Sans;
-	font-size : 12px;
+	font-size : 9px;
 	font-style : normal;
 	font-weight : bold;
 	text-decoration:none;
@@ -63,9 +64,9 @@ fb_error        span around field error message
 	background: #fee3ad;
 	width: 250px;
 	height: 50px;
-	color : #ffffff;
+	color : #000000;
 	font-family : Verdana, Sans;
-	font-size : 12px;
+	font-size : 8px;
 	font-style : normal;
 	font-weight : bold;
 	text-decoration:none;
@@ -82,7 +83,7 @@ fb_error        span around field error message
 	background: #000000;
 	outline: none;
 	font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
-	font-size: 12px;
+	font-size: 8px;
 	border:0px;
 	font-weight : bold;
 	margin-left:10px;
@@ -91,15 +92,15 @@ fb_error        span around field error message
 	color : #000000;
 	background: #ffa20f;
 	font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
-	font-size: 12px;
+	font-size: 10px;
 	font-weight : bold;
 }
 .fb_required {
-    font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    font-weight : bold;
-    color: #ffffff;
-    /*line-height: 2em;*/
+        font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        font-weight : bold;
+	color: #ffffff;
+        line-height: 2em;
 }
 			
 .fb_option {
@@ -203,10 +204,10 @@ border: 1px solid #ffffff;
 	visibility: visible;
 	display:block;
 	width: 97%;
-	height: 97px;
+	/*height: 63px;*/
 	padding-left: 17px;
 	padding-right: 17px;
-	padding-bottom: 13px;
+	padding-bottom: 4px;
 	padding-top: 4px;
 	z-index: 1;
 }
@@ -241,7 +242,7 @@ border: 1px solid #ffffff;
 #preview {
 	position:relative; 
 	background-color: #3d3d3d;
-	top: 174px;
+	top: 155px;
 	visibility: visible;
 	display:block;
 	width: 180px;
@@ -309,15 +310,15 @@ p, li, td {
 h2 {
 	color : #ffffff;
 	font-family : Verdana, Sans;
-	font-size : 16px;
-	font-style : bold;
+	font-size : 10px;
+	font-style : normal;
 }
 
 h1 {
 	color : #ffffff;
 	font-family : Verdana, Sans;
-	font-size : 20px;
-	font-style : bold;
+	font-size : 12px;
+	font-style : normal;
 }
 
 h3 {
@@ -329,22 +330,23 @@ h3 {
 
 
 #legend {
-	/*position:absolute;
-	top:140px;
+	position:absolute;
+	top:130px;
 	height: 46px;
 	left:3px;
-	overflow: auto;*/
+	overflow: auto;
 	color: white;
 	background-color: transparent;
 	font-family : Verdana, Sans;
 	font-color: white;
-	width: 95%;
+	font-size : 9px;
+	font-style : normal;
+	font-weight : bold;
+	width: 90%;
 	padding: 2px;
 	padding-left: 3px;
-    font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    font-weight : normal;
-	/*z-index:25;*/
+	line-height: 15px;
+	z-index:25;
 }
 a {
 	color : orange;
@@ -368,7 +370,7 @@ a:hover, a:active {
 
 
 .debug {
-	/&*display: none;
+	display: none;
 	background-color: #ffffff;
 	color: #000000;
 	opacity: 50%;
@@ -377,6 +379,7 @@ a:hover, a:active {
 	top: 20%;
 	bottom: 20%;
 	left: 1100px;
+	#right: 20%;
 	overflow: auto;
 	z-index: 1000;
 	padding:15px;
@@ -389,8 +392,10 @@ a:hover, a:active {
  	height: 600px;*/
  	position: absolute;
  	top: 180px;
+	left:15px;
  	background-color: black;
- 	padding-bottom: 30px;
+ 	/*border-top: 1px solid white;*/
+ 	margin-bottom: 500px;
 }
 
 
@@ -414,13 +419,11 @@ input:checked,input:checked+label {
 
 span.legend {
  white-space: nowrap; 
+ line-height: 2em; 
  color: black;
- padding: 0px;
- padding-left: 3px;
- padding-right: 3px;
- border: 1px solid black;
+ padding: 2px;
+ border: none;
  font-weight : bold;
- border:1px solid black ;
 }
 
 #formdiv p { display: none; }
@@ -435,35 +438,3 @@ span.legend {
 	font-size:1.2em;
 }
 
-#area_tabs ul.subsection_tabs {
-	border-bottom:1px solid #CCCCCC;
-	clear:both;
-	height:20px;
-	list-style-image:none;
-	list-style-position:outside;
-	list-style-type:none;
-	margin:0 0 5px;
-	padding:0;
-}
-#area_tabs ul.subsection_tabs li.tab {
-	float:left;
-	margin-right:7px;
-	text-align:center;
-}
-#area_tabs ul.subsection_tabs li.tab a {
-	background-color:#FFFFFF;
-	color:#666666;
-	display:block;
-	height:20px;
-	padding:0 6px;
-	width:80px;
-}
-#area_tabs ul.subsection_tabs li.tab a:hover {
-	color:#666666;
-}
-#main ul.subsection_tabs li.tab a.active {
-	background-color:#DDDDDD;
-}
-#area_tabs ul.subsection_tabs li.source_code {
-	float:right;
-}

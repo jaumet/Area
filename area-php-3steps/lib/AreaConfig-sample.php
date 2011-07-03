@@ -31,10 +31,4 @@ $area_numdistinct_max = 50;
 ## 			of any field of the selected database (default/recommended: 2)
 $area_numdistinct_min      = 2;
 
-## $quantum_default :  "quantum" same size for all nodes
-$quantum_default  = "quantum";
-
-## size in pixels of the representations
-$x_min ="800";
-$y_min = "600";
 ?>

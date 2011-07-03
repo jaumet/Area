@@ -41,4 +41,33 @@ $datas['XXXX'] = array // Name for the data (only letters and/or numbers
 		),
 	)
 );
+
+#######################################################################
+## This is a data test, you need to create a database call test and  ##
+## populated with the file area_test_minim.sql                       ##
+#######################################################################
+$datas['test'] = array // Name for the data (only letters and/or numbers
+(
+	'name' => 'Test', // Human title for the data
+	'label' => 'simple test', // Human subtitle for the data
+	'max_representations' => 'XXXX', // Use area_calc.rb to calculate how many 
+					 // representations you can do with your data using Area
+	'description' => 'XXXX', // Description of the Data (accepts HTML.
+	'db'=> array(
+		'name'=>'test', // database name
+		'user'=>'XXXX', // database user
+		'passw'=>'XXXX', // database password
+		'host'=>'localhost' // Host. Ussually is 'localhost'
+	),
+	
+	'table'=> 'minim', // Table to be represented.
+	'pkey'=>'id', // Unique value per entrye (use to be the 'id'
+	'fields' => array( // list of fields in the database
+		'id' => array( // name of one of the fields
+			'label'=>'ID', // Human name for the field
+			'filter'=>'1', // 0 or 1. By defaulf or if 'label' is not setted, its value is 0
+			'show'=>'1' // 0 or 1
+		),
+
+	)
 ?>

@@ -171,6 +171,4 @@ function showdiv(divid) {
 		}
 	}
 }
-function area_tabs() {
-	new Control.Tabs('area_tabs'); 
-}
+
