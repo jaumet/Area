@@ -29,7 +29,7 @@ if (!$dataname) {
 	echo "<h2>No dataname selected!!<br /> Choose one of the list:</h2>";
 	echo "<ul>"; 
 	foreach ($datas as $k => $v) {
-		echo "<li><a href=\"".$area_url."area.php?dataname=".$k."\">$k</a></li>";
+		echo "<li><a href=\"".$area_url.$area_file."?dataname=".$k."\">$k</a></li>";
 	}
 	echo "</ul>";
 	echo "</div>";
@@ -75,13 +75,14 @@ if (!$dataname) {
 
             # Count distinct values per field
             # array: field -> distinct_number
-            $query = "select count(distinct $n) FROM ".myescape($d['table']).";";
+            $query = "select count(distinct `".$n."`) FROM ".myescape($d['table']).";";
+            //echo $query." |||";
             $result = mysql_query($query) or die('Query count distinc L11: ' . mysql_error());
             $numdistinct = mysql_fetch_array($result);
             $numdistinct = $numdistinct[0];
 
             # null values per field
-            $query = "select count(*) from ".myescape($d['table'])." where ".myescape($n)."='' or ".myescape($n)." is null;";
+            $query = "select count(*) from ".myescape($d['table'])." where `".myescape($n)."`='' or `".myescape($n)."` is null;";
             $result = mysql_query($query) or die('Query count step1 L39: ' . mysql_error());
             $numnull = mysql_fetch_array($result);
             $numnull = $numnull[0];
@@ -223,7 +224,7 @@ if (!$dataname) {
 
         foreach ($block_array as $bl) {
         //echo $query;
-            $query = "SELECT COUNT(*) FROM ".myescape($d['table'])." WHERE ".myescape($param1)."='".myescape($bl)."';";
+            $query = "SELECT COUNT(*) FROM ".myescape($d['table'])." WHERE `".myescape($param1)."`='".myescape($bl)."';";
             $result = mysql_query($query) or die('Query count L132: ' . mysql_error());
             $nodes_per_block = mysql_fetch_array($result);
             ## add nodes per block to the array as a value
@@ -333,7 +334,7 @@ if (!$dataname) {
     $form_html .= "<p>";
 
     ### FORM
-    $form_html .= '<form action="area.php" id="construct1" method="post" name="construct1" onsubmit="return validate_construct1(this);">'."\n";
+    $form_html .= '<form action="'.$area_file.'" id="construct1" method="post" name="construct1" onsubmit="return validate_construct1(this);">'."\n";
     $form_html .= '<input id="_submitted_construct1" name="_submitted_construct1" type="hidden" value="1" />'."\n".'
     <input class="fb_hidden" id="dataname" name="dataname" type="hidden" value="'.$dataname.'" />'."\n".'
     <input id="submitted_filter" name="submitted_filter" value="'.$submitted_filter.'" type="hidden">'."\n".'
@@ -384,7 +385,7 @@ if (!$dataname) {
     echo '<div id="t3" class="my_tab">
         <h5 class="tab_title">Config</h5>
         <p>';
-    echo '<form action="area.php" id="update" method="post" name="update">
+    echo '<form action="'.$area_file.'" id="update" method="post" name="update">
     <div class="fb_required">
     <input id="param1" name="param1" value="'.$param1.'" type="hidden">
     <input id="param2" name="param2" value="'.$param2.'" type="hidden">
@@ -442,7 +443,8 @@ if (!$dataname) {
         $nodestyle = "width: ".(($block_x)/($matrix_nodes))."px; height:".$node_h."px;";
 
         $qqq = "";
-        if ($submitted_filter == 1) {
+        if ($submitted_filter == 1)  {
+        ##$d['fields'][$key]['filter'] == 1) {
             $qqq = "(";
             //echo "XXXX: ";print_r($d['fields']);
             foreach ($d['fields'] as $key => $value) {
@@ -480,12 +482,12 @@ if (!$dataname) {
                 if ($submitted_filter == 1) {
                     $query = "SELECT ".myescape($d['pkey'])."
                         FROM ".myescape($d['table'])."
-                        WHERE ".myescape($param1)."='".myescape($bl)."' AND ";
+                        WHERE ".myescape($param1)."='".myescape($bl)."' ";
 
-                    if ($qqq) { $query .= $qqq; }
+                    if ($qqq != "()") { $query .=  " AND ".$qqq; }
 
                     $query .= " ORDER BY ".myescape($param2).";";
-                    $result = mysql_query($query) or die('Query filter param2:'.$query.'| ' . mysql_error());
+                    $result = mysql_query($query) or die('Query filter param2:'.$query.' | mysql error: ' . mysql_error());
                     while ($line = mysql_fetch_array($result)) {
                         array_push($filter_array, $line[0]);
                     }
@@ -521,7 +523,7 @@ if (!$dataname) {
         $sesion_id = session_id();
         echo '
         <div id="preview" style="height: '.$panel_h.'px; left: '.($x + 13*$matrix).'px;">
-        <form action="area.php" id="filter" method="post" name="filter">'."\n".'
+        <form action="'.$area_file.'" id="filter" method="post" name="filter">'."\n".'
         <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
         <input id="param1" name="param1" value="'.$param1.'" type="hidden">
         <input class="fb_hidden" id="status" name="status" type="hidden" value="'.$status.'" />'."\n".'
@@ -550,7 +552,7 @@ if (!$dataname) {
         </div>'."\n";
         echo '<div id="savethis" style="visibility: hidden;">
         </div>'."\n";
-	}  // END IF L256
+	} 
 }
 echo "</body></html>";
 ?>

@@ -126,13 +126,13 @@ function get_parameters_list($param, $table, $area_percnotnull, $area_numdistinc
 
         # Count distinct values per field
         # array: field -> distinct_number
-        $query = "select count(distinct $n) FROM ".myescape($table).";";
-        $result = mysql_query($query) or die('Query count distinc L11: ' . mysql_error());
+        $query = "select count(distinct `".$n."`) FROM ".myescape($table).";";
+        $result = mysql_query($query) or die('Query count distinc L22: ' . mysql_error());
         $numdistinct = mysql_fetch_array($result);
         $numdistinct = $numdistinct[0];
-        //echo $query;print_r($numdistinct);echo "<hr />";
+        ##echo $query;print_r($numdistinct);echo "<hr />";
         # null values per field
-        $query = "select count(*) from ".myescape($table)." where ".myescape($n)."='' or ".myescape($n)." is null;";
+        $query = "select count(*) from ".myescape($table)." where `".myescape($n)."`='' or `".myescape($n)."` is null;";
         $result = mysql_query($query) or die('Query count step1 L39: ' . mysql_error());
         $numnull = mysql_fetch_array($result);
         $numnull = $numnull[0];

@@ -5,6 +5,7 @@
 ## NOTE: use slash (/) at the end
 $area_path = "/var/www/area/";
 $area_url = "http://localhost/area/";
+$area_file = "index.php";
 
 ##################################################
 ## Put this file in a non-webserver public space, 
