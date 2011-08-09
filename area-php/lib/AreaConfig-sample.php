@@ -3,15 +3,15 @@
 
 ## AREA Vars paths
 ## NOTE: use slash (/) at the end
-$area_path = "/var/www/area/";
-$area_url = "http://localhost/area/";
+$area_path = "/var/www/webspace/nualart.com/unfaelle/";
+$area_url = "http://nualart.com/unfaelle/";
 $area_file = "index.php";
 
 ##################################################
 ## Put this file in a non-webserver public space, 
 ## otherwise, the access to the databases will be 
 ## accessible publicly in internet !!
-$area_data_config_path = "/var/www/area/lib/AreaConfig.php"; 
+$area_data_config_path = "/home/jaume/AREA-CONF/area2/unfaelle/DataConfig.php"; 
 
 
 ## AREA general parameters: 
@@ -25,17 +25,21 @@ $area_data_config_path = "/var/www/area/lib/AreaConfig.php";
 $area_percnotnull = 90;
 
 ## $numdistinct_max      : maximum number of distinct values (different values) 
-## 			of any field of the selected database (default/recommended: 50)
-$area_numdistinct_max = 50;
+## 			of any field of the selected database (default/recommended: 30)
+$area_numdistinct_max = 30;
 
 ## $numdistinct_min       : minimum number of distinct values (different values) 
 ## 			of any field of the selected database (default/recommended: 2)
 $area_numdistinct_min      = 2;
 
-## $quantum_default :  "quantum" same size for all nodes
 $quantum_default  = "quantum";
 
-## size in pixels of the representations
 $x_min ="800";
+
 $y_min = "600";
+
+#Default parameters
+$param1 = "";
+$param2 = "";
+
 ?>
