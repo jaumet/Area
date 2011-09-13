@@ -75,13 +75,14 @@ if (!$dataname) {
 
             # Count distinct values per field
             # array: field -> distinct_number
-            $query = "select count(distinct $n) FROM ".myescape($d['table']).";";
+            $query = "select count(distinct `".$n."`) FROM ".myescape($d['table']).";";
+            //echo $query." |||";
             $result = mysql_query($query) or die('Query count distinc L11: ' . mysql_error());
             $numdistinct = mysql_fetch_array($result);
             $numdistinct = $numdistinct[0];
 
             # null values per field
-            $query = "select count(*) from ".myescape($d['table'])." where ".myescape($n)."='' or ".myescape($n)." is null;";
+            $query = "select count(*) from ".myescape($d['table'])." where `".myescape($n)."`='' or `".myescape($n)."` is null;";
             $result = mysql_query($query) or die('Query count step1 L39: ' . mysql_error());
             $numnull = mysql_fetch_array($result);
             $numnull = $numnull[0];
@@ -223,7 +224,7 @@ if (!$dataname) {
 
         foreach ($block_array as $bl) {
         //echo $query;
-            $query = "SELECT COUNT(*) FROM ".myescape($d['table'])." WHERE ".myescape($param1)."='".myescape($bl)."';";
+            $query = "SELECT COUNT(*) FROM ".myescape($d['table'])." WHERE `".myescape($param1)."`='".myescape($bl)."';";
             $result = mysql_query($query) or die('Query count L132: ' . mysql_error());
             $nodes_per_block = mysql_fetch_array($result);
             ## add nodes per block to the array as a value
@@ -442,7 +443,8 @@ if (!$dataname) {
         $nodestyle = "width: ".(($block_x)/($matrix_nodes))."px; height:".$node_h."px;";
 
         $qqq = "";
-        if ($submitted_filter == 1) {
+        if ($submitted_filter == 1)  {
+        ##$d['fields'][$key]['filter'] == 1) {
             $qqq = "(";
             //echo "XXXX: ";print_r($d['fields']);
             foreach ($d['fields'] as $key => $value) {
@@ -480,12 +482,12 @@ if (!$dataname) {
                 if ($submitted_filter == 1) {
                     $query = "SELECT ".myescape($d['pkey'])."
                         FROM ".myescape($d['table'])."
-                        WHERE ".myescape($param1)."='".myescape($bl)."' AND ";
+                        WHERE ".myescape($param1)."='".myescape($bl)."' ";
 
-                    if ($qqq) { $query .= $qqq; }
+                    if ($qqq != "()") { $query .=  " AND ".$qqq; }
 
                     $query .= " ORDER BY ".myescape($param2).";";
-                    $result = mysql_query($query) or die('Query filter param2:'.$query.'| ' . mysql_error());
+                    $result = mysql_query($query) or die('Query filter param2:'.$query.' | mysql error: ' . mysql_error());
                     while ($line = mysql_fetch_array($result)) {
                         array_push($filter_array, $line[0]);
                     }
