@@ -29,7 +29,7 @@ if (!$dataname) {
 	echo "<h2>No dataname selected!!<br /> Choose one of the list:</h2>";
 	echo "<ul>"; 
 	foreach ($datas as $k => $v) {
-		echo "<li><a href=\"".$area_url."area.php?dataname=".$k."\">$k</a></li>";
+		echo "<li><a href=\"".$area_url.$area_file."?dataname=".$k."\">$k</a></li>";
 	}
 	echo "</ul>";
 	echo "</div>";
@@ -334,7 +334,7 @@ if (!$dataname) {
     $form_html .= "<p>";
 
     ### FORM
-    $form_html .= '<form action="area.php" id="construct1" method="post" name="construct1" onsubmit="return validate_construct1(this);">'."\n";
+    $form_html .= '<form action="'.$area_file.'" id="construct1" method="post" name="construct1" onsubmit="return validate_construct1(this);">'."\n";
     $form_html .= '<input id="_submitted_construct1" name="_submitted_construct1" type="hidden" value="1" />'."\n".'
     <input class="fb_hidden" id="dataname" name="dataname" type="hidden" value="'.$dataname.'" />'."\n".'
     <input id="submitted_filter" name="submitted_filter" value="'.$submitted_filter.'" type="hidden">'."\n".'
@@ -385,7 +385,7 @@ if (!$dataname) {
     echo '<div id="t3" class="my_tab">
         <h5 class="tab_title">Config</h5>
         <p>';
-    echo '<form action="area.php" id="update" method="post" name="update">
+    echo '<form action="'.$area_file.'" id="update" method="post" name="update">
     <div class="fb_required">
     <input id="param1" name="param1" value="'.$param1.'" type="hidden">
     <input id="param2" name="param2" value="'.$param2.'" type="hidden">
@@ -523,7 +523,7 @@ if (!$dataname) {
         $sesion_id = session_id();
         echo '
         <div id="preview" style="height: '.$panel_h.'px; left: '.($x + 13*$matrix).'px;">
-        <form action="area.php" id="filter" method="post" name="filter">'."\n".'
+        <form action="'.$area_file.'" id="filter" method="post" name="filter">'."\n".'
         <input id="submitted_filter" name="submitted_filter" value="1" type="hidden">'."\n".'
         <input id="param1" name="param1" value="'.$param1.'" type="hidden">
         <input class="fb_hidden" id="status" name="status" type="hidden" value="'.$status.'" />'."\n".'
@@ -552,7 +552,7 @@ if (!$dataname) {
         </div>'."\n";
         echo '<div id="savethis" style="visibility: hidden;">
         </div>'."\n";
-	}  // END IF L256
+	} 
 }
 echo "</body></html>";
 ?>
