@@ -1,18 +1,13 @@
 <?
 include('./lib/functions.php');
 include('./lib/AreaConfig.php');
-include($area_path.'lib/DataConfig.php');
+include($area_data_config_path);
 
 ## Getting the right tab activated
 $status = $_POST['status'];
 
 ## Handling session:
 session_start();
-
-############## $_REQUEST -> $vars
-//if (isset($_REQUEST['block_selected']) ) {
-//	$_REQUEST = $vars;
-//}
 
 ##  IS ANY DATABASE SELECTED?
 $dataname = $_GET['dataname'];
