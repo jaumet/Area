@@ -1,0 +1,5 @@
+var data = [
+	{'x': 200, 'y': 100, 'gender': 'male'},
+	{'x': 80, 'y': 0, 'gender': 'male'},
+	{'x': 160, 'y': 0, 'gender': 'female'}
+];
