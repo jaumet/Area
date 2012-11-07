@@ -3,15 +3,15 @@
 
 ## AREA Vars paths
 ## NOTE: use slash (/) at the end
-$area_path = "/var/www/webspace/nualart.com/unfaelle/";
-$area_url = "http://nualart.com/unfaelle/";
+$area_path = "/path/to/uour/yourdomain.org/area/";
+$area_url = "http://yourdomain.whatever/area/";
 $area_file = "index.php";
 
 ##################################################
 ## Put this file in a non-webserver public space, 
 ## otherwise, the access to the databases will be 
 ## accessible publicly in internet !!
-$area_data_config_path = "/home/jaume/AREA-CONF/area2/unfaelle/DataConfig.php"; 
+$area_data_config_path = "/path/to/your/DataConfig.php"; 
 
 
 ## AREA general parameters: 

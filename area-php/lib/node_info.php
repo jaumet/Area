@@ -2,13 +2,12 @@
 $id = $_REQUEST['id'];
 $datasource = $_REQUEST['data'];
 include ('./functions.php');
-#include ('./DataConfig.php');
-$area_path_data = "./DataConfig.php";
-include ($area_path_data);
+include ('./AreaConfig.php');
+include ($area_data_config_path);
 $d = $datas[$datasource];
 ## Getting the info for the node:
 ## FIXME : select only the parameters with filter = 1 in DataConfig!
-connect($datasource);
+connect($datasource, $area_data_config_path);
 $query = "SELECT *  
 	FROM ".myescape($d['table'])." 
 	WHERE ".myescape($d['pkey'])."='".$id."';";
@@ -21,11 +20,11 @@ echo '<h3>'.$d['name'].' - <a onclick="javascript: hidediv(\'node_info\');" href
 
 foreach($line as $k => $v) {
 	if ($d['fields'][$k]['show'] == 1)  {
-		echo "<br />".$d['fields'][$k]['label']." -> <b>".htmlspecialchars_decode($v)."</b>";
+		echo "<br />".$d['fields'][$k]['label']." -> <b>".htmlentities($v)."</b>";
 	}
 }
 echo "<hr />";
 echo "<pre>";
-##print_r($line);
+//print_r($line);
 echo "</pre>";
 ?>
