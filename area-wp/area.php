@@ -6,7 +6,24 @@ Description: AREA is a visualization tool that allows friendly-graphical browsin
 Version: 1.0
 Author: Jaume Nualart
 Author URI: http://nualart.cat
+License: GPL2
+
+Copyright 2011  Jaume Nualart i Vilaplana  (email : jaume@nualart.cat)
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License, version 2, as 
+    published by the Free Software Foundation.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
 if (!function_exists('area_main')) {
 	function area_main()  {
 		echo "<p>AREA is HERE!!!</p>";
@@ -25,13 +42,12 @@ add_action( 'admin_init', 'register_area_settings' );
 
 
 function area_admin_menu() {
-  add_options_page('AREA Options', 'AREA', 8, 'your-unique-identifier', 'area_admin_options');
+  add_options_page('AREA Options', 'AREA', 8, 'area', 'area_admin_options');
 }
 
 function register_area_settings() { // whitelist options
   register_setting( 'area-group', 'new_option_name' );
   register_setting( 'area-group', 'some_other_option' );
-  register_setting( 'area-group', 'option_etc' );
 }
 
 function area_admin_options() {
@@ -57,6 +73,7 @@ function area_admin_options() {
 	echo '" />
 	</p>
 	</form>
+	<?php echo wp_dropdown_categories(array('hide_empty' => 0, 'name' => 'category_parent', 'orderby' => 'name', 'selected' => $category->parent, 'hierarchical' => true, 'show_option_none' => __('None'))); ?>
 	</div>';
 }
 
