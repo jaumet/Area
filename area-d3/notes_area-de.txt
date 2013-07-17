@@ -1,10 +1,10 @@
 AREA v4
 -------
 
-- Version 4 of AREAmade with:
+- Version 4 of AREA made with:
 	- Interface: 
-		- html5? using new tags, like <section>,...
-		- Area representation: D3
+		- html5 using new tags, like <section>,...
+		- Area representation/display: D3
 
 	- Data acces + logics
 		- Option A: backbone.js OR Agility.js
@@ -12,7 +12,7 @@ AREA v4
 	>>- Option C: from a json (or csv) file of the whole data and everything done with D3/jquery.
 	
 ------------------
-Option C dev process:
+Option C dev process: 
 Parts:
 A- Area configuration default variables: firstly in a config file. Later on maybe better to have a JS config editor.
 	- Area size: (AxB) in px
