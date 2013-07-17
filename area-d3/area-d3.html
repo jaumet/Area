@@ -9,7 +9,7 @@
   </head>
   <body>
   	<script type="text/javascript" src="js/jquery.js"></script>
-		<script type="text/javascript" src="http://localhost/Area/area-d3/js/d3.v2.js"></script>
+		<script type="text/javascript" src="js/d3.v2.js"></script>
     <div id="viz"></div>
     <div id="distinc"></div>
     <p>lala</p>
@@ -18,51 +18,55 @@
     <script type="text/javascript">
     // data:		
 		var data = [
-			{"id": 0, "gender": "male", "name": "joan"},
-			{"id": 1, "gender": "female", "name": "pep"},
-			{"id": 2, "gender": "female", "name": "maria"},
-			{"id": 3, "gender": "female", "name": "meli"},
-			{"id": 4, "gender": "female", "name": "jaume"},
-			{"id": 5, "gender": "female", "name": "jordi"},
-			{"id": 6, "gender": "female", "name": "kiami"},
-			{"id": 7, "gender": "female", "name": "lluis"},
-			{"id": 8, "gender": "female", "name": "Laia"},
-			{"id": 9, "gender": "female", "name": "eva"},
-			{"id": 10, "gender": "female", "name": "anna"},
-			{"id": 0, "gender": "female", "name": "joan"},
-			{"id": 1, "gender": "female", "name": "pep"},
-			{"id": 2, "gender": "male", "name": "maria"},
-			{"id": 3, "gender": "male", "name": "meli"},
-			{"id": 4, "gender": "male", "name": "jaume"},
-			{"id": 5, "gender": "male", "name": "jordi"},
-			{"id": 6, "gender": "male", "name": "kiami"},
-			{"id": 7, "gender": "male", "name": "lluis"},
-			{"id": 8, "gender": "male", "name": "Laia"},
-			{"id": 9, "gender": "male", "name": "eva"},
-			{"id": 10, "gender": "male", "name": "anna"},
-			{"id": 0, "gender": "male", "name": "joan"},
-			{"id": 1, "gender": "male", "name": "pep"},
-			{"id": 2, "gender": "male", "name": "maria"},
-			{"id": 3, "gender": "male", "name": "meli"},
-			{"id": 4, "gender": "male", "name": "jaume"},
-			{"id": 5, "gender": "male", "name": "jordi"},
-			{"id": 6, "gender": "male", "name": "kiami"},
-			{"id": 7, "gender": "male", "name": "lluis"},
-			{"id": 8, "gender": "male", "name": "Laia"},
-			{"id": 9, "gender": "male", "name": "eva"},
-			{"id": 10, "gender": "male", "name": "anna"},
-			{"id": 0, "gender": "male", "name": "joan"},
-			{"id": 1, "gender": "male", "name": "pep"},
-			{"id": 2, "gender": "male", "name": "maria"},
-			{"id": 3, "gender": "male", "name": "meli"},
-			{"id": 4, "gender": "male", "name": "jaume"},
-			{"id": 5, "gender": "male", "name": "jordi"},
-			{"id": 6, "gender": "male", "name": "kiami"},
-			{"id": 7, "gender": "male", "name": "lluis"},
-			{"id": 8, "gender": "male", "name": "Laia"},
-			{"id": 9, "gender": "male", "name": "eva"},
-			{"id": 10, "gender": "male", "name": "anna"}						
+			{"id": 0, "mood": "good", "gender": "male", "name": "joan"},
+			{"id": 1, "mood": "good", "gender": "female", "name": "pep"},
+			{"id": 2, "mood": "good", "gender": "female", "name": "maria"},
+			{"id": 3, "mood": "good", "gender": "female", "name": "meli"},
+			{"id": 4, "mood": "good", "gender": "female", "name": "jaume"},
+			{"id": 5, "mood": "good", "gender": "female", "name": "jordi"},
+			{"id": 6, "mood": "good", "gender": "female", "name": "kiami"},
+			{"id": 7, "mood": "good", "gender": "female", "name": "lluis"},
+			{"id": 8, "mood": "good", "gender": "female", "name": "Laia"},
+			{"id": 9, "mood": "good", "gender": "female", "name": "eva"},
+			{"id": 10, "mood": "good", "gender": "female", "name": "anna"},
+			{"id": 11, "mood": "good", "gender": "female", "name": "joan"},
+			{"id": 12, "mood": "good", "gender": "female", "name": "pep"},
+			{"id": 13, "mood": "good", "gender": "male", "name": "maria"},
+			{"id": 14, "mood": "good", "gender": "male", "name": "meli"},
+			{"id": 15, "mood": "good", "gender": "male", "name": "jaume"},
+			{"id": 16, "mood": "good", "gender": "male", "name": "jordi"},
+			{"id": 17, "mood": "good", "gender": "male", "name": "kiami"},
+			{"id": 18, "mood": "good", "gender": "male", "name": "lluis"},
+			{"id": 19, "mood": "good", "gender": "male", "name": "Laia"},
+			{"id": 20, "mood": "good", "gender": "male", "name": "eva"},
+			{"id": 21, "mood": "good", "gender": "male", "name": "anna"},
+			{"id": 22, "mood": "good", "gender": "male", "name": "joan"},
+			{"id": 23, "mood": "good", "gender": "male", "name": "pep"},
+			{"id": 24, "mood": "bad", "gender": "male", "name": "maria"},
+			{"id": 25, "mood": "bad", "gender": "male", "name": "meli"},
+			{"id": 26, "mood": "bad", "gender": "male", "name": "jaume"},
+			{"id": 27, "mood": "bad", "gender": "male", "name": "jordi"},
+			{"id": 28, "mood": "bad", "gender": "male", "name": "kiami"},
+			{"id": 29, "mood": "bad", "gender": "male", "name": "lluis"},
+			{"id": 30, "mood": "bad", "gender": "male", "name": "Laia"},
+			{"id": 31, "mood": "bad", "gender": "male", "name": "eva"},
+			{"id": 32, "mood": "bad", "gender": "male", "name": "anna"},
+			{"id": 33, "mood": "bad", "gender": "male", "name": "joan"},
+			{"id": 34, "mood": "bad", "gender": "male", "name": "pep"},
+			{"id": 35, "mood": "bad", "gender": "male", "name": "maria"},
+			{"id": 36, "mood": "bad", "gender": "male", "name": "meli"},
+			{"id": 37, "mood": "bad", "gender": "male", "name": "jaume"},
+			{"id": 38, "mood": "bad", "gender": "male", "name": "jordi"},
+			{"id": 39, "mood": "bad", "gender": "male", "name": "kiami"},
+			{"id": 40, "mood": "bad", "gender": "male", "name": "lluis"},
+			{"id": 41, "mood": "bad", "gender": "male", "name": "Laia"},
+			{"id": 42, "mood": "bad", "gender": "male", "name": "eva"},
+			{"id": 43, "mood": "bad", "gender": "male", "name": "anna"}						
 		];
+		
+		// Parameters:
+		var param1 = "mood";
+		var param2 = "gender";
 		
 		// Data parser:
 		var d_length = data.length;
@@ -70,8 +74,8 @@
 		// get number distinc for each json argument
 		var distinct = [];
 		$.each(data, function(index, element) {
-			distinct.push(element.gender)
-    });
+			distinct.push(element[param2])
+    	});
 
 		function removeDuplicates(inputArray) {
             var i;
@@ -91,10 +95,8 @@
 		$.each(removeDuplicates(distinct), function(index, element) {
 			$('#distinc').append($('<span>', {
 		    	text: " "+element
-    	}));
-    });
-
-
+	    	}));
+	    });
 
 		// config:
 		var c_container = 200;
@@ -103,19 +105,20 @@
 		if (dim_node != Math.floor(dim_node)) {
 			dim_node = Math.floor(dim_node)+1;
 		}
-		var c_node = c_container/dim_node;
-		//alert("dims :"+dim_node);
+		var c_node = Math.floor(c_container/dim_node);
+		//alert("dims :"+dim_node+" | "+c_container);
 
-    var areaSVG = d3.select("#sq")
-        .append("svg:svg")
-        .attr("width", c_container)
-        .attr("height", c_container)
-				.style('position','relative');
-		
+	    var areaSVG = d3.select("#sq")
+	        .append("svg:svg")
+	        .attr("width", c_container)
+	        .attr("height", c_container)
+			.style('position','relative');
+
 		var my_x = 0;
 		var my_y = 0;
 		$.each(data, function(index, value) {
 			n = index/dim_node;
+			//alert("n; "+n);
 			if (typeof n === 'number' && n % 1 == 0) {
 				my_x = 0;
 			} else {
@@ -128,32 +131,30 @@
 		
 		
 		function draw_node(x, y, c_node, id, name) {	
-		  areaSVG.append("svg:rect")
+			areaSVG.append("svg:rect")
 				.attr("x", x)
-			  .attr("y", y)
-			  .attr("width", c_node)
-			  .attr("height", c_node)
-			  .attr("stroke", "red")
-			  .attr('class','node')
-			  .attr("id", id)
-			  .attr("name", name)
-			  .on('mouseover', function(d,i) { 
-      	  d3.select(this)
-          	.style('fill','lightblue'); 
-      	})
-      	.on('mouseout', function(d,i) { 
-        	d3.select(this)
-    				.style('fill','black'); 
-      	})
-      	.on('click', function(d,i) {
-	      	d3.select(this)
-  	    		alert("id: "+id+" | name: "+name);
-      	});
-			};	
+				.attr("y", y)
+				.attr("width", c_node)
+				.attr("height", c_node)
+				.attr("stroke", "red")
+				.attr('class','node')
+				.attr("id", id)
+				.attr("name", name)
+				.on('mouseover', function(d,i) { 
+		    		d3.select(this)
+		      			.style('fill','lightblue'); 
+		   		})
+				.on('mouseout', function(d,i) { 
+        			d3.select(this)
+    					.style('fill','black'); 
+      			})
+      			.on('click', function(d,i) {
+	      			d3.select(this)
+  	    			alert("id: "+id+" | name: "+name);
+      		});
+		};	
 	    // mouse interactions
 	    /*
-
-
 
     sampleSVG.append("svg:rect")
 			.attr("id", 85)
