@@ -9,9 +9,10 @@
 
 	<style>
 		.node { position:relative;float:left;}
-		#area {	border: 2px solid blue;height:3px;}
+		/*#area {	border: 2px solid blue;height:3px;}*/
 		#good td { border: 1px solid green;}
 		#bad td { border: 1px solid red;}
+		.block {position:relative;float:left;}
 	</style>
   </head>
   <body>
@@ -23,7 +24,14 @@
    		<table id="bad"></table>
    	</div>
     <p>display</p>
-	<div id="sq"></div>
+    <div id="area">
+		<div id="sq" class="block">
+			<div class="blockname">Male</div>
+		</div>
+		<div id="sq1" class="block">
+			<div class="blockname">Female</div>
+		</div>
+	</div>
 	
     <script type="text/javascript">
     	
@@ -79,37 +87,44 @@
 		
 		///////////////////////
 		// BLOCK REPRESENTATION
-		var c_container = 200; // TODO: this is block dimenssion
-		//c_node = 78;
-		var dim_node = Math.sqrt(d_length);
-		if (dim_node != Math.floor(dim_node)) {
-			dim_node = Math.floor(dim_node)+1;
-		}
-		var c_node = Math.floor(c_container/dim_node);
-		//alert("dims :"+dim_node+" | "+c_node);
-
-	    var areaSVG = d3.select("#sq")
-	        .append("svg:svg")
-	        .attr("width", c_container)
-	        .attr("height", c_container)
-			.style('position','relative');
-
-		var my_x = 0;
-		var my_y = 0;
-		$.each(data, function(index, value) {
-			n = index/dim_node;
-			if (typeof n === 'number' && n % 1 == 0) {
-				my_x = 0;
-			} else {
-				my_x = my_x + c_node;
+		
+		function block_builder(data, param, param_val, block_div, areaSVG) {
+			var b_container = 300; // this is block dimenssion
+			//c_node = 78;
+			var dim_node = Math.sqrt(d_length);
+			if (dim_node != Math.floor(dim_node)) {
+				dim_node = Math.floor(dim_node)+1;
 			}
-			my_y = Math.floor(n) * c_node;
-			//alert("index: "+index+" | x: "+my_x+" | y: "+my_y+" | n: "+n+" | c_node: "+c_node);
-			draw_node(my_x, my_y, c_node, value.id, value.name);
-		});
+			var c_node = Math.floor(b_container/dim_node);
+			//alert("dims :"+dim_node+" | "+c_node);
+
+			areaSVG = d3.select(block_div)
+				.append("svg:svg")
+				.attr("width", b_container)
+				.attr("height", b_container)
+				.style('position','relative');
+
+			var my_x = 0;
+			var my_y = 0;
+			var count = 0;
+			$.each(data, function(index, value) {
+				if(value[param] == param_val) {
+					//n = index/dim_node;
+					n = count/dim_node;
+					if (typeof n === 'number' && n % 1 == 0) {
+						my_x = 0;
+					} else {
+						my_x = my_x + c_node;
+					}
+					my_y = Math.floor(n) * c_node;
+					//alert("index: "+index+" | x: "+my_x+" | y: "+my_y+" | n: "+n+" | c_node: "+c_node);
+					draw_node(my_x, my_y, c_node, value.id, value.name, value.gender, areaSVG);
+					count = count +1;
+				}
+			});
+		}
 		
-		
-		function draw_node(x, y, c_node, id, name) {	
+		function draw_node(x, y, c_node, id, name, gender, areaSVG) {	
 			areaSVG.append("svg:rect")
 				.attr("x", x)
 				.attr("y", y)
@@ -119,6 +134,7 @@
 				.attr('class','node')
 				.attr("id", id)
 				.attr("name", name)
+				.attr("gender", gender)
 				.on('mouseover', function(d,i) { 
 		    		d3.select(this)
 		      			.style('fill','lightblue'); 
@@ -129,22 +145,14 @@
       			})
       			.on('click', function(d,i) {
 	      			d3.select(this)
-  	    			alert("id: "+id+" | name: "+name);
+  	    			alert("id: "+id+" | name: "+name+" | gender: "+gender);
       		});
-		};	
-	    // mouse interactions
-	    /*
-
-    sampleSVG.append("svg:rect")
-			.attr("id", 85)
-	    .attr("name", 0)
-	    .attr("width", 80)
-	    .attr("height", 80)
-	    .attr("stroke", "blue")
-	    .attr("fill", "green")
-			.style('position','relative')
-			.attr('class','node');
-		*/
+		};
+		
+		// Area builder (matrix of blocks):
+		// List of params and params values
+		block_builder(data, "gender", "male", "#sq");
+		block_builder(data, "gender", "female", "#sq1");
 		
     </script>
 
