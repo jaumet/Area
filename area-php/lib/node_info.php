@@ -3,7 +3,8 @@ $id = $_REQUEST['id'];
 $datasource = $_REQUEST['data'];
 include ('./functions.php');
 include ('./AreaConfig.php');
-include ($area_data_config_path);
+include ('./DataConfig.php');
+
 $d = $datas[$datasource];
 ## Getting the info for the node:
 ## FIXME : select only the parameters with filter = 1 in DataConfig!
@@ -23,7 +24,7 @@ foreach($line as $k => $v) {
 		echo "<br />".$d['fields'][$k]['label']." -> <b>".htmlentities($v)."</b>";
 	}
 }
-echo "<hr />";
+echo "<br /><hr />";
 echo "<pre>";
 //print_r($line);
 echo "</pre>";

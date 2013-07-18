@@ -1,7 +1,7 @@
 <?
 ## AREA functions
-function connect($dataname, $area_data_config_path) {
-	include ($area_data_config_path);
+function connect($dataname, $area_path_data) {
+	include ($area_path_data);
 	$DBserver = $datas[$dataname]['db']['server'];
 	$DBname = $datas[$dataname]['db']['name'];
 	$DBuser = $datas[$dataname]['db']['user'];
@@ -10,7 +10,7 @@ function connect($dataname, $area_data_config_path) {
 	#echo "data: ".$DBserver." - ".$DBuser." - ".$DBpassw." - ".$DBname;
         $link = mysql_connect($DBserver, $DBuser, $DBpassw)
             or die('Could not connect: ' . mysql_error());
-        mysql_select_db($DBname) or die('Could not select database!');
+        mysql_select_db($DBname) or die('Could not select database');
 	#mysql_query("SET NAMES 'utf8'");
 	mysql_query("SET NAMES 'latin1_swedish_ci'");
 }
@@ -22,9 +22,9 @@ function myescape($escaped) {
 	return $escaped;
 }
 
-function get_distinct_values($param, $table, $dataname, $area_data_config_path) {
+function get_distinct_values($param, $table, $dataname, $area_path_data) {
 	if ($param) {
-		include ($area_data_config_path);
+		include ($area_path_data);
 		if ($datas[$dataname]['fields'][$param]['join']) {
 			$join_table = $datas[$dataname]['fields'][$param]['join']['table'];
 			$join_key = $datas[$dataname]['fields'][$param]['join']['key'];
@@ -86,9 +86,9 @@ function get_dark_color($rgb)  {
 	return $dark;
 }
 
-function get_parameters_list($param, $table, $area_percnotnull, $area_numdistinct_max, $area_numdistinct_mini, $language, $area_data_config_path) {
+function get_parameters_list($param, $table, $area_percnotnull, $area_numdistinct_max, $area_numdistinct_mini, $language, $area_path_data) {
     $fields = array();
-    include ($area_data_config_path);
+    include ($area_path_data);
 
     #preparacio de la taula en questio
     $query = "SELECT * FROM ".myescape($table).";";
@@ -140,12 +140,11 @@ function get_parameters_list($param, $table, $area_percnotnull, $area_numdistinc
                 $label_lang = "label_en";
           } else {
                 $label_lang = "label";
-          }
-    ##
-    #######################
+          } 
+   #######################
 
-        if ($datas['violencies']['fields'][$n][$label_lang]) {
-            $humann = $datas['violencies']['fields'][$n][$label_lang];
+        if ($datas['textvistools']['fields'][$n][$label_lang]) {
+            $humann = $datas['textvistools']['fields'][$n][$label_lang];
         } else {
             $humann = str_replace("_"," ", $n);
         }
@@ -189,7 +188,7 @@ function head_html($page_title, $status) {
     # Starting html
     $html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Frameset//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd\"> 
     <head>
-      <title>:: AREA :: data visualization  - ".$page_title."</title>\n
+      <title>area visualization</title>\n
     	<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n
     	<link rel=\"SHORTCUT ICON\" href=\"images/logoareapetit.png\" />\n
     	<link href=\"./css/area.css\" rel=\"stylesheet\" type=\"text/css\" />\n
@@ -202,11 +201,11 @@ function head_html($page_title, $status) {
 					if(typeof(MT)=='undefined'){
 						var MyTabs= new mt('tabs','div.my_tab');				
 						MyTabs.removeTabTitles('h5.tab_title');
-						MyTabs.addTab('t1','Legend');
-						MyTabs.addTab('t2','Parameters');
+						MyTabs.addTab('t1','Legend/Parameters');
+						//MyTabs.addTab('t2','Parameters');
 						MyTabs.addTab('t3','Config');
 						//MyTabs.addTab('t4','tab 4 - Long Title');
-						MyTabs.makeActive('".$tab_active."');
+						MyTabs.makeActive('t1');
 					}
 				}
 
@@ -219,10 +218,8 @@ function head_html($page_title, $status) {
 
 function get_areadiv($area_url)  {
 	$output = '<div id="headerdiv">'."\n";
-	$output .= "<p><a href=\"".$area_url."\"><img src=\"./images/area.png\" style=\"padding-left:10px;padding-right:10px;float:left;width:50px;border-width:0px;\" /><span style=\"font-size:20px;\">Feminicidis en Area</span></a><br />visualitzaci&oacute;³ de feminicidis a l'Estat Espanyol des del 2000 fins avui.<br /> Per N&uacute;ria Verg&eacute;s i Jaume Nualart (<a href=\"http://riereta.net\" target=\"_riereta\">riereta.net</a> raval barcelona catalunya)</p>";
-	#$output .= "<span style=\"padding-left:25px;\"><a href=\"/webarchive/public/view/mid:5\" style=\"color:#2abbf1;\">back</a></span>";
-	#$output .=  "<h1><a href=\"".$area_url."\"><img src=\"./images/	area.png\" width=\"33px\" align=\"left\" vspace=\"0\" hspace=\"0\" border=\"0\" alt=\"go to AREA\" style=\"margin-right:3px;margin-left:2px;\" /></a>\n";
-	//$output .=   " AREA, visualization tool</h1>\n";
+	$output .= "<p><a href=\"".$area_url."\"><img src=\"./images/area.png\" style=\"padding-left:10px;padding-right:10px;float:left;width:200px;border-width:0px;\" /><span style=\"font-size:20px;\">XXXX XXXX XXXX</span></a><br />
+by Jaume Nualart (<a href=\"http://nualart.cat\" target=\"_nualart\">nualart.cat</a> Canberra. Australia)</p>";
 	$output .=   "</div>";
 	echo $output;
 }

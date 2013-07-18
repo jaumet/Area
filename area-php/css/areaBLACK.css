@@ -23,17 +23,17 @@ fb_error        span around field error message
 
 .fb {
 	color : #ffa20f;
-	background: #fff;
+	background: #000000;
     font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
     font-size: 12px;
-    font-weight : normal;
+    font-weight : bold;
     color:white;
 }
 .fb_field {
 	font-family : Verdana, Sans;
 	font-size : 12px;
 	font-style : normal;
-	font-weight : normal;
+	font-weight : bold;
 	text-decoration:none;
 	width:90%;
 }
@@ -42,7 +42,7 @@ fb_error        span around field error message
  	background: #fee3ad;
     font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
     font-size: 12px;
-    font-weight : normal;
+    font-weight : bold;
 	text-decoration:none;
 	margin-left:0px;
 	margin-right:0px;
@@ -54,7 +54,7 @@ fb_error        span around field error message
 	font-family : Verdana, Sans;
 	font-size : 12px;
 	font-style : normal;
-	font-weight : normal;
+	font-weight : bold;
 	text-decoration:none;
 	margin-left:5px;
 	margin-right:15px;
@@ -67,7 +67,7 @@ fb_error        span around field error message
 	font-family : Verdana, Sans;
 	font-size : 12px;
 	font-style : normal;
-	font-weight : normal;
+	font-weight : bold;
 	text-decoration:none;
 	margin-left:0px;
 	margin-right:15px;
@@ -98,13 +98,13 @@ fb_error        span around field error message
 .fb_required {
     font-family: Verdana, Sans, Arial, Helvetica, sans-serif;
     font-size: 12px;
-    font-weight : normal;
-    color: #000;
+    font-weight : bold;
+    color: #ffffff;
     /*line-height: 2em;*/
 }
 			
 .fb_option {
-	color : #000000;
+	color : #ffffff;
 	font-family : Verdana, Sans;
 	font-size : 10px;
 	font-style : normal;
@@ -124,8 +124,8 @@ fb_error        span around field error message
 
 /* main ones */
 .node {
-	border: 0px solid white;
-	border-width: 0px 2px 2px 0px;
+	border: 0px solid black;
+	border-width: 0px 1px 1px 0px;
 	visibility: visible;
 	display: block;
 	/*height: 6px;
@@ -133,27 +133,23 @@ fb_error        span around field error message
 	cursor : help;
 	z-index: 10;
 	float: left;
-	
-}
-.node:hover {
-	border-color: black;
 }
 
 .blockname {
 	vertical-align: top;
 	/*text-align: top;*/
 	margin: 0px;
-	height: 44px;
+	height: 24px;
 	line-height: 9px; 
 	padding: 3px 3px 0px 3px;
 	border-style: none;
 	border-color: #3d3d3d;
 	z-index:10;
-	color : #000;
+	color : white;
 	font-family : Verdana, Sans;
 	font-size : 8px;
 	font-weight : bold;
-	background-color: #fff;
+	background-color: black;
 }
 
 .block {
@@ -167,45 +163,44 @@ fb_error        span around field error message
 
 .good {
 	text-align: left;
-	background: #c6c6c6;
+	background: #444;
 }
 .bad {
 	text-align: left;
-	background: #fff;
+	background: #000;
 }
 
 #headerdiv {
 	position:absolute; 
-	background-color: #fff;
+	background-color: #000000;
 	overflow:auto; 
-	top: 10px; 
+	top: 20px; 
 	left: 3px;
 	visibility: visible;
 	display:block;
 	width: 100%;
 	padding: 20px;
-	padding-top:0;  
-	padding-bottom: 0;
+	padding-top: 0px;
 	z-index: 1;
 }
 #formdiv {
 	position:absolute; 
-	background-color: #fff;
+	background-color: #000;
         /* background-color:#f5f5f5;*/
 	overflow:auto; 
-	top: 90px; 
+	top: 120px; 
 	left: 3px;
 	visibility: visible;
 	display:block;
 	width: 100%;
 	height: 97px;
-	padding: 40px;
+	padding: 20px;
 	padding-top: 4px;
 	z-index: 1;
 }
 #hideShow {
 	position:absolute; 
-	background-color: #fff;
+	background-color: #000000;
 	top: 160px; 
 	left: 200px;
 	visibility: hidden;
@@ -222,7 +217,7 @@ fb_error        span around field error message
 }
 #analisisdiv {
 	position:absolute; 
-	background-color: #fff;
+	background-color: #000000;
 	top: 167px; 
 	left: 0px;
 	visibility: visible;
@@ -234,15 +229,14 @@ fb_error        span around field error message
 #preview {
 	position:relative; 
 	/*background-color: #999999;*/
-	background-color:#fff;
-	color:#000;
+	background-color:#000;
 	top: 235px;
 	visibility: visible;
 	display:block;
 	width: 180px;
 	padding: 15px;
 	z-index: 100;
-	border-width: 0px;
+	border-width: 1px;
 	border-style: solid;
 	border-color: #565656;
 }
@@ -290,7 +284,7 @@ fb_error        span around field error message
 }
 
 body { 
-	background-color:#fff;
+	background-color:#000000;
 	/* background-image: url(../images/bg_body.gif); */
 	margin-top:0px;
 	padding-top:0px;
@@ -305,7 +299,7 @@ p, li, td {
 }
 	
 h2 {
-	color : #000;
+	color : #ffffff;
 	font-family : Verdana, Sans;
 	font-size : 16px;
 	font-weight : bold;
@@ -320,7 +314,7 @@ h1 {
 }
 
 h3 {
-	color : #000;
+	color : #ffffff;
 	font-family : Verdana, Sans;
 	font-size : 14px;
 	font-style : normal;
@@ -329,9 +323,10 @@ h3 {
 
 #legend {
 	/*color: white*/;
+	color:#2abbf1;
 	background-color: transparent;
 	font-family : Verdana, Sans;
-	color: #000;
+	color: white;
 	width: 95%;
 	padding: 2px;
 	padding-left: 3px;
@@ -339,8 +334,6 @@ h3 {
     font-size: 12px;
     font-weight : normal;
     line-height:25px;
-	overflow-y:scroll;
-	overflow-x:hidden;
 }
 a {
 	color : orange;
@@ -383,7 +376,7 @@ a:hover, a:active {
  	margin: 2px;
  	position: absolute;
  	top: 240px;
- 	background-color: #fff;
+ 	background-color: black;
  	padding-bottom: 30px;
 }
 
@@ -413,20 +406,9 @@ span.legend {
  padding-left: 3px;
  padding-right: 3px;
  border: 1px solid black;
- font-weight : normal;
+ font-weight : bold;
  border:1px solid black ;
 }
-
-span.legend1 {
- white-space: nowrap;
- color: black;
- padding: 2px;
- padding-left: 4px;
- padding-right: 4px;
- font-weight : normal;
- border:2px solid grey;
-}
-
 
 #formdiv p { display: none; }
 
@@ -475,7 +457,4 @@ span.legend1 {
 
 #node_info, #savethis {
 	-moz-border-radius:100px 100px 100px 100px;
-}
-#node_info h3 {
-	color:#fff;
 }
