@@ -77,27 +77,48 @@
 			distinct.push(element[param2])
     	});
 
-		function removeDuplicates(inputArray) {
-            var i;
-            var len = inputArray.length;
-            var outputArray = [];
-            var temp = {};
+//		$('#distinc').append($('<span>', {
+//			text: " "+element
+//		}));
 
-            for (i = 0; i < len; i++) {
-                temp[inputArray[i]] = 0;
-            }
-            for (i in temp) {
-                outputArray.push(i);
-            }
-            return outputArray;
-        }
-		alert(removeDuplicates(distinct));
-		$.each(removeDuplicates(distinct), function(index, element) {
-			$('#distinc').append($('<span>', {
-		    	text: " "+element
-	    	}));
-	    });
+		
+		
+	    //// Get distinc values for a parameter:
+	    function distinc(data, param) {
+			var dupes = {};
+			var singles = [];
+			$.each(data, function(i, el) {
+				if (!dupes[el[param]]) {
+					dupes[el[param]] = true;
+					singles.push(el[param]);
+				}
+			});
+			return singles;
+		}
+		
+		//// Get list of parameters:
+		var params = [];
+		var dupes = {};
+		$.each(data, function(i0, el0) {
+			$.each(el0, function(i, el) {
+				if (!dupes[i]) {
+					dupes[i] = true;
+					params.push(i);
+				}
+			});
+		});
+		alert("params: "+params);
+		console.log(params);
+		/// Walk through the list of parameters
+		//var params_distinc_values=[];
+		//$.each(params, function(i, el) {
+			
+		//});
+		
+		//alert("my distinc mood: "+distinc(data, 'mood')+" | my distinc gender: "+distinc(data, 'gender'));
+		//console.log(distinc(data, 'mood'));
 
+		//////////////////////////////////////////
 		// config:
 		var c_container = 200;
 		//c_node = 78;
