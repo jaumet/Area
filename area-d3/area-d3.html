@@ -2,101 +2,53 @@
 <html>
   <head>
     <title>Hello, data!</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/d3.v2.js"></script>
+	<script type="text/javascript" src="js/underscore-min.js"></script>
+	<script type="text/javascript" src="data.json"></script>
+
 	<style>
 		.node { position:relative;float:left;}
 		#area {	border: 2px solid blue;height:3px;}
-	</style>    
+		#good td { border: 1px solid green;}
+		#bad td { border: 1px solid red;}
+	</style>
   </head>
   <body>
-  	<script type="text/javascript" src="js/jquery.js"></script>
-		<script type="text/javascript" src="js/d3.v2.js"></script>
     <div id="viz"></div>
-    <div id="distinc"></div>
-    <p>lala</p>
-		  <div id="sq"></div>
-		</div>
+   	<div id="analysis">
+   		<p>GOOD:</p>
+   		<table id="good"></table>
+   		<p>BAD:</p>
+   		<table id="bad"></table>
+   	</div>
+    <p>display</p>
+	<div id="sq"></div>
+	
     <script type="text/javascript">
-    // data:		
-		var data = [
-			{"id": 0, "mood": "good", "gender": "male", "name": "joan"},
-			{"id": 1, "mood": "good", "gender": "female", "name": "pep"},
-			{"id": 2, "mood": "good", "gender": "female", "name": "maria"},
-			{"id": 3, "mood": "good", "gender": "female", "name": "meli"},
-			{"id": 4, "mood": "good", "gender": "female", "name": "jaume"},
-			{"id": 5, "mood": "good", "gender": "female", "name": "jordi"},
-			{"id": 6, "mood": "good", "gender": "female", "name": "kiami"},
-			{"id": 7, "mood": "good", "gender": "female", "name": "lluis"},
-			{"id": 8, "mood": "good", "gender": "female", "name": "Laia"},
-			{"id": 9, "mood": "good", "gender": "female", "name": "eva"},
-			{"id": 10, "mood": "good", "gender": "female", "name": "anna"},
-			{"id": 11, "mood": "good", "gender": "female", "name": "joan"},
-			{"id": 12, "mood": "good", "gender": "female", "name": "pep"},
-			{"id": 13, "mood": "good", "gender": "male", "name": "maria"},
-			{"id": 14, "mood": "good", "gender": "male", "name": "meli"},
-			{"id": 15, "mood": "good", "gender": "male", "name": "jaume"},
-			{"id": 16, "mood": "good", "gender": "male", "name": "jordi"},
-			{"id": 17, "mood": "good", "gender": "male", "name": "kiami"},
-			{"id": 18, "mood": "good", "gender": "male", "name": "lluis"},
-			{"id": 19, "mood": "good", "gender": "male", "name": "Laia"},
-			{"id": 20, "mood": "good", "gender": "male", "name": "eva"},
-			{"id": 21, "mood": "good", "gender": "male", "name": "anna"},
-			{"id": 22, "mood": "good", "gender": "male", "name": "joan"},
-			{"id": 23, "mood": "good", "gender": "male", "name": "pep"},
-			{"id": 24, "mood": "bad", "gender": "male", "name": "maria"},
-			{"id": 25, "mood": "bad", "gender": "male", "name": "meli"},
-			{"id": 26, "mood": "bad", "gender": "male", "name": "jaume"},
-			{"id": 27, "mood": "bad", "gender": "male", "name": "jordi"},
-			{"id": 28, "mood": "bad", "gender": "male", "name": "kiami"},
-			{"id": 29, "mood": "bad", "gender": "male", "name": "lluis"},
-			{"id": 30, "mood": "bad", "gender": "male", "name": "Laia"},
-			{"id": 31, "mood": "bad", "gender": "male", "name": "eva"},
-			{"id": 32, "mood": "bad", "gender": "male", "name": "anna"},
-			{"id": 33, "mood": "bad", "gender": "male", "name": "joan"},
-			{"id": 34, "mood": "bad", "gender": "male", "name": "pep"},
-			{"id": 35, "mood": "bad", "gender": "male", "name": "maria"},
-			{"id": 36, "mood": "bad", "gender": "male", "name": "meli"},
-			{"id": 37, "mood": "bad", "gender": "male", "name": "jaume"},
-			{"id": 38, "mood": "bad", "gender": "male", "name": "jordi"},
-			{"id": 39, "mood": "bad", "gender": "male", "name": "kiami"},
-			{"id": 40, "mood": "bad", "gender": "male", "name": "lluis"},
-			{"id": 41, "mood": "bad", "gender": "male", "name": "Laia"},
-			{"id": 42, "mood": "bad", "gender": "male", "name": "eva"},
-			{"id": 43, "mood": "bad", "gender": "male", "name": "anna"}						
-		];
+    	
+		////////////////////////////////
+		// AREA CONFIG
+		var MAX_DISTINC = 10;
 		
-		// Parameters:
-		var param1 = "mood";
-		var param2 = "gender";
-		
-		// Data parser:
+		////////////////////////////////
+		// DATA PARSER:
 		var d_length = data.length;
-		// Data analisys;
-		// get number distinc for each json argument
-		var distinct = [];
-		$.each(data, function(index, element) {
-			distinct.push(element[param2])
-    	});
-
-//		$('#distinc').append($('<span>', {
-//			text: " "+element
-//		}));
-
 		
-		
-	    //// Get distinc values for a parameter:
+	    // Function to get distinc values for a parameter:
 	    function distinc(data, param) {
-			var dupes = {};
+			var dupes = {};	
 			var singles = [];
 			$.each(data, function(i, el) {
-				if (!dupes[el[param]]) {
+			if (!dupes[el[param]]) {
 					dupes[el[param]] = true;
 					singles.push(el[param]);
 				}
 			});
 			return singles;
 		}
-		
-		//// Get list of parameters:
+
+		// Get list of parameters from data:
 		var params = [];
 		var dupes = {};
 		$.each(data, function(i0, el0) {
@@ -107,27 +59,34 @@
 				}
 			});
 		});
-		alert("params: "+params);
-		console.log(params);
-		/// Walk through the list of parameters
-		//var params_distinc_values=[];
-		//$.each(params, function(i, el) {
-			
-		//});
 		
-		//alert("my distinc mood: "+distinc(data, 'mood')+" | my distinc gender: "+distinc(data, 'gender'));
-		//console.log(distinc(data, 'mood'));
+		// Walk through the list of parameters and draw a table
+		var d = [];
+		var l = 0;
+		$.each(params, function(i, el) {
+			d = distinc(data, el);
+			l = d.length;
+			//alert("llll :"+l);
+			if (l<MAX_DISTINC) {myid = "#good";} else {myid = "#bad";}
+			$(myid).append(
+				'<tr><td>'+el+'</td><td>'+l+'</td><td>'+d+'</td></tr>'
+			);
+			console.log(el+" -> "+distinc(data, el));
+		});
 
 		//////////////////////////////////////////
-		// config:
-		var c_container = 200;
+		// DISPLAY
+		
+		///////////////////////
+		// BLOCK REPRESENTATION
+		var c_container = 200; // TODO: this is block dimenssion
 		//c_node = 78;
 		var dim_node = Math.sqrt(d_length);
 		if (dim_node != Math.floor(dim_node)) {
 			dim_node = Math.floor(dim_node)+1;
 		}
 		var c_node = Math.floor(c_container/dim_node);
-		//alert("dims :"+dim_node+" | "+c_container);
+		//alert("dims :"+dim_node+" | "+c_node);
 
 	    var areaSVG = d3.select("#sq")
 	        .append("svg:svg")
@@ -139,7 +98,6 @@
 		var my_y = 0;
 		$.each(data, function(index, value) {
 			n = index/dim_node;
-			//alert("n; "+n);
 			if (typeof n === 'number' && n % 1 == 0) {
 				my_x = 0;
 			} else {
