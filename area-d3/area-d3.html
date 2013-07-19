@@ -38,7 +38,7 @@
 		// DATA PARSER:
 		var d_length = data.length;
 		
-	    // Function to get distinc values for a parameter:
+	    // Function to get distinc values of a parameter:
 	    function distinc(data, param) {
 			var dupes = {};	
 			var singles = [];
@@ -74,6 +74,7 @@
 			$(myid).append(
 				'<tr><td>'+el+'</td><td>'+l+'</td><td>'+d+'</td></tr>'
 			);
+			// FIXME Count here the max number of elements for each value and get the max one
 			//console.log(el+" -> "+distinc(data, el));
 		});
 
@@ -82,54 +83,22 @@
 		
 		///////////////////////
 		// BLOCK REPRESENTATION
-		
-		function block_builder(data, param_val1, block_div, areaSVG) {
+				
+		function block_builder(data, param_val1, param2colors, areaSVG) {
 			var b_container = 300; // this is block dimenssion
-			//c_node = 78;
 			var dim_node = Math.sqrt(d_length);
 			if (dim_node != Math.floor(dim_node)) {
 				dim_node = Math.floor(dim_node)+1;
 			}
 			var c_node = Math.floor(b_container/dim_node);
-			//alert("dims :"+dim_node+" | "+c_node);
-
-			areaSVG = d3.select(block_div)
+			
+			// creating a d3 canvas per block
+			areaSVG = d3.select('#b-'+param_val1)
 				.append("svg:svg")
 				.attr("width", b_container)
 				.attr("height", b_container)
 				.style('position','relative');
-
-			// Colors for param2
-			var colors = ['#cc3333', '#7f33cc', '#7fcc33','#33cccc'];
 			
-			// Assign colors to param2 values:
-			// FIXME colors must be assigned only once for each area (=> outside of the block_builder function)
-			var param2colors = [];
-			$.each(distinc(data, param2), function(i, el) {
-				param2colors[el] = colors[i];
-			});
-			//console.log(param2);
-			//console.log(param2colors);
-			
-			// FIXME Order data by param2 values:
-			//data(function):
-			/*
-			function sortBy(fields) {
-				return function (a, b) {
-					var A;
-					var B;
-					for( var i=0 ; i< fields.length ; i++ ) {
-						A += a[fields[i]];
-						B += b[fields[i]];
-					}
-					return A == B ? 0 : (A < B ? -1 : 1)
-				};
-			}
-			data = data.sort(sortBy(2, 2));
-			*/
-			console.log(data);
-
-			// 
 			var my_x = 0;
 			var my_y = 0;
 			var count = 0;
@@ -173,15 +142,49 @@
       		});
 		};
 		
-		// Area builder (matrix of blocks):
+		///////////////////////
+		// MATRIX REPRESENTATION
+		
 		// List of params and params values
 		var param1 = "gender";
 		var param2 = "mood";
 		
-		// 
-		$.each(distinc(data, param1), function(i, param1_val) {
+		///////////
+		// Prepare colors for param2 values:
+		// Approach 1: fix list and order of colors
+		var colors = ['#cc3333', '#7f33cc', '#7fcc33','#33cccc'];
+		
+		// FIXME colors must be assigned only once for each area (=> outside of the block_builder function)
+		var param2colors = [];
+		$.each(distinc(data, param2), function(i, el) {
+			param2colors[el] = colors[i];
+		});
+		
+		// Order data by any param values:
+		function sortJSON(data, key, order) {
+			order = order || "asc"; //defining default parameters in JS
+			console.log(order);
+			return data.sort(function(a, b) {
+				var x = a[key]; var y = b[key];
+				if (order=="asc") { n=-1; /*ASC*/} else { n=1; /*DESC*/}
+				return ((x < y) ? n : ((x > y) ? -n : 0)); 
+			});
+		}
+		sortJSON(data,param2);
+
+		//FIXME Get size of area:
+			// 1.Get max of param1_value
+			// 2.Get size of block
+			// 3. get size of the matrix
+		
+		
+		// Order of blocks by param1: use .sort() OR .reverse()
+		my = distinc(data, param1).sort(); // ASC
+		//my = distinc(data, param1).reverse(); // DESC
+		
+		$.each(my, function(i, param1_val) {
 			$('#area').append('<div id="b-'+param1_val+'" class="block"><div class="blockname">'+param1_val+'</div></div>');
-			block_builder(data, param1_val, '#b-'+param1_val);
+			block_builder(data, param1_val, param2colors);
 		});
 
     </script>
