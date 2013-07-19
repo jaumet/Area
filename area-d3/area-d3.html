@@ -4,34 +4,36 @@
     <title>Hello, data!</title>
     <script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/d3.v2.js"></script>
-	<script type="text/javascript" src="js/underscore-min.js"></script>
+	<!--<script type="text/javascript" src="js/underscore-min.js"></script>-->
 	<script type="text/javascript" src="data.json"></script>
 
 	<style>
 		.node { position:relative;float:left;}
-		/*#area {	border: 2px solid blue;height:3px;}*/
+		#area {	border: 2px solid blue;height:3px;}
 		#good td { border: 1px solid green;}
 		#bad td { border: 1px solid red;}
 		.block {position:relative;float:left;}
 	</style>
   </head>
   <body>
-    <div id="viz"></div>
    	<div id="analysis">
    		<p>GOOD:</p>
    		<table id="good"></table>
    		<p>BAD:</p>
    		<table id="bad"></table>
    	</div>
+   	<div style="clear:both;"></div>
     <p>display</p>
     <div id="area">
-		<div id="sq" class="block">
+	</div>
+	<!--
+	<div id="sq" class="block">
 			<div class="blockname">Male</div>
 		</div>
 		<div id="sq1" class="block">
 			<div class="blockname">Female</div>
 		</div>
-	</div>
+	-->
 	
     <script type="text/javascript">
     	
@@ -79,7 +81,7 @@
 			$(myid).append(
 				'<tr><td>'+el+'</td><td>'+l+'</td><td>'+d+'</td></tr>'
 			);
-			console.log(el+" -> "+distinc(data, el));
+			//console.log(el+" -> "+distinc(data, el));
 		});
 
 		//////////////////////////////////////////
@@ -151,8 +153,17 @@
 		
 		// Area builder (matrix of blocks):
 		// List of params and params values
-		block_builder(data, "gender", "male", "#sq");
-		block_builder(data, "gender", "female", "#sq1");
+		var param1 = "mood";
+		var param2 = "";
+		
+		// 
+		$.each(distinc(data, param1), function(i, el) {
+			$('#area').append('<div id="b-'+el+'" class="block"><div class="blockname">'+el+'</div></div>');
+			block_builder(data, param1, el, '#b-'+el);
+		});
+		
+		//block_builder(data, "gender", "male", "#sq");
+		//block_builder(data, "gender", "female", "#sq1");
 		
     </script>
 
