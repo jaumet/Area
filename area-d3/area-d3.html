@@ -9,7 +9,7 @@
 
 	<style>
 		.node { position:relative;float:left;} /*fill:grey;}*/
-		#area {	position:relative;float:left;border: 2px solid blue;height:3px;}
+		#area {	position:relative;float:left;border: 2px solid blue;}
 		#good td { border: 1px solid green;}
 		#bad td { border: 1px solid red;}
 		.block {position:relative;float:left;}
@@ -33,6 +33,10 @@
 		////////////////////////////////
 		// AREA CONFIG
 		var MAX_DISTINC = 10;
+		var areax = 1000;
+		var areay = 600;
+		var param1 = "gender";
+		var param2 = "gender";
 		
 		////////////////////////////////
 		// DATA PARSER:
@@ -56,10 +60,12 @@
 		var dupes = {};
 		$.each(data, function(i0, el0) {
 			$.each(el0, function(i, el) {
+				//console.log("i0 :"+i0+" | el0: "+el0+" | i: "+i+" | el : "+el);
 				if (!dupes[i]) {
 					dupes[i] = true;
 					params.push(i);
 				}
+				
 			});
 		});
 		
@@ -69,34 +75,50 @@
 		$.each(params, function(i, el) {
 			d = distinc(data, el);
 			l = d.length;
-			//alert("llll :"+l);
 			if (l<MAX_DISTINC) {myid = "#good";} else {myid = "#bad";}
 			$(myid).append(
 				'<tr><td>'+el+'</td><td>'+l+'</td><td>'+d+'</td></tr>'
 			);
-			// FIXME Count here the max number of elements for each value and get the max one
-			//console.log(el+" -> "+distinc(data, el));
 		});
-
+		
+		// Count here the max number of elements for each value and get the max one
+		function countValues(values, column, search) {
+			var total = 0;
+			for(var i  = 0; i < values.length; i++) {
+				if(values[i][column] === search) { total++; }
+			}
+			return total;
+		}
+		max1 = 0;max1name = '';
+		distinc1 = distinc(data, param1);
+		console.log("distinc1: "+distinc1);
+		$.each(distinc1, function(i, el) {
+			if (countValues(data, param1, el) > max1) {
+				max1 = countValues(data, param1, el);
+				max1name = el;
+			}
+		});
+			
 		//////////////////////////////////////////
 		// DISPLAY
 		
 		///////////////////////
 		// BLOCK REPRESENTATION
-				
-		function block_builder(data, param_val1, param2colors, areaSVG) {
-			var b_container = 300; // this is block dimenssion
-			var dim_node = Math.sqrt(d_length);
+
+		function block_builder(data, b_container, param_val1, param2colors, areaSVG) {
+			//var b_container = 300; // this is block dimenssion
+			var dim_node = Math.sqrt(max1);
 			if (dim_node != Math.floor(dim_node)) {
 				dim_node = Math.floor(dim_node)+1;
 			}
 			var c_node = Math.floor(b_container/dim_node);
+			block_h = dim_node*c_node;
 			
 			// creating a d3 canvas per block
 			areaSVG = d3.select('#b-'+param_val1)
 				.append("svg:svg")
 				.attr("width", b_container)
-				.attr("height", b_container)
+				.attr("height", block_h)
 				.style('position','relative');
 			
 			var my_x = 0;
@@ -145,25 +167,21 @@
 		///////////////////////
 		// MATRIX REPRESENTATION
 		
-		// List of params and params values
-		var param1 = "gender";
-		var param2 = "mood";
-		
 		///////////
 		// Prepare colors for param2 values:
-		// Approach 1: fix list and order of colors
+		// FIXME  Approach 1: fix list and order of colors
 		var colors = ['#cc3333', '#7f33cc', '#7fcc33','#33cccc'];
 		
-		// FIXME colors must be assigned only once for each area (=> outside of the block_builder function)
+		// param2's colors 
 		var param2colors = [];
-		$.each(distinc(data, param2), function(i, el) {
+		var distinc2 = distinc(data, param2);
+		$.each(distinc2, function(i, el) {
 			param2colors[el] = colors[i];
 		});
 		
 		// Order data by any param values:
 		function sortJSON(data, key, order) {
 			order = order || "asc"; //defining default parameters in JS
-			console.log(order);
 			return data.sort(function(a, b) {
 				var x = a[key]; var y = b[key];
 				if (order=="asc") { n=-1; /*ASC*/} else { n=1; /*DESC*/}
@@ -171,20 +189,23 @@
 			});
 		}
 		sortJSON(data,param2);
-
-		//FIXME Get size of area:
-			// 1.Get max of param1_value
-			// 2.Get size of block
-			// 3. get size of the matrix
-		
-		
+			
 		// Order of blocks by param1: use .sort() OR .reverse()
-		my = distinc(data, param1).sort(); // ASC
-		//my = distinc(data, param1).reverse(); // DESC
-		
-		$.each(my, function(i, param1_val) {
+		distinc1 = distinc(data, param1).sort(); // ASC
+		//distinc1 = distinc(data, param1).reverse(); // DESC
+
+		// Get size of area:
+		// Number of blocks: distinc1.length
+		var dim_blocks = Math.sqrt(distinc1.length);
+		if (dim_blocks != Math.floor(dim_blocks)) {
+			dim_blocks = Math.floor(dim_blocks)+1;
+		}
+		var b_container = Math.floor(areax/dim_blocks);
+		$('#area').css("width", areax+2+(2*dim_blocks)+"px"); // FIXME check this width correction 
+		console.log("dim_blocks: "+dim_blocks+" |b_container : "+b_container+" area total: "+areax+" 2 "+dim_blocks);
+		$.each(distinc1, function(i, param1_val) {
 			$('#area').append('<div id="b-'+param1_val+'" class="block"><div class="blockname">'+param1_val+'</div></div>');
-			block_builder(data, param1_val, param2colors);
+			block_builder(data, b_container, param1_val, param2colors);
 		});
 
     </script>
