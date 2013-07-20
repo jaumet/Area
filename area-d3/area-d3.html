@@ -35,7 +35,7 @@
 		var MAX_DISTINC = 10;
 		var areax = 1000;
 		var areay = 600;
-		var param1 = "gender";
+		var param1 = "mood";
 		var param2 = "gender";
 		
 		////////////////////////////////
@@ -192,7 +192,7 @@
 			
 		// Order of blocks by param1: use .sort() OR .reverse()
 		distinc1 = distinc(data, param1).sort(); // ASC
-		//distinc1 = distinc(data, param1).reverse(); // DESC
+		//distinc1 = distinc(data, param1);//.reverse(); // DESC (to use it just uncomment this line and let the sort() one active
 
 		// Get size of area:
 		// Number of blocks: distinc1.length
@@ -202,7 +202,7 @@
 		}
 		var b_container = Math.floor(areax/dim_blocks);
 		$('#area').css("width", areax+2+(2*dim_blocks)+"px"); // FIXME check this width correction 
-		console.log("dim_blocks: "+dim_blocks+" |b_container : "+b_container+" area total: "+areax+" 2 "+dim_blocks);
+		//console.log("dim_blocks: "+dim_blocks+" |b_container : "+b_container+" area total: "+areax+" 2 "+dim_blocks);
 		$.each(distinc1, function(i, param1_val) {
 			$('#area').append('<div id="b-'+param1_val+'" class="block"><div class="blockname">'+param1_val+'</div></div>');
 			block_builder(data, b_container, param1_val, param2colors);
