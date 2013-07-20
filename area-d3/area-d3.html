@@ -13,7 +13,7 @@
 		#good td { border: 1px solid green;}
 		#bad td { border: 1px solid red;}
 		.block {position:relative;float:left;}
-		.blockname, .block {border: 1px solid green;}
+		.blockname, .block {border: 0px solid green;}
 	</style>
   </head>
   <body>
@@ -125,6 +125,7 @@
 			var my_y = 0;
 			var count = 0;
 			$.each(data, function(index, value) {
+				var content = "<ul>";
 				if(value[param1] == param_val1) {
 					n = count/dim_node;
 					if (typeof n === 'number' && n % 1 == 0) {
@@ -132,23 +133,29 @@
 					} else {
 						my_x = my_x + c_node;
 					}
+					// build node content:
+					$.each(value, function(i, el) {
+						content += "<li>"+el+"</li>";
+					});
+					content += "</ul>";
+					//console.log(content);
 					my_y = Math.floor(n) * c_node;
-					draw_node(my_x, my_y, c_node, value.id, value.name, param2colors[value[param2]], areaSVG);
-					count = count +1;
+					draw_node(my_x, my_y, c_node, value.id, content, param2colors[value[param2]], areaSVG);
+					count ++;
+					content = "";
 				}
 			});
 		}
 		
-		function draw_node(x, y, c_node, id, name, color, areaSVG) {	
+		function draw_node(x, y, c_node, id, content, color, areaSVG) {	
 			areaSVG.append("svg:rect")
 				.attr("x", x)
 				.attr("y", y)
 				.attr("width", c_node)
 				.attr("height", c_node)
-				.attr("stroke", "red")
+				.attr("stroke", "#ffffff")
 				.attr('class','node')
 				.attr("id", id)
-				.attr("name", name)
 				.style('fill',color)
 				.on('mouseover', function(d,i) { 
 		    		d3.select(this)
@@ -160,7 +167,7 @@
       			})
       			.on('click', function(d,i) {
 	      			d3.select(this)
-  	    			alert("id: "+id+" | name: "+name);
+  	    			alert(content);
       		});
 		};
 		
@@ -169,15 +176,37 @@
 		
 		///////////
 		// Prepare colors for param2 values:
-		// FIXME  Approach 1: fix list and order of colors
-		var colors = ['#cc3333', '#7f33cc', '#7fcc33','#33cccc'];
+		
+		//// FIXME include approach 1 or 2 in the config options
+
+		// Approach 1: fix list and order of colors
+		//var colors = ['#CC5151', '#51CCCC', '#8ECC51', '#8E51CC', '#CCAD51', '#51CC70', '#5170CC', '#CC51AD', '#CC7F51', '#BCCC51', '#60CC51', '#51CC9E', '#519ECC', '#6051CC', '#BC51CC', '#CC517F', '#CC6851', '#CC9651', ];
+		//var colors_dark = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ];
+
+		// Approach 2: generate random colors
+		function get_random_colors(num_colors)  {
+			colors = [];
+			for (var i=0;i<num_colors;i++) {
+				r = Math.floor( 100+(Math.random()*(0, 155)));
+				g = Math.floor( 100+(Math.random()*(0, 155)));
+				b = Math.floor( 50 +(Math.random()*(0, 205)));
+				bgcolorc = "rgb("+r+","+g+","+b+")";
+				colors.push(bgcolorc);
+			}
+			return colors;
+		}
 		
 		// param2's colors 
 		var param2colors = [];
 		var distinc2 = distinc(data, param2);
+		colors = get_random_colors(distinc.length);
+		
 		$.each(distinc2, function(i, el) {
 			param2colors[el] = colors[i];
 		});
+
+		/////////
+		// order/sort & sizes
 		
 		// Order data by any param values:
 		function sortJSON(data, key, order) {
@@ -209,7 +238,6 @@
 		});
 
     </script>
-
   </body>
 </html>
 
