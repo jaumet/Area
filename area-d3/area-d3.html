@@ -10,11 +10,13 @@
 
 	<style>
 		.node { position:relative;float:left;} /*fill:grey;}*/
-		#area {	position:relative;float:left;border: 2px solid blue;}
+		#area {	position:relative;float:left;border-top: 0px solid grey;}
 		#good td { border: 1px solid green;}
 		#bad td { border: 1px solid red;}
 		.block {position:relative;float:left;}
-		.blockname, .block {border: 0px solid green;}
+		.block {border-right: 1px solid black;border-bottom: 0px solid grey;}
+		/*.blockname {border-right: 0px solid #ffffff;background-color:grey;color:#ffffff;padding-left:6px;}*/
+		.blockname {padding-left:6px;border-bottom: 1px solid grey;border-top: 1px solid grey;}
 	</style>
   </head>
   <body>
@@ -37,8 +39,8 @@
 		var AREAX = 1000;
 		var AREAY = 600;
 		var COLORS_APPROACH = "random"; // fix, random, gradient
-		var PARAM1 = "gender";
-		var PARAM2 = "mood";
+		var PARAM1 = "mood";
+		var PARAM2 = "name";
 		
 		////////////////////////////////
 		// DATA PARSER:
