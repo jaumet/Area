@@ -5,6 +5,7 @@
     <script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/d3.v2.js"></script>
 	<!--<script type="text/javascript" src="js/underscore-min.js"></script>-->
+	<script type="text/javascript" src="js/area_functions.js"></script>
 	<script type="text/javascript" src="data.json"></script>
 
 	<style>
@@ -35,8 +36,8 @@
 		var MAX_DISTINC = 10;
 		var areax = 1000;
 		var areay = 600;
-		var param1 = "mood";
-		var param2 = "gender";
+		var param1 = "gender";
+		var param2 = "mood";
 		
 		////////////////////////////////
 		// DATA PARSER:
@@ -188,7 +189,7 @@
 			colors = [];
 			for (var i=0;i<num_colors;i++) {
 				r = Math.floor( 100+(Math.random()*(0, 155)));
-				g = Math.floor( 100+(Math.random()*(0, 155)));
+				g = Math.floor( 75+(Math.random()*(100, 155)));
 				b = Math.floor( 50 +(Math.random()*(0, 205)));
 				bgcolorc = "rgb("+r+","+g+","+b+")";
 				colors.push(bgcolorc);
@@ -196,10 +197,25 @@
 			return colors;
 		}
 		
+		
+		// Approach 3: gradient and HSV2RGB
+		function get_random_hsv(h, v, num_colors)  {
+			colors = []; s = 0;
+			chunk = 100/num_colors;
+			for (var i=0;i<num_colors;i++) {
+				//s = Math.floor(Math.random()*(0, 100));
+				s += chunk;
+				bgcolorc = "rgb("+hsvToRgb(h, 100-s, v)+")";
+				colors.push(bgcolorc);
+			}
+			return colors;
+		}
+		
 		// param2's colors 
 		var param2colors = [];
-		var distinc2 = distinc(data, param2);
-		colors = get_random_colors(distinc.length);
+		var distinc2 = distinc(data, param2).sort();
+		//colors = get_random_colors(distinc2.length);
+		colors = get_random_hsv(260, 100, distinc2.length);
 		
 		$.each(distinc2, function(i, el) {
 			param2colors[el] = colors[i];
