@@ -34,27 +34,15 @@
 		////////////////////////////////
 		// AREA CONFIG
 		var MAX_DISTINC = 10;
-		var areax = 1000;
-		var areay = 600;
-		var param1 = "gender";
-		var param2 = "mood";
+		var AREAX = 1000;
+		var AREAY = 600;
+		var COLORS_APPROACH = "random"; // fix, random, gradient
+		var PARAM1 = "gender";
+		var PARAM2 = "mood";
 		
 		////////////////////////////////
 		// DATA PARSER:
 		var d_length = data.length;
-		
-	    // Function to get distinc values of a parameter:
-	    function distinc(data, param) {
-			var dupes = {};	
-			var singles = [];
-			$.each(data, function(i, el) {
-			if (!dupes[el[param]]) {
-					dupes[el[param]] = true;
-					singles.push(el[param]);
-				}
-			});
-			return singles;
-		}
 
 		// Get list of parameters from data:
 		var params = [];
@@ -66,7 +54,6 @@
 					dupes[i] = true;
 					params.push(i);
 				}
-				
 			});
 		});
 		
@@ -83,19 +70,12 @@
 		});
 		
 		// Count here the max number of elements for each value and get the max one
-		function countValues(values, column, search) {
-			var total = 0;
-			for(var i  = 0; i < values.length; i++) {
-				if(values[i][column] === search) { total++; }
-			}
-			return total;
-		}
 		max1 = 0;max1name = '';
-		distinc1 = distinc(data, param1);
+		distinc1 = distinc(data, PARAM1);
 		console.log("distinc1: "+distinc1);
 		$.each(distinc1, function(i, el) {
-			if (countValues(data, param1, el) > max1) {
-				max1 = countValues(data, param1, el);
+			if (countValues(data, PARAM1, el) > max1) {
+				max1 = countValues(data, PARAM1, el);
 				max1name = el;
 			}
 		});
@@ -127,7 +107,7 @@
 			var count = 0;
 			$.each(data, function(index, value) {
 				var content = "<ul>";
-				if(value[param1] == param_val1) {
+				if(value[PARAM1] == param_val1) {
 					n = count/dim_node;
 					if (typeof n === 'number' && n % 1 == 0) {
 						my_x = 0;
@@ -139,9 +119,8 @@
 						content += "<li>"+el+"</li>";
 					});
 					content += "</ul>";
-					//console.log(content);
 					my_y = Math.floor(n) * c_node;
-					draw_node(my_x, my_y, c_node, value.id, content, param2colors[value[param2]], areaSVG);
+					draw_node(my_x, my_y, c_node, value.id, content, param2colors[value[PARAM2]], areaSVG);
 					count ++;
 					content = "";
 				}
@@ -176,46 +155,26 @@
 		// MATRIX REPRESENTATION
 		
 		///////////
-		// Prepare colors for param2 values:
+		// Prepare colors for PARAM2 values:
 		
-		//// FIXME include approach 1 or 2 in the config options
-
-		// Approach 1: fix list and order of colors
-		//var colors = ['#CC5151', '#51CCCC', '#8ECC51', '#8E51CC', '#CCAD51', '#51CC70', '#5170CC', '#CC51AD', '#CC7F51', '#BCCC51', '#60CC51', '#51CC9E', '#519ECC', '#6051CC', '#BC51CC', '#CC517F', '#CC6851', '#CC9651', ];
-		//var colors_dark = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ];
-
-		// Approach 2: generate random colors
-		function get_random_colors(num_colors)  {
-			colors = [];
-			for (var i=0;i<num_colors;i++) {
-				r = Math.floor( 100+(Math.random()*(0, 155)));
-				g = Math.floor( 75+(Math.random()*(100, 155)));
-				b = Math.floor( 50 +(Math.random()*(0, 205)));
-				bgcolorc = "rgb("+r+","+g+","+b+")";
-				colors.push(bgcolorc);
-			}
-			return colors;
-		}
-		
-		
-		// Approach 3: gradient and HSV2RGB
-		function get_random_hsv(h, v, num_colors)  {
-			colors = []; s = 0;
-			chunk = 100/num_colors;
-			for (var i=0;i<num_colors;i++) {
-				//s = Math.floor(Math.random()*(0, 100));
-				s += chunk;
-				bgcolorc = "rgb("+hsvToRgb(h, 100-s, v)+")";
-				colors.push(bgcolorc);
-			}
-			return colors;
-		}
-		
-		// param2's colors 
+		// PARAM2's colors 
 		var param2colors = [];
-		var distinc2 = distinc(data, param2).sort();
-		//colors = get_random_colors(distinc2.length);
-		colors = get_random_hsv(260, 100, distinc2.length);
+		var distinc2 = distinc(data, PARAM2).sort();
+		switch(COLORS_APPROACH) {
+			case "fix":
+				// Approach 1: fix list and order of colors
+				var colors = ['#CC5151', '#51CCCC', '#8ECC51', '#8E51CC', '#CCAD51', '#51CC70', '#5170CC', '#CC51AD', '#CC7F51', '#BCCC51', '#60CC51', '#51CC9E', '#519ECC', '#6051CC', '#BC51CC', '#CC517F', '#CC6851', '#CC9651', ];
+				//var colors_dark = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ];			  
+			  break;
+			case "random":
+				colors = get_random_colors(distinc2.length);
+			  break;
+			case "gradient":
+				colors = get_random_hsv(60, 100, distinc2.length);
+			  break;
+			//default:
+			//  default code here 
+		}
 		
 		$.each(distinc2, function(i, el) {
 			param2colors[el] = colors[i];
@@ -223,21 +182,11 @@
 
 		/////////
 		// order/sort & sizes
-		
-		// Order data by any param values:
-		function sortJSON(data, key, order) {
-			order = order || "asc"; //defining default parameters in JS
-			return data.sort(function(a, b) {
-				var x = a[key]; var y = b[key];
-				if (order=="asc") { n=-1; /*ASC*/} else { n=1; /*DESC*/}
-				return ((x < y) ? n : ((x > y) ? -n : 0)); 
-			});
-		}
-		sortJSON(data,param2);
+		sortJSON(data,PARAM2);
 			
-		// Order of blocks by param1: use .sort() OR .reverse()
-		distinc1 = distinc(data, param1).sort(); // ASC
-		//distinc1 = distinc(data, param1);//.reverse(); // DESC (to use it just uncomment this line and let the sort() one active
+		// Order of blocks by PARAM1: use .sort() OR .reverse()
+		distinc1 = distinc(data, PARAM1).sort(); // ASC
+		//distinc1 = distinc(data, PARAM1);//.reverse(); // DESC (to use it just uncomment this line and let the sort() one active
 
 		// Get size of area:
 		// Number of blocks: distinc1.length
@@ -245,9 +194,8 @@
 		if (dim_blocks != Math.floor(dim_blocks)) {
 			dim_blocks = Math.floor(dim_blocks)+1;
 		}
-		var b_container = Math.floor(areax/dim_blocks);
-		$('#area').css("width", areax+2+(2*dim_blocks)+"px"); // FIXME check this width correction 
-		//console.log("dim_blocks: "+dim_blocks+" |b_container : "+b_container+" area total: "+areax+" 2 "+dim_blocks);
+		var b_container = Math.floor(AREAX/dim_blocks);
+		$('#area').css("width", AREAX+2+(2*dim_blocks)+"px"); // FIXME check this width correction 
 		$.each(distinc1, function(i, param1_val) {
 			$('#area').append('<div id="b-'+param1_val+'" class="block"><div class="blockname">'+param1_val+'</div></div>');
 			block_builder(data, b_container, param1_val, param2colors);
