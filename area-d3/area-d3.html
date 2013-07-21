@@ -36,8 +36,8 @@
 		////////////////////////////////
 		// AREA CONFIG
 		var MAX_DISTINC = 10;
-		var AREAX = 1000;
-		var AREAY = 600;
+		var AREAX = 500;
+		var AREAY = 500;
 		var COLORS_APPROACH = "random"; // fix, random, gradient
 		var PARAM1 = "mood";
 		var PARAM2 = "name";
@@ -88,20 +88,20 @@
 		///////////////////////
 		// BLOCK REPRESENTATION
 
-		function block_builder(data, b_container, param_val1, param2colors, areaSVG) {
+		function block_builder(data, blockx, blocky, param_val1, param2colors, areaSVG) {
 			//var b_container = 300; // this is block dimenssion
 			var dim_node = Math.sqrt(max1);
 			if (dim_node != Math.floor(dim_node)) {
 				dim_node = Math.floor(dim_node)+1;
 			}
-			var c_node = Math.floor(b_container/dim_node);
-			block_h = dim_node*c_node;
-			
+			var nodex = Math.floor(blockx/dim_node);
+			var nodey = Math.floor(blocky/dim_node);
+				
 			// creating a d3 canvas per block
 			areaSVG = d3.select('#b-'+param_val1)
 				.append("svg:svg")
-				.attr("width", b_container)
-				.attr("height", block_h)
+				.attr("width", blockx)
+				.attr("height", blocky)
 				.style('position','relative');
 			
 			var my_x = 0;
@@ -114,27 +114,27 @@
 					if (typeof n === 'number' && n % 1 == 0) {
 						my_x = 0;
 					} else {
-						my_x = my_x + c_node;
+						my_x = my_x + nodex;
 					}
 					// build node content:
 					$.each(value, function(i, el) {
 						content += "<li>"+el+"</li>";
 					});
 					content += "</ul>";
-					my_y = Math.floor(n) * c_node;
-					draw_node(my_x, my_y, c_node, value.id, content, param2colors[value[PARAM2]], areaSVG);
+					my_y = Math.floor(n) * nodey;
+					draw_node(my_x, my_y, nodex, nodey, value.id, content, param2colors[value[PARAM2]], areaSVG);
 					count ++;
 					content = "";
 				}
 			});
 		}
 		
-		function draw_node(x, y, c_node, id, content, color, areaSVG) {	
+		function draw_node(x, y, nodex, nodey, id, content, color, areaSVG) {	
 			areaSVG.append("svg:rect")
 				.attr("x", x)
 				.attr("y", y)
-				.attr("width", c_node)
-				.attr("height", c_node)
+				.attr("width", nodex)
+				.attr("height", nodey)
 				.attr("stroke", "#ffffff")
 				.attr('class','node')
 				.attr("id", id)
@@ -196,11 +196,12 @@
 		if (dim_blocks != Math.floor(dim_blocks)) {
 			dim_blocks = Math.floor(dim_blocks)+1;
 		}
-		var b_container = Math.floor(AREAX/dim_blocks);
+		var blockx = Math.floor(AREAX/dim_blocks);
+		var blocky = Math.floor(AREAY/dim_blocks);
 		$('#area').css("width", AREAX+2+(2*dim_blocks)+"px"); // FIXME check this width correction 
 		$.each(distinc1, function(i, param1_val) {
 			$('#area').append('<div id="b-'+param1_val+'" class="block"><div class="blockname">'+param1_val+'</div></div>');
-			block_builder(data, b_container, param1_val, param2colors);
+			block_builder(data, blockx, blocky, param1_val, param2colors);
 		});
 
     </script>
