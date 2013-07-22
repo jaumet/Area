@@ -4,8 +4,6 @@
     <title>Hello, data!</title>
     <script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/d3.v2.js"></script>
-	<!--<script type="text/javascript" src="js/underscore-min.js"></script>-->
-	<script type="text/javascript" src="js/area_functions.js"></script>
 	<script type="text/javascript" src="data.json"></script>
 
 	<style>
@@ -15,20 +13,56 @@
 		.node { position:relative;float:left;}
 		.block {position:relative;float:left;border-right: 1px solid black;border-bottom: 0px solid grey;}
 		.blockname {padding-left:6px;border-bottom: 1px solid grey;border-top: 1px solid grey;}
+		
+		.tabs li {
+				list-style:none;
+				display:inline;
+			}
+
+			.tabs a {
+				padding:5px 10px;
+				display:inline-block;
+				background:#666;
+				color:#fff;
+				text-decoration:none;
+			}
+
+			.tabs a.active {
+				background:#fff;
+				color:#000;
+			}
+
 	</style>
   </head>
   <body>
-   	<div id="analysis">
-   		<p>GOOD:</p>
-   		<table id="good"></table>
-   		<p>BAD:</p>
-   		<table id="bad"></table>
-   	</div>
+  	<div id="panel">
+		<ul class='tabs'>
+			<li><a href='#tab1'>Parameters & legend</a></li>
+			<li><a href='#tab2'>About the data</a></li>
+			<li><a href='#tab3'>Configuration</a></li>
+		</ul>
+		<div id='tab1'>hola1
+			<div id="options">
+			</div>
+		</div>
+		<div id='tab2'>hola2
+			<p>This is the 2nd tab.</p>
+		</div>
+		<div id='tab3'>
+			<div id="analysis">
+				<p>GOOD:</p>
+				<table id="good"></table>
+				<p>BAD:</p>
+				<table id="bad"></table>
+			</div>
+		</div>
+	</div>
+
    	<div style="clear:both;"></div>
     <p>display</p>
     <div id="area">
 	</div>
-
+	<script type="text/javascript" src="js/area_functions.js"></script>
     <script type="text/javascript">
     	
 		////////////////////////////////
@@ -60,10 +94,16 @@
 		// Walk through the list of parameters and draw a table
 		var d = [];
 		var l = 0;
+		var options = '';
 		$.each(params, function(i, el) {
 			d = distinc(data, el);
 			l = d.length;
-			if (l<MAX_DISTINC) {myid = "#good";} else {myid = "#bad";}
+			if (l<MAX_DISTINC) {
+				myid = "#good";
+				$('#options').append('<ul><li>'+d.join('<li>')+'</ul>');
+			} else {
+				myid = "#bad";
+			}
 			$(myid).append(
 				'<tr><td>'+el+'</td><td>'+l+'</td><td>'+d+'</td></tr>'
 			);
