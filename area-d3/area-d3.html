@@ -13,7 +13,7 @@
 		.node { position:relative;float:left;}
 		.block {position:relative;float:left;border-right: 1px solid black;border-bottom: 0px solid grey;}
 		.blockname {padding-left:6px;border-bottom: 1px solid grey;border-top: 1px solid grey;}
-		
+		.tab {height:120px;border:1px solid red;overflow:auto;}
 		.tabs li {
 				list-style:none;
 				display:inline;
@@ -31,44 +31,72 @@
 				background:#fff;
 				color:#000;
 			}
-
+			.defaultText { width: 30px; }
+			.configuration_div {
+				position:relative;
+				float:left;
+				width:150px;
+			}
 	</style>
   </head>
   <body>
   	<div id="panel">
 		<ul class='tabs'>
 			<li><a href='#tab1'>Parameters & legend</a></li>
-			<li><a href='#tab2'>About the data</a></li>
-			<li><a href='#tab3'>Configuration</a></li>
+			<li><a href='#tab2'>filter</a></li>
+			<li><a href='#tab3'>About the data</a></li>
+			<li><a href='#tab4'>Configuration</a></li>
 		</ul>
-		<div id='tab1'>hola1
+		<div id='tab1' class="tab">
 			<div id="params">
 			</div>
-			<input type="button" id="submit_params" value="apply" />
+			<input type="button" class="submit_params" value="apply" />
 			
 		</div>
-		<div id='tab2'>hola2
-			<p>This is the 2nd tab.</p>
+		<div id='tab2' class="tab">
+			<p>FILTER</p>
 		</div>
-		<div id='tab3'>
+		<div id='tab3' class="tab">
 			<div id="analysis">
-				<p>GOOD:</p>
+				<span>GOOD:</span>
 				<table id="good"></table>
-				<p>BAD:</p>
+				<span>BAD:</span>
 				<table id="bad"></table>
+			</div>
+		</div>
+		<div id='tab4' class="tab">
+			<div class="configuration_div">
+				<p>size: 
+					<input class="defaultText" id="areax" type="text" />
+					&nbsp;<b>X</b>&nbsp;
+					<input class="defaultText" id="areay" type="text" />
+				</p>
+				<p>colors schema: 
+					<select id="colors_approach">
+						<option value="fix">fix</option>
+						<option value="random">random</option>
+						<option value="gradient">gradient</option>
+					</select>				
+				</p>
+			</div>
+			<div class="configuration_div">
+				<p>
+					<input type="button" class="submit_params" value="apply" />
+				</p>
 			</div>
 		</div>
 	</div>
 
    	<div style="clear:both;"></div>
-    <p>display</p>
+
     <div id="area">
 	</div>
+	
 	<script type="text/javascript" src="js/area_functions.js"></script>
     <script type="text/javascript">
     	
-		////////////////////////////////
-		// AREA CONFIG
+		///////////////////////////////
+		// AREA  DEFAULT CONFIG
 		var MAX_DISTINC = 10;
 		var AREAX = 400;
 		var AREAY = 400;
@@ -76,136 +104,147 @@
 		var PARAM1 = "gender";
 		var PARAM2 = "mood";
 		
-		////////////////////////////////
-		// DATA PARSER:
-		var d_length = data.length;
-
-		// Get list of parameters from data:
-		var params = [];
-		var dupes = {};
-		$.each(data, function(i0, el0) {
-			$.each(el0, function(i, el) {
-				//console.log("i0 :"+i0+" | el0: "+el0+" | i: "+i+" | el : "+el);
-				if (!dupes[i]) {
-					dupes[i] = true;
-					params.push(i);
-				}
-			});
-		});
-		
-		// Walk through the list of parameters and draw a table
-		var d = [];
-		var l = 0;
-		var options = ''; var myopt='';
-		$.each(params, function(i, el) {
-			d = distinc(data, el);
-			l = d.length;
-			if (l<MAX_DISTINC) {
-				myid = "#good";
-				myopt += '<option value='+el+'>'+el+'</option>';
-			} else {
-				myid = "#bad";
-			}
-			$(myid).append(
-				'<tr><td>'+el+'</td><td>'+l+'</td><td>'+d+'</td></tr>'
-			);
-		});
-		myoptions = '<select class="options"><option value="select">select</option>'+myopt;
-		myoptions += '</select>';
-		$('#params').append(myoptions+myoptions);		
-
-		// Count here the max number of elements for each value and get the max one
-		max1 = 0;max1name = '';
-		distinc1 = distinc(data, PARAM1);
-		console.log("distinc1: "+distinc1);
-		$.each(distinc1, function(i, el) {
-			if (countValues(data, PARAM1, el) > max1) {
-				max1 = countValues(data, PARAM1, el);
-				max1name = el;
-			}
-		});
-		
-		//////////////////////////////////////////
-		// DISPLAY
-		
-		///////////////////////
-		// BLOCK REPRESENTATION
-
-		function block_builder(data, blockx, blocky, param_val1, param2colors, areaSVG) {
-			//console.log('param2colors: '+param2colors.length);
-			//var b_container = 300; // this is block dimenssion
-			var dim_node = Math.sqrt(max1);
-			if (dim_node != Math.floor(dim_node)) {
-				dim_node = Math.floor(dim_node)+1;
-			}
-			var nodex = Math.floor(blockx/dim_node);
-			var nodey = Math.floor(blocky/dim_node);
-				
-			// creating a d3 canvas per block
-			areaSVG = d3.select('#b-'+param_val1)
-				.append("svg:svg")
-				.attr("width", blockx)
-				.attr("height", blocky)
-				.style('position','relative');
-			
-			var my_x = 0;
-			var my_y = 0;
-			var count = 0;
-			$.each(data, function(index, value) {
-				var content = "<ul>";
-				if(value[PARAM1] == param_val1) {
-					n = count/dim_node;
-					if (typeof n === 'number' && n % 1 == 0) {
-						my_x = 0;
-					} else {
-						my_x = my_x + nodex;
-					}
-					// build node content:
-					$.each(value, function(i, el) {
-						content += "<li>"+el+"</li>";
-					});
-					content += "</ul>";
-					my_y = Math.floor(n) * nodey;
-					draw_node(my_x, my_y, nodex, nodey, value.id, content, param2colors[value[PARAM2]], areaSVG);
-					//console.log(my_x+" | "+my_y+" | "+nodex+" | "+nodey+" | "+value.id+" | "+content+" | "+param2colors[value[PARAM2]]+" | "+areaSVG);
-					count ++;
-					content = "";
-				}
-			});
-		}
-		
-		function draw_node(x, y, nodex, nodey, id, content, color, areaSVG) {	
-			areaSVG.append("svg:rect")
-				.attr("x", x)
-				.attr("y", y)
-				.attr("width", nodex)
-				.attr("height", nodey)
-				.attr("stroke", "#ffffff")
-				.attr('class','node')
-				.attr("id", id)
-				.style('fill',color)
-				.on('mouseover', function(d,i) { 
-		    		d3.select(this)
-		      			.style('fill','lightblue'); 
-		   		})
-				.on('mouseout', function(d,i) { 
-        			d3.select(this)
-    					.style('fill',color); 
-      			})
-      			.on('click', function(d,i) {
-	      			d3.select(this)
-  	    			alert(content);
-      		});
-		};
-		
-		///////////////////////
-		// MATRIX REPRESENTATION
-		
-		///////////
-		// Prepare colors for PARAM2 values:
+		///////////////////////////////
+		// MAIN AREA FUNCTION
 		function do_area(PARAM1, PARAM2, AREAX, AREAY, COLORS_APPROACH) {
-			$("#area").empty();$('#area').css("width",0);
+			////////////////////////////////
+			// DATA PARSER:
+			var d_length = data.length;
+	
+			// Get list of parameters from data:
+			var params = [];
+			var dupes = {};
+			$.each(data, function(i0, el0) {
+				$.each(el0, function(i, el) {
+					//console.log("i0 :"+i0+" | el0: "+el0+" | i: "+i+" | el : "+el);
+					if (!dupes[i]) {
+						dupes[i] = true;
+						params.push(i);
+					}
+				});
+			});
+			
+			// Walk through the list of parameters and draw a table, and the the dropdowns for the two parameters
+			var d = [];
+			var l = 0;
+			var myoptions_end = ''; var myopt='';
+			myoptions1 = '<select id="options1"><option value="select">select</option>';
+			myoptions2 = '<select id="options2"><option value="select">select</option>';
+			$.each(params, function(i, el) {
+				d = distinc(data, el);
+				l = d.length;
+				if (l<MAX_DISTINC) {
+					myid = "#good";
+					myopt += '<option value='+el+'>'+el+'</option>';
+				} else {
+					myid = "#bad";
+				}
+				$(myid).append(
+					'<tr><td>'+el+'</td><td>'+l+'</td><td>'+d+'</td></tr>'
+				);
+			});
+			myoptions_end += '</select>';
+			dbarrow = '<img id="dbarrow" src="images/dbarrow.png" width="30px" />';
+			$('#params').append(myoptions1+myopt+myoptions_end+dbarrow+myoptions2+myopt+myoptions_end);		
+			
+			// select the PARA1 and PARAM2 in the two dropdowns
+			$('#options1').val(PARAM1);
+			$('#options2').val(PARAM2);
+			
+			// Add AREA config values to the config TAB fields
+			$('#areax').val(AREAX);
+			$('#areay').val(AREAY);
+			$('#colors_approach').val(COLORS_APPROACH);
+	
+			// Count here the max number of elements for each value and get the max one
+			max1 = 0;max1name = '';
+			distinc1 = distinc(data, PARAM1);
+			$.each(distinc1, function(i, el) {
+				if (countValues(data, PARAM1, el) > max1) {
+					max1 = countValues(data, PARAM1, el);
+					max1name = el;
+				}
+			});
+			
+			//////////////////////////////////////////
+			// DISPLAY
+			
+			///////////////////////
+			// BLOCK REPRESENTATION
+	
+			function block_builder(data, blockx, blocky, param_val1, param2colors, areaSVG) {
+				var dim_node = Math.sqrt(max1);
+				if (dim_node != Math.floor(dim_node)) {
+					dim_node = Math.floor(dim_node)+1;
+				}
+				var nodex = Math.floor(blockx/dim_node);
+				var nodey = Math.floor(blocky/dim_node);
+					
+				// creating a d3 canvas per block
+				areaSVG = d3.select('#b-'+param_val1)
+					.append("svg:svg")
+					.attr("width", blockx)
+					.attr("height", blocky)
+					.style('position','relative');
+				
+				var my_x = 0;
+				var my_y = 0;
+				var count = 0;
+				$.each(data, function(index, value) {
+					var content = "<ul>";
+					if(value[PARAM1] == param_val1) {
+						n = count/dim_node;
+						if (typeof n === 'number' && n % 1 == 0) {
+							my_x = 0;
+						} else {
+							my_x = my_x + nodex;
+						}
+						// build node content:
+						$.each(value, function(i, el) {
+							content += "<li>"+el+"</li>";
+						});
+						content += "</ul>";
+						my_y = Math.floor(n) * nodey;
+						draw_node(my_x, my_y, nodex, nodey, value.id, content, param2colors[value[PARAM2]], areaSVG);
+						count ++;
+						content = "";
+					}
+				});
+			}
+			
+			function draw_node(x, y, nodex, nodey, id, content, color, areaSVG) {	
+				areaSVG.append("svg:rect")
+					.attr("x", x)
+					.attr("y", y)
+					.attr("width", nodex)
+					.attr("height", nodey)
+					.attr("stroke", "#ffffff")
+					.attr('class','node')
+					.attr("id", id)
+					.style('fill',color)
+					.on('mouseover', function(d,i) { 
+			    		d3.select(this)
+			      			.style('fill','lightblue'); 
+			   		})
+					.on('mouseout', function(d,i) { 
+	        			d3.select(this)
+	    					.style('fill',color); 
+	      			})
+	      			.on('click', function(d,i) {
+		      			d3.select(this)
+	  	    			alert(content);
+	      		});
+			};
+			
+			///////////////////////
+			// MATRIX REPRESENTATION
+			
+			///////////
+			// Prepare colors for PARAM2 values:
+			
 			// PARAM2's colors 
+			// Function to get distinc values of a parameter:
+
 			var param2colors = [];
 			var distinc2 = distinc(data, PARAM2).sort();
 			switch(COLORS_APPROACH) {
@@ -224,11 +263,8 @@
 			
 			$.each(distinc2, function(i, el) {
 				param2colors[el] = colors[i];
-				//console.log('->> param2colors[el]: '+param2colors[el]+' | colors[i]: '+colors[i]);
 			});
-			$.each(param2colors, function(i, el) {
-				console.log(">>>> param2colors: i->"+i+" | el->"+el);
-			});
+
 			/////////
 			// order/sort & sizes
 			sortJSON(data,PARAM2);
@@ -249,20 +285,27 @@
 			$.each(distinc1, function(i, param1_val) {
 				$('#area').append('<div id="b-'+param1_val+'" class="block"><div class="blockname">'+param1_val+'</div></div>');
 				block_builder(data, blockx, blocky, param1_val, param2colors);
-				console.log('-> blockX: '+blockx+' | BlockY: '+blocky+' | param_val: '+param1_val+' | param2colors: '+param2colors.length);
 			});
 		}
 		
 		do_area(PARAM1, PARAM2, AREAX, AREAY, COLORS_APPROACH);
 		
-		$("#submit_params").on("click", function(event){
-			p1 = $("#params select:first option:selected").val();
-			p2 = $("#params select:first").next().val();
-			console.log(p1);
-			console.log(p2);
-			if (p1 != 'select' && p2 != 'select') {
-				console.log(p1+', '+p2+', '+AREAX+', '+AREAY+', '+COLORS_APPROACH);
-				do_area(p1, p2, AREAX, AREAY, COLORS_APPROACH);
+		$(".submit_params").on("click", function(event){
+			p1 = $("#options1").val();
+			p2 = $("#options2").val();
+			ax = parseInt($('#areax').val());
+			ay = parseInt($('#areay').val());
+			c_a = $("#colors_approach option:selected").val();
+			
+			if (p1 != 'select' || p2 != 'select') {
+				// Emptying divs that will be refilled in the do_area function:
+				$("#params").empty();
+				$("#area").empty();
+				$('#area').css("width",0);
+				
+				console.log("-> p1: "+p1+"-> p2: "+p2+"-> ax: "+ax+"-> ay: "+ay+"-> c_a: "+c_a);
+
+				do_area(p1, p2, ax, ay, c_a);
 			}
 		});
     </script>

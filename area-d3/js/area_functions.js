@@ -1,3 +1,13 @@
+
+// Size of an associative array
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
+
 // TABS function
 $('ul.tabs').each(function(){
 	// function by @jacklmoore [http://www.jacklmoore.com/notes/jquery-tabs/]. Thanks!
