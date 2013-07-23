@@ -35,7 +35,23 @@
 			.configuration_div {
 				position:relative;
 				float:left;
-				width:150px;
+				min-width:200px;
+			}
+			.legendlist {
+				line-height:30px;	
+			}
+			.legendlist span {
+				border:1px solid #000000;
+				padding:3px;
+			}
+			#node_infoXX {
+				position:absolute;
+				left:40px;
+				top:200px;
+				border:2px solid green;
+				min-width:300px;
+				min-height:300px;
+				z-index:20;
 			}
 	</style>
   </head>
@@ -48,10 +64,19 @@
 			<li><a href='#tab4'>Configuration</a></li>
 		</ul>
 		<div id='tab1' class="tab">
-			<div id="params">
+			<div class="configuration_div">
+				<p>Parameters</p>
+				<div id="params">
+				</div>
+				<input type="button" class="submit_params" value="apply" />
 			</div>
-			<input type="button" class="submit_params" value="apply" />
-			
+			<div class="configuration_div">
+				<p>Legend</p>
+				<p>
+					<span id="legend1" class="legendlist">Blocks:&nbsp;&nbsp;</span><br />
+					<span id="legend2" class="legendlist">Colors:&nbsp;&nbsp;</span>
+				</p>
+			</div>			
 		</div>
 		<div id='tab2' class="tab">
 			<p>FILTER</p>
@@ -88,8 +113,10 @@
 	</div>
 
    	<div style="clear:both;"></div>
-
-    <div id="area">
+	<div>
+	    <div id="area">
+		</div>
+		<div id="node_info">NODE INFO</div>
 	</div>
 	
 	<script type="text/javascript" src="js/area_functions.js"></script>
@@ -98,8 +125,8 @@
 		///////////////////////////////
 		// AREA  DEFAULT CONFIG
 		var MAX_DISTINC = 10;
-		var AREAX = 400;
-		var AREAY = 400;
+		var AREAX = 800;
+		var AREAY = 600;
 		var COLORS_APPROACH = "random"; // fix, random, gradient
 		var PARAM1 = "gender";
 		var PARAM2 = "mood";
@@ -201,7 +228,7 @@
 						}
 						// build node content:
 						$.each(value, function(i, el) {
-							content += "<li>"+el+"</li>";
+							content += "<li>"+i+" -> "+el+"</li>";
 						});
 						content += "</ul>";
 						my_y = Math.floor(n) * nodey;
@@ -232,21 +259,22 @@
 	      			})
 	      			.on('click', function(d,i) {
 		      			d3.select(this)
-	  	    			alert(content);
+	  	    			//alert(content);
+	  	    			$('#node_info').html(content);
 	      		});
 			};
 			
 			///////////////////////
 			// MATRIX REPRESENTATION
-			
-			///////////
-			// Prepare colors for PARAM2 values:
-			
-			// PARAM2's colors 
-			// Function to get distinc values of a parameter:
 
+			// Prepare colors for PARAM2 values:
 			var param2colors = [];
-			var distinc2 = distinc(data, PARAM2).sort();
+			
+			// FIXME this parameter can be added to the configuration
+			// Order of blocks by PARAM1: use .sort() OR .reverse()
+			var distinc2 = distinc(data, PARAM2).sort(); // ASC
+			// var distinc2 = distinc(data, PARAM2).reverse(); / DESC (to use it just uncomment this line and let the sort() one active
+			
 			switch(COLORS_APPROACH) {
 				case "random":
 					colors = get_random_colors(distinc2.length);
@@ -260,20 +288,25 @@
 					//var colors_dark = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ];			  
 				  break;
 			}
-			
+
+			// Getting legend for param2
+			var legend2 = "";
 			$.each(distinc2, function(i, el) {
 				param2colors[el] = colors[i];
+				legend2 += '<span class="legendtxt" style="background-color:'+colors[i]+';">'+el+'</span>&nbsp;';
 			});
+			// Adding legend for param2
+			$('#legend2').append(legend2);
 
-			/////////
-			// order/sort & sizes
+			// sort data
 			sortJSON(data,PARAM2);
-				
+
+			// FIXME this parameter can be added to the configuration
 			// Order of blocks by PARAM1: use .sort() OR .reverse()
 			distinc1 = distinc(data, PARAM1).sort(); // ASC
 			//distinc1 = distinc(data, PARAM1);//.reverse(); // DESC (to use it just uncomment this line and let the sort() one active
 
-			// Get size of area:
+			// Calculate size of blocks:
 			// Number of blocks: distinc1.length
 			var dim_blocks = Math.sqrt(distinc1.length);
 			if (dim_blocks != Math.floor(dim_blocks)) {
@@ -281,11 +314,17 @@
 			}
 			var blockx = Math.floor(AREAX/dim_blocks);
 			var blocky = Math.floor(AREAY/dim_blocks);
-			$('#area').css("width", AREAX+2+(2*dim_blocks)+"px"); // FIXME check this width correction 
+			
+			$('#area').css("width", AREAX+2+(2*dim_blocks)+"px"); // FIXME check this width correction
+			var legend1 = ""; 
 			$.each(distinc1, function(i, param1_val) {
+				// Getting legent for apram1
+				legend1 += '<span class="legendtxt">'+param1_val+'</span>&nbsp;';
 				$('#area').append('<div id="b-'+param1_val+'" class="block"><div class="blockname">'+param1_val+'</div></div>');
 				block_builder(data, blockx, blocky, param1_val, param2colors);
 			});
+			// Adding legend for param1
+			$('#legend1').append(legend1);
 		}
 		
 		do_area(PARAM1, PARAM2, AREAX, AREAY, COLORS_APPROACH);
@@ -300,6 +339,8 @@
 			if (p1 != 'select' || p2 != 'select') {
 				// Emptying divs that will be refilled in the do_area function:
 				$("#params").empty();
+				$('#legend1').empty();
+				$('#legend2').empty();
 				$("#area").empty();
 				$('#area').css("width",0);
 				
