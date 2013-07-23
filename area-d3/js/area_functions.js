@@ -1,6 +1,6 @@
 // TABS function
 $('ul.tabs').each(function(){
-	// function by @jacklmoor [http://www.jacklmoore.com/notes/jquery-tabs/]. Thanks!
+	// function by @jacklmoore [http://www.jacklmoore.com/notes/jquery-tabs/]. Thanks!
 	var $active, $content, $links = $(this).find('a');
 	$active = $($links.filter('[href="'+location.hash+'"]')[0] || $links[0]);
 	$active.addClass('active');
