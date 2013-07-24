@@ -8,12 +8,15 @@
 
 	<style>
 		#area {	position:relative;float:left;border-top: 0px solid grey;}
-		#good td { border: 1px solid green;}
-		#bad td { border: 1px solid red;}
+		thead {background-color:#C1C1C1;}
+		#good, #bad { border: 1px solid #C1C1C1;}
 		.node { position:relative;float:left;}
 		.block {position:relative;float:left;border-right: 1px solid black;border-bottom: 0px solid grey;}
 		.blockname {padding-left:6px;border-bottom: 1px solid grey;border-top: 1px solid grey;}
-		.tab {height:120px;border:1px solid red;overflow:auto;}
+		#expand {
+			position:relative;float:top;background-image:url('images/expand.png');background-repeat:no-repeat;background-position:center;
+		}
+		.tab {height:120px;border:0px solid red;overflow:auto;}
 		.tabs li {
 				list-style:none;
 				display:inline;
@@ -30,6 +33,7 @@
 			.tabs a.active {
 				background:#fff;
 				color:#000;
+				border-bottom: 1px solid #C1C1C1;
 			}
 			.defaultText { width: 30px; }
 			.configuration_div {
@@ -83,9 +87,9 @@
 		</div>
 		<div id='tab3' class="tab">
 			<div id="analysis">
-				<span>GOOD:</span>
+				<span>Eligible parameters:</span>
 				<table id="good"></table>
-				<span>BAD:</span>
+				<span>Rest of parameters:</span>
 				<table id="bad"></table>
 			</div>
 		</div>
@@ -141,7 +145,9 @@
 			// Get list of parameters from data:
 			var params = [];
 			var dupes = {};
+			var rows = 0;
 			$.each(data, function(i0, el0) {
+				rows ++;
 				$.each(el0, function(i, el) {
 					//console.log("i0 :"+i0+" | el0: "+el0+" | i: "+i+" | el : "+el);
 					if (!dupes[i]) {
@@ -150,7 +156,13 @@
 					}
 				});
 			});
-			
+			// 
+
+			$('#analysis').prepend('<div id="expand">.</div><p>number of cases: <b>'+rows+'</b></p>');			
+			var thead = '<thead><tr><th>Name</th><th>Number of values</th><th>Values</th></tr></thead>';
+			$('#good').append(thead);	
+			$('#bad').append(thead);
+
 			// Walk through the list of parameters and draw a table, and the the dropdowns for the two parameters
 			var d = [];
 			var l = 0;
@@ -351,6 +363,14 @@
 				do_area(p1, p2, ax, ay, c_a);
 			}
 		});
+
+		$('#tab3').on('mouseenter', function(){
+		    $(this).css("z-index", 10).animate({ margin: -10, height: "+=210"});
+		})
+		.on('mouseleave', function(){
+		    $(this).css("z-index", 0).animate({ margin: 0, height: "-=210"});
+		})
+
     </script>
   </body>
 </html>
