@@ -8,15 +8,15 @@
 
 	<style>
 		#area {	position:relative;float:left;border-top: 0px solid grey;}
-		thead {background-color:#C1C1C1;}
-		#good, #bad { border: 1px solid #C1C1C1;}
+		thead {background-color:#ffffff;}
+		#good, #bad { border: 1px solid #ffffff;}
 		.node { position:relative;float:left;}
 		.block {position:relative;float:left;border-right: 1px solid black;border-bottom: 0px solid grey;}
 		.blockname {padding-left:6px;border-bottom: 1px solid grey;border-top: 1px solid grey;}
 		#expand {
 			position:relative;float:top;background-image:url('images/expand.png');background-repeat:no-repeat;background-position:center;
 		}
-		.tab {height:120px;border:0px solid red;overflow:auto;}
+		.tab {height:120px;border:0px solid red;overflow:auto;background-color:#EBEBEB;padding-left:7px;border:0px solid #000000;}
 		.tabs li {
 				list-style:none;
 				display:inline;
@@ -31,7 +31,7 @@
 			}
 
 			.tabs a.active {
-				background:#fff;
+				background:#ffffff;
 				color:#000;
 				border-bottom: 1px solid #C1C1C1;
 			}
@@ -39,7 +39,7 @@
 			.configuration_div {
 				position:relative;
 				float:left;
-				min-width:200px;
+				min-width:240px;
 			}
 			.legendlist {
 				line-height:30px;	
@@ -57,6 +57,8 @@
 				min-height:300px;
 				z-index:20;
 			}
+			select, input{font-size:20px;}
+			input{background:orange;}
 	</style>
   </head>
   <body>
@@ -89,7 +91,8 @@
 			<div id="analysis">
 				<span>Eligible parameters:</span>
 				<table id="good"></table>
-				<span>Rest of parameters:</span>
+				<p>&nbsp;</p>
+				<pan>Rest of parameters:</span>
 				<table id="bad"></table>
 			</div>
 		</div>
@@ -116,7 +119,7 @@
 		</div>
 	</div>
 
-   	<div style="clear:both;"></div>
+   	<div style="clear:both;height:20px;"></div>
 	<div>
 	    <div id="area">
 		</div>
@@ -157,8 +160,7 @@
 				});
 			});
 			// 
-
-			$('#analysis').prepend('<div id="expand">.</div><p>number of cases: <b>'+rows+'</b></p>');			
+			$('#analysis').prepend('<div id="expand">&nbsp;</div><p>number of cases: <b>'+rows+'</b></p>');			
 			var thead = '<thead><tr><th>Name</th><th>Number of values</th><th>Values</th></tr></thead>';
 			$('#good').append(thead);	
 			$('#bad').append(thead);
@@ -351,6 +353,8 @@
 			if (p1 != 'select' || p2 != 'select') {
 				// Emptying divs that will be refilled in the do_area function:
 				$("#params").empty();
+				$('#expand').remove();
+				$('#analysis p').remove();
 				$('#legend1').empty();
 				$('#legend2').empty();
 				$('#good').empty();
@@ -365,10 +369,10 @@
 		});
 
 		$('#tab3').on('mouseenter', function(){
-		    $(this).css("z-index", 10).animate({ margin: -10, height: "+=210"});
+		    $(this).css("z-index", 10).animate({ margin: -10, height: "+=240"});
 		})
 		.on('mouseleave', function(){
-		    $(this).css("z-index", 0).animate({ margin: 0, height: "-=210"});
+		    $(this).css("z-index", 0).animate({ margin: 0, height: "-=240"});
 		})
 
     </script>
