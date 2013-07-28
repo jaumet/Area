@@ -16,6 +16,7 @@
 		#expand {
 			position:relative;float:top;background-image:url('images/expand.png');background-repeat:no-repeat;background-position:center;
 		}
+		#title, #config {position:relative;float:left;height:45px;border:1px solid red;}
 		.tab {height:120px;border:0px solid red;overflow:auto;background-color:#EBEBEB;padding-left:7px;border:0px solid #000000;}
 		.tabs li {
 				list-style:none;
@@ -31,7 +32,7 @@
 			}
 
 			.tabs a.active {
-				background:#ffffff;
+				background:#EBEBEB;
 				color:#000;
 				border-bottom: 1px solid #C1C1C1;
 			}
@@ -63,12 +64,18 @@
   </head>
   <body>
   	<div id="panel">
-		<ul class='tabs'>
-			<li><a href='#tab1'>Parameters & legend</a></li>
-			<li><a href='#tab2'>filter</a></li>
-			<li><a href='#tab3'>About the data</a></li>
-			<li><a href='#tab4'>Configuration</a></li>
-		</ul>
+		<div id="title">
+			<p syle="padding-top:0;">AREA: <br />explore data at a glance</p>
+		</div>
+		<div id="config">
+			<ul class='tabs'>
+				<li><a href='#tab1'>Parameters & legend</a></li>
+				<li><a href='#tab2'>filter</a></li>
+				<li><a href='#tab3'>About the data</a></li>
+				<li><a href='#tab4'>Configuration</a></li>
+			</ul>
+		</div>
+		<div style="clear:both;"></div>
 		<div id='tab1' class="tab">
 			<div class="configuration_div">
 				<p>Parameters</p>
@@ -287,7 +294,7 @@
 			// FIXME this parameter can be added to the configuration
 			// Order of blocks by PARAM1: use .sort() OR .reverse()
 			var distinc2 = distinc(data, PARAM2).sort(); // ASC
-			// var distinc2 = distinc(data, PARAM2).reverse(); / DESC (to use it just uncomment this line and let the sort() one active
+			//var distinc2 = distinc(data, PARAM2).reverse(); // DESC (to use it just uncomment this line and let the sort() one active
 			
 			switch(COLORS_APPROACH) {
 				case "random":
@@ -297,19 +304,19 @@
 					colors = get_random_hsv(60, 100, distinc2.length);
 				  break;
 				default:
-					// Approach 1: fix list and order of colors
+					// Approach 1: fix and sorted list of colors
 					var colors = ['#CC5151', '#51CCCC', '#8ECC51', '#8E51CC', '#CCAD51', '#51CC70', '#5170CC', '#CC51AD', '#CC7F51', '#BCCC51', '#60CC51', '#51CC9E', '#519ECC', '#6051CC', '#BC51CC', '#CC517F', '#CC6851', '#CC9651', ];
 					//var colors_dark = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ];			  
 				  break;
 			}
 
-			// Getting legend for param2
+			// Getting legend of param2
 			var legend2 = "";
 			$.each(distinc2, function(i, el) {
 				param2colors[el] = colors[i];
 				legend2 += '<span class="legendtxt" style="background-color:'+colors[i]+';">'+el+'</span>&nbsp;';
 			});
-			// Adding legend for param2
+			// Adding legend of param2
 			$('#legend2').append(legend2);
 
 			// sort data
@@ -318,7 +325,7 @@
 			// FIXME this parameter can be added to the configuration
 			// Order of blocks by PARAM1: use .sort() OR .reverse()
 			distinc1 = distinc(data, PARAM1).sort(); // ASC
-			//distinc1 = distinc(data, PARAM1);//.reverse(); // DESC (to use it just uncomment this line and let the sort() one active
+			//distinc1 = distinc(data, PARAM1).reverse(); // DESC (to use it just uncomment this line and let the sort() one active
 
 			// Calculate size of blocks:
 			// Number of blocks: distinc1.length
@@ -332,12 +339,12 @@
 			$('#area').css("width", AREAX+2+(2*dim_blocks)+"px"); // FIXME check this width correction
 			var legend1 = ""; 
 			$.each(distinc1, function(i, param1_val) {
-				// Getting legent for apram1
+				// Getting legent of param1
 				legend1 += '<span class="legendtxt">'+param1_val+'</span>&nbsp;';
 				$('#area').append('<div id="b-'+param1_val+'" class="block"><div class="blockname">'+param1_val+'</div></div>');
 				block_builder(data, blockx, blocky, param1_val, param2colors);
 			});
-			// Adding legend for param1
+			// Adding legend of param1
 			$('#legend1').append(legend1);
 		}
 		
