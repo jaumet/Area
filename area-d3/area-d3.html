@@ -36,7 +36,7 @@
 				color:#000;
 				border-bottom: 1px solid #C1C1C1;
 			}
-			.defaultText { width: 30px; }
+			.defaultText { width: 40px; }
 			.configuration_div {
 				position:relative;
 				float:left;
@@ -59,7 +59,7 @@
 				z-index:20;
 			}
 			select, input{font-size:20px;}
-			input{background:orange;}
+			input, select{background:#FFC29C;}
 	</style>
   </head>
   <body>
@@ -144,6 +144,7 @@
 		var COLORS_APPROACH = "random"; // fix, random, gradient
 		var PARAM1 = "gender";
 		var PARAM2 = "mood";
+		var AREA_TITLE = "";
 		
 		///////////////////////////////
 		// MAIN AREA FUNCTION
@@ -369,14 +370,12 @@
 				$("#area").empty();
 				$('#area').css("width",0);
 				
-				console.log("-> p1: "+p1+"-> p2: "+p2+"-> ax: "+ax+"-> ay: "+ay+"-> c_a: "+c_a);
-
 				do_area(p1, p2, ax, ay, c_a);
 			}
 		});
 
 		$('#tab3').on('mouseenter', function(){
-		    $(this).css("z-index", 10).animate({ margin: -10, height: "+=240"});
+		    $(this).css("z-index", 10).animate({ margin: 10, height: "+=240"});
 		})
 		.on('mouseleave', function(){
 		    $(this).css("z-index", 0).animate({ margin: 0, height: "-=240"});
