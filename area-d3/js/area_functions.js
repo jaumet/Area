@@ -66,6 +66,20 @@ function sortJSON(data, key, order) {
 	});
 }
 
+// prepare divs
+function prepare_divs() {
+	// Emptying divs that will be refilled in the do_area function:
+	$("#params").empty();
+	$('#expand').remove();
+	$('#analysis p').remove();
+	$('#legend1').empty();
+	$('#legend2').empty();
+	$('#good').empty();
+	$('#bad').empty();
+	$("#area").empty();
+	$('#area').css("width",0);
+	$('#filtered_params input').remove()
+}
 
 //////////////////////////////////////////////
 //////  COLORS

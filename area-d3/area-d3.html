@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello, data!</title>
+    <title>AREA</title>
     <script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/d3.v2.js"></script>
-	<script type="text/javascript" src="data.json"></script>
+	<script type="text/javascript" src="area-config.js"></script>
 
 	<style>
 		#area {	position:relative;float:left;border-top: 0px solid grey;}
@@ -59,7 +59,8 @@
 				z-index:20;
 			}
 			select, input{font-size:20px;}
-			input, select{background:#FFC29C;}
+			input, select{background-color:#FFC29C;}
+			#filter { width: 100px; }
 	</style>
   </head>
   <body>
@@ -86,20 +87,25 @@
 			<div class="configuration_div">
 				<p>Legend</p>
 				<p>
-					Blocks:&nbsp;&nbsp;<span id="legend1" class="legendlist"></span><br />
+					Blocks:&nbsp;&nbsp;<span id="legend1" class="legendlist"></span>
+					<br />
 					Colors:&nbsp;&nbsp;<span id="legend2" class="legendlist"></span>
 				</p>
 			</div>			
 		</div>
 		<div id='tab2' class="tab">
-			<p>FILTER</p>
+			<p>
+				<div id="filtered_params"></div>
+				<input id="filter" type="text" />
+				<input type="button" class="submit_params" value="filter" />
+			</p>
 		</div>
 		<div id='tab3' class="tab">
 			<div id="analysis">
 				<span>Eligible parameters:</span>
 				<table id="good"></table>
 				<p>&nbsp;</p>
-				<pan>Rest of parameters:</span>
+				<span>Rest of parameters:</span>
 				<table id="bad"></table>
 			</div>
 		</div>
@@ -135,32 +141,32 @@
 	
 	<script type="text/javascript" src="js/area_functions.js"></script>
     <script type="text/javascript">
-    	
-		///////////////////////////////
-		// AREA  DEFAULT CONFIG
-		var MAX_DISTINC = 10;
-		var AREAX = 800;
-		var AREAY = 600;
-		var COLORS_APPROACH = "random"; // fix, random, gradient
-		var PARAM1 = "gender";
-		var PARAM2 = "mood";
-		var AREA_TITLE = "";
 		
 		///////////////////////////////
 		// MAIN AREA FUNCTION
-		function do_area(PARAM1, PARAM2, AREAX, AREAY, COLORS_APPROACH) {
+		function do_area(PARAM1, PARAM2, AREAX, AREAY, COLORS_APPROACH, FILTER) {
+			
+			////////////////////////////////
+			// FILTER TAB
+			var filter_params_list = 'Check parameters to filter:<br />';
+			$.each(FIELDS[0], function(i, el) {
+				if (el.filter == 1) {
+					filter_params_list += '<input type="checkbox" checked value="'+i+'">'+el.human+'&nbsp;&nbsp;';	
+				}
+			});			
+			$('#submit_params').append(filter_params_list);
+			
 			////////////////////////////////
 			// DATA PARSER:
-			var d_length = data.length;
+			var d_length = DATA.length;
 	
-			// Get list of parameters from data:
+			// Get list of parameters from DATA:
 			var params = [];
 			var dupes = {};
 			var rows = 0;
-			$.each(data, function(i0, el0) {
+			$.each(DATA, function(i0, el0) {
 				rows ++;
 				$.each(el0, function(i, el) {
-					//console.log("i0 :"+i0+" | el0: "+el0+" | i: "+i+" | el : "+el);
 					if (!dupes[i]) {
 						dupes[i] = true;
 						params.push(i);
@@ -180,7 +186,7 @@
 			myoptions1 = '<select id="options1"><option value="select">select</option>';
 			myoptions2 = '<select id="options2"><option value="select">select</option>';
 			$.each(params, function(i, el) {
-				d = distinc(data, el);
+				d = distinc(DATA, el);
 				l = d.length;
 				if (l<MAX_DISTINC) {
 					myid = "#good";
@@ -207,10 +213,10 @@
 	
 			// Count here the max number of elements for each value and get the max one
 			max1 = 0;max1name = '';
-			distinc1 = distinc(data, PARAM1);
+			distinc1 = distinc(DATA, PARAM1);
 			$.each(distinc1, function(i, el) {
-				if (countValues(data, PARAM1, el) > max1) {
-					max1 = countValues(data, PARAM1, el);
+				if (countValues(DATA, PARAM1, el) > max1) {
+					max1 = countValues(DATA, PARAM1, el);
 					max1name = el;
 				}
 			});
@@ -220,8 +226,8 @@
 			
 			///////////////////////
 			// BLOCK REPRESENTATION
-	
-			function block_builder(data, blockx, blocky, param_val1, param2colors, areaSVG) {
+
+			function block_builder(DATA, blockx, blocky, param_val1, param2colors, FILTER, areaSVG) {
 				var dim_node = Math.sqrt(max1);
 				if (dim_node != Math.floor(dim_node)) {
 					dim_node = Math.floor(dim_node)+1;
@@ -239,7 +245,7 @@
 				var my_x = 0;
 				var my_y = 0;
 				var count = 0;
-				$.each(data, function(index, value) {
+				$.each(DATA, function(index, value) {
 					var content = "<ul>";
 					if(value[PARAM1] == param_val1) {
 						n = count/dim_node;
@@ -251,17 +257,20 @@
 						// build node content:
 						$.each(value, function(i, el) {
 							content += "<li>"+i+" -> "+el+"</li>";
+							console.log("type:"+typeof(el));
+							// FIXME Filter: check browser compatibility !!
+							if (FILTER != "" && toString(el).indexOf(FILTER)>=0) {param2colors[value[PARAM2]]="#000000";}
 						});
 						content += "</ul>";
 						my_y = Math.floor(n) * nodey;
-						draw_node(my_x, my_y, nodex, nodey, value.id, content, param2colors[value[PARAM2]], areaSVG);
+						draw_node(my_x, my_y, nodex, nodey, value.id, content, param2colors[value[PARAM2]], FILTER, areaSVG);
 						count ++;
 						content = "";
 					}
 				});
 			}
 			
-			function draw_node(x, y, nodex, nodey, id, content, color, areaSVG) {	
+			function draw_node(x, y, nodex, nodey, id, content, color, FILTER, areaSVG) {	
 				areaSVG.append("svg:rect")
 					.attr("x", x)
 					.attr("y", y)
@@ -294,8 +303,8 @@
 			
 			// FIXME this parameter can be added to the configuration
 			// Order of blocks by PARAM1: use .sort() OR .reverse()
-			var distinc2 = distinc(data, PARAM2).sort(); // ASC
-			//var distinc2 = distinc(data, PARAM2).reverse(); // DESC (to use it just uncomment this line and let the sort() one active
+			var distinc2 = distinc(DATA, PARAM2).sort(); // ASC
+			//var distinc2 = distinc(DATA, PARAM2).reverse(); // DESC (to use it just uncomment this line and let the sort() one active
 			
 			switch(COLORS_APPROACH) {
 				case "random":
@@ -320,13 +329,13 @@
 			// Adding legend of param2
 			$('#legend2').append(legend2);
 
-			// sort data
-			sortJSON(data,PARAM2);
+			// sort DATA
+			sortJSON(DATA,PARAM2);
 
 			// FIXME this parameter can be added to the configuration
 			// Order of blocks by PARAM1: use .sort() OR .reverse()
-			distinc1 = distinc(data, PARAM1).sort(); // ASC
-			//distinc1 = distinc(data, PARAM1).reverse(); // DESC (to use it just uncomment this line and let the sort() one active
+			distinc1 = distinc(DATA, PARAM1).sort(); // ASC
+			//distinc1 = distinc(DATA, PARAM1).reverse(); // DESC (to use it just uncomment this line and let the sort() one active
 
 			// Calculate size of blocks:
 			// Number of blocks: distinc1.length
@@ -343,7 +352,7 @@
 				// Getting legent of param1
 				legend1 += '<span class="legendtxt">'+param1_val+'</span>&nbsp;';
 				$('#area').append('<div id="b-'+param1_val+'" class="block"><div class="blockname">'+param1_val+'</div></div>');
-				block_builder(data, blockx, blocky, param1_val, param2colors);
+				block_builder(DATA, blockx, blocky, param1_val, param2colors, FILTER);
 			});
 			// Adding legend of param1
 			$('#legend1').append(legend1);
@@ -357,20 +366,11 @@
 			ax = parseInt($('#areax').val());
 			ay = parseInt($('#areay').val());
 			c_a = $("#colors_approach option:selected").val();
+			fltr = $("#filter").val();
 			
 			if (p1 != 'select' || p2 != 'select') {
-				// Emptying divs that will be refilled in the do_area function:
-				$("#params").empty();
-				$('#expand').remove();
-				$('#analysis p').remove();
-				$('#legend1').empty();
-				$('#legend2').empty();
-				$('#good').empty();
-				$('#bad').empty();
-				$("#area").empty();
-				$('#area').css("width",0);
-				
-				do_area(p1, p2, ax, ay, c_a);
+				prepare_divs();
+				do_area(p1, p2, ax, ay, c_a, fltr);
 			}
 		});
 
