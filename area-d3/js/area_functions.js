@@ -78,7 +78,7 @@ function prepare_divs() {
 	$('#bad').empty();
 	$("#area").empty();
 	$('#area').css("width",0);
-	$('#filtered_params input').remove()
+	$('#filtered_params').empty();
 }
 
 //////////////////////////////////////////////
@@ -190,3 +190,14 @@ function get_random_hsv(h, v, num_colors)  {
 	}
 	return colors;
 }
+
+function get_dark_color(rgb)  {
+	rgb1 = rgb.substr(4, rgb.length - 5)
+	rgb2 = rgb1.split(",");
+	rd = Math.floor(rgb2[0]/2.5);
+	gd = Math.floor(rgb2[1]/2.5);
+	bd = Math.floor(rgb2[2]/2.5);
+	dark = "rgb("+rd+","+gd+","+bd+")"; 
+	return dark;
+}
+

@@ -13,9 +13,9 @@
 ///////////////////////////////////////////////////////////////////
 // FIELDS CONFIGURATIONS:
 //
-// the index are the machine-names for each field (only alphanumeric characters)
-// human : human name for the field
-// filter: 0 no eligible for filtering | 1 eligible for filtering
+// -> the index are the machine-names for each field (only alphanumeric characters)/ Also used in var DATA
+// -> human : human name for the field
+// -> filter: 0 no eligible for filtering | 1 eligible for filtering
 //
 
 	var FIELDS = [

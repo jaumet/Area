@@ -148,13 +148,17 @@
 			
 			////////////////////////////////
 			// FILTER TAB
+			
+			// FIXME needs to be passed the array or string of filter checkboxes. 
+			//Then build an array with checked ones and coadd it yo ths IF statatement on line 266
+			
 			var filter_params_list = 'Check parameters to filter:<br />';
 			$.each(FIELDS[0], function(i, el) {
 				if (el.filter == 1) {
 					filter_params_list += '<input type="checkbox" checked value="'+i+'">'+el.human+'&nbsp;&nbsp;';	
 				}
 			});			
-			$('#submit_params').append(filter_params_list);
+			$('#filtered_params').append(filter_params_list);
 			
 			////////////////////////////////
 			// DATA PARSER:
@@ -255,15 +259,18 @@
 							my_x = my_x + nodex;
 						}
 						// build node content:
+						var mycolor; var darkme = 0;
 						$.each(value, function(i, el) {
 							content += "<li>"+i+" -> "+el+"</li>";
-							console.log("type:"+typeof(el));
 							// FIXME Filter: check browser compatibility !!
-							if (FILTER != "" && toString(el).indexOf(FILTER)>=0) {param2colors[value[PARAM2]]="#000000";}
+							mycolor = param2colors[value[PARAM2]];
+							if (FILTER.length > 2 && String(el).indexOf(FILTER)>=0) {darkme = 1;}
+							console.log("EL:"+String(el)+" | filter: "+FILTER+" | mycolor: "+mycolor);
 						});
+						if (darkme == 1) {mycolor = get_dark_color(mycolor);}
 						content += "</ul>";
 						my_y = Math.floor(n) * nodey;
-						draw_node(my_x, my_y, nodex, nodey, value.id, content, param2colors[value[PARAM2]], FILTER, areaSVG);
+						draw_node(my_x, my_y, nodex, nodey, value.id, content, mycolor, FILTER, areaSVG);
 						count ++;
 						content = "";
 					}
@@ -357,8 +364,8 @@
 			// Adding legend of param1
 			$('#legend1').append(legend1);
 		}
-		
-		do_area(PARAM1, PARAM2, AREAX, AREAY, COLORS_APPROACH);
+		FILTER = "";
+		do_area(PARAM1, PARAM2, AREAX, AREAY, COLORS_APPROACH, FILTER);
 		
 		$(".submit_params").on("click", function(event){
 			p1 = $("#options1").val();
