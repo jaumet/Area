@@ -167,9 +167,9 @@ function hsvToRgb(h, s, v) {
 function get_random_colors(num_colors)  {
 	colors = [];
 	for (var i=0;i<num_colors;i++) {
-		r = Math.floor( 100+(Math.random()*(0, 155)));
-		g = Math.floor( 75+(Math.random()*(100, 155)));
-		b = Math.floor( 50 +(Math.random()*(0, 205)));
+		r = Math.floor( 120+(Math.random()*(0, 135)));
+		g = Math.floor( 120+(Math.random()*(0, 135)));
+		b = Math.floor( 120 +(Math.random()*(0, 135)));
 		bgcolorc = "rgb("+r+","+g+","+b+")";
 		colors.push(bgcolorc);
 	}
