@@ -1,12 +1,4 @@
 
-// Size of an associative array
-Object.size = function(obj) {
-    var size = 0, key;
-    for (key in obj) {
-        if (obj.hasOwnProperty(key)) size++;
-    }
-    return size;
-};
 
 // TABS function
 $('ul.tabs').each(function(){
@@ -34,7 +26,7 @@ $('ul.tabs').each(function(){
 	});
 });
 
-// Function to get distinc values of a parameter:
+// Get distinc values of a parameter:
 function distinc(data, param) {
 	var dupes = {};	
 	var singles = [];
@@ -78,7 +70,7 @@ function prepare_divs() {
 	$('#bad').empty();
 	$("#area").empty();
 	$('#area').css("width",0);
-	$('#filtered_params').empty();
+	//$('#filtered_params').empty();
 }
 
 //////////////////////////////////////////////
@@ -191,6 +183,7 @@ function get_random_hsv(h, v, num_colors)  {
 	return colors;
 }
 
+// Get dark version of a color. Valid for approaches 1 (fix) and 2 (random)
 function get_dark_color(rgb)  {
 	rgb1 = rgb.substr(4, rgb.length - 5)
 	rgb2 = rgb1.split(",");
