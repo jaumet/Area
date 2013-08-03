@@ -219,12 +219,12 @@
 				l = d.length;
 				if (l<MAX_DISTINC) {
 					myid = "#good";
-					myopt += '<option value='+el+'>'+el+'</option>';
+					myopt += '<option value='+el+'>'+FIELDS[0][el]['human']+'</option>';
 				} else {
 					myid = "#bad";
 				}
 				$(myid).append(
-					'<tr><td>'+el+'</td><td>'+l+'</td><td>'+d+'</td></tr>'
+					'<tr><td>'+FIELDS[0][el]['human']+'</td><td>'+l+'</td><td>'+d+'</td></tr>'
 				);
 			});
 			myoptions_end += '</select>';
@@ -286,7 +286,7 @@
 						// build node content:
 						var mycolor; var darkme = 0;
 						$.each(value, function(i, el) {
-							content += "<li>"+i+" -> "+el+"</li>";
+							content += "<li>"+FIELDS[0][i]['human']+" -> "+el+"</li>";
 							// FIXME Filter: check browser compatibility !!
 							mycolor = param2colors[value[PARAM2]];
 							if (FILTER.length > 2 && jQuery.inArray(i, selected) > -1 && String(el).indexOf(FILTER)>=0) {darkme = 1;}
