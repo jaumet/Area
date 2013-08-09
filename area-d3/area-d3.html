@@ -4,7 +4,7 @@
     <title>AREA</title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 	<script type="text/javascript" src="js/d3.v2.min.js"></script>
-	<script type="text/javascript" src="area-config2.js"></script>
+	<script type="text/javascript" src="area-config.js"></script>
 	<link href="css/area.css" rel="stylesheet">
   </head>
   <body>
@@ -96,8 +96,8 @@
 			if ($('#filtered_params input').length == 0) {
 				var filter_params_list = 'Check parameters to filter:<br />';
 				$.each(FIELDS[0], function(i, el) {
-					if (el.filter == 1) {
-						filter_params_list += '<input type="checkbox" checked name="'+i+'" value="'+i+'">'+el.human+'&nbsp;&nbsp;';	
+					if (el.areafilter == 1) {
+						filter_params_list += '<span><input type="checkbox" checked name="'+i+'" value="'+i+'">'+el.human+'</span>&nbsp;&nbsp;';	
 					}
 				});		
 				$('#filtered_params').append(filter_params_list);
