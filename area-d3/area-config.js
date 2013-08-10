@@ -21,13 +21,13 @@
 	var FIELDS = [
 		{
 			"id": 
-				{ human: "ID", filter: "0"},
+				{ human: "ID", areafilter: "0"},
 			"mood": 
-				{ human: "Mood", filter: "1"},
+				{ human: "Mood", areafilter: "1"},
 			"gender": 
-				{ human: "Gender", filter: "1"},
+				{ human: "Gender", areafilter: "1"},
 			"name": 
-				{ human: "Name", filter: "1"}
+				{ human: "Name", areafilter: "1"}
 		}
 	];
 

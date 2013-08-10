@@ -102,6 +102,10 @@ thead {
 	font-size:25px;
 	color:#FFC29C;
 	cursor:pointer;
+	padding:4px;
+	padding-top:2px;
+	padding-bottom:2px;
+	border:2px solid #FFC29C;
 }
 rect {
 	cursor:pointer;

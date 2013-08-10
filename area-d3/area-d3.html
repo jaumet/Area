@@ -4,7 +4,7 @@
     <title>AREA</title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 	<script type="text/javascript" src="js/d3.v2.min.js"></script>
-	<script type="text/javascript" src="area-config.js"></script>
+	<script type="text/javascript" src="area-config2.js"></script>
 	<link href="css/area.css" rel="stylesheet">
   </head>
   <body>
@@ -144,12 +144,14 @@
 				l = d.length;
 				if (l<MAX_DISTINC) {
 					myid = "#good";
+					d = '<td>'+d+'</td>';
 					myopt += '<option value='+el+'>'+FIELDS[0][el]['human']+'</option>';
 				} else {
 					myid = "#bad";
+					d = '<td> - </td>';
 				}
 				$(myid).append(
-					'<tr><td>'+FIELDS[0][el]['human']+'</td><td>'+l+'</td><td>'+d+'</td></tr>'
+					'<tr><td>'+FIELDS[0][el]['human']+'</td><td>'+l+'</td>'+d+'</tr>'
 				);
 			});
 			myoptions_end += '</select>';
@@ -332,10 +334,10 @@
 			c_a = $("#colors_approach option:selected").val();
 			fltr = $("#filter").val();
 			
-			if (p1 != 'select' || p2 != 'select') {
+			//if (p1 != 'select' || p2 != 'select') {
 				prepare_divs();
 				do_area(p1, p2, ax, ay, c_a, fltr);
-			}
+			//}
 		});
 
 		$('#tab3').on('mouseenter', function(){
@@ -345,7 +347,7 @@
 		    $(this).css("z-index", 0).animate({ margin: 0, height: "-=240"});
 		})
 
-		$("#node_info_close b").on("click", function(event){
+		$("#node_info_close b").on("mouseover", function(event){
 			$("#node_info").css("display", "none");
 		});
 
