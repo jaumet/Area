@@ -5,9 +5,9 @@
 	var MAX_DISTINC = 20;
 	var AREAX = 800;
 	var AREAY = 600;
-	var COLORS_APPROACH = "random"; // fix, random, gradient
+	var COLORS_APPROACH = "fix"; // fix, random, gradient
 	var PARAM1 = "topic1";
-	var PARAM2 = "topic3";
+	var PARAM2 = "topic1";
 	var AREA_TITLE = "";
 
 ///////////////////////////////////////////////////////////////////
