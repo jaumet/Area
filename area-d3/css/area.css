@@ -68,7 +68,7 @@ thead {
 .configuration_div {
 	position:relative;
 	float:left;
-	min-width:240px;
+	min-width:255px;
 	padding-right:15px;
 	padding-top:15px;
   }
@@ -117,7 +117,9 @@ select, input{
 	width:150px;
   }
 #dbarrow {
-	padding:7px;
+	padding:0;
+	padding-left:7px;
+	padding-right:7px;
 }
 #filter {
 	width: 100px;
