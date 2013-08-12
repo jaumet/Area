@@ -34,7 +34,7 @@ thead {
 #title, #config {
 	position:relative;
 	float:left;
-	height:45px;
+	height:30px;
 	border:0px solid red;
   }
 .tab {
@@ -69,6 +69,8 @@ thead {
 	position:relative;
 	float:left;
 	min-width:240px;
+	padding-right:15px;
+	padding-top:15px;
   }
 .legendlist {
 	line-height:30px;	
@@ -111,11 +113,12 @@ rect {
 	cursor:pointer;
 }
 select, input{
-	font-size:20px;
-  }
-input, select{
 	background-color:#FFC29C;
+	width:150px;
   }
+#dbarrow {
+	padding:7px;
+}
 #filter {
 	width: 100px;
   }

@@ -5,7 +5,7 @@
 	var MAX_DISTINC = 10;
 	var AREAX = 800;
 	var AREAY = 600;
-	var COLORS_APPROACH = "random"; // fix, random, gradient
+	var COLORS_APPROACH = "fix"; // fix, random, gradient
 	var PARAM1 = "gender";
 	var PARAM2 = "mood";
 	var AREA_TITLE = "";
