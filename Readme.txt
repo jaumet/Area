@@ -1,10 +1,26 @@
---- AREA :: database representation usin treemaps. ---
+--- AREA :: data visualization tool ---
 
-Area project page: http://nualart.com/area
+Area code page: http://github.com/jaumet/Area
 
 Area is copyright of Jaume Nualart (2006-2012) and is released under the tems of GPL license (see http://gnu.org)
 
+--- area-js ---
+
+-- Description --
+Area-js is a javascript version of area. Area-js is an only client side application.
+
 -- INSTALL --
+
+1) 
+
+
+
+
+
+
+-- Some INSTALL for Archived versions --
+
+(find this versions in ARCHIVE/ folder)
 
 Area versions status / installation steps
 
