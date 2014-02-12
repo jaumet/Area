@@ -1,0 +1,48 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~ AREA code ToDo
+
+REDESIGN HTML
+	- Try to integrate filter TAB in first TAB or somewhere else
+
+INTERACTION JAVASCRIPT
+	- Make press-ENTER equals to click in apply and filter bottons
+	' Unpop node-info with "ESC" key
+	- FILTERs: add check/uncheck all
+	- Add alt (or toolbox) with param2 value on mouse over.
+
+INTERNAL JAVASCRIPT
+	- In filter, selection of filters gets lost when reload (all checked)
+	- Be sure that if "human" propierty is "" or not defined, then AREA uses machine-name
+	- Try to find a IntjsonAPI to validate the data.
+	- Activate AREA_TITLE variable
+	- Make filter case insensitive
+
+CSS / Look
+	- Filters tab: fields, button and text field rectangles + paddings
+	- Check the css for long lists of fields (specially for the TAB filter)
+
+OTHER
+	- Write comments/help in data/config.js.
+	- Write comments/help in data/data.js.
+	- Save AREA to image with  http://html2canvas.hertzen.com/documentation.html
+	
+AREA-DATA-EMBEDED	
+	- OPTIONAL data-build-in-AREA -> static HTML generated for a given area-config.js with a area-gen.py script.
+	-> CHRIS QUESTIONS: Study the option of dividing the data in parameters-object and rest-of-data-object with a call using IDs. Would be this method save resources or speed the process?? Graphically right now, with D3, AREA can represent more squares than befor (with DIVs), but the data-in-a-file in maybe now the bottle neck?
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~ AREA IR-DATA ToDo
+
+CHECK Gdoc https://docs.google.com/document/d/10RGv32hTzV1EIXn4n37Ul7vX4FMVubbuEVooWpHbej4/edit
+
+ADD FIELD
+	- ABSTRACT: For better filtering
+	- 
+
+DATA
+	- Typos in author names, like Pérez-Montoro.
+	- Check fields numref when = 0
+
+
