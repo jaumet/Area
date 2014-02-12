@@ -27,27 +27,15 @@
 
 var FIELDS = [
 	{
-		"paperid": 
-			{ human: "Paper ID", areafilter: "0", role:"table"},
-		"issue": 
-			{ human: "Issue", areafilter: "0", role:"table-area"},
-		"title": 
-			{ human: "Title", areafilter: "1", role:"table-area"},
-		"numref": 
-			{ human: "Num ref", areafilter: "0", role:"table-area"},
-                "numrefgrp": 
-			{ human: "Num ref (grp)", areafilter: "0", role:"table-area"},
-		"citation": 
-			{ human: "Citation", areafilter: "1", role:"table-area"},
-		"year": 
-			{ human: "Year", areafilter: "1", role:"table-area"},
-		"volume": 
-			{ human: "Volume", areafilter: "0", role:"table-area"},
-		"link": 
-			{ human: "Link", areafilter: "0", role:"table-area"},
-		"authors": 
-			{ human: "Authors", areafilter: "1", role:"table-area"},
-		"issueurl": 
-			{ human: "Issue URL", areafilter: "0", role:"table-area"}
+		"id": 
+			{ human: "ID", areafilter: "0", role:"area"},
+		"myfield1": 
+			{ human: "my Field 1", areafilter: "0", role:"area"},
+		"myfield2": 
+			{ human: "my Field 2", areafilter: "0", role:"area"},
+		"myfield3": 
+			{ human: "my Field 3", areafilter: "0", role:"area"},
+		"myfield4": 
+			{ human: "my Field 4", areafilter: "0", role:"area"}
 	}
 ];
