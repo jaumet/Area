@@ -213,10 +213,10 @@
 						}
 						my_y = Math.floor(n) * nodey;
 
-						// build node content:
+						// building node content:
 						var mycolor; var darkme = 0;
 						$.each(value, function(i, el) {
-							content += "<li>"+getHumanName(FIELDS[0], FIELDS[0][i])+" -> "+el+"</li>";
+							content += "<li>"+getHumanName(FIELDS[0], i)+" -> "+el+"</li>";
 							mycolor = param2colors[value[PARAM2]];
 							if (FILTER.length > 2 && jQuery.inArray(i, selected) > -1 && String(el).indexOf(FILTER)>=0) {darkme = 1;}
 						});
