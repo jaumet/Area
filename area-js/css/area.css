@@ -34,11 +34,11 @@ thead {
 #title, #config {
 	position:relative;
 	float:left;
-	height:30px;
+	height:45px;
 	border:0px solid red;
   }
 .tab {
-	height:120px;
+	height:135px;
 	border:0px solid red;
 	overflow:auto;
 	background-color:#EBEBEB;
@@ -70,7 +70,7 @@ thead {
 	float:left;
 	min-width:240px;
 	padding-right:15px;
-	padding-top:15px;
+	padding-top:0;
   }
 .legendlist {
 	line-height:30px;	
@@ -112,9 +112,11 @@ thead {
 rect {
 	cursor:pointer;
 }
-select, input{
+select {
 	background-color:#FFC29C;
-	width:150px;
+}
+input{
+	width:70px;
   }
 #dbarrow {
 	padding:7px;
