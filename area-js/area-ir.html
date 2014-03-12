@@ -146,13 +146,13 @@
 				if (l<MAX_DISTINC) {
 					myid = "#good";
 					d = '<td>'+d+'</td>';
-					myopt += '<option value='+el+'>'+FIELDS[0][el]['human']+'</option>';
+					myopt += '<option value='+el+'>'+getHumanName(FIELDS[0], el)+'</option>';
 				} else {
 					myid = "#bad";
 					d = '<td> - </td>';
 				}
 				$(myid).append(
-					'<tr><td>'+FIELDS[0][el]['human']+'</td><td>'+l+'</td>'+d+'</tr>'
+					'<tr><td>'+getHumanName(FIELDS[0], el)+'</td><td>'+l+'</td>'+d+'</tr>'
 				);
 			});
 			myoptions_end += '</select>';
@@ -216,7 +216,7 @@
 						// build node content:
 						var mycolor; var darkme = 0;
 						$.each(value, function(i, el) {
-							content += "<li>"+FIELDS[0][i]['human']+" -> "+el+"</li>";
+							content += "<li>"+getHumanName(FIELDS[0], FIELDS[0][i])+" -> "+el+"</li>";
 							mycolor = param2colors[value[PARAM2]];
 							if (FILTER.length > 2 && jQuery.inArray(i, selected) > -1 && String(el).indexOf(FILTER)>=0) {darkme = 1;}
 						});
