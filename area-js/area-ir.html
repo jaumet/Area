@@ -317,8 +317,9 @@
 			$.each(distinc1, function(i, param1_val) {
 				// Getting legent of param1
 				legend1 += '<span class="legendtxt">'+param1_val+'</span>&nbsp;';
-				$('#area').append('<div id="b-'+param1_val+'" class="block"><div class="blockname">'+param1_val+'</div></div>');
-				block_builder(DATA, blockx, blocky, param1_val, param2colors, FILTER, selected);
+				param1_val_clean = param1_val.replace(/\ /g, '_');
+				$('#area').append('<div id="b-'+param1_val_clean+'" class="block"><div class="blockname">'+param1_val+'</div></div>');
+				block_builder(DATA, blockx, blocky, param1_val_clean, param2colors, FILTER, selected);
 			});
 			// Adding legend of param1
 			$('#legend1').append(legend1);

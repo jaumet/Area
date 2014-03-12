@@ -16,7 +16,9 @@ INTERNAL JAVASCRIPT
 	- Try to find a IntjsonAPI to validate the data.
 	- Activate AREA_TITLE variable
 	- Make filter case insensitive
-
+	DONE- I WAS SOLVED REMPLACING ' ' BY '_' (SEE INDEX LINE 323, BEFORE CALLING block_builder BUG: block size/positioning errors when there are none elements in the block. 
+	BUG: values with some characters (like: ":") produce an error in de selector: Uncaught SyntaxError: Failed to execute 'querySelector' on 'Document': '#b-Creative commons: BY-SA 3.0' is not a valid selector. 
+	
 CSS / Look
 	- Filters tab: fields, button and text field rectangles + paddings
 	- Check the css for long lists of fields (specially for the TAB filter)

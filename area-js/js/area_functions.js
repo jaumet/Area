@@ -42,7 +42,7 @@ function distinc(data, param) {
 // Get human name of a FIELD
 function getHumanName(myFields, fieldName) {
 	var name = '';
-	console.log("fieldName===> "+fieldName);
+	//console.log("fieldName===> "+fieldName);
 	if (fieldName in myFields) {
 		name = myFields[fieldName]['human'];
 	} else {
