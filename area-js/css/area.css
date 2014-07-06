@@ -1,3 +1,6 @@
+body {
+  font-family: 'Ubuntu', sans-serif;
+}
 
 #area, #sidebar {
 	position:relative;
@@ -42,12 +45,10 @@ thead {
   }
 .tab {
 	height:135px;
-	border:0px solid red;
 	overflow:auto;
 	background-color:#EBEBEB;
 	padding-left:7px;
-	border:0px solid #000000;
-   }
+  }
 .tabs li {
 	list-style:none;
 	display:inline;
@@ -58,12 +59,13 @@ thead {
 	background:#666;
 	color:#fff;
 	text-decoration:none;
+	border-bottom: 1px solid #666;
   }
 
 .tabs a.active {
 	background:#EBEBEB;
 	color:#000;
-	border-bottom: 1px solid #C1C1C1;
+	border-bottom: 1px solid #EBEBEB;
   }
 .defaultText {
 	width: 40px;
@@ -104,7 +106,6 @@ thead {
 #node_info_close {
 	position:relative;
 	float:right;
-	font-family:helvetica;
 	font-size:25px;
 	color:#FFC29C;
 	cursor:pointer;
@@ -147,4 +148,9 @@ select {
 	background:#666;
 	color:#fff;
 	text-decoration:none;
+}
+
+#about {
+  text-align:justify;
+  text-justify:inter-word;
 }

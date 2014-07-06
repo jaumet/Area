@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>AREA</title>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+ <head>
+  <title>AREA</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 	<script type="text/javascript" src="js/d3.v2.min.js"></script>
 	<script type="text/javascript" src="./data/config.js"></script>
 	<script type="text/javascript" src="./data/dataX.js"></script>
 	<link href="css/area.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+  <!-- FONT: In case you use other caracters: greek, cyrilic, etc: https://www.google.com/fonts#QuickUsePlace:quickUse -->  
   </head>
   <body>
   	<div id="panel">
@@ -26,17 +28,13 @@
 		<div style="clear:both;"></div>
 		<div id='tab1' class="tab">
 			<div class="configuration_div">
-				<p>Parameters selection:</p>
-				<div id="params">
-				</div>
-				<input type="button" class="submit_params" value="apply" />
-			</div>
-			<div class="configuration_div">
-				<p>Legend</p>
-				<p>
-					<span id="legend1" class="legendlist"></span>
-					<br />
-					<span id="legend2" class="legendlist"></span>
+				<p>Legend
+        <br />
+        <span id="params1"></span><span id="legend1" class="legendlist"></span>
+        <br />
+        <span id="params2"></span><span id="legend2" class="legendlist"></span>
+        <br />
+        <input type="button" class="submit_params" value="apply" />
 				</p>
 			</div>			
 		</div>
@@ -56,7 +54,7 @@
   
   <div id="sidebar">
 		<div id='about'>
-			<span class="sidebarhead">About</span>
+			<span id="about" class="sidebarhead">About</span>
       <p>This is a representation of <span id="totalpapers"></span> papers. Each colored square represents a paper. 
       <br />You can select 2 parameters and filter papers.
       <br />On click a colored square, you'll get the link to the paper and further information.
@@ -168,8 +166,9 @@
 			});
 			myoptions_end += '</select>';
 			dbarrow = '<img id="dbarrow" src="images/dbarrow.png" width="30px" />';
-			$('#params').append(myoptions1+myopt+myoptions_end+dbarrow+myoptions2+myopt+myoptions_end);		
-			
+			$('#params1').html(myoptions1+myopt+myoptions_end);
+			$('#params2').html(myoptions2+myopt+myoptions_end);
+
 			// select the PARA1 and PARAM2 in the two dropdowns
 			$('#options1').val(PARAM1);
 			$('#options2').val(PARAM2);
@@ -297,8 +296,8 @@
 				  break;
 			}
 
-			// Getting legend of param2
-			var legend2 = FIELDS[0][PARAM2]["human"]+" <i>(colors)</i>: ";
+			// Getting legend for param2
+			var legend2 = " <i>(colors)</i>: ";
 			$.each(distinc2, function(i, el) {
 				param2colors[el] = colors[i];
 				legend2 += '<span class="legendtxt" style="background-color:'+colors[i]+';">'+el+'</span>&nbsp;';
@@ -329,7 +328,7 @@
 			var blocky = Math.floor(AREAY/dim_blocks);
 			
 			$('#area').css("width", AREAX+2+(2*dim_blocks)+"px"); // FIXME check this width correction
-			var legend1 = FIELDS[0][PARAM1]["human"]+" <i>(blocks)</i>: "; 
+			var legend1 = " <i>(blocks)</i>: "; 
 			$.each(distinc1, function(i, param1_val) {
 				// Getting legent of param1
 				legend1 += '<span class="legendtxt">'+param1_val+'</span>&nbsp;';
@@ -359,10 +358,10 @@
 		});
 
 		$('#tab3').on('mouseenter', function(){
-		    $(this).css("z-index", 10).animate({ margin: 10, height: "+=240"});
+		    $(this).css("z-index", 10).animate({ height: "+=240"});
 		})
 		.on('mouseleave', function(){
-		    $(this).css("z-index", 0).animate({ margin: 0, height: "-=240"});
+		    $(this).css("z-index", 0).animate({ height: "-=240"});
 		})
 
 		$("#node_info_close b").on("mouseover", function(event){
