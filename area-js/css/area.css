@@ -1,9 +1,12 @@
 
-#area {
+#area, #sidebar {
 	position:relative;
 	float:left;
 	border-top: 0px solid grey;
   }
+#sidebar {
+  width:200px;
+}
 thead {
 	background-color:#ffffff;
   }

@@ -8,7 +8,9 @@ INTERACTION JAVASCRIPT
 	- Make press-ENTER equals to click in apply and filter bottons
 	' Unpop node-info with "ESC" key
 	- FILTERs: add check/uncheck all
+	- FILTER RIGHT COLUMN: add "filter by topic" with a topic list dropdown. 
 	- Add alt (or toolbox) with param2 value on mouse over.
+		BETTER -> title + authors + year for each node onmouseover
 
 INTERNAL JAVASCRIPT
 	- In filter, selection of filters gets lost when reload (all checked)
@@ -16,8 +18,10 @@ INTERNAL JAVASCRIPT
 	- Try to find a IntjsonAPI to validate the data.
 	- Activate AREA_TITLE variable
 	- Make filter case insensitive
-	DONE- I WAS SOLVED REMPLACING ' ' BY '_' (SEE INDEX LINE 323, BEFORE CALLING block_builder BUG: block size/positioning errors when there are none elements in the block. 
+	- FILTER: after filtering, show results below the filter button.
+	DONE- IT WAS SOLVED REMPLACING ' ' BY '_' (SEE INDEX LINE 323, BEFORE CALLING block_builder BUG: block size/positioning errors when there are none elements in the block. 
 	BUG: values with some characters (like: ":") produce an error in de selector: Uncaught SyntaxError: Failed to execute 'querySelector' on 'Document': '#b-Creative commons: BY-SA 3.0' is not a valid selector. 
+	
 	
 CSS / Look
 	- Filters tab: fields, button and text field rectangles + paddings
@@ -30,7 +34,7 @@ OTHER
 	
 AREA-DATA-EMBEDED	
 	- OPTIONAL data-build-in-AREA -> static HTML generated for a given area-config.js with a area-gen.py script.
-	-> CHRIS QUESTIONS: Study the option of dividing the data in parameters-object and rest-of-data-object with a call using IDs. Would be this method save resources or speed the process?? Graphically right now, with D3, AREA can represent more squares than befor (with DIVs), but the data-in-a-file in maybe now the bottle neck?
+	-> CHRIS QUESTIONS: Study the option of dividing the data in parameters-object and rest-of-data-object with a call using IDs. Would this method save resources or speed up the process?? Graphically right now, with D3, AREA can represent more squares than before (with DIVs), but the data-in-a-file is now the bottle neck?
 
 
 
@@ -39,12 +43,5 @@ AREA-DATA-EMBEDED
 
 CHECK Gdoc https://docs.google.com/document/d/10RGv32hTzV1EIXn4n37Ul7vX4FMVubbuEVooWpHbej4/edit
 
-ADD FIELD
-	- ABSTRACT: For better filtering
-	- 
-
-DATA
-	- Typos in author names, like Pérez-Montoro.
-	- Check fields numref when = 0
 
 

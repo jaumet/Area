@@ -16,9 +16,11 @@
 		<div id="config">
 			<ul class='tabs'>
 				<li><a href='#tab1'>Parameters & legend</a></li>
+<!--
 				<li><a href='#tab2'>filter</a></li>
-				<li><a href='#tab3'>About the data</a></li>
 				<li><a href='#tab4'>Configuration</a></li>
+-->
+				<li><a href='#tab3'>Data overview</a></li>
 			</ul>
 		</div>
 		<div style="clear:both;"></div>
@@ -32,12 +34,13 @@
 			<div class="configuration_div">
 				<p>Legend</p>
 				<p>
-					Blocks:&nbsp;&nbsp;<span id="legend1" class="legendlist"></span>
+					<span id="legend1" class="legendlist"></span>
 					<br />
-					Colors:&nbsp;&nbsp;<span id="legend2" class="legendlist"></span>
+					<span id="legend2" class="legendlist"></span>
 				</p>
 			</div>			
 		</div>
+<!-------
 		<div id='tab2' class="tab">
 			<p>
 				<div id="filtered_params"></div>
@@ -45,6 +48,7 @@
 				<input type="button" class="submit_params" value="filter" />
 			</p>
 		</div>
+------>
 		<div id='tab3' class="tab">
 			<div id="analysis">
 				<span>Eligible parameters:</span>
@@ -54,6 +58,7 @@
 				<table id="bad"></table>
 			</div>
 		</div>
+<!--------
 		<div id='tab4' class="tab">
 			<div class="configuration_div">
 				<p>size: 
@@ -75,10 +80,41 @@
 				</p>
 			</div>
 		</div>
+-------->
 	</div>
 
-   	<div style="clear:both;height:20px;"></div>
+  <div style="clear:both;height:20px;"></div>
 	<div id="area"></div>
+  <div id="sidebar">
+		<div id='tab2'>
+			<p>
+				<div id="filtered_params"></div>
+				<input id="filter" type="text" />
+				<input type="button" class="submit_params" value="filter" />
+			</p>
+		</div>
+    <div id='tab4' class="tab">
+			<div class="configuration_div">
+				<p>size: 
+					<input class="defaultText" id="areax" type="text" />
+					&nbsp;<b>X</b>&nbsp;
+					<input class="defaultText" id="areay" type="text" />
+				</p>
+				<p>colors schema: 
+					<select id="colors_approach">
+						<option value="fix">fix</option>
+						<option value="random">random</option>
+						<option value="gradient">gradient</option>
+					</select>				
+				</p>
+			</div>
+			<div class="configuration_div">
+				<p>
+					<input type="button" class="submit_params" value="apply" />
+				</p>
+			</div>
+		</div>
+  </div>
 	<div id="node_info">
 		<div id="node_info_close"><b>X</b></div>
 		<p>Node info:</p>
@@ -138,8 +174,8 @@
 			var d = [];
 			var l = 0;
 			var myoptions_end = ''; var myopt='';
-			myoptions1 = '<select id="options1"><option value="select">select</option>';
-			myoptions2 = '<select id="options2"><option value="select">select</option>';
+			myoptions1 = '<select id="options1">';<!--<option value="select">select</option>';-->
+			myoptions2 = '<select id="options2">';<!--<option value="select">select</option>';-->
 			$.each(params, function(i, el) {
 				d = distinc(DATA, el);
 				l = d.length;
@@ -282,12 +318,12 @@
 				  break;
 				default:
 					// Approach 1: fix and sorted list of colors
-					var colors = ['#CC5151', '#51CCCC', '#8ECC51', '#8E51CC', '#CCAD51', '#51CC70', '#5170CC', '#CC51AD', '#CC7F51', '#BCCC51', '#60CC51', '#51CC9E', '#519ECC', '#6051CC', '#BC51CC', '#CC517F', '#CC6851', '#CC9651', ];
+					var colors = ['#CC5151', '#51CCCC', '#8ECC51', '#8E51CC', '#CCAD51', '#51CC70', '#5170CC', '#CC51AD', '#CC7F51', '#BCCC51', '#60CC51', '#51CC9E', '#519ECC', '#6051CC', '#BC51CC', '#9E1452', '#CFA2B0', '#CC9651', '#4BEC4E', '#E8FA14',];
 				  break;
 			}
 
 			// Getting legend of param2
-			var legend2 = "";
+			var legend2 = FIELDS[0][PARAM2]["human"]+" <i>(colors)</i>: ";
 			$.each(distinc2, function(i, el) {
 				param2colors[el] = colors[i];
 				legend2 += '<span class="legendtxt" style="background-color:'+colors[i]+';">'+el+'</span>&nbsp;';
@@ -300,9 +336,14 @@
 
 			// FIXME this parameter can be added to the configuration
 			// Order of blocks by PARAM1: use .sort() OR .reverse()
-			distinc1 = distinc(DATA, PARAM1).sort(); // ASC
+      distinc1 = distinc(DATA, PARAM1).sort(); // ASC
 			//distinc1 = distinc(DATA, PARAM1).reverse(); // DESC (to use it just uncomment this line and let the sort() one active
-
+      
+      //In case values are numbers, sort it as numbers
+      if (parseInt("0"+distinc1[0], 10) > 0) { 
+        distinc1.sort(function(a, b){return a-b});
+      }
+      
 			// Calculate size of blocks:
 			// Number of blocks: distinc1.length
 			var dim_blocks = Math.sqrt(distinc1.length);
@@ -313,7 +354,7 @@
 			var blocky = Math.floor(AREAY/dim_blocks);
 			
 			$('#area').css("width", AREAX+2+(2*dim_blocks)+"px"); // FIXME check this width correction
-			var legend1 = ""; 
+			var legend1 = FIELDS[0][PARAM1]["human"]+" <i>(blocks)</i>: "; 
 			$.each(distinc1, function(i, param1_val) {
 				// Getting legent of param1
 				legend1 += '<span class="legendtxt">'+param1_val+'</span>&nbsp;';
