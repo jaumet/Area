@@ -71,9 +71,10 @@ thead {
 .configuration_div {
 	position:relative;
 	float:left;
-	min-width:240px;
-	padding-right:15px;
-	padding-top:0;
+	padding:0;
+  padding-right:10px;
+  padding-left:10px;
+	border-right:2px solid #ffffff;
   }
 .legendlist {
 	line-height:30px;	
@@ -118,9 +119,7 @@ rect {
 select {
 	background-color:#FFC29C;
 }
-input{
-	width:70px;
-  }
+
 #dbarrow {
 	padding:7px;
 }
@@ -138,6 +137,14 @@ input{
   }
 #filtered_params span {
 	border:1px solid orange;
-	padding:3px;
 	background-color:#ffffff;
   }
+
+.sidebarhead {
+  width:200px;
+  padding:5px 10px;
+	display:inline-block;
+	background:#666;
+	color:#fff;
+	text-decoration:none;
+}

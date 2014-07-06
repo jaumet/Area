@@ -26,7 +26,7 @@
 		<div style="clear:both;"></div>
 		<div id='tab1' class="tab">
 			<div class="configuration_div">
-				<p>Parameters</p>
+				<p>Parameters selection:</p>
 				<div id="params">
 				</div>
 				<input type="button" class="submit_params" value="apply" />
@@ -40,15 +40,6 @@
 				</p>
 			</div>			
 		</div>
-<!-------
-		<div id='tab2' class="tab">
-			<p>
-				<div id="filtered_params"></div>
-				<input id="filter" type="text" />
-				<input type="button" class="submit_params" value="filter" />
-			</p>
-		</div>
------->
 		<div id='tab3' class="tab">
 			<div id="analysis">
 				<span>Eligible parameters:</span>
@@ -58,61 +49,43 @@
 				<table id="bad"></table>
 			</div>
 		</div>
-<!--------
-		<div id='tab4' class="tab">
-			<div class="configuration_div">
-				<p>size: 
-					<input class="defaultText" id="areax" type="text" />
-					&nbsp;<b>X</b>&nbsp;
-					<input class="defaultText" id="areay" type="text" />
-				</p>
-				<p>colors schema: 
-					<select id="colors_approach">
-						<option value="fix">fix</option>
-						<option value="random">random</option>
-						<option value="gradient">gradient</option>
-					</select>				
-				</p>
-			</div>
-			<div class="configuration_div">
-				<p>
-					<input type="button" class="submit_params" value="apply" />
-				</p>
-			</div>
-		</div>
--------->
 	</div>
-
   <div style="clear:both;height:20px;"></div>
-	<div id="area"></div>
+	
+  <div id="area"></div>
+  
   <div id="sidebar">
+		<div id='about'>
+			<span class="sidebarhead">About</span>
+      <p>This is a representation of <span id="totalpapers"></span> papers. Each colored square represents a paper. 
+      <br />You can select 2 parameters and filter papers.
+      <br />On click a colored square, you'll get the link to the paper and further information.
+      <br />[See a guided tour]</p>
+    </div>
 		<div id='tab2'>
-			<p>
-				<div id="filtered_params"></div>
+			<span class="sidebarhead">Filter papers</span>
+      <p>
 				<input id="filter" type="text" />
 				<input type="button" class="submit_params" value="filter" />
+				<div id="filtered_params"></div>
 			</p>
 		</div>
-    <div id='tab4' class="tab">
-			<div class="configuration_div">
-				<p>size: 
-					<input class="defaultText" id="areax" type="text" />
-					&nbsp;<b>X</b>&nbsp;
-					<input class="defaultText" id="areay" type="text" />
-				</p>
-				<p>colors schema: 
-					<select id="colors_approach">
-						<option value="fix">fix</option>
-						<option value="random">random</option>
-						<option value="gradient">gradient</option>
-					</select>				
-				</p>
-			</div>
-			<div class="configuration_div">
-				<p>
-					<input type="button" class="submit_params" value="apply" />
-				</p>
-			</div>
+    <div id='tab4'>
+      <span class="sidebarhead">Configuration graphic:</span>
+      <p>size: 
+        <input class="defaultText" id="areax" type="text" />
+        &nbsp;<b>X</b>&nbsp;
+        <input class="defaultText" id="areay" type="text" />
+      <br />
+      colors schema: 
+        <select id="colors_approach">
+          <option value="fix">fix</option>
+          <option value="random">random</option>
+          <option value="gradient">gradient</option>
+        </select>				
+        <br />
+        <input type="button" class="submit_params" value="apply" />
+      </p>
 		</div>
   </div>
 	<div id="node_info">
@@ -149,7 +122,9 @@
 			////////////////////////////////
 			// DATA PARSER:
 			var d_length = DATA.length;
-	
+      // Adding total papers to the sidebar:about
+      $("#totalpapers").html(d_length);
+      
 			// Get list of parameters from DATA:
 			var params = [];
 			var dupes = {};
