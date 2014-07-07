@@ -12,7 +12,7 @@ html, body {
   margin: 0px auto;
   background-color:#fff;
   padding:30px;
-  padding-top:200px;
+  padding-top:15px;
 }
 #panel {
   padding-bottom:20px;
@@ -25,16 +25,20 @@ html, body {
   background-color:#ffffff;
 	border-bottom: 1px solid grey;
   border-left: 1px solid grey;
-  }
+}
 #right, #left {
   width:200px;
   padding-left:5px;
+  padding-right:5px;
+}
+#left {
+  width:140px;
 }
 sidebar p, sidebar p div {
   padding-left:10px;
   font-size:12px;
 }
-header, footer {
+footer {
   width:100%;
   text-align: center;
   margin:auto;
@@ -45,15 +49,20 @@ header, footer {
   z-index: 10;
 }
 header {
-  top: 10px;
-  height: 160px;
-  color: #000;
-  background-color: #fff;
+  text-align: center;
+/**
+ *   top: 10px;
+ * height: 200px;
+ *  color: #000;
+ *  background-color: #fff;
+**/
 }
 header p {
+/**
   margin:auto;
   display: block;
   width:1300px;
+**/
 	border-bottom: 1px solid grey;
 	border-top: 1px solid grey;
 }
@@ -198,7 +207,7 @@ select {
 
 .sidebarhead {
   width:200px;
-  padding:5px 10px;
+  padding:5px 5px;
 	display:inline-block;
 	background:#666;
 	color:#fff;
@@ -208,4 +217,8 @@ select {
 #about {
   text-align:justify;
   text-justify:inter-word;
+}
+
+#mainmenu {
+  width:125px;
 }
