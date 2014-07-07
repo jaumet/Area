@@ -11,87 +11,86 @@
   <!-- FONT: In case you use other caracters: greek, cyrilic, etc: https://www.google.com/fonts#QuickUsePlace:quickUse -->  
   </head>
   <body>
+   <div id="container"> 
+    <header>Welcome to AREA: explore data at a glance</header>
   	<div id="panel">
-		<div id="title">
-			<p syle="padding:0;margin:0;">AREA: explore data at a glance</p>
-		</div>
-		<div id="config">
-			<ul class='tabs'>
-				<li><a href='#tab1'>Parameters & legend</a></li>
-<!--
-				<li><a href='#tab2'>filter</a></li>
-				<li><a href='#tab4'>Configuration</a></li>
--->
-				<li><a href='#tab3'>Data overview</a></li>
-			</ul>
-		</div>
-		<div style="clear:both;"></div>
-		<div id='tab1' class="tab">
-			<div class="configuration_div">
-				<p>Legend
+      <div id="title">
+        <p syle="padding:0;margin:0;">Information Resarch </p>
+      </div>
+      <div id="config">
+        <ul class='tabs'>
+          <li><a href='#tab1'>Parameters & legend</a></li>
+          <li><a href='#tab3'>Data overview</a></li>
+        </ul>
+      </div>
+      <div style="clear:both;"></div>
+      <div id='tab1' class="tab">
+        <div class="configuration_div">
+          <p>Legend
+          <br />
+          <span id="params1"></span><span id="legend1" class="legendlist"></span>
+          <br />
+          <span id="params2"></span><span id="legend2" class="legendlist"></span>
+          <br />
+          <input type="button" class="submit_params" value="apply" />
+          </p>
+        </div>			
+      </div>
+      <div id='tab3' class="tab">
+        <div id="analysis">
+          <span>Eligible parameters:</span>
+          <table id="good"></table>
+          <p>&nbsp;</p>
+          <span>Rest of parameters:</span>
+          <table id="bad"></table>
+        </div>
+      </div>
+    </div>    
+    <div id="area"></div>
+    
+    <div id="sidebar">
+      <div id='about'>
+        <span id="about" class="sidebarhead">About</span>
+        <p>This is a representation of <span id="totalpapers"></span> papers. Each colored square represents a paper. 
+        <br />You can select 2 parameters and filter papers.
+        <br />On click a colored square, you'll get the link to the paper and further information.
+        <br />[See a guided tour]</p>
+      </div>
+      <div id='tab2'>
+        <span class="sidebarhead">Filter papers</span>
+        <p>
+          <input id="filter" type="text" />
+          <input type="button" class="submit_params" value="filter" />
+        </p>
+        <p>
+          <span id="filtered_params"></span>
+        </p>
+      </div>
+      <div id='tab4'>
+        <span class="sidebarhead">Configuration graphic:</span>
+        <p>size: 
+          <input class="defaultText" id="areax" type="text" />
+          &nbsp;<b>X</b>&nbsp;
+          <input class="defaultText" id="areay" type="text" />
         <br />
-        <span id="params1"></span><span id="legend1" class="legendlist"></span>
-        <br />
-        <span id="params2"></span><span id="legend2" class="legendlist"></span>
-        <br />
-        <input type="button" class="submit_params" value="apply" />
-				</p>
-			</div>			
-		</div>
-		<div id='tab3' class="tab">
-			<div id="analysis">
-				<span>Eligible parameters:</span>
-				<table id="good"></table>
-				<p>&nbsp;</p>
-				<span>Rest of parameters:</span>
-				<table id="bad"></table>
-			</div>
-		</div>
-	</div>
-  <div style="clear:both;height:20px;"></div>
-	
-  <div id="area"></div>
-  
-  <div id="sidebar">
-		<div id='about'>
-			<span id="about" class="sidebarhead">About</span>
-      <p>This is a representation of <span id="totalpapers"></span> papers. Each colored square represents a paper. 
-      <br />You can select 2 parameters and filter papers.
-      <br />On click a colored square, you'll get the link to the paper and further information.
-      <br />[See a guided tour]</p>
+        colors schema: 
+          <select id="colors_approach">
+            <option value="fix">fix</option>
+            <option value="random">random</option>
+            <option value="gradient">gradient</option>
+          </select>				
+          <br />
+          <input type="button" class="submit_params" value="apply" />
+        </p>
+      </div>
     </div>
-		<div id='tab2'>
-			<span class="sidebarhead">Filter papers</span>
-      <p>
-				<input id="filter" type="text" />
-				<input type="button" class="submit_params" value="filter" />
-				<div id="filtered_params"></div>
-			</p>
-		</div>
-    <div id='tab4'>
-      <span class="sidebarhead">Configuration graphic:</span>
-      <p>size: 
-        <input class="defaultText" id="areax" type="text" />
-        &nbsp;<b>X</b>&nbsp;
-        <input class="defaultText" id="areay" type="text" />
-      <br />
-      colors schema: 
-        <select id="colors_approach">
-          <option value="fix">fix</option>
-          <option value="random">random</option>
-          <option value="gradient">gradient</option>
-        </select>				
-        <br />
-        <input type="button" class="submit_params" value="apply" />
-      </p>
-		</div>
-  </div>
-	<div id="node_info">
-		<div id="node_info_close"><b>X</b></div>
-		<p>Node info:</p>
-		<div id="node_info_data"></div>
-	</div>
-	
+    <div id="node_info">
+      <div id="node_info_close"><b>X</b></div>
+      <p>Node info:</p>
+      <div id="node_info_data"></div>
+    </div>
+    <footer>This is AREA XXXXXXXX</footer>
+   </div>
 	<script type="text/javascript" src="js/area_functions.js"></script>
     <script type="text/javascript">
 		
