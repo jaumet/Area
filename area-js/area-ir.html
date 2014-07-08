@@ -227,8 +227,7 @@
 						$.each(value, function(i, el) {
 							content += "<li>"+getHumanName(FIELDS[0], i)+" -> "+el+"</li>";
 							mycolor = param2colors[value[PARAM2]];
-							if (FILTER.length > 2 && jQuery.inArray(i, selected) > -1 && String(el).indexOf(FILTER)>=0) {darkme = 1;}
-						});
+							if (FILTER.length > 2 && jQuery.inArray(i, selected) > -1 && String(el).toLowerCase().indexOf(FILTER.toLowerCase())>=0) {darkme = 1;}						});
 						if (darkme == 1) {
 							if (COLORS_APPROACH == "gradient") {
 								mycolor = "rgb(210, 210, 210)";

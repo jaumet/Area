@@ -3,7 +3,7 @@
 // AREA CONFIGURATION
 //
 	var MAX_DISTINC = 30;
-	var AREAX = 800;
+	var AREAX = 920;
 	var AREAY = 600;
 	var COLORS_APPROACH = "fix"; // fix, random, gradient
 	var PARAM1 = "year";

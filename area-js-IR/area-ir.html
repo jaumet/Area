@@ -12,17 +12,6 @@
   </head>
   <body>
    <div id="container"> 
-<!--------
-    <header>
-      <img src="images/ir_logo.jpg" />
-      <p>
-        <br />
-        <i>Information Research</i>, is an open access, international, peer-reviewed, scholarly journal, dedicated to making accessible the results of research across a wide range of information-related disciplines. It is privately published and edited by <a href="http://InformationR.net/tdw/" target="_blank">Professor T.D. Wilson</a>. It is hosted, and given technical support, by <a href="http://www.lub.lu.se/new_top/omlub/bd_eng.shtml" target="_blank">Lund University Libraries</a>, Sweden and editorial support by the 
-        <a href="http://www.hb.se" target="_blank">University of Bor&aring;s</a>, Sweden.
-        <br /><br />
-      </p>
-    </header>
---------->
   	<div id="panel">
       <header>
       <img src="images/ir_logo.jpg" />
@@ -69,6 +58,8 @@
       <span id="mainmenu" class="sidebarhead">Main menu</span>
       <table>
       <tbody>
+      <tr>
+      <td>&nbsp; </td></tr>
       <tr>
       <td><a href="index.html">Home</a> </td></tr>
       <tr>
@@ -131,19 +122,25 @@
         </p>
       </div>
       <div id='tab4'>
-        <span class="sidebarhead">Configuration graphic:</span>
-        <p>size: 
+        <span class="sidebarhead">Configure colors</span>
+        <p>
+<!------ Edit area size is hidden in this version --------------->
+        <span style="display:none;">
+        size: 
           <input class="defaultText" id="areax" type="text" />
           &nbsp;<b>X</b>&nbsp;
           <input class="defaultText" id="areay" type="text" />
         <br />
+        </span>
+<!-------------------------------------------------------------->
         colors schema: 
           <select id="colors_approach">
             <option value="fix">fix</option>
             <option value="random">random</option>
             <option value="gradient">gradient</option>
           </select>				
-          <br />
+          </p>
+          <p>
           <input type="button" class="submit_params" value="apply" />
         </p>
       </div>
@@ -201,13 +198,13 @@
 				});
 			});
 
-			// Building the table about the data
+			// Building data overview table 
 			$('#analysis').prepend('<div id="expand">&nbsp;</div><p>number of cases: <b>'+rows+'</b></p>');			
 			var thead = '<thead><tr><th>Name</th><th>Number of values</th><th>Values</th></tr></thead>';
 			$('#good').append(thead);	
 			$('#bad').append(thead);
 
-			// Walk through the list of parameters and draw a table, and the the dropdowns for the two parameters
+			// Walk through the list of parameters and draw a table and the the dropdowns for the two parameters
 			var d = [];
 			var l = 0;
 			var myoptions_end = ''; var myopt='';
@@ -233,7 +230,7 @@
 			$('#params1').html(myoptions1+myopt+myoptions_end);
 			$('#params2').html(myoptions2+myopt+myoptions_end);
 
-			// select the PARA1 and PARAM2 in the two dropdowns
+			// select PARAM1 and PARAM2 from the two dropdowns
 			$('#options1').val(PARAM1);
 			$('#options2').val(PARAM2);
 			
@@ -242,7 +239,7 @@
 			$('#areay').val(AREAY);
 			$('#colors_approach').val(COLORS_APPROACH);
 	
-			// Count here the max number of elements for each value and get the max one
+			// Count max number of elements for each value and get the max one
 			max1 = 0;max1name = '';
 			distinc1 = distinc(DATA, PARAM1);
 			$.each(distinc1, function(i, el) {
@@ -292,7 +289,7 @@
 						$.each(value, function(i, el) {
 							content += "<li>"+getHumanName(FIELDS[0], i)+" -> "+el+"</li>";
 							mycolor = param2colors[value[PARAM2]];
-							if (FILTER.length > 2 && jQuery.inArray(i, selected) > -1 && String(el).indexOf(FILTER)>=0) {darkme = 1;}
+							if (FILTER.length > 2 && jQuery.inArray(i, selected) > -1 && String(el).toLowerCase().indexOf(FILTER.toLowerCase())>=0) {darkme = 1;}
 						});
 						if (darkme == 1) {
 							if (COLORS_APPROACH == "gradient") {
@@ -337,7 +334,7 @@
 			///////////////////////
 			// MATRIX REPRESENTATION
 
-			// FIXME  Keep colors whn change param1, config or filter
+			// FIXME  Keep colors when change param1, config or filter
 			 
 			// Prepare colors for PARAM2 values:
 			var param2colors = [];
@@ -355,7 +352,7 @@
 					colors = get_random_hsv(60, 100, distinc2.length);
 				  break;
 				default:
-					// Approach 1: fix and sorted list of colors
+					// default case: fix and sorted list of colors
 					var colors = ['#CC5151', '#51CCCC', '#8ECC51', '#8E51CC', '#CCAD51', '#51CC70', '#5170CC', '#CC51AD', '#CC7F51', '#BCCC51', '#60CC51', '#51CC9E', '#519ECC', '#6051CC', '#BC51CC', '#9E1452', '#CFA2B0', '#CC9651', '#4BEC4E', '#E8FA14',];
 				  break;
 			}
@@ -414,11 +411,8 @@
 			ay = parseInt($('#areay').val());
 			c_a = $("#colors_approach option:selected").val();
 			fltr = $("#filter").val();
-			
-			//if (p1 != 'select' || p2 != 'select') {
-				prepare_divs();
-				do_area(p1, p2, ax, ay, c_a, fltr);
-			//}
+			prepare_divs();
+			do_area(p1, p2, ax, ay, c_a, fltr);
 		});
 
 		$('#tab3').on('mouseenter', function(){
