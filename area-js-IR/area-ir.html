@@ -105,8 +105,8 @@
     
     <sidebar id="right">
       <div id='about'>
-        <span id="about" class="sidebarhead">How to</span>
-        <p>This is a representation of <span id="totalpapers"></span> papers. Each colored square represents a paper. 
+        <span id="about" class="sidebarhead">HELP</span>
+        <p>This is a representation of <b><span id="totalpapers"></span></b> papers. Each colored square represents a paper. 
         <br />You can select 2 parameters and filter papers.
         <br />On click a colored square, you'll get the link to the paper and further information.
         <br />[See a guided tour]</p>
@@ -291,6 +291,7 @@
 							mycolor = param2colors[value[PARAM2]];
 							if (FILTER.length > 2 && jQuery.inArray(i, selected) > -1 && String(el).toLowerCase().indexOf(FILTER.toLowerCase())>=0) {darkme = 1;}
 						});
+
 						if (darkme == 1) {
 							if (COLORS_APPROACH == "gradient") {
 								mycolor = "rgb(210, 210, 210)";
