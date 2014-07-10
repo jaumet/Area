@@ -1,4 +1,3 @@
-<a id="a" name="a"></a><br />
 <strong>abstracting</strong>
 <a href="3-4/paper47.html">Human creation of abstracts with selected computer assistance tools</a>
 
