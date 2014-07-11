@@ -5,7 +5,7 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 	<script type="text/javascript" src="js/d3.v2.min.js"></script>
 	<script type="text/javascript" src="./data/config.js"></script>
-	<script type="text/javascript" src="./data/dataX.js"></script>
+	<script type="text/javascript" src="./data/data.js"></script>
 	<link href="css/area.css" rel="stylesheet">
   <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
   <!-- FONT: In case you use other caracters: greek, cyrilic, etc: https://www.google.com/fonts#QuickUsePlace:quickUse -->  
@@ -394,7 +394,8 @@
 			$.each(distinc1, function(i, param1_val) {
 				// Getting legent of param1
 				legend1 += '<span class="legendtxt">'+param1_val+'</span>&nbsp;';
-				param1_val_clean = param1_val.replace(/\ /g, '_');
+////////				param1_val_clean = param1_val.replace(/\ /g, '_');
+        param1_val_clean = param1_val
 				$('#area').append('<div id="b-'+param1_val_clean+'" class="block"><div class="blockname">'+param1_val+'</div></div>');
 				block_builder(DATA, blockx, blocky, param1_val_clean, param2colors, FILTER, selected);
 			});

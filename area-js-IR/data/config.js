@@ -49,6 +49,8 @@ var FIELDS = [
 			{ human: "Authors", areafilter: "1", role:"area"},
     "issueurl": 
       { human: "Link issue", areafilter: "0", role:"area"},
+    "subject": 
+      { human: "Subject", areafilter: "1", role:"area"},
 	}
 ];
 

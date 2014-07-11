@@ -13,18 +13,23 @@ myjson = '['
 paperid = ''; subject = ''; count = 0;
 for line in f:
 	#if len(line) > 4:
-	if re.match(r'^\<strong\>', line):
+	if re.match(r'\<strong\>', line):
 		# replacements
 		subjects = re.sub(r'\<strong\>(.*)?\<\/strong\>.*?\n', r'\1', line)
 		##subjects = re.sub(r'\<\/a><a\ .*\>$', '', line)
-	elif re.match(r'^\<a href\=\"', line):
+	elif re.match(r'\<a href\=\"', line):
 		paperid = re.sub(r'\<a href\=\"\d+\-\d+\/paper(\d+)?\.html.*?\n', r'\1', line)
-	if (not re.match(r'\D', paperid) and paperid != '') and not re.match(r'\<a\ href', subject):
+	if not re.match(r'\D', paperid) and paperid != '' and not re.match(r'\<a\ href', subject):
+		#print "@@@@@@@@@@@@@@@"+line
+		#print "paperid: "+paperid
+		#print "subject: "+subjects	
 		count = count + 1
 		myjson += '{"paperid": "'+paperid+'", "subject": "'+subjects+'"},\n'
 		paperid = ''
-		
-		#print count, myjson1
+	#else:
+		#print "!!!!!!!!!!!!!!!!  "+line
+		#print "paperid: "+paperid
+		#print "subject: "+subjects
 myjson = myjson[:-2]
 myjson += ']'
 print myjson

@@ -541,7 +541,7 @@ bibliographic databases
 <strong>digital repositories</strong>
 <a href="13-4/paper385.html">Implantaci&oacute;n de la Open Archives Initiative en España</a>
 <a href="13-1/paper333.html">Managing and evaluating digital repositories</a>
- <a href="17-1/paper507.html">Open access theses in institutional repositories: an exploratory study of the perceptions of doctoral students</a>
+<a href="17-1/paper507.html">Open access theses in institutional repositories: an exploratory study of the perceptions of doctoral students</a>
 <a href="17-4/paper547.html">Task-based navigation of a taxonomy interface to a digital repository</a>
 
 <strong>discourse analysis</strong>
@@ -986,7 +986,7 @@ see <a href="#sss">
 <a href="13-4/paper359.html">Immigrants' information needs: their role in the absorption process</a>
 <a href="13-4/wks01.html">Immigrants seeking work-life-related information - a study of the information practices of Russian and Kurd women in Finland</a>
 <a href="13-4/paper371.html">Information behaviour in research network building by relocated scholars in Swedish higher education: a report on a pilot project</a>
-<a href="paper16-4/500.html">Information tactics of immigrants in urban environments</a>
+<a href="00-0/paper16-4/500.html">Information tactics of immigrants in urban environments</a>
 <a href="17-2/paper514.html">The use of an online forum for health information by married Korean women in the United States</a>
 <td style="vertical-align: top; padding-bottom: 5px;" id="i">
 <strong>indexing</strong>
@@ -1097,7 +1097,7 @@ see <a href="#sss">
 <a href="12-3/paper320.html">Users' information behaviour - a gender perspective</a>
 <a href="9-4/paper184.html">Using participant or non-participant observation to explain information behaviour</a>
 <a href="13-4/paper358.html">Validating coding for a theoretical model of information behaviour</a>
-<a href="paper556.html">Visitors and residents: what motivates engagement with the digital information environment?</a>
+<a href="00-0/paper556.html">Visitors and residents: what motivates engagement with the digital information environment?</a>
 <a href="12-4/colis/colis15.html">'What's past is prologue': towards a general model of lay information mediary behaviour</a>
 <a href="13-4/paper365.html">Where information is paramount: a mixed methods multi-disciplinary investigation of Australian online investors</a><em>see also</em> <a href="#info">
 <strong>information needs</strong></a>, <a href="#isb">
@@ -1282,7 +1282,7 @@ See <em><a href="#infb">information behaviour</a></em>
 <a href="18-3/colis/paperC29.html">From collections to connections: building a revised platform for library and information science</a>
 <a href="12-4/colis/colis23.html">The handicap principle: a new perspective for library and information science research</a>
 <a href="12-4/colis/colisp01.html">Heterogeneity and homogeneity in library and information science research</a> [Poster abstract]
-<a href="paper439.html">Information and information science: an address on the occasion of receiving the award of Doctor Honoris Causa, at the University of Murcia, 30 September, 2010</a>
+<a href="00-0/paper439.html">Information and information science: an address on the occasion of receiving the award of Doctor Honoris Causa, at the University of Murcia, 30 September, 2010</a>
 <a href="10-4/paper239.html">Information and knowledge: an evolutionary framework for information science</a>
 <a href="12-4/colis/colis31.html">Information as self-organised complexity; a unifying viewpoint</a>
 <a href="15-3/paper434.html">Information science as a social science</a>
@@ -1437,7 +1437,7 @@ See <em><a href="#infb">information behaviour</a></em>
 <a href="11-4/paper270.html">Challenges in sharing information effectively: examples from command and control.</a>
 <a href="18-4/paper591.html">The impact of information technology capability, information sharing and government process redesign on the operational performance of emergency incident management systems</a>
 <a href="14-1/paper393.html">The influence of information behaviour on information sharing across cultural boundaries in development contexts</a>
-<a href="paper440.html">Information sharing: an exploration of the literature and some propositions</a>
+<a href="00-0/paper440.html">Information sharing: an exploration of the literature and some propositions</a>
 <a href="12-2/paper306.html">Information sharing between different groups: a qualitative study of information service to business in Japanese public libraries</a>
 <a href="12-4/colis/colis14.html">Information interaction among computer scientists. A longitudinal study </a>
 <a href="17-4/paper538.html">Managing collaborative information sharing: bridging research on information culture and collaborative information behaviour</a>
@@ -1612,7 +1612,7 @@ See <em><a href="#infb">information behaviour</a></em>
 <strong>Internet</strong>
 <a href="9-4/paper190.html">Censura y tolerancia del material sexualmente explícito: la opinión de los estudiantes universitarios de pregrado</a>
 <a href="6-1/paper89.html">Designing Internet research assignments: building a framework for instructor collaboration</a>
-<a href="paper302.html">Diffusion and usage patterns of Internet services in the European Union</a>
+<a href="00-0/paper302.html">Diffusion and usage patterns of Internet services in the European Union</a>
 <a href="14-2/paper397.html">The effectiveness of Web search engines to index new sites from different countries</a>
 <td style="verical-align: top; padding-bottom: 5px;">
 <a href="10-1/paper198.html">Enthusiastic, realistic and critical: discourses of Internet use in the context of everyday life information seeking</a>
@@ -2005,12 +2005,12 @@ Lesotho
 
 <strong>open access publishing</strong>
 <a href="11-3/conf1.html">Conference report: Third Nordic Conference on Scholarly Communication, Lund 24-25 April, 2006</a>
-<a href="paper469.html">The costs and potential benefits of alternative scholarly publishing models</a>
+<a href="00-0/paper469.html">The costs and potential benefits of alternative scholarly publishing models</a>
 <a href="11-3/paper255.html">The Electronic Journal of Information Technology in Construction (ITcon): an open access journal using an un-paid, volunteer-based organization.</a>
 <a href="12-2/paper301.html"><em>Medical Education Online</em>: a case study of an open access journal in health professional education.</a>
 <a href="12-3/paper308.html">Open access on a zero budget: a case study of <em>Postcolonial Text</em></a>
 <a href="14-3/paper409.html">Open access publishing in Indian premier research institutions</a>
- <a href="17-1/paper507.html">Open access theses in institutional repositories: an exploratory study of the perceptions of doctoral students</a>
+<a href="17-1/paper507.html">Open access theses in institutional repositories: an exploratory study of the perceptions of doctoral students</a>
 <a href="9-2/paper170.html">Open access to scientific publications - an analysis of the barriers to change</a>
 <a href="17-4/paper541.html">Report on a survey of readers of <em>Information Research</em></a></h5>  </a>
 <a href="12-4/paper321.html">The 'platinum route' to open access:  a case study of <em>E-JASL:  The Electronic Journal of Academic and Special Librarianship</em></a>
@@ -2065,12 +2065,11 @@ Lesotho
 
 <strong>patients</strong> 
 <a href="13-4/paper360.html">Information needs and information behaviour of patients and family members in a cancer palliative care setting</a>
-<a href="18-3/paper590.html">Information seeking behaviour of parents of paediatric patients for clinical decision making: the central role of information literacy in a participatory setting</a> <tr>    <a href="18-3/paper588.html">Measuring patients’ preferences and priorities for information in chronic kidney disease</a>
+<a href="18-3/paper590.html">Information seeking behaviour of parents of paediatric patients for clinical decision making: the central role of information literacy in a participatory setting</a> <tr>    
+<a href="18-3/paper588.html">Measuring patients’ preferences and priorities for information in chronic kidney disease</a>
 
 <strong>periodicals</strong>
-<em>
-<strong>see:</strong></em> <a href="#jnls">
-journals</a>
+<a href="#jnls">journals</a>
 
 <strong>personal information management</strong>
 <a href="19-1/paper604.html">Continuum thinking and the contexts of personal information management</a>
@@ -2118,7 +2117,7 @@ journals</a>
 
 <strong>practice theory</strong>
 <a href="18-3/colis/paperC35.html">Analytical implications of using practice theory in workplace information literacy research</a>
- <tr>                   <a href="15-3/colis7/colis704.html">Corporeality and practice theory: exploring emerging research agendas for information literacy</a>
+<a href="15-3/colis7/colis704.html">Corporeality and practice theory: exploring emerging research agendas for information literacy</a>
 <a href="9-4/paper194.html">Diseño y desarrollo de una plataforma digital de apoyo a la docencia y a la investigación en Archivos Electrónicos: un portal temático</a>
 <a href="9-3/paper181.html">My e-journal - exploring the usefulness of personalized access to scholarly articles and services.</a>
 <a href="16-4/paper497.html">Planting contemporary practice theory in the garden of information science</a><tr>           
@@ -2176,19 +2175,19 @@ journals</a>
 <a href="12-2/paper306.html">Information sharing between different groups: a qualitative study of information service to business in Japanese public libraries</a>
 <a href="16-1/paper468.html">In search of facilitating citizens' problem solving: public libraries' collaborative development of services with related organizations</a>
 <a href="2-3/paper18.html">An investigation into the impact of the Sheffield Libraries strike</a>
-<tr>     <a href="18-3/colis/paperC20.html">Public libraries as places for empowering women through autonomous learning activities</a>
-<tr>    <a href="18-3/colis/paperC15.html">The public library, democracy and Rancière’s poetics of politics</a>
+<a href="18-3/colis/paperC20.html">Public libraries as places for empowering women through autonomous learning activities</a>
+<a href="18-3/colis/paperC15.html">The public library, democracy and Rancière’s poetics of politics</a>
 <a href="12-4/colis/colis20.html">Public libraries, social capital and low intensive meeting places </a>
 <a href="12-4/colis/colis17.html">The public library: from information access to knowledge management - a theory of knowledge and knowledge categories</a>
-<tr>     <a href="18-3/colis/paperC04.html">The public library user and the charter tourist: two travellers, one analogy</a> 
+<a href="18-3/colis/paperC04.html">The public library user and the charter tourist: two travellers, one analogy</a> 
 
 <a href="5-3/paper75.html">Public use of the Internet at Chester library, UK.</a>
 <a href="13-4/paper366.html">Satisfaction and perception of usefulness among users of business information services in Japan</a>
 <a href="13-4/paper370.html">Serendipity dimensions and users' information behaviour in the physical library interface</a>
- <tr>    <a href="18-3/colis/paperC14.html">Socio-cultural innovation through and by public libraries in disadvantaged neighbourhoods in Denmark: concepts and practices</a>/tr>
+<a href="18-3/colis/paperC14.html">Socio-cultural innovation through and by public libraries in disadvantaged neighbourhoods in Denmark: concepts and practices</a>/tr>
 
 <a href="10-2/paper218.html">Speaking of users: on user discourses in the field of public libraries</a>
- <tr>     <a href="18-3/colis/paperS10.html">Using the critical incident technique to evaluate the service quality perceptions of public library users: an exploratory study</a>
+<a href="18-3/colis/paperS10.html">Using the critical incident technique to evaluate the service quality perceptions of public library users: an exploratory study</a>
 
 <strong>public policy</strong>
 <a href="11-4/paper266.html">What defines 'enough' information? How policy workers make judgements and decisions during information seeking: preliminary results from an exploratory study</a>
@@ -2200,13 +2199,13 @@ journals</a>
 <strong>publishing</strong>
 <a href="6-3/paper107.html">The changing role of subjects connected with book history and publishing in the education of library specialists in Estonia</a>
 <a href="11-3/conf1.html">Conference report: Third Nordic Conference on Scholarly Communication, Lund 24-25 April, 2006</a>
-<a href="paper469.html">The costs and potential benefits of alternative scholarly publishing models</a>
+<a href="16-1/paper469.html">The costs and potential benefits of alternative scholarly publishing models</a>
 <a href="11-3/paper255.html">The Electronic Journal of Information Technology in Construction (ITcon): an open access journal using an un-paid, volunteer-based organization.</a>
 <a href="12-2/paper301.html"><em>Medical Education Online</em>: a case study of an open access journal in health professional education.</a>
 <a href="12-2/paper307.html">A model of scientific communication as a global distributed information system</a>
 <a href="9-4/paper196.html">Online newspapers: the impact of culture, sex, and age on the perceived importance of specified quality factors</a>
 <a href="14-3/paper409.html">Open access publishing in Indian premier research institutions</a>
-<a href="paper308.html">Open access on a zero budget: a case study of <em>Postcolonial Text</em></a>
+<a href="00-0/paper308.html">Open access on a zero budget: a case study of <em>Postcolonial Text</em></a>
 <a href="9-2/paper170.html">Open access to scientific publications - an analysis of the barriers to change</a>
 <a href="12-4/paper321.html">The 'platinum route' to open access:  a case study of <em>E-JASL:  The Electronic Journal of Academic and Special Librarianship</em></a>
 <a href="4-4/paper63.html">Publishing, bookselling and the World Wide Web</a>
@@ -2341,7 +2340,7 @@ see <a href="#publ">
 <tr>     
  
 <strong>science and technology studies</strong>
- <a href="18-3/colis/paperC34.html">Different traditions in the study of disciplinarity in science – science and technology studies, library and information science and scientometrics</a>
+<a href="18-3/colis/paperC34.html">Different traditions in the study of disciplinarity in science – science and technology studies, library and information science and scientometrics</a>
 
 <strong>scorecard models</strong><a href="7-1/paper122.html">Strategy, information processing and scorecard models in the UK financial services sector</a><a id="seaeng" name="seaeng"></a>
 
@@ -2578,7 +2577,6 @@ see <a href="#publ">
 <em>see</em>: <a href="#you">
 
 <strong>youth</strong>
-</a>
 
 <strong>telecentres</strong>
 <a href="4-2/isic/ellen.html">The role of telecentres in the provision of community access to electronic information</a>
@@ -2595,7 +2593,7 @@ see <a href="#publ">
 
 <strong>theses</strong>
 <a href="7-1/paper117.html">Intelligence obtained by applying data mining to a database of French theses on the subject of Brazil</a>
- <a href="17-1/paper507.html">Open access theses in institutional repositories: an exploratory study of the perceptions of doctoral students</a>
+<a href="17-1/paper507.html">Open access theses in institutional repositories: an exploratory study of the perceptions of doctoral students</a>
 
 <strong>thinking aloud</strong><em>see</em>&nbsp;<a href="#socare">
 <strong></strong></a>
@@ -2826,7 +2824,7 @@ see <a href="#publ">
 <a href="7-3/paper130.html">What is the title of a Web page? A study of Webography practice</a>
 <a href="8-3/paper151.html">What is this link doing here? Beginning a fine-grained process of identifying reasons for academic hyperlink creation</a>
 <a href="6-2/paper93.html">Where is meaning when form is gone? Knowledge representation on the Web</a><em>see also</em> <a href="#seaeng">
-<strong>search engines</strong>;</a> <a href="#semweb">
+<strong>search engines</strong>
 <strong>semantic web</strong></a><a id="x" name="x"></a>
 
 <strong>XML</strong>
