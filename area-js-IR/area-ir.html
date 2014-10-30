@@ -6,6 +6,7 @@
 	<script type="text/javascript" src="js/d3.v2.min.js"></script>
 	<script type="text/javascript" src="./data/config.js"></script>
 	<script type="text/javascript" src="./data/data.js"></script>
+	<script type="text/javascript" src="./data/my_topics.js"></script>
 	<link href="css/area.css" rel="stylesheet">
   <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
   <!-- FONT: In case you use other caracters: greek, cyrilic, etc: https://www.google.com/fonts#QuickUsePlace:quickUse -->  
@@ -28,21 +29,29 @@
       <div id="config">
         <ul class='tabs'>
           <li><a href='#tab1'>Parameters & legend</a></li>
+          <li><a href='#tab2'>By topic</a></li>
           <li><a href='#tab3'>Data overview</a></li>
         </ul>
       </div>
       <div style="clear:both;"></div>
       <div id='tab1' class="tab">
         <div class="configuration_div">
-          <p>Legend
-          <br />
+          <p>
           <span id="params1"></span><span id="legend1" class="legendlist"></span>
           <br />
           <span id="params2"></span><span id="legend2" class="legendlist"></span>
-          <br />
+          <br /><br />
           <input type="button" class="submit_params" value="apply" />
           </p>
         </div>			
+      </div>
+      <div id='tab2' class="tab">
+        <div id="bytopic">
+          <p>
+            <input placeholder=" Filter by typing" id="box" type="text" /> (Click in a topic and relevant papers will appear in black) 
+            <ul class="filter_topics"></ul>
+          </p>
+        </div>
       </div>
       <div id='tab3' class="tab">
         <div id="analysis">
@@ -55,65 +64,41 @@
       </div>
     </div>
     <sidebar id="left">
-      <span id="mainmenu" class="sidebarhead">Main menu</span>
-      <table>
-      <tbody>
-      <tr>
-      <td>&nbsp; </td></tr>
-      <tr>
-      <td><a href="index.html">Home</a> </td></tr>
-      <tr>
-      <td><a href="about.html">About IR</a> </td></tr>
-      <tr>
-      <td><a href="sponsoring.html">Sponsoring IR</a> </td></tr>
-      <tr>
-      <td>&nbsp; </td></tr>
-      <tr>
-      <td><a href="editors.html">Editors</a> </td></tr>
-      <tr>
-      <td><a href="author2.html">Author instructions</a> </td></tr>
-      <tr>
-      <td><a href="http://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">Copyright</a> </td></tr>
-      <tr>
-      <td>&nbsp; </td></tr>
-      <tr>
-      <td><a href="iraindex.html">Author index</a> </td></tr>
-      <tr>
-      <td><a href="irsindex.html">Subject index</a> </td></tr>
-      <tr>
-      <td><a href="search.html">Search</a> </td></tr>
-      <tr>
-      <td>&nbsp; </td></tr>
-      <tr>
-      <td><a href="reviews/reviews.html">Reviews</a> </td></tr>
-      <tr>
-      <td><a href="http://info-research.blogspot.com/">Weblog</a> </td></tr>
-      <tr>
-      <td>&nbsp; </td></tr>
-      <tr>
-      <td><a href="register.html">Register</a> </td></tr>
-      <tr><td><br></td></tr>
-      <tr><td>&nbsp;</td></tr>
-      <tr><td style="text-align:center;">
-      <br><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Transitional" border="0" height="18" width="44"></a>
-      </td></tr>
-      <tr><td></td></tr>
-      </tbody></table>
-
-    </sidebar>    
-    <div id="area"></div>
-    
-    <sidebar id="right">
       <div id='about'>
-        <span id="about" class="sidebarhead">HELP</span>
-        <p>This is a representation of <b><span id="totalpapers"></span></b> papers. Each colored square represents a paper. 
-        <br />You can select 2 parameters and filter papers.
-        <br />On click a colored square, you'll get the link to the paper and further information.
-        <br />[See a guided tour]</p>
-      </div>
-      <div id='tab2'>
+        <span class="sidebarhead">OVERVIEW</span>
+        <ul><li>Number of papers in IR: <b><span id="totalpapers"></span></b> papers.</li>
+        <li>73 issues in 19,5 years (1995-2014)</li></ul>
+        <span class="sidebarhead">HELP</span>
+        <p>- Each colored square represents a paper. 
+        <br />- You can select 2 parameters and filter papers.
+        <br />- On click a colored square, you'll get the link to the paper and further information.
+        </p>
+      </div>      
+
+      <span id="mainmenu" class="sidebarhead">IR existing menu</span>
+      <table><tbody>
+      <tr><td><a href="index.html">Home</a> </td></tr>
+      <tr><td><a href="about.html">About IR</a> </td></tr>
+      <tr><td><a href="sponsoring.html">Sponsoring IR</a> </td></tr>
+      <tr><td><a href="editors.html">Editors</a> </td></tr>
+      <tr><td><a href="author2.html">Author instructions</a> </td></tr>
+      <tr><td><a href="http://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">Copyright</a> </td></tr>
+      <tr><td><a href="iraindex.html">Author index</a> </td></tr>
+      <tr><td><a href="irsindex.html">Subject index</a> </td></tr>
+      <tr><td><a href="search.html">Search</a> </td></tr>
+      <tr><td><a href="reviews/reviews.html">Reviews</a> </td></tr>
+      <tr><td><a href="http://info-research.blogspot.com/">Weblog</a> </td></tr>
+      <tr><td><a href="register.html">Register</a> </td></tr>
+      </tbody></table>
+    </sidebar>
+
+    <div id="area"></div>
+
+    <sidebar id="right">
+      <div id='byfilter'>
         <span class="sidebarhead">Filter papers</span>
         <p>
+          <p id="totals"></p>
           <input id="filter" type="text" />
           <input type="button" class="submit_params" value="filter" />
         </p>
@@ -121,10 +106,11 @@
           <span id="filtered_params"></span>
         </p>
       </div>
+
       <div id='tab4'>
         <span class="sidebarhead">Configure colors</span>
         <p>
-<!------ Edit area size is hidden in this version --------------->
+        <!------ Edit area size is hidden in this version --------------->
         <span style="display:none;">
         size: 
           <input class="defaultText" id="areax" type="text" />
@@ -132,7 +118,7 @@
           <input class="defaultText" id="areay" type="text" />
         <br />
         </span>
-<!-------------------------------------------------------------->
+        <!-------------------------------------------------------------->
         colors schema: 
           <select id="colors_approach">
             <option value="fix">fix</option>
@@ -153,9 +139,10 @@
     </div>
     <footer>This is the FOOTER</footer>
    </div>
-	<script type="text/javascript" src="js/area_functions.js"></script>
-    <script type="text/javascript">
-		
+  <script type="text/javascript" src="js/area_functions.js"></script>
+  <script type="text/javascript">
+		var TOTALS =0;
+
 		///////////////////////////////
 		// MAIN AREA FUNCTION
 		function do_area(PARAM1, PARAM2, AREAX, AREAY, COLORS_APPROACH, FILTER) {
@@ -273,6 +260,7 @@
 				var my_x = 0;
 				var my_y = 0;
 				var count = 0;
+        var filter_results = 0;
 				$.each(DATA, function(index, value) {
 					var content = "<ul>";
 					if(value[PARAM1] == param_val1) {
@@ -285,11 +273,14 @@
 						my_y = Math.floor(n) * nodey;
 
 						// building node content:
-						var mycolor; var darkme = 0;
+						var mycolor; var darkme = 0;; 
 						$.each(value, function(i, el) {
 							content += "<li>"+getHumanName(FIELDS[0], i)+" -> "+el+"</li>";
 							mycolor = param2colors[value[PARAM2]];
-							if (FILTER.length > 2 && jQuery.inArray(i, selected) > -1 && String(el).toLowerCase().indexOf(FILTER.toLowerCase())>=0) {darkme = 1;}
+							if (FILTER.length > 2 && jQuery.inArray(i, selected) > -1 && String(el).toLowerCase().indexOf(FILTER.toLowerCase())>=0) {
+                darkme = 1;
+                TOTALS = TOTALS + 1;
+              }
 						});
 
 						if (darkme == 1) {
@@ -394,7 +385,7 @@
 			$.each(distinc1, function(i, param1_val) {
 				// Getting legent of param1
 				legend1 += '<span class="legendtxt">'+param1_val+'</span>&nbsp;';
-////////				param1_val_clean = param1_val.replace(/\ /g, '_');
+        //////// param1_val_clean = param1_val.replace(/\ /g, '_');
         param1_val_clean = param1_val
 				$('#area').append('<div id="b-'+param1_val_clean+'" class="block"><div class="blockname">'+param1_val+'</div></div>');
 				block_builder(DATA, blockx, blocky, param1_val_clean, param2colors, FILTER, selected);
@@ -403,20 +394,41 @@
 			$('#legend1').append(legend1);
 		}
 		
+    // TAB2: By topic on typing filter 
+    $(".filter_topics").html(my_topics);
+    
+    $('#box').keyup(function(){
+       var valThis = $(this).val().toLowerCase();
+        $('.filter_topics>li').each(function(){
+         var text = $(this).text().toLowerCase();
+            (text.indexOf(valThis) == -1) ? $(this).hide() : $(this).show(); 
+       });
+    });
+
 		FILTER = "";
 		do_area(PARAM1, PARAM2, AREAX, AREAY, COLORS_APPROACH, FILTER);
 		
-		$(".submit_params").on("click", function(event){
+    ///////////////////////////////////////////
+    /////// Do Area after filtering 
+		$(".submit_params, .filter_topics li").on("click", function(event){
 			p1 = $("#options1").val();
 			p2 = $("#options2").val();
 			ax = parseInt($('#areax').val());
 			ay = parseInt($('#areay').val());
 			c_a = $("#colors_approach option:selected").val();
-			fltr = $("#filter").val();
+      if ($(this).text().length > 0) { 
+        fltr = $(this).text(); 
+        $("#filter").html("");
+      } else {
+        fltr = $("#filter").val();
+      } 
 			prepare_divs();
 			do_area(p1, p2, ax, ay, c_a, fltr);
+      // Show number of results
+      $("#totals").html("RESULTS: <b>"+TOTALS+"</b><br />");
+      TOTALS = 0;
 		});
-
+      
 		$('#tab3').on('mouseenter', function(){
 		    $(this).css("z-index", 10).animate({ height: "+=240"});
 		})
@@ -427,8 +439,6 @@
 		$("#node_info_close b").on("mouseover", function(event){
 			$("#node_info").css("display", "none");
 		});
-
     </script>
   </body>
 </html>
-

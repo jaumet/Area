@@ -27,13 +27,11 @@ html, body {
   border-left: 1px solid grey;
 }
 #right, #left {
-  width:200px;
+  width:170px;
   padding-left:5px;
   padding-right:5px;
 }
-#left {
-  width:140px;
-}
+
 sidebar p, sidebar p div {
   padding-left:10px;
   font-size:12px;
@@ -206,7 +204,7 @@ select {
   }
 
 .sidebarhead {
-  width:200px;
+  width:160px;
   padding:5px 5px;
 	display:inline-block;
 	background:#666;
@@ -214,11 +212,20 @@ select {
 	text-decoration:none;
 }
 
-#about {
-  text-align:justify;
-  text-justify:inter-word;
+.filter_topics li {
+  list-style:none;
+  display: inline-block;
+ 	border:1px solid orange;
+  font-size:11px;
+}
+.filter_topics li:hover {
+  background-color:orange;
 }
 
-#mainmenu {
-  width:125px;
+#totals {;
+  color:red;
+  padding:4px;
+  font-weight:bold;
 }
+
+
