@@ -212,13 +212,13 @@ select {
 	text-decoration:none;
 }
 
-.filter_topics li {
+.filter_topics li, .filter_authors li {
   list-style:none;
   display: inline-block;
  	border:1px solid orange;
   font-size:11px;
 }
-.filter_topics li:hover {
+.filter_topics li:hover, .filter_authors li:hover {
   background-color:orange;
 }
 

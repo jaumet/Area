@@ -29,6 +29,7 @@
       <div id="config">
         <ul class='tabs'>
           <li><a href='#tab1'>Parameters & legend</a></li>
+          <li><a href='#tab4'>By author</a></li>
           <li><a href='#tab2'>By topic</a></li>
           <li><a href='#tab3'>Data overview</a></li>
         </ul>
@@ -45,10 +46,18 @@
           </p>
         </div>			
       </div>
+      <div id='tab4' class="tab">
+        <div id="byauthor">
+          <p>
+            <input placeholder=" Filter by typing" id="box" type="text" /> (Click in an author and related papers will be highlighted in black) 
+            <ul class="filter_authors"></ul>
+          </p>
+        </div>
+      </div>
       <div id='tab2' class="tab">
         <div id="bytopic">
           <p>
-            <input placeholder=" Filter by typing" id="box" type="text" /> (Click in a topic and relevant papers will appear in black) 
+            <input placeholder=" Filter by typing" id="box" type="text" /> (Click in a topic and related papers will be highlighted in black) 
             <ul class="filter_topics"></ul>
           </p>
         </div>
@@ -404,13 +413,23 @@
             (text.indexOf(valThis) == -1) ? $(this).hide() : $(this).show(); 
        });
     });
+    // TAB4: By author on typing filter 
+    $(".filter_authors").html(my_authors);
+    
+    $('#box').keyup(function(){
+       var valThis = $(this).val().toLowerCase();
+        $('.filter_authors>li').each(function(){
+         var text = $(this).text().toLowerCase();
+            (text.indexOf(valThis) == -1) ? $(this).hide() : $(this).show(); 
+       });
+    });
 
 		FILTER = "";
 		do_area(PARAM1, PARAM2, AREAX, AREAY, COLORS_APPROACH, FILTER);
 		
     ///////////////////////////////////////////
     /////// Do Area after filtering 
-		$(".submit_params, .filter_topics li").on("click", function(event){
+		$(".submit_params, .filter_topics li, .filter_authors li").on("click", function(event){
 			p1 = $("#options1").val();
 			p2 = $("#options2").val();
 			ax = parseInt($('#areax').val());
