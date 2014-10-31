@@ -162,7 +162,7 @@
 				var filter_params_list = 'Check parameters to filter:<br />';
 				$.each(FIELDS[0], function(i, el) {
 					if (el.areafilter == 1) {
-						filter_params_list += '<span><input type="checkbox" checked name="'+i+'" value="'+i+'">'+el.human+'</span>&nbsp;&nbsp;';	
+						filter_params_list += '<span><input type="checkbox" checked name="'+i+'" value="'+i+'">'+el.human+'</span><br />';	
 					}
 				});		
 				$('#filtered_params').append(filter_params_list);
