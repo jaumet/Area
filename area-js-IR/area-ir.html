@@ -200,7 +200,7 @@
 			$('#good').append(thead);	
 			$('#bad').append(thead);
 
-			// Walk through the list of parameters and draw a table and the the dropdowns for the two parameters
+			// Walk through the list of parameters and draw a table and the dropdowns for the two parameters
 			var d = [];
 			var l = 0;
 			var myoptions_end = ''; var myopt='';
@@ -282,15 +282,18 @@
 						my_y = Math.floor(n) * nodey;
 
 						// building node content:
-						var mycolor; var darkme = 0;; 
+						var mycolor; var darkme = 0; bell = 0; 
 						$.each(value, function(i, el) {
 							content += "<li>"+getHumanName(FIELDS[0], i)+" -> "+el+"</li>";
 							mycolor = param2colors[value[PARAM2]];
+//////////////////////////////////////////////////////////////////////////////////////////////
+              console.log("FILTRE: "+FILTER);
 							if (FILTER.length > 2 && jQuery.inArray(i, selected) > -1 && String(el).toLowerCase().indexOf(FILTER.toLowerCase())>=0) {
                 darkme = 1;
-                TOTALS = TOTALS + 1;
+                bell = 1;
               }
 						});
+            if (bell == 1 ) { TOTALS = TOTALS + 1; }
 
 						if (darkme == 1) {
 							if (COLORS_APPROACH == "gradient") {
@@ -408,9 +411,9 @@
     
     $('#box').keyup(function(){
        var valThis = $(this).val().toLowerCase();
-        $('.filter_topics>li').each(function(){
+       $('.filter_topics>li').each(function(){
          var text = $(this).text().toLowerCase();
-            (text.indexOf(valThis) == -1) ? $(this).hide() : $(this).show(); 
+         (text.indexOf(valThis) == -1) ? $(this).hide() : $(this).show(); 
        });
     });
     // TAB4: By author on typing filter 
@@ -418,9 +421,9 @@
     
     $('#box').keyup(function(){
        var valThis = $(this).val().toLowerCase();
-        $('.filter_authors>li').each(function(){
+       $('.filter_authors>li').each(function(){
          var text = $(this).text().toLowerCase();
-            (text.indexOf(valThis) == -1) ? $(this).hide() : $(this).show(); 
+         (text.indexOf(valThis) == -1) ? $(this).hide() : $(this).show(); 
        });
     });
 
@@ -436,7 +439,9 @@
 			ay = parseInt($('#areay').val());
 			c_a = $("#colors_approach option:selected").val();
       if ($(this).text().length > 0) { 
-        fltr = $(this).text(); 
+        fltr = $(this).text();
+        // Split author's name and take just the last name:
+        fltr = fltr.split(", ")[0];
         $("#filter").html("");
       } else {
         fltr = $("#filter").val();
