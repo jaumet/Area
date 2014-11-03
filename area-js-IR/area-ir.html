@@ -154,25 +154,27 @@
 
 		///////////////////////////////
 		// MAIN AREA FUNCTION
-		function do_area(PARAM1, PARAM2, AREAX, AREAY, COLORS_APPROACH, FILTER) {
-			
+		function do_area(PARAM1, PARAM2, AREAX, AREAY, COLORS_APPROACH, FILTER, SELECTED) {
+console.log("  178|  selected: "+SELECTED);
 			////////////////////////////////
 			// FILTER TAB
 			if ($('#filtered_params input').length == 0) {
 				var filter_params_list = 'Check parameters to filter:<br />';
 				$.each(FIELDS[0], function(i, el) {
 					if (el.areafilter == 1) {
-						filter_params_list += '<span><input type="checkbox" checked name="'+i+'" value="'+i+'">'+el.human+'</span><br />';	
+            if ($.inArray(i, SELECTED) > -1 || !SELECTED)  {var checked = "checked";} else {checked = "";}
+						filter_params_list += '<span><input type="checkbox" '+checked+' name="'+i+'" value="'+i+'">'+el.human+'</span><br />';	
 					}
 				});		
 				$('#filtered_params').append(filter_params_list);
 			}
-			
+
 			// Array of checked filter's checkboxes.
-			var selected = new Array();
-			$('#filtered_params input:checked').each(function() {
-			    selected.push($(this).attr('name'));
-			});
+			//var selected = new Array();
+			//$('#filtered_params input:checked').each(function() {
+			//    selected.push($(this).attr('name'));
+			//});
+//console.log("  178|  selected: "+selected);
 
 			////////////////////////////////
 			// DATA PARSER:
@@ -251,7 +253,7 @@
 			///////////////////////
 			// BLOCK REPRESENTATION
 
-			function block_builder(DATA, blockx, blocky, param_val1, param2colors, FILTER, selected, areaSVG) {
+			function block_builder(DATA, blockx, blocky, param_val1, param2colors, FILTER, SELECTED) {
 				var dim_node = Math.sqrt(max1);
 				if (dim_node != Math.floor(dim_node)) {
 					dim_node = Math.floor(dim_node)+1;
@@ -270,6 +272,7 @@
 				var my_y = 0;
 				var count = 0;
         var filter_results = 0;
+        DATA.sort();
 				$.each(DATA, function(index, value) {
 					var content = "<ul>";
 					if(value[PARAM1] == param_val1) {
@@ -281,42 +284,43 @@
 						}
 						my_y = Math.floor(n) * nodey;
 
+/////////////// FIXME: add some html formating for the node info
 						// building node content:
 						var mycolor; var darkme = 0; bell = 0; 
 						$.each(value, function(i, el) {
 							content += "<li>"+getHumanName(FIELDS[0], i)+" -> "+el+"</li>";
 							mycolor = param2colors[value[PARAM2]];
-//////////////////////////////////////////////////////////////////////////////////////////////
-              console.log("FILTRE: "+FILTER);
-							if (FILTER.length > 2 && jQuery.inArray(i, selected) > -1 && String(el).toLowerCase().indexOf(FILTER.toLowerCase())>=0) {
+							if (FILTER.length > 2 && jQuery.inArray(i, SELECTED) > -1 && String(el).toLowerCase().indexOf(FILTER.toLowerCase())>=0) {
                 darkme = 1;
                 bell = 1;
               }
 						});
             if (bell == 1 ) { TOTALS = TOTALS + 1; }
+            stroke = "#ffffff";
 
 						if (darkme == 1) {
-							if (COLORS_APPROACH == "gradient") {
+              stroke = "red";
+      				if (COLORS_APPROACH == "gradient") {
 								mycolor = "rgb(210, 210, 210)";
 							} else {	
 								mycolor = get_dark_color(mycolor);
 							}
 						}
 						content += "</ul>";
-						draw_node(my_x, my_y, nodex, nodey, value.id, content, mycolor, areaSVG);
+						draw_node(my_x, my_y, nodex, nodey, value. id, content, mycolor, stroke, areaSVG);
 						count ++;
 						content = "";
 					}
 				});
 			}
 			
-			function draw_node(x, y, nodex, nodey, id, content, color, areaSVG) {	
+			function draw_node(x, y, nodex, nodey, id, content, color, stroke, areaSVG) {	
 				areaSVG.append("svg:rect")
 					.attr("x", x)
 					.attr("y", y)
 					.attr("width", nodex)
 					.attr("height", nodey)
-					.attr("stroke", "#ffffff")
+					.attr("stroke", stroke)
 					.attr('class','node')
 					.attr("id", id)
 					.style('fill',color)
@@ -344,7 +348,7 @@
 			var param2colors = [];
 			
 			// FIXME this parameter can be added to the configuration
-			// Order of blocks by PARAM1: use .sort() OR .reverse()
+			// Sort blocks by PARAM1: use .sort() OR .reverse()
 			var distinc2 = distinc(DATA, PARAM2).sort(); // ASC
 			//var distinc2 = distinc(DATA, PARAM2).reverse(); // DESC (to use it just uncomment this line and let the sort() one active
 			
@@ -400,15 +404,14 @@
         //////// param1_val_clean = param1_val.replace(/\ /g, '_');
         param1_val_clean = param1_val
 				$('#area').append('<div id="b-'+param1_val_clean+'" class="block"><div class="blockname">'+param1_val+'</div></div>');
-				block_builder(DATA, blockx, blocky, param1_val_clean, param2colors, FILTER, selected);
+				block_builder(DATA, blockx, blocky, param1_val_clean, param2colors, FILTER, SELECTED);
 			});
 			// Adding legend of param1
 			$('#legend1').append(legend1);
 		}
 		
     // TAB2: By topic on typing filter 
-    $(".filter_topics").html(my_topics);
-    
+    $(".filter_topics").html(my_topics);    
     $('#box').keyup(function(){
        var valThis = $(this).val().toLowerCase();
        $('.filter_topics>li').each(function(){
@@ -416,9 +419,9 @@
          (text.indexOf(valThis) == -1) ? $(this).hide() : $(this).show(); 
        });
     });
+
     // TAB4: By author on typing filter 
-    $(".filter_authors").html(my_authors);
-    
+    $(".filter_authors").html(my_authors);    
     $('#box').keyup(function(){
        var valThis = $(this).val().toLowerCase();
        $('.filter_authors>li').each(function(){
@@ -427,8 +430,8 @@
        });
     });
 
-		FILTER = "";
-		do_area(PARAM1, PARAM2, AREAX, AREAY, COLORS_APPROACH, FILTER);
+    FILTER = "";
+    do_area(PARAM1, PARAM2, AREAX, AREAY, COLORS_APPROACH, FILTER);
 		
     ///////////////////////////////////////////
     /////// Do Area after filtering 
@@ -438,19 +441,31 @@
 			ax = parseInt($('#areax').val());
 			ay = parseInt($('#areay').val());
 			c_a = $("#colors_approach option:selected").val();
+      
+      // Array of checked filter's checkboxes.
+			var selected = new Array();
+			$('#filtered_params input:checked').each(function() {
+			    selected.push($(this).attr('name'));
+			});
+//// console.log("  |  selected: "+selected);
+
+      // 
       if ($(this).text().length > 0) { 
         fltr = $(this).text();
         // Split author's name and take just the last name:
+        $("#filter").val(fltr);
         fltr = fltr.split(", ")[0];
-        $("#filter").html("");
       } else {
         fltr = $("#filter").val();
       } 
 			prepare_divs();
-			do_area(p1, p2, ax, ay, c_a, fltr);
+			do_area(p1, p2, ax, ay, c_a, fltr, selected);
+
       // Show number of results
-      $("#totals").html("RESULTS: <b>"+TOTALS+"</b><br />");
-      TOTALS = 0;
+      if($(this).val() != "apply" ) {
+        $("#totals").html("RESULTS: <b>"+TOTALS+"</b><br />");
+        TOTALS = 0;
+      }
 		});
       
 		$('#tab3').on('mouseenter', function(){
@@ -460,9 +475,8 @@
 		    $(this).css("z-index", 0).animate({ height: "-=240"});
 		})
 
-		$("#node_info_close b").on("mouseover", function(event){
-			$("#node_info").css("display", "none");
-		});
+		$("#node_info_close b").on("mouseover", function(event){ $("#node_info").css("display", "none");});
+    $(document).keyup(function(e) { if (e.keyCode == 27) { $("#node_info").css("display", "none"); }});
     </script>
   </body>
 </html>
