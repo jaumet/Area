@@ -4,7 +4,7 @@ html, body {
   margin: 0; 
   font-family: 'Ubuntu', sans-serif;
   background-color:#fff;
-  color:#000;
+  color:grey;
 }
 #container {
   width:1300px;
@@ -133,9 +133,12 @@ thead {
 	line-height:30px;	
   }
 .legendlist span {
-	border:1px solid #000000;
+	border:1px solid #c3c3c3;
 	padding:3px;
   }
+#legend2 span.legendtxt {
+  border:0;
+}
 #node_info {
 	display:none;
 	position:absolute;
