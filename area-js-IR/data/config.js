@@ -28,29 +28,29 @@
 var FIELDS = [
 	{
     "paperid": 
-			{ human: "Paper Id", areafilter: "0", role:"area"},
+			{ human: "Paper Id", areafilter: "0", type:"number"},
     "issue": 
-			{ human: "Issue", areafilter: "0", role:"area"},
+			{ human: "Issue", areafilter: "0", type:"number"},
     "title": 
-			{ human: "Tiitle", areafilter: "1", role:"area"},
+			{ human: "Tiitle", areafilter: "1", type:"text"},
     "numref": 
-			{ human: "No. refs", areafilter: "0", role:"area"},
+			{ human: "No. refs", areafilter: "0", type:"number"},
     "numrefgrp": 
-			{ human: "No. refs", areafilter: "0", role:"area"},
+			{ human: "No. refs", areafilter: "0", type:"number"},
     "citation":  
-			{ human: "Citation", areafilter: "1", role:"area"},
+			{ human: "Citation", areafilter: "1", type:"text"},
     "year": 
-      { human: "Year", areafilter: "1", role:"area"},
+      { human: "Year", areafilter: "1", type:"number"},
     "volume": 
-			{ human: "Volume", areafilter: "0", role:"area"},
+			{ human: "Volume", areafilter: "0", type:"number"},
     "link": 
-			{ human: "Link paper", areafilter: "0", role:"area"},
+			{ human: "Paper (URL)", areafilter: "0", type:"url"},
     "authors": 
-			{ human: "Authors", areafilter: "1", role:"area"},
+			{ human: "Authors", areafilter: "1", type:"text"},
     "issueurl": 
-      { human: "Link issue", areafilter: "0", role:"area"},
+      { human: "Issue (URL)", areafilter: "0", type:"url"},
     "subject": 
-      { human: "Subject", areafilter: "1", role:"area"},
+      { human: "Subject/s", areafilter: "1", type:"text"},
 	}
 ];
 

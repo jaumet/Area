@@ -223,4 +223,9 @@ ul.tabs {
   border-bottom: 1px solid grey;
   padding-left:0;
 }
-
+.node_info_numbers, .node_info_link {
+  float:left;
+  margin:3px;
+  padding:15px;
+  border:1px solid orange;
+}

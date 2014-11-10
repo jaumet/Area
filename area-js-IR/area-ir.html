@@ -2,6 +2,7 @@
 <html>
  <head>
   <title>AREA</title>
+  <meta charset="UTF-8"> 
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 	<script type="text/javascript" src="js/d3.v2.min.js"></script>
 	<script type="text/javascript" src="./data/config.js"></script>
@@ -74,30 +75,30 @@
     </div>
     <sidebar id="left">
       <div id='about'>
-        <span class="sidebarhead">OVERVIEW</span>
-        <p>- Number of papers in IR: <b><span id="totalpapers"></span></b> papers.</p>
-        <p>- 73 issues in 19,5 years (1995-2014)</p>
-        <span class="sidebarhead">HELP</span>
+        <span class="sidebarhead" style="color:#ff99ff;">HELP</span>
         <p>- Each colored square represents a paper. 
         <br />- You can select 2 parameters and filter papers.
         <br />- On click a colored square, you'll get the link to the paper and further information.
         </p>
+        <span class="sidebarhead">OVERVIEW</span>
+        <p>- Number of papers in IR: <b><span id="totalpapers"></span></b> papers.</p>
+        <p>- 73 issues in 19,5 years (1995-2014)</p>
       </div>      
 
       <span id="mainmenu" class="sidebarhead">IR existing menu</span>
       <table><tbody>
-      <tr><td><a href="index.html">Home</a> </td></tr>
-      <tr><td><a href="about.html">About IR</a> </td></tr>
-      <tr><td><a href="sponsoring.html">Sponsoring IR</a> </td></tr>
-      <tr><td><a href="editors.html">Editors</a> </td></tr>
-      <tr><td><a href="author2.html">Author instructions</a> </td></tr>
+      <tr><td><a href="http://www.informationr.net/ir/index.html">Home</a> </td></tr>
+      <tr><td><a href="http://www.informationr.net/ir/about.html">About IR</a> </td></tr>
+      <tr><td><a href="http://www.informationr.net/ir/sponsoring.html">Sponsoring IR</a> </td></tr>
+      <tr><td><a href="http://www.informationr.net/ir/editors.html">Editors</a> </td></tr>
+      <tr><td><a href="http://www.informationr.net/ir/author2.html">Author instructions</a> </td></tr>
       <tr><td><a href="http://creativecommons.org/licenses/by-nc-nd/3.0/" target="_blank">Copyright</a> </td></tr>
-      <tr><td><a href="iraindex.html">Author index</a> </td></tr>
-      <tr><td><a href="irsindex.html">Subject index</a> </td></tr>
-      <tr><td><a href="search.html">Search</a> </td></tr>
-      <tr><td><a href="reviews/reviews.html">Reviews</a> </td></tr>
+      <tr><td><a href="http://www.informationr.net/ir/iraindex.html">Author index</a> </td></tr>
+      <tr><td><a href="http://www.informationr.net/ir/irsindex.html">Subject index</a> </td></tr>
+      <tr><td><a href="http://www.informationr.net/ir/search.html">Search</a> </td></tr>
+      <tr><td><a href="http://www.informationr.net/ir/reviews/reviews.html">Reviews</a> </td></tr>
       <tr><td><a href="http://info-research.blogspot.com/">Weblog</a> </td></tr>
-      <tr><td><a href="register.html">Register</a> </td></tr>
+      <tr><td><a href="http://www.informationr.net/ir/register.html">Register</a> </td></tr>
       </tbody></table>
     </sidebar>
 
@@ -143,7 +144,7 @@
     
     <div id="node_info">
       <div id="node_info_close"><b>X</b></div>
-      <p>Paper info:</p>
+      <h3>Paper info:</h3>
       <div id="node_info_data"></div>
     </div>
     <footer>Welcome to AREA-IR: an exploration and visualization tool applied to the papers published from 1995-2014 in the open access journal Information Research</footer>
@@ -155,7 +156,7 @@
 		///////////////////////////////
 		// MAIN AREA FUNCTION
 		function do_area(PARAM1, PARAM2, AREAX, AREAY, COLORS_APPROACH, FILTER, SELECTED) {
-console.log("  178|  selected: "+SELECTED);
+
 			////////////////////////////////
 			// FILTER TAB
 			if ($('#filtered_params input').length == 0) {
@@ -168,13 +169,6 @@ console.log("  178|  selected: "+SELECTED);
 				});		
 				$('#filtered_params').append(filter_params_list);
 			}
-
-			// Array of checked filter's checkboxes.
-			//var selected = new Array();
-			//$('#filtered_params input:checked').each(function() {
-			//    selected.push($(this).attr('name'));
-			//});
-//console.log("  178|  selected: "+selected);
 
 			////////////////////////////////
 			// DATA PARSER:
@@ -284,11 +278,22 @@ console.log("  178|  selected: "+SELECTED);
 						}
 						my_y = Math.floor(n) * nodey;
 
-/////////////// FIXME: add some html formating for the node info
+            // FIXME: Node content is not general. The switch needts to be generalized, OR the node_info style redefined (??)
 						// building node content:
-						var mycolor; var darkme = 0; bell = 0; 
+						var mycolor; var darkme = 0; bell = 0; my_el_text = ''; my_el_url = ''; my_el_number = '';  
 						$.each(value, function(i, el) {
-							content += "<li>"+getHumanName(FIELDS[0], i)+" -> "+el+"</li>";
+              switch (FIELDS[0][i]["type"]) {
+                case "url":
+                  my_el_url += "&nbsp;<span class=\"node_info_link\">Visit the <a href=\""+el+"\" target=\"_"+i+"\">"+getHumanName(FIELDS[0], i)+"</a></span>&nbsp;";
+                  break;
+                case "text":
+                  my_el_text += "<p>"+getHumanName(FIELDS[0], i)+": <b>"+el+"</b></p>";
+                  break;
+                default:
+                  my_el_number += "&nbsp;<span class=\"node_info_numbers\">"+getHumanName(FIELDS[0], i)+": <b>"+el+"</b></span>&nbsp;";
+              }
+              
+							//content += my_el_default+"<hr />"+my_el_url;
 							mycolor = param2colors[value[PARAM2]];
 							if (FILTER.length > 2 && jQuery.inArray(i, SELECTED) > -1 && String(el).toLowerCase().indexOf(FILTER.toLowerCase())>=0) {
                 darkme = 1;
@@ -306,7 +311,8 @@ console.log("  178|  selected: "+SELECTED);
 								mycolor = get_dark_color(mycolor);
 							}
 						}
-						content += "</ul>";
+						//content += "</ul>";
+            content += "<p>"+my_el_text+"</p><p>&nbsp;</p><p>"+my_el_number+my_el_url+"</p>";
 						draw_node(my_x, my_y, nodex, nodey, value. id, content, mycolor, stroke, areaSVG);
 						count ++;
 						content = "";
