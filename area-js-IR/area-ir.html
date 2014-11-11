@@ -278,8 +278,8 @@
 						}
 						my_y = Math.floor(n) * nodey;
 
-            // FIXME: Node content is not general. The switch needts to be generalized, OR the node_info style redefined (??)
-						// building node content:
+            // FIXME: Node content is not general. The switch needs to be AREA-generalized, OR the node_info generation redefined (??)
+						// building node_info content:
 						var mycolor; var darkme = 0; bell = 0; my_el_text = ''; my_el_url = ''; my_el_number = '';  
 						$.each(value, function(i, el) {
               switch (FIELDS[0][i]["type"]) {
@@ -293,7 +293,6 @@
                   my_el_number += "&nbsp;<span class=\"node_info_numbers\">"+getHumanName(FIELDS[0], i)+": <b>"+el+"</b></span>&nbsp;";
               }
               
-							//content += my_el_default+"<hr />"+my_el_url;
 							mycolor = param2colors[value[PARAM2]];
 							if (FILTER.length > 2 && jQuery.inArray(i, SELECTED) > -1 && String(el).toLowerCase().indexOf(FILTER.toLowerCase())>=0) {
                 darkme = 1;
@@ -302,7 +301,6 @@
 						});
             if (bell == 1 ) { TOTALS = TOTALS + 1; }
             stroke = "#ffffff";
-
 						if (darkme == 1) {
               stroke = "red";
       				if (COLORS_APPROACH == "gradient") {
@@ -311,7 +309,6 @@
 								mycolor = get_dark_color(mycolor);
 							}
 						}
-						//content += "</ul>";
             content += "<p>"+my_el_text+"</p><p>&nbsp;</p><p>"+my_el_number+my_el_url+"</p>";
 						draw_node(my_x, my_y, nodex, nodey, value. id, content, mycolor, stroke, areaSVG);
 						count ++;
@@ -407,7 +404,6 @@
 			$.each(distinc1, function(i, param1_val) {
 				// Getting legent of param1
 				legend1 += '<span class="legendtxt">'+param1_val+'</span>&nbsp;';
-        //////// param1_val_clean = param1_val.replace(/\ /g, '_');
         param1_val_clean = param1_val
 				$('#area').append('<div id="b-'+param1_val_clean+'" class="block"><div class="blockname">'+param1_val+'</div></div>');
 				block_builder(DATA, blockx, blocky, param1_val_clean, param2colors, FILTER, SELECTED);
@@ -453,14 +449,11 @@
 			$('#filtered_params input:checked').each(function() {
 			    selected.push($(this).attr('name'));
 			});
-//// console.log("  |  selected: "+selected);
-
-      // 
       if ($(this).text().length > 0) { 
         fltr = $(this).text();
         // Split author's name and take just the last name:
-        $("#filter").val(fltr);
         fltr = fltr.split(", ")[0];
+        $("#filter").val(fltr);
       } else {
         fltr = $("#filter").val();
       } 
