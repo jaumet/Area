@@ -110,13 +110,13 @@ thead {
 	background:#666;
 	color:#fff;
 	text-decoration:none;
-	border-bottom: 1px solid #666;
+	border-bottom: 0px solid #666;
   }
 
 .tabs a.active {
 	background:#EBEBEB;
 	color:#000;
-	border-bottom: 1px solid #EBEBEB;
+	border-bottom: 0px solid #EBEBEB;
   }
 .defaultText {
 	width: 40px;
@@ -219,8 +219,19 @@ select {
   padding:4px;
   font-weight:bold;
 }
+.tabs a {
+  padding:4px;
+  border: 1px solid grey;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px 10px 0 0;
+	/*margin:20px 10% auto 10%;*/
+}
+ul.tabs, .tabs a {
+  border-bottom: 0px solid grey;
+}
 ul.tabs {
-  border-bottom: 1px solid grey;
   padding-left:0;
 }
 .node_info_numbers, .node_info_link {
