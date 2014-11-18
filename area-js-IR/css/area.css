@@ -6,6 +6,12 @@ html, body {
   background-color:#fff;
   color:grey;
 }
+html{
+  height: 100%;
+}
+body {
+  min-height: 100%;
+}
 #container {
   width:1300px;
   height:100%;

@@ -32,7 +32,7 @@ var FIELDS = [
     "issue": 
 			{ human: "Issue", areafilter: "0", type:"number"},
     "title": 
-			{ human: "Tiitle", areafilter: "1", type:"text"},
+			{ human: "Title", areafilter: "1", type:"text"},
     "numref": 
 			{ human: "No. refs", areafilter: "0", type:"number"},
     "numrefgrp": 
