@@ -273,3 +273,6 @@ ul.tabs {
   text-decoration: underline;
   cursor: pointer;
 }
+.highlight {
+  background-color:yellow;
+}

@@ -311,14 +311,14 @@
 							mycolor = "#000000"
 						}
             content += "<p>"+my_el_text+"</p><p>&nbsp;</p><p>"+my_el_number+my_el_url+"</p>";
-						draw_node(my_x, my_y, nodex, nodey, value. id, content, mycolor, stroke, areaSVG);
+						draw_node(my_x, my_y, nodex, nodey, value. id, content, mycolor, stroke, areaSVG, String(FILTER));
 						count ++;
 						content = "";
 					}
 				});
 			}
 			
-			function draw_node(x, y, nodex, nodey, id, content, color, stroke, areaSVG) {	
+			function draw_node(x, y, nodex, nodey, id, content, color, stroke, areaSVG, FILTER) {	
 				areaSVG.append("svg:rect")
 					.attr("x", x)
 					.attr("y", y)
@@ -337,7 +337,9 @@
 	      	})
 	      	.on('click', function(d,i) {
 		      		d3.select(this);
-	  	    		$('#node_info_data').html(content);
+		      		// Filter content:
+		      		var content_query_highlighted = content.replace(FILTER, "<span class=\"highlight\">"+FILTER+"</span>");
+	  	    		$('#node_info_data').html(content_query_highlighted);
 	  	    		$("#node_info").css("display", "block");
 	        		d3.select(this).style('fill',color); 
 	      	});

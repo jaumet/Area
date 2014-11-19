@@ -206,4 +206,3 @@ function get_dark_color(rgb)  {
 	dark = "rgb("+rd+","+gd+","+bd+")"; 
 	return dark;
 }
-
