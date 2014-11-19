@@ -199,7 +199,10 @@ select {
 #filtered_params span {
 	border:1px solid orange;
 	background-color:#ffffff;
-  }
+}
+#filtered_params span input{
+  padding-top:4px;
+}
 
 .sidebarhead {
   width:160px;
@@ -243,6 +246,17 @@ ul.tabs {
 .node_info_numbers, .node_info_link {
   float:left;
   margin:3px;
-  padding:15px;
+  padding:11px;
   border:1px solid orange;
+}
+.submit_params {
+  margin: 4px;
+  margin-left:  0;
+  background-color: #FFC29C;
+  width:100px;
+    border: 1px solid grey;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px 10px;
 }
