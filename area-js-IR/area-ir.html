@@ -31,8 +31,7 @@
         <ul class='tabs'>
           <li><a href='#tab1'>Parameters & legend</a></li>
           <li><a href='#tab4'>By author</a></li>
-          <li><a href='#tab2'>By topic</a></li>
-          <li><a href='#tab3'>Data overview</a></li>
+          <li><a href='#tab2'>By subject</a></li>
         </ul>
       </div>
       <div style="clear:both;"></div>
@@ -63,15 +62,6 @@
           </p>
         </div>
       </div>
-      <div id='tab3' class="tab">
-        <div id="analysis">
-          <span>Eligible parameters:</span>
-          <table id="good"></table>
-          <p>&nbsp;</p>
-          <span>Rest of parameters:</span>
-          <table id="bad"></table>
-        </div>
-      </div>
     </div>
     <sidebar id="left">
       <div id='about'>
@@ -83,6 +73,7 @@
         <span class="sidebarhead">OVERVIEW</span>
         <p>- Number of papers in IR: <b><span id="totalpapers"></span></b> papers.</p>
         <p>- 74 issues in 19 years (1995-2014)</p>
+        <p>- <a id='data_overview'>Data details</a></p>
       </div>      
 
       <span id="mainmenu" class="sidebarhead">IR existing menu</span>
@@ -142,6 +133,17 @@
       </div>
     </sidebar>
     
+    <div id='tab3'>
+      <div id="tab3_close"><b>X</b></div>
+      <div id="analysis">
+        <span>Eligible parameters:</span>
+        <table id="good"></table>
+        <p>&nbsp;</p>
+        <span>Rest of parameters:</span>
+        <table id="bad"></table>
+      </div>
+    </div>
+      
     <div id="node_info">
       <div id="node_info_close"><b>X</b></div>
       <h3>Paper info:</h3>
@@ -191,7 +193,7 @@
 			});
 
 			// Building data overview table 
-			$('#analysis').prepend('<div id="expand">&nbsp;</div><p>number of cases: <b>'+rows+'</b></p>');			
+			$('#analysis').prepend('<p>number of cases: <b>'+rows+'</b></p>');			
 			var thead = '<thead><tr><th>Name</th><th>Number of values</th><th>Values</th></tr></thead>';
 			$('#good').append(thead);	
 			$('#bad').append(thead);
@@ -466,15 +468,19 @@
       }
 		});
       
-		$('#tab3').on('mouseenter', function(){
-		    $(this).css("z-index", 10).animate({ height: "+=240"});
-		})
+		//$('#tab3').on('mouseenter', function(){
+		//   $(this).css("z-index", 10).animate({ height: "+=240"});
+		//})
+
+		$('#data_overview').on('click', function(){		
+      $("#tab3").css("display", "block");
+	  })
 		.on('mouseleave', function(){
 		    $(this).css("z-index", 0).animate({ height: "-=240"});
 		})
 
-		$("#node_info_close b").on("mouseover", function(event){ $("#node_info").css("display", "none");});
-    $(document).keyup(function(e) { if (e.keyCode == 27) { $("#node_info").css("display", "none"); }});
+		$("#node_info_close b, #tab3_close b").on("mouseover", function(event){ $("#node_info, #tab3").css("display", "none");});
+    $(document).keyup(function(e) { if (e.keyCode == 27) { $("#node_info, #tab3").css("display", "none"); }});
     </script>
   </body>
 </html>

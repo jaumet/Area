@@ -87,6 +87,7 @@ thead {
 	border-bottom: 1px solid grey;
 	border-top: 1px solid grey;
   }
+  /*
 #expand {
 	position:relative;
 	float:top;
@@ -94,6 +95,7 @@ thead {
 	background-repeat:no-repeat;
 	background-position:center;
   }
+  */
 #title, #config {
 	position:relative;
 	float:left;
@@ -145,7 +147,7 @@ thead {
 #legend2 span.legendtxt {
   border:0;
 }
-#node_info {
+#node_info, #tab3 {
 	display:none;
 	position:absolute;
 	left:40px;
@@ -163,7 +165,7 @@ thead {
 	margin:20px 10% auto 10%;
 	z-index:20;
   }
-#node_info_close {
+#node_info_close, #tab3_close {
 	position:relative;
 	float:right;
 	font-size:25px;
@@ -259,4 +261,15 @@ ul.tabs {
 	-webkit-border-radius: 10px;
 	-khtml-border-radius: 10px;
 	border-radius: 10px 10px;
+}
+.to_right {
+  padding-left: 840px;
+}
+.to_right a{
+  background-color: #c3c3c3;
+}
+#data_overview {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
 }
