@@ -197,7 +197,7 @@ select {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
   }
 #filtered_params span {
-	border:1px solid orange;
+	border:0px solid orange;
 	background-color:#ffffff;
 }
 #filtered_params span input{

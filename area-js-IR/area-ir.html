@@ -292,9 +292,12 @@
                 default:
                   my_el_number += "&nbsp;<span class=\"node_info_numbers\">"+getHumanName(FIELDS[0], i)+": <b>"+el+"</b></span>&nbsp;";
               }
-              
 							mycolor = param2colors[value[PARAM2]];
-							if (FILTER.length > 2 && jQuery.inArray(i, SELECTED) > -1 && String(el).toLowerCase().indexOf(FILTER.toLowerCase())>=0) {
+
+							/////////////////////////////////////// 
+							/////// FILTER  Statement
+							// DEBUG: console.log(" el:"+el+" | FILTER:"+FILTER);
+							if (FILTER.length >= 2 && jQuery.inArray(i, SELECTED) > -1 && String(el).toLowerCase().indexOf(String(FILTER).toLowerCase())>=0) {
                 darkme = 1;
                 bell = 1;
               }
@@ -303,11 +306,7 @@
             stroke = "#ffffff";
 						if (darkme == 1) {
               stroke = "red";
-      				if (COLORS_APPROACH == "gradient") {
-								mycolor = "rgb(210, 210, 210)";
-							} else {	
-								mycolor = get_dark_color(mycolor);
-							}
+							mycolor = "#000000"
 						}
             content += "<p>"+my_el_text+"</p><p>&nbsp;</p><p>"+my_el_number+my_el_url+"</p>";
 						draw_node(my_x, my_y, nodex, nodey, value. id, content, mycolor, stroke, areaSVG);
@@ -328,18 +327,18 @@
 					.attr("id", id)
 					.style('fill',color)
 					.on('mouseover', function(d,i) { 
-			    		d3.select(this)
-			      			.style('fill','lightblue'); 
-			   		})
+			    		d3.select(this).style('fill','lightblue'); 
+			   	})
 					.on('mouseout', function(d,i) { 
-	        			d3.select(this)
-	    					.style('fill',color); 
-	      			})
-	      			.on('click', function(d,i) {
-		      			d3.select(this);
-	  	    			$('#node_info_data').html(content);
-	  	    			$("#node_info").css("display", "block");
-	      		});
+					  if ( color.length < 3) { color = "#000000"}
+	        		d3.select(this).style('fill',color); 
+	      	})
+	      	.on('click', function(d,i) {
+		      		d3.select(this);
+	  	    		$('#node_info_data').html(content);
+	  	    		$("#node_info").css("display", "block");
+	        		d3.select(this).style('fill',color); 
+	      	});
 			};
 			
 			///////////////////////
