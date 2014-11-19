@@ -251,16 +251,19 @@ ul.tabs {
   padding:11px;
   border:1px solid orange;
 }
-.submit_params {
+.submit_params, .clean_params {
   margin: 4px;
   margin-left:  0;
   background-color: #FFC29C;
-  width:100px;
+  width:68px;
     border: 1px solid grey;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	-khtml-border-radius: 10px;
 	border-radius: 10px 10px;
+}
+.clean_params {
+  width:30px;
 }
 .to_right {
   padding-left: 840px;

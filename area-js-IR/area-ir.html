@@ -102,6 +102,7 @@
           <p id="totals"></p>
           <input id="filter" type="text" />
           <input type="button" class="submit_params" value="filter" />
+          <input type="button" class="clean_params" value="C" />
         </p>
         <p>
           <span id="filtered_params"></span>
@@ -450,7 +451,7 @@
 		
     ///////////////////////////////////////////
     /////// Do Area after filtering 
-		$(".submit_params, .filter_topics li, .filter_authors li").on("click", function(event){
+		$(".submit_params, .filter_topics li, .filter_authors li, .clean_params").on("click", function(event){
 			p1 = $("#options1").val();
 			p2 = $("#options2").val();
 			ax = parseInt($('#areax').val());
@@ -462,6 +463,9 @@
 			$('#filtered_params input:checked').each(function() {
 			    selected.push($(this).attr('name'));
 			});
+      if ($(this).attr('class') == "clean_params") {
+        $("#filter").val("");
+      }
       if ($(this).text().length > 0) { 
         fltr = $(this).text();
         // Split author's name and take just the last name:
