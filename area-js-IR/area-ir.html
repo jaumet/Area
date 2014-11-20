@@ -343,11 +343,10 @@
                 function preg_quote( str ) {
                    return (str+'').replace(/([\\\.\+\*\?\[\^\]\$\(\)\{\}\=\!\<\>\|\:])/g, "\\$1");
                 }
-                function replaceAll(find, replace, str) {
+                function replaceAll(find, str) {
                   return str.replace( new RegExp( "(" + preg_quote( find ) + ")" , 'gi' ), "<span class=\"highlight\">$1</span>" );
                 }
-                myreplace = "<span class=\"highlight\">"+FILTER+"</span>";
-                var content_query_highlighted = replaceAll(FILTER, myreplace, content);
+                var content_query_highlighted = replaceAll(FILTER, content);
               } else {
                 var content_query_highlighted = content;
 	  	    		}
