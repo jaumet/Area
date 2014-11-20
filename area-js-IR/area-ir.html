@@ -338,18 +338,19 @@
 	      	})
 	      	.on('click', function(d,i) {
 		      		d3.select(this);
-		      		// Filter content:
-		      		function replaceAll(find, replace, str) {
-                return str.replace(new RegExp(find, 'g'), replace);
-              }
-		      		//var content_query_highlighted = content.replace(FILTER, "<span class=\"highlight\">"+FILTER+"</span>");
-              myreplace = "<span class=\"highlight\">"+FILTER+"</span>";
-	  	    		var content_query_highlighted = replaceAll(FILTER, myreplace, content);
-	  	    		//var content_query_highlighted = content.split(FILTER).join(myreplace);
-	  	    		
-	  	    		//var re = new RegExp(myreplace, 'g');
-              //var content_query_highlighted = content.replace(re, FILTER);
-	  	    		
+		      		// Filter content and highlights one-word query in node_info text: 
+              if (FILTER.length >= 2) { 
+                function preg_quote( str ) {
+                   return (str+'').replace(/([\\\.\+\*\?\[\^\]\$\(\)\{\}\=\!\<\>\|\:])/g, "\\$1");
+                }
+                function replaceAll(find, replace, str) {
+                  return str.replace( new RegExp( "(" + preg_quote( find ) + ")" , 'gi' ), "<span class=\"highlight\">$1</span>" );
+                }
+                myreplace = "<span class=\"highlight\">"+FILTER+"</span>";
+                var content_query_highlighted = replaceAll(FILTER, myreplace, content);
+              } else {
+                var content_query_highlighted = content;
+	  	    		}
 	  	    		$('#node_info_data').html(content_query_highlighted);
 	  	    		$("#node_info").css("display", "block");
 	        		d3.select(this).style('fill',color); 
