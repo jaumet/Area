@@ -279,3 +279,7 @@ ul.tabs {
 .highlight {
   background-color:yellow;
 }
+select, input {
+  font-size:15px;
+
+}
