@@ -46,7 +46,7 @@ var FIELDS = [
     "link": 
 			{ human: "Paper (URL)", areafilter: "0", type:"url"},
     "authors": 
-			{ human: "Authors", areafilter: "1", type:"text"},
+			{ human: "Authors, intitutions", areafilter: "1", type:"text"},
     "issueurl": 
       { human: "Issue (URL)", areafilter: "0", type:"url"},
     "subject": 
