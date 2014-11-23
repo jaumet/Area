@@ -31,6 +31,8 @@ var FIELDS = [
 			{ human: "Paper Id", areafilter: "0", type:"number"},
     "issue": 
 			{ human: "Issue", areafilter: "0", type:"number"},
+    "lang": 
+			{ human: "Language", areafilter: "1", type:"text"},
     "title": 
 			{ human: "Title", areafilter: "1", type:"text"},
     "numref": 
