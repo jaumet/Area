@@ -206,3 +206,41 @@ function get_dark_color(rgb)  {
 	dark = "rgb("+rd+","+gd+","+bd+")"; 
 	return dark;
 }
+
+function toHTMLentities(fltr)  {
+  // Convert user query to html-entities
+  fltr = fltr.replace(/&/g, '&amp;')
+    .replace(/>/g, '&gt;')
+    .replace(/</g, '&lt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;')
+    .replace(/à/g, '&agrave;')
+    .replace(/À/g, '&Agrave;')
+    .replace(/è/g, '&egrave;')
+    .replace(/È/g, '&Egrave;')
+    .replace(/é/g, '&eacute;')
+    .replace(/É/g, '&Eacute;')
+    .replace(/í/g, '&iacute;')
+    .replace(/Í/g, '&Iacute;')
+    .replace(/ò/g, '&ograve;')
+    .replace(/Ò/g, '&Ograve;')
+    .replace(/ó/g, '&oacute;')
+    .replace(/Ó/g, '&Oacute;')
+    .replace(/ú/g, '&uacute;')
+    .replace(/Ú/g, '&Uacute;')
+    .replace(/ö/g, '&ouml;')
+    .replace(/ü/g, '&uuml;')
+    .replace(/Ü/g, '&Uuml;')
+    .replace(/Ö/g, '&Ouml;')
+    .replace(/ë/g, '&euml;')
+    .replace(/Ë/g, '&Euml;')
+    .replace(/ç/g, '&ccedil;')
+    .replace(/Ç/g, '&acedil;')
+    .replace(/ñ/g, '&ntilde;')
+    .replace(/Ñ/g, '&Ntilde;')
+    .replace(/Ã/g, '&Atilde;')
+    .replace(/ã/g, '&atilde;')
+    .replace(/Õ/g, '&Otilde;')
+    .replace(/õ/g, '&otilde;');
+  return fltr;
+}

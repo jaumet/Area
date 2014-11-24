@@ -4,6 +4,7 @@
   <title>AREA</title>
   <meta charset="UTF-8"> 
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<script type="text/javascript" src="js/underscore-min.js"></script>
 	<script type="text/javascript" src="js/d3.v2.min.js"></script>
 	<script type="text/javascript" src="./data/config.js"></script>
 	<script type="text/javascript" src="./data/data.js"></script>
@@ -474,6 +475,9 @@
       } else {
         fltr = $("#filter").val();
       } 
+      fltr = toHTMLentities(fltr);
+      
+      //console.log("fltr: "+toHTMLentities(fltr));
 			prepare_divs();
 			do_area(p1, p2, ax, ay, c_a, fltr, selected);
 
