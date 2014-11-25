@@ -4,7 +4,7 @@
   <title>AREA</title>
   <meta charset="UTF-8"> 
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-	<script type="text/javascript" src="js/d3.v2.min.js"></script>
+	<script type="text/javascript" src="./js/d3.v2.min.js"></script>
 	<script type="text/javascript" src="./data/config.js"></script>
 	<script type="text/javascript" src="./data/data.js"></script>
 	<script type="text/javascript" src="./data/my_topics.js"></script>
@@ -474,17 +474,19 @@
       } else {
         fltr = $("#filter").val();
       } 
-      fltr = toHTMLentities(fltr);
-      
-      //console.log("fltr: "+toHTMLentities(fltr));
+      fltr = toHTMLentities(fltr);      
 			prepare_divs();
 			do_area(p1, p2, ax, ay, c_a, fltr, selected);
 
       // Show number of results
-      if($(this).val() != "apply" ) {
+      if($(this).val() != "apply" && TOTALS > 0) {
         $("#totals").html("RESULTS: <b>"+TOTALS+"</b><br />");
         TOTALS = 0;
       }
+      if ($(this).attr('class') == "clean_params") {
+        $("#totals").html(" ");
+      }
+      //return true;
 		});
       
 		//$('#tab3').on('mouseenter', function(){
