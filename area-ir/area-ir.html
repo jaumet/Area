@@ -49,7 +49,7 @@
       <div id='tab4' class="tab">
         <div id="byauthor">
           <p>
-            <input placeholder=" Filter by typing" id="box" type="text" /> (Click in an author and related papers will be highlighted in black) 
+            <input placeholder=" Filter by typing" id="boxa" type="text" /> (Click in an author and related papers will be highlighted in black) 
             <ul class="filter_authors"></ul>
           </p>
         </div>
@@ -57,7 +57,7 @@
       <div id='tab2' class="tab">
         <div id="bytopic">
           <p>
-            <input placeholder=" Filter by typing" id="box" type="text" /> (Click in a topic and related papers will be highlighted in black) 
+            <input placeholder=" Filter by typing" id="boxt" type="text" /> (Click in a topic and related papers will be highlighted in black) 
             <ul class="filter_topics"></ul>
           </p>
         </div>
@@ -428,7 +428,7 @@
 		
     // TAB2: By topic on typing filter 
     $(".filter_topics").html(my_topics);    
-    $('#box').keyup(function(){
+    $('#boxa, #boxt').keyup(function(){
        var valThis = $(this).val().toLowerCase();
        $('.filter_topics>li').each(function(){
          var text = $(this).text().toLowerCase();
@@ -438,7 +438,7 @@
 
     // TAB4: By author on typing filter 
     $(".filter_authors").html(my_authors);    
-    $('#box').keyup(function(){
+    $('#boxa, #boxt').keyup(function(){
        var valThis = $(this).val().toLowerCase();
        $('.filter_authors>li').each(function(){
          var text = $(this).text().toLowerCase();
