@@ -2,9 +2,10 @@ html, body {
   height: 100%; 
   width: 100%; 
   margin: 0; 
-  font-family: 'Ubuntu', sans-serif;
+  font-family:'Ek Mukta', 'Ubuntu', sans-serif;
+  font-size:1.0em;
   background-color:#fff;
-  color:grey;
+  color:black;
 }
 html{
   height: 100%;
@@ -220,6 +221,7 @@ select {
   list-style:none;
   display: inline-block;
  	border:1px solid orange;
+  cursor: pointer;
   font-size:11px;
 }
 .filter_topics li:hover, .filter_authors li:hover {
