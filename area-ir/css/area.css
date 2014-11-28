@@ -254,6 +254,9 @@ ul.tabs {
   padding:11px;
   border:1px solid orange;
 }
+#filter {
+  background-color: #FFC29C;
+}
 .submit_params, .clean_params {
   margin: 4px;
   margin-left:  0;
