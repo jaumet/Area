@@ -2,7 +2,7 @@ html, body {
   height: 100%; 
   width: 100%; 
   margin: 0; 
-  font-family:'Ek Mukta', 'Ubuntu', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   font-size:1.0em;
   background-color:#fff;
   color:black;
@@ -267,6 +267,7 @@ ul.tabs {
 	-webkit-border-radius: 10px;
 	-khtml-border-radius: 10px;
 	border-radius: 10px 10px;
+  cursor: pointer;
 }
 .clean_params {
   width:30px;
