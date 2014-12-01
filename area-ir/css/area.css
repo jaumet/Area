@@ -146,9 +146,6 @@ thead {
 	border:1px solid #c3c3c3;
 	padding:3px;
   }
-#legend2 span.legendtxt {
-  border:0;
-}
 #node_info, #tab3 {
 	display:none;
 	position:absolute;
