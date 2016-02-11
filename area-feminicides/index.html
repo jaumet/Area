@@ -267,7 +267,11 @@
                   my_el_url += "&nbsp;<span class=\"node_info_link\">Visit the <a href=\""+el+"\" target=\"_"+i+"\">"+getHumanName(FIELDS[0], i)+"</a></span>&nbsp;";
                   break;
                 case "text":
-                  my_el_text += "<p>"+getHumanName(FIELDS[0], i)+": <b>"+el+"</b></p>";
+                  gtrans = "";
+                  if (getHumanName(FIELDS[0], i) == "Narrative") {
+                    gtrans = '[<a href="https://translate.google.com/#ca/en/'+el.replace(" ", "%20")+'" target="_gtranslate">to English >></a>]';
+                  }
+                  my_el_text += "<p>"+getHumanName(FIELDS[0], i)+": "+gtrans+" <b>"+el+"</b></p>";
                   break;
                 default:
                   my_el_number += "&nbsp;<span class=\"node_info_numbers\">"+getHumanName(FIELDS[0], i)+": <b>"+el+"</b></span>&nbsp;";
