@@ -7,7 +7,6 @@
 	<script type="text/javascript" src="./js/d3.v2.min.js"></script>
 	<script type="text/javascript" src="./data/config.js"></script>
 	<script type="text/javascript" src="./data/data.js"></script>
-	<script type="text/javascript" src="./data/my_topics.js"></script>
 	<link href="css/area.css" rel="stylesheet">
   <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
   </head>
@@ -402,25 +401,6 @@
 			$('#legend1').append(legend1);
 		}
 		
-    // TAB2: By topic on typing filter 
-    $(".filter_topics").html(my_topics);    
-    $('#boxa, #boxt').keyup(function(){
-       var valThis = $(this).val().toLowerCase();
-       $('.filter_topics>li').each(function(){
-         var text = $(this).text().toLowerCase();
-         (text.indexOf(valThis) == -1) ? $(this).hide() : $(this).show(); 
-       });
-    });
-
-    // TAB4: By author on typing filter 
-    $(".filter_authors").html(my_authors);    
-    $('#boxa, #boxt').keyup(function(){
-       var valThis = $(this).val().toLowerCase();
-       $('.filter_authors>li').each(function(){
-         var text = $(this).text().toLowerCase();
-         (text.indexOf(valThis) == -1) ? $(this).hide() : $(this).show(); 
-       });
-    });
 
     FILTER = "";
     do_area(PARAM1, PARAM2, AREAX, AREAY, COLORS_APPROACH, FILTER);
