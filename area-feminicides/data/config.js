@@ -6,8 +6,8 @@
 	var AREAX = 920;
 	var AREAY = 600;
 	var COLORS_APPROACH = "fix"; // fix, random, gradient
-	var PARAM1 = "edat_grups";
-	var PARAM2 = "armes";
+	var PARAM1 = "any";
+	var PARAM2 = "parentiu_agresor";
 	var AREA_TITLE = "AREA Feminicides";
 
 ///////////////////////////////////////////////////////////////////
