@@ -6,8 +6,8 @@
 	var AREAX = 1100;
 	var AREAY = 900;
 	var COLORS_APPROACH = "fix"; // fix, random, gradient
-	var PARAM1 = "region";
-	var PARAM2 = "stage";
+	var PARAM1 = "rem_year";
+	var PARAM2 = "region";
 	var AREA_TITLE = "PeaceAgreements.org";
 
 ///////////////////////////////////////////////////////////////////
@@ -47,6 +47,8 @@ var FIELDS = [
 	  { human: "Agreement Status", areafilter: "1", type:"text", exclude:"0"},
 	"sign_date":
 	  { human: "Signed Date", areafilter: "1", type:"text", exclude:"0"},
+	"rem_year":
+	  { human: "Signed Year", areafilter: "1", type:"text", exclude:"0"},
 	"stage":
 	  { human: "Stage", areafilter: "0", type:"text", exclude:"0"}
 	  }
