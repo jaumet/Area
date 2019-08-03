@@ -52,7 +52,7 @@
       <div id="config">
         <ul class='tabs'>
           <li><a href='#tab1'>Properties & legend</a></li>
-          <li><a href='#tab4'>By author</a></li>
+          <!--<li><a href='#tab4'>By author</a></li>-->
           <!--<li><a href='#tab2'>Por tema</a></li>-->
         </ul>
       </div>
@@ -68,6 +68,7 @@
           </p>
         </div>
       </div>
+      <!--
       <div id='tab4' class="tab">
         <div id="byauthor">
           <p>
@@ -76,6 +77,7 @@
           </p>
         </div>
       </div>
+      -->
       <!--
       <div id='tab2' class="tab">
         <div id="bytopic">
@@ -90,9 +92,9 @@
     <sidebar id="left">
       <div id='about'>
         <span class="sidebarhead" style="color:#ff99ff;">HELP</span>
-        <p>- Each colored square represents a paper. 
-        <br />- You can select 2 parameters and filter papers. 
-        <br />- On click a colored square, you'll get the link to the paper and further information.
+        <p>- Each colored square represents a document in PA-X list of documents. 
+        <br />- You can select 2 parameters. The first rearrages the small squares (the documents) among the blocks. The second produces the small squares colors. 
+        <br />- On click a colored square, you'll get the further information related to the clicked document.
                 </p>
 
 
@@ -107,7 +109,7 @@
       <tr><td>Some other Areas: </td></tr>
       <tr><td><a href="http://research.nualart.cat/area-feminicides">> Area Feminicides</a> </td></tr>
       <tr><td><a href="http://research.nualart.cat/area-ir">> Area Infromation Research</a> </td></tr>
-      <tr><td><a href="http://research.nualart.cat/area-mariategui">> Area Amaura</a> </td></tr>
+      <tr><td><a href="http://www.mariategui.org/vis/amautaexplorada.html">> Area Amaura</a> </td></tr>
       <tr><td><a href="http://research.nualart.cat/area-peaceagreements">> Area Peace Agreements</a> </td></tr>
       </tbody></table>
     </sidebar>
@@ -117,7 +119,7 @@
     <sidebar id="right">
 -
       <div id='byfilter'>
-        <span class="sidebarhead">FILTRO</span>
+        <span class="sidebarhead">FILTER</span>
         <p>
           <input id="filter" type="text" />
           <br /><span id="totals"></span>
@@ -130,7 +132,7 @@
       </div>
 
       <div id='tab4'>
-        <span class="sidebarhead">OPCIONES DE COLOR</span>
+        <span class="sidebarhead">COLOR OPTIONS</span>
         <p>
         <!------ Edit area size is hidden in this version --------------->
         <span style="display:none;">
@@ -169,7 +171,7 @@
       <div id="node_info_close"><b>X</b></div>
       <div id="node_info_data"></div>
     </div>
-    <footer>Welcome to AREA-IR: an exploration and visualization tool applied to the papers published from 1995-2014 in the open access journal Information Research</footer>
+    <footer>Welcome to AREA-IR: an exploration and visualization tool. This is free software and the code is available in <a href="https://github.com/jaumet/Area" target="area github">github</a> </footer>
    </div>
   <script type="text/javascript" src="js/area_functions.js"></script>
   <script type="text/javascript">
@@ -182,7 +184,7 @@
 			////////////////////////////////
 			// FILTER TAB
 			if ($('#filtered_params input').length == 0) {
-				var filter_params_list = 'Check parameters to filter:<br />';
+				var filter_params_list = 'Filter is permanent. Set an empty filter to clean the current filter. Check parameters to filter:<br />';
 				$.each(FIELDS[0], function(i, el) {
           if (el.areafilter == 1) {
             if ($.inArray(i, SELECTED) > -1 || !SELECTED)  {var checked = "checked";} else {checked = "";}
