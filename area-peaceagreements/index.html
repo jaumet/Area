@@ -323,6 +323,8 @@
                     break;
                   default:
                     my_el_number += "&nbsp;<span class=\"node_info_numbers\">"+getHumanName(FIELDS[0], i)+": <b>"+el+"</b></span>&nbsp;";
+                    //// HACK for the PeaceAgreements version                    
+                    my_el_number += "&nbsp;<span class=\"node_info_numbers\"><b><a href=\"https://www.peaceagreements.org/view/"+el+"\" target=\"PA view document id "+el+"\">View the Document >></a></b></span>&nbsp;";
                   }
               }
 							mycolor = param2colors[value[PARAM2]];
