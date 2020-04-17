@@ -1,4 +1,20 @@
 
+
+DATA PROCESS:
+
+1- Download CSV and XCLX for DATA and CORPUS from peaceagreements.org
+2- CORPUS csv (LireOffice or Google sheet)-> remove column L (Agreement Text)
+3 convert CSV to JSON (2-csv2json.py)
+4- Edit the json and do several replacements (vim):
+    :%s/}, {/},\r {/g
+    :%s/""/"NA"/g
+    :%s/(excl MENA)/excl MENA/g
+    :%s/\ufeff//g
+5 conver JSON in JS, just adding: var DAT = [json file contexts] ;
+
+
+################3333
+
 Files/directories description:
   > 0-readme.txt: this file
   > 1-Header_distinc_nums-in-CSV.ipynb: Jupyter.-notebook that generates the CSV files in CSV/

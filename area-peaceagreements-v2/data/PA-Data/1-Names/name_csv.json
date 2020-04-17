@@ -1,0 +1,22 @@
+[
+    {
+        "Agreement with subsequent status": "Multiparty signed/agreed",
+        "7": "1619",
+        "nameA": "A"
+    },
+    {
+        "Agreement with subsequent status": "",
+        "7": "",
+        "nameA": "A"
+    },
+    {
+        "Agreement with subsequent status": "Status unclear",
+        "7": "10",
+        "nameA": "B"
+    },
+    {
+        "Agreement with subsequent status": "Unilateral document",
+        "7": "119",
+        "nameA": "C"
+    }
+]
