@@ -311,7 +311,7 @@ var FIELDS = [
 			"HrfBor":
 				  { human: "Bill of Rights.", areafilter: "0", type:"text", exclude:"0"},
 			"HrfTinc":
-				  { human: "Incorporation of human rights treaties, humanitarian law, or international criminal law treaties (Treaty Incorporation", areafilter: "0", type:"text", exclude:"0"},
+				  { human: "Treaty Incorporation", areafilter: "0", type:"text", exclude:"0"},
 			"HrfOth":
 				  { human: "Other.", areafilter: "0", type:"text", exclude:"0"},
 			"HrCp":
